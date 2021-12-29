@@ -8,8 +8,6 @@ import Main from '../components/Main';
 import Next from '../components/Next';
 import React, { useRef, useEffect } from 'react';
 import FloatingHeader from '../components/Common/Floating';
-import Client from '../components/client.client';
-import Server from '../components/server.server';
 
 const Home: NextPage = () => {
   // if (process.browser) {
@@ -135,7 +133,6 @@ const Home: NextPage = () => {
         <Next />
       </E>
       <Footer />
-      <Client />
     </>
   );
 };
