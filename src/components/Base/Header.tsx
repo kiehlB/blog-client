@@ -19,61 +19,44 @@ import styled from 'styled-components';
 
 const solutions = [
   {
-    name: 'Analytics',
-    description: 'Get a better understanding of where your traffic is coming from.',
+    name: 'Kairos',
+    description: 'chrome extension for recording and & visualizing chrome activity',
     href: '#',
     icon: ChartBarIcon,
   },
+
   {
-    name: 'Engagement',
-    description: 'Speak directly to your customers in a more meaningful way.',
-    href: '#',
-    icon: CursorClickIcon,
-  },
-  {
-    name: 'Security',
-    description: "Your customers' data will be safe and secure.",
-    href: '#',
-    icon: ShieldCheckIcon,
-  },
-  {
-    name: 'Integrations',
-    description: "Connect with third-party tools that you're already using.",
-    href: '#',
-    icon: ViewGridIcon,
-  },
-  {
-    name: 'Automations',
-    description: 'Build strategic funnels that will drive your customers to convert',
+    name: 'Coming soon',
+    description: 'Coming soon',
     href: '#',
     icon: RefreshIcon,
   },
 ];
 const callsToAction = [
   { name: 'Watch Demo', href: '#', icon: PlayIcon },
-  { name: 'Contact Sales', href: '#', icon: PhoneIcon },
+  { name: 'Contact Me', href: '#', icon: PhoneIcon },
 ];
 const resources = [
   {
-    name: 'Help Center',
+    name: '내가 쓴 글',
     description: 'Get all of your questions answered in our forums or contact support.',
     href: '#',
     icon: SupportIcon,
   },
   {
-    name: 'Guides',
+    name: '좋아요 글',
     description: 'Learn how to maximize our platform to get the most out of it.',
     href: '#',
     icon: BookmarkAltIcon,
   },
   {
-    name: 'Events',
+    name: '설정',
     description: 'See what meet-ups and other events we might be planning near you.',
     href: '#',
     icon: CalendarIcon,
   },
   {
-    name: 'Security',
+    name: '로그아웃',
     description: 'Understand how we take your privacy seriously.',
     href: '#',
     icon: ShieldCheckIcon,
@@ -93,10 +76,10 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Example() {
+export default function Header() {
   return (
     <Popover className="relative bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-9xl mx-auto sm:px-6 m2xl:px-10 mmd:px-4">
         <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="#">
@@ -137,6 +120,17 @@ export default function Example() {
             </Popover.Button>
           </div>
           <Popover.Group as="nav" className="hidden md:flex space-x-10">
+            <a
+              href="#"
+              className="text-base font-medium text-gray-500 hover:text-gray-900">
+              Blog
+            </a>
+            <a
+              href="#"
+              className="text-base font-medium text-gray-500 hover:text-gray-900">
+              About
+            </a>
+
             <Popover className="relative">
               {({ open }) => (
                 <>
@@ -145,7 +139,7 @@ export default function Example() {
                       open ? 'text-gray-900' : 'text-gray-500',
                       'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
                     )}>
-                    <span>Solutions</span>
+                    <span>Projects</span>
                     <ChevronDownIcon
                       className={classNames(
                         open ? 'text-gray-600' : 'text-gray-400',
@@ -208,17 +202,6 @@ export default function Example() {
               )}
             </Popover>
 
-            <a
-              href="#"
-              className="text-base font-medium text-gray-500 hover:text-gray-900">
-              Pricing
-            </a>
-            <a
-              href="#"
-              className="text-base font-medium text-gray-500 hover:text-gray-900">
-              Docs
-            </a>
-
             <Popover className="relative">
               {({ open }) => (
                 <>
@@ -227,7 +210,7 @@ export default function Example() {
                       open ? 'text-gray-900' : 'text-gray-500',
                       'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
                     )}>
-                    <span>More</span>
+                    <span>Setting</span>
                     <ChevronDownIcon
                       className={classNames(
                         open ? 'text-gray-600' : 'text-gray-400',

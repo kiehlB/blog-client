@@ -7,7 +7,7 @@ export type GridProps = {};
 function Grid({}: GridProps) {
   return (
     <GridBlock>
-      <FirstWrapper className="grid grid-cols-3 mxl:grid-cols-2 mmd:grid-cols-1">
+      <FirstWrapper className="grid gap-9 grid-cols-3 mxl:grid-cols-2 mmd:grid-cols-1">
         {/* <FirstGrid className="border border-black col-span-3 mxl:col-span-2 mmd:col-span-1  ">
           <FisrtColumn className="">
             <GridAuto>

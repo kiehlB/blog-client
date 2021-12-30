@@ -1,0 +1,177 @@
+.likebutton {
+  
+    font-size: 10vmin;
+    appearance: none;
+    border: none;
+    border-radius: 50%;
+    background: white;
+    
+    width: 1em;
+    height: 1em;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    z-index: 2;
+    transition: transform var(--duration) var(--easing);
+    cursor: pointer;
+    
+    &:before {
+      z-index: -1;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-shadow: 0 .1em 0.2em rgba(black, 0.1);
+      border-radius: inherit;
+      transition: inherit;
+    }
+    
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      border-radius: inherit;
+      z-index: -1;
+    }
+    
+    &:active {
+      &:before {
+        animation: depress-shadow var(--duration) var(--easing) both;
+      }
+    }
+    
+    &:focus:after {
+      animation: depress var(--duration) var(--easing) both;
+    }
+    
+    @keyframes depress {
+      from, to {
+        transform: none;
+      }
+      50% {
+        transform: translateY(5%) scale(0.9);
+      }
+    }
+    
+    @keyframes depress-shadow {
+      from, to {
+        transform: none;
+      }
+      50% {
+        transform: scale(0.5);
+      }
+    }
+  }
+  
+  .likewrapper {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    
+    > * { 
+      margin: auto;
+      grid-area: 1 / 1; 
+    }
+  }
+  
+  
+  
+  
+  /* Added wrapper to prevent layout jank with resizing particles */
+  .particles {
+  
+    width: 1px;
+    height: 1px;
+  }
+  
+  .particle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: .1em;
+    width: .1em;
+    border-radius: .05em;
+    background-color: var(--color);
+    --percentage: calc( var(--i) / var(--total-particles) );
+    --Θ: calc( var(--percentage) * 1turn );
+    transform: translate(-50%, -50%) rotate( var(--Θ) ) translateY(0) scaleY(0);
+    transition: all var(--duration) var(--easing);
+    
+    
+    .likebutton:focus & {
+      animation: particles-out calc(var(--duration) * 1.2) var(--easing) forwards;
+      
+      @keyframes particles-out {
+        50% {
+          height: .3em;
+        }
+        50%, 60% {
+          height: .3em;
+          transform:
+            translate(-50%, -50%) 
+            rotate( var(--Θ) )
+            translateY(.8em)
+            scale(1)
+            ;
+        }
+        60% {
+          height: .2em;
+        }
+        100% { 
+          transform:
+            translate(-50%, -50%) 
+            rotate( var(--Θ) )
+            translateY(1em)
+            scale(0)
+            ;
+        }
+      }
+    }
+  }
+  
+  .ripple {
+    position: relative;
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 1;
+    
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: .4em solid var(--color-heart);
+      border-radius: inherit;
+      transform: scale(0);
+      
+    }
+    
+    .likebutton:focus & {
+      &:before {
+        animation: ripple-out var(--duration) var(--easing);
+        @keyframes ripple-out {
+          from { transform: scale(0); }
+          to { transform: scale(5); }
+        }
+      }
+    }
+  }
+  
+  
+  /* Reset the animation when clicking again! */
+  .likebutton:focus {
+    
+    pointer-events: none;
+    cursor: normal;
+  }

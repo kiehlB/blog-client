@@ -10,7 +10,7 @@ function Main({}: MainProps) {
   const WindowWidth = useWindowSize();
 
   return (
-    <MainBlock className="max-w-7xl mx-auto px-4 sm:px-6">
+    <MainBlock className="max-w-9xl mx-auto sm:px-6 m2xl:px-10  mmd:px-4">
       {WindowWidth.width > 768 ? (
         <MainTitle>
           The best design
