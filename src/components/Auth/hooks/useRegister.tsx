@@ -17,12 +17,5 @@ export default function useRegister() {
     },
   });
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    signUp({
-      variables: inputs,
-    });
-  };
-
-  return { inputs, handleChange, handleSubmit };
+  return { inputs, handleChange, signUp };
 }

@@ -1,33 +1,45 @@
 import styled from 'styled-components';
+import LabelInput from '../LabelInput/LabelInput';
+import useRegister from './hooks/useRegister';
 
 export type SignUpFormProps = {};
 
 function SignUpForm({}: SignUpFormProps) {
+  const { inputs, handleChange, signUp } = useRegister();
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    signUp({
+      variables: inputs,
+    });
+  };
+
   return (
-    <form className="mt-6" action="#" method="POST">
+    <form className="mt-6" onSubmit={handleSubmit}>
       <div>
         <label className="block text-gray-700">Email Address</label>
-        <input
-          type="email"
-          name=""
-          id=""
+        <LabelInput
+          label="Email"
+          name="email"
+          type="text"
+          value={inputs?.username}
+          onChange={handleChange}
           placeholder="Enter Email Address"
           className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
-          autoFocus
-          required
         />
       </div>
 
       <div className="mt-4">
         <label className="block text-gray-700">Password</label>
-        <input
-          type="password"
-          name=""
-          id=""
+        <LabelInput
+          label="PassWord"
+          name="password"
+          type="text"
+          value={inputs?.username}
+          onChange={handleChange}
           placeholder="Enter Password"
           className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
               focus:bg-white focus:outline-none"
-          required
         />
       </div>
 

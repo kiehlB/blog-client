@@ -1,34 +1,40 @@
 import styled from 'styled-components';
-import AuthImg from '../components/Auth/AuthImg.client';
+import AppLayout from '../components/AppLayout';
+import AuthHeader from '../components/Auth/AuthHeader.client';
 import AuthSocialButtonGroup from '../components/Auth/AuthSocialButtonGroup';
+import IsAuth from '../components/Auth/IsAuth.client';
 import SignUpForm from '../components/Auth/SignUpForm';
+import View from '../components/View';
 
 export type SignUpProps = {};
 
 function SignUp({}: SignUpProps) {
   return (
     <>
-      <section className="flex flex-col md:flex-row h-screen items-center">
-        <AuthImg />
-        <div
-          className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
-      flex items-center justify-center">
-          <div className="w-full h-100">
-            <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12">
-              Log in to your account
-            </h1>
-            <SignUpForm />
-            <div className="my-6 border-gray-300 w-full" />
-            <AuthSocialButtonGroup />
-            <p className="mt-8">
-              Need an account?{' '}
-              <a href="#" className="text-blue-500 hover:text-blue-700 font-semibold">
-                Create an account
-              </a>
-            </p>
-          </div>
-        </div>
-      </section>
+      <View.Container>
+        <View.Body>
+          <section className="flex flex-col md:flex-row h-screen items-center">
+            <div className="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
+              <img
+                src="https://source.unsplash.com/random"
+                alt=""
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div
+              className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
+  flex items-center justify-center">
+              <div className="w-full h-100">
+                <AuthHeader />
+                <SignUpForm />
+                <div className="my-6 border-gray-300 w-full" />
+                <AuthSocialButtonGroup />
+                <IsAuth />
+              </div>
+            </div>
+          </section>
+        </View.Body>
+      </View.Container>
     </>
   );
 }

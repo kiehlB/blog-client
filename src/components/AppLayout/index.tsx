@@ -1,9 +1,21 @@
-export type AppLayoutProps = {};
+export type AppLayoutProps = {
+  leftNav?: React.ReactNode;
+  centerContent?: React.ReactNode;
+  rightContent?: React.ReactNode;
+};
 
-function MainNav({ children }) {
+export type CellLayoutProps = {
+  children?: React.ReactNode;
+};
+
+function MainNav({ children }: CellLayoutProps) {
   return <div>{children}</div>;
 }
-export default function AppLayout({ leftNav, centerContent, rightContent }) {
+export default function AppLayout({
+  leftNav,
+  centerContent,
+  rightContent,
+}: AppLayoutProps) {
   return (
     <div>
       {leftNav}
@@ -12,13 +24,13 @@ export default function AppLayout({ leftNav, centerContent, rightContent }) {
     </div>
   );
 }
-function LeftNav({ children }) {
+function LeftNav({ children }: CellLayoutProps) {
   return <div>{children}</div>;
 }
-function CenterContent({ children }) {
+function CenterContent({ children }: CellLayoutProps) {
   return <div>{children}</div>;
 }
-function RightContent({ children }) {
+function RightContent({ children }: CellLayoutProps) {
   return <div>{children}</div>;
 }
 
