@@ -1,18 +1,18 @@
-import styled from 'styled-components';
+import Link from 'next/link';
 
 export type IsAuthProps = {};
 
 function IsAuth({}: IsAuthProps) {
   return (
-    <p className="mt-8">
-      Need an account?{' '}
-      <a href="#" className="text-blue-500 hover:text-blue-700 font-semibold">
-        Create an account
-      </a>
-    </p>
+    <Link href="/signup">
+      <p className="mt-8">
+        Need an account?{' '}
+        <a href="#" className="text-regal-sky hover:text-sky-600 font-semibold">
+          Create an account
+        </a>
+      </p>
+    </Link>
   );
 }
-
-const IsAuthBlock = styled.div``;
 
 export default IsAuth;

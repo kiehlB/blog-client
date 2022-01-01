@@ -8,6 +8,8 @@ import Main from '../components/Main';
 import Next from '../components/Next';
 import React, { useRef, useEffect } from 'react';
 import FloatingHeader from '../components/Common/Floating';
+import AppLayout from '../components/AppLayout';
+import View from '../components/View';
 
 const Home: NextPage = () => {
   // if (process.browser) {
@@ -118,21 +120,34 @@ const Home: NextPage = () => {
   // }
   return (
     <>
-      {/* <C>
-        <canvas></canvas>
-      </C> */}
-      <Banner />
-      <Header />
-      <FloatingHeader />
+      <AppLayout.MainNav>
+        <Banner />
+        <Header />
+        <FloatingHeader />
+      </AppLayout.MainNav>
 
-      <Main />
-      <C>
-        <Grid />
-      </C>
-      <E>
-        <Next />
-      </E>
-      <Footer />
+      <AppLayout
+        first={
+          <AppLayout.First>
+            <Main />
+          </AppLayout.First>
+        }
+        second={
+          <AppLayout.Second>
+            <C>
+              <Grid />
+            </C>
+            <E>
+              <Next />
+            </E>
+          </AppLayout.Second>
+        }
+        third={
+          <AppLayout.Third>
+            <Footer />
+          </AppLayout.Third>
+        }
+      />
     </>
   );
 };
@@ -145,3 +160,8 @@ const C = styled.div`
 const E = styled.div`
   height: 100%;
 `;
+{
+  /* <C>
+        <canvas></canvas>
+      </C> */
+}

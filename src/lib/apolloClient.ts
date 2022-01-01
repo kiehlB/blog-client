@@ -12,7 +12,7 @@ function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({
-      uri: 'https://localhost:4000/graphql', // Server URL (must be absolute)
+      uri: 'http://localhost:4000/graphql', // Server URL (must be absolute)
       credentials: 'include',
     }),
     cache: new InMemoryCache({

@@ -1,7 +1,7 @@
 export type AppLayoutProps = {
-  leftNav?: React.ReactNode;
-  centerContent?: React.ReactNode;
-  rightContent?: React.ReactNode;
+  first?: React.ReactNode;
+  second?: React.ReactNode;
+  third?: React.ReactNode;
 };
 
 export type CellLayoutProps = {
@@ -11,30 +11,26 @@ export type CellLayoutProps = {
 function MainNav({ children }: CellLayoutProps) {
   return <div>{children}</div>;
 }
-export default function AppLayout({
-  leftNav,
-  centerContent,
-  rightContent,
-}: AppLayoutProps) {
+export default function AppLayout({ first, second, third }: AppLayoutProps) {
   return (
     <div>
-      {leftNav}
-      {centerContent}
-      {rightContent}
+      {first}
+      {second}
+      {third}
     </div>
   );
 }
-function LeftNav({ children }: CellLayoutProps) {
+function First({ children }: CellLayoutProps) {
   return <div>{children}</div>;
 }
-function CenterContent({ children }: CellLayoutProps) {
+function Second({ children }: CellLayoutProps) {
   return <div>{children}</div>;
 }
-function RightContent({ children }: CellLayoutProps) {
+function Third({ children }: CellLayoutProps) {
   return <div>{children}</div>;
 }
 
 AppLayout.MainNav = MainNav;
-AppLayout.LeftNav = LeftNav;
-AppLayout.CenterContent = CenterContent;
-AppLayout.RightContent = RightContent;
+AppLayout.First = First;
+AppLayout.Second = Second;
+AppLayout.Third = Third;

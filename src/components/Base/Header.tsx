@@ -16,49 +16,50 @@ import {
 } from '@heroicons/react/outline';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 const solutions = [
   {
     name: 'Kairos',
     description: 'chrome extension for recording and & visualizing chrome activity',
-    href: '#',
+    href: '/',
     icon: ChartBarIcon,
   },
 
   {
     name: 'Coming soon',
     description: 'Coming soon',
-    href: '#',
+    href: '/',
     icon: RefreshIcon,
   },
 ];
 const callsToAction = [
-  { name: 'Watch Demo', href: '#', icon: PlayIcon },
-  { name: 'Contact Me', href: '#', icon: PhoneIcon },
+  { name: 'Watch Demo', href: '/', icon: PlayIcon },
+  { name: 'Contact Me', href: '/', icon: PhoneIcon },
 ];
 const resources = [
   {
     name: '내가 쓴 글',
     description: 'Get all of your questions answered in our forums or contact support.',
-    href: '#',
+    href: '/',
     icon: SupportIcon,
   },
   {
     name: '좋아요 글',
     description: 'Learn how to maximize our platform to get the most out of it.',
-    href: '#',
+    href: '/',
     icon: BookmarkAltIcon,
   },
   {
     name: '설정',
     description: 'See what meet-ups and other events we might be planning near you.',
-    href: '#',
+    href: '/',
     icon: CalendarIcon,
   },
   {
     name: '로그아웃',
     description: 'Understand how we take your privacy seriously.',
-    href: '#',
+    href: '/',
     icon: ShieldCheckIcon,
   },
 ];
@@ -284,17 +285,18 @@ export default function Header() {
               )}
             </Popover>
           </Popover.Group>
+
           <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-            <a
-              href="#"
-              className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-              Sign in
-            </a>
-            <a
-              href="#"
-              className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-regal-sky">
-              Sign up
-            </a>
+            <Link href="/signin">
+              <a className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+                Sign in
+              </a>
+            </Link>
+            <Link href="/signup">
+              <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-regal-sky">
+                Sign up
+              </a>
+            </Link>
           </div>
         </div>
       </div>

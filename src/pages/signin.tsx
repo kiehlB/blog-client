@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import AuthHeader from '../components/Auth/AuthHeader.client';
 import AuthSocialButtonGroup from '../components/Auth/AuthSocialButtonGroup';
 import IsAuth from '../components/Auth/IsAuth.client';
+import SignInForm from '../components/Auth/SignInForm';
 import SignUpForm from '../components/Auth/SignUpForm';
 import View from '../components/View';
 
@@ -25,8 +26,8 @@ function SignIn({}: SignInProps) {
               className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
   flex items-center justify-center">
               <div className="w-full h-100">
-                <AuthHeader />
-                <SignUpForm />
+                <AuthHeader HeaderName="Login to your account" />
+                <SignInForm />
                 <div className="my-6 border-gray-300 w-full" />
                 <AuthSocialButtonGroup />
                 <IsAuth />

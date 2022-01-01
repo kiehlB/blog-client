@@ -13,7 +13,7 @@ export default function useRegister() {
 
   const [signUp, { error: registerError }] = useMutation(registerMutation, {
     onCompleted({ signUp }) {
-      router.push('/login');
+      router.push('/signin');
     },
   });
 

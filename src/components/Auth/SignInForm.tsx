@@ -1,34 +1,39 @@
 import styled from 'styled-components';
+import { setAccessToken } from '../../lib/accessToken';
+import { MeDocument, MeQuery } from '../../types/apolloComponent';
 import LabelInput from '../LabelInput/LabelInput';
-import useRegister from './hooks/useRegister';
+import useLogin from './hooks/useLogin';
 
-export type SignUpFormProps = {};
+export type SignInFormProps = {};
 
-function SignUpForm({}: SignUpFormProps) {
-  const { inputs, handleChange, signUp } = useRegister();
+function SignInForm({}: SignInFormProps) {
+  const { inputs, handleChange, login } = useLogin();
 
   const handleSubmit = async e => {
     e.preventDefault();
-    signUp({
+    const response = await login({
       variables: inputs,
+      update: (store, { data }) => {
+        if (!data) {
+          return null;
+        }
+
+        store.writeQuery<MeQuery>({
+          query: MeDocument,
+          data: {
+            me: data.login.username,
+          },
+        });
+      },
     });
+
+    if (response.data) {
+      setAccessToken(response.data.login.accessToken);
+    }
   };
 
   return (
     <form className="mt-8" onSubmit={handleSubmit}>
-      <div>
-        <label className="block text-gray-700">UserName</label>
-        <LabelInput
-          label="Username"
-          name="username"
-          type="text"
-          value={inputs?.username}
-          onChange={handleChange}
-          placeholder="Enter Email Address"
-          className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none  "
-        />
-      </div>
-
       <div className="mt-6">
         <label className="block text-gray-700">Email Address</label>
         <LabelInput
@@ -52,7 +57,7 @@ function SignUpForm({}: SignUpFormProps) {
           onChange={handleChange}
           placeholder="Enter Password"
           className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
-              focus:bg-white focus:outline-none"
+            focus:bg-white focus:outline-none"
         />
       </div>
 
@@ -66,14 +71,14 @@ function SignUpForm({}: SignUpFormProps) {
 
       <button
         type="submit"
-        className="w-full block bg-regal-sky hover:bg-sky-600 text-white font-semibold rounded-lg
-            px-4 py-3 mt-6">
+        className="w-full block bg-indigo-500 hover:bg-indigo-400  text-white font-semibold rounded-lg
+          px-4 py-3 mt-6">
         Log In
       </button>
     </form>
   );
 }
 
-const SignUpFormBlock = styled.div``;
+const SignInFormBlock = styled.div``;
 
-export default SignUpForm;
+export default SignInForm;

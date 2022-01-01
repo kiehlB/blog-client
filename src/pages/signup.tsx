@@ -4,6 +4,7 @@ import AuthHeader from '../components/Auth/AuthHeader.client';
 import AuthSocialButtonGroup from '../components/Auth/AuthSocialButtonGroup';
 import IsAuth from '../components/Auth/IsAuth.client';
 import SignUpForm from '../components/Auth/SignUpForm';
+import CircleButton from '../components/Common/CircleButton';
 import View from '../components/View';
 
 export type SignUpProps = {};
@@ -21,15 +22,16 @@ function SignUp({}: SignUpProps) {
                 className="w-full h-full object-cover"
               />
             </div>
+
             <div
               className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
   flex items-center justify-center">
               <div className="w-full h-100">
-                <AuthHeader />
+                <CircleButton />
+                <AuthHeader HeaderName="Sign Up" />
                 <SignUpForm />
                 <div className="my-6 border-gray-300 w-full" />
                 <AuthSocialButtonGroup />
-                <IsAuth />
               </div>
             </div>
           </section>
@@ -38,10 +40,6 @@ function SignUp({}: SignUpProps) {
     </>
   );
 }
-
-const SignUpBlock = styled.div``;
-
-const First = styled.div``;
 
 const Second = styled.div``;
 
