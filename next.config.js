@@ -4,6 +4,7 @@ module.exports = {
     reactRoot: true,
     concurrentFeatures: true,
     serverComponents: true,
+    swcMinify: false,
   },
 
   swcMinify: false,
