@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import AppLayout from '../components/AppLayout';
-import AuthHeader from '../components/Auth/AuthHeader.client';
+import AuthHeader from '../components/Auth/AuthHeader';
+
 import AuthSocialButtonGroup from '../components/Auth/AuthSocialButtonGroup';
-import IsAuth from '../components/Auth/IsAuth.client';
+
 import SignUpForm from '../components/Auth/SignUpForm';
 import CircleButton from '../components/Common/CircleButton';
 import View from '../components/View';

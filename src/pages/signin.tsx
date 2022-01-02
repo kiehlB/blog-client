@@ -1,8 +1,10 @@
 import url from 'cloudinary-build-url/dist/cjs/url';
 import styled from 'styled-components';
-import AuthHeader from '../components/Auth/AuthHeader.client';
+import AuthHeader from '../components/Auth/AuthHeader';
+
 import AuthSocialButtonGroup from '../components/Auth/AuthSocialButtonGroup';
-import IsAuth from '../components/Auth/IsAuth.client';
+import IsAuth from '../components/Auth/IsAuth';
+
 import SignInForm from '../components/Auth/SignInForm';
 import SignUpForm from '../components/Auth/SignUpForm';
 import View from '../components/View';
