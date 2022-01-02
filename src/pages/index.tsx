@@ -10,8 +10,12 @@ import React, { useRef, useEffect } from 'react';
 import FloatingHeader from '../components/Common/Floating';
 import AppLayout from '../components/AppLayout';
 import View from '../components/View';
+import useGetUser from '../components/Base/hooks/useGetUser';
 
 const Home: NextPage = () => {
+  const { getUser, loading, error, logoutButton } = useGetUser();
+
+  console.log(getUser);
   // if (process.browser) {
   //   const canvas = document.querySelector('canvas');
   //   const c = canvas.getContext('2d');
@@ -122,8 +126,8 @@ const Home: NextPage = () => {
     <>
       <AppLayout.MainNav>
         <Banner />
-        <Header />
-        <FloatingHeader />
+        <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
+        <FloatingHeader getUser={getUser} loading={loading} logoutButton={logoutButton} />
       </AppLayout.MainNav>
 
       <AppLayout

@@ -17,6 +17,7 @@ import {
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import styled from 'styled-components';
 import Link from 'next/link';
+import media from '../../lib/styles/media';
 
 const solutions = [
   {
@@ -73,11 +74,17 @@ const recentPosts = [
   { id: 3, name: 'Improve your customer experience', href: '#' },
 ];
 
+export type HeaderProps = {
+  getUser: any;
+  loading: any;
+  logoutButton: any;
+};
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Header() {
+export default function Header({ getUser, loading, logoutButton }: HeaderProps) {
   return (
     <Popover className="relative bg-white">
       <div className="max-w-9xl mx-auto sm:px-6 m2xl:px-10 mmd:px-4">
@@ -211,14 +218,20 @@ export default function Header() {
                       open ? 'text-gray-900' : 'text-gray-500',
                       'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
                     )}>
-                    <span>Setting</span>
-                    <ChevronDownIcon
-                      className={classNames(
-                        open ? 'text-gray-600' : 'text-gray-400',
-                        'ml-2 h-5 w-5 group-hover:text-gray-500',
-                      )}
-                      aria-hidden="true"
-                    />
+                    {!loading && getUser?.me ? (
+                      <>
+                        <span>Setting</span>
+                        <ChevronDownIcon
+                          className={classNames(
+                            open ? 'text-gray-600' : 'text-gray-400',
+                            'ml-2 h-5 w-5 group-hover:text-gray-500',
+                          )}
+                          aria-hidden="true"
+                        />
+                      </>
+                    ) : (
+                      ''
+                    )}
                   </Popover.Button>
 
                   <Transition
@@ -286,18 +299,30 @@ export default function Header() {
             </Popover>
           </Popover.Group>
 
-          <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-            <Link href="/signin">
-              <a className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-                Sign in
-              </a>
-            </Link>
-            <Link href="/signup">
-              <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-regal-sky">
-                Sign up
-              </a>
-            </Link>
-          </div>
+          {!loading && getUser?.me ? (
+            <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+              <div
+                onClick={logoutButton}
+                className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-regal-sky">
+                Sign out
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+                <Link href="/signin">
+                  <a className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+                    Sign in
+                  </a>
+                </Link>
+                <Link href="/signup">
+                  <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-regal-sky">
+                    Sign up
+                  </a>
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -399,6 +424,9 @@ const HeaderTagWrapper = styled.nav`
     display: flex;
     align-items: center;
     height: 1.375rem;
+  }
+  ${media.custom(768)} {
+    display: none;
   }
 `;
 

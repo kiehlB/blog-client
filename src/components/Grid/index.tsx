@@ -19,11 +19,13 @@ function Grid({}: GridProps) {
             </GridAuto>
           </FisrtColumn>
         </FirstGrid> */}
+
         <C className="border border-black">
-          <img
+          <ContentImg
             src="https://media.vlpt.us/images/ictechgy/post/6504eca7-b160-4e21-8ce4-39fe1f02e55c/MVVM%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4%ED%91%9C%EC%A7%80.png"
             alt="Picture of the author"
           />
+
           <PostContent>
             <PostTitle>
               나는야 텍스트나는야 텍스트나는야 텍스트나는야 텍스트나는야 텍스트나는야
@@ -106,17 +108,37 @@ function Grid({}: GridProps) {
 
 const GridBlock = styled.div`
   max-width: 82.5rem;
-  border: 1px solid red;
   margin: 0 auto;
 `;
 
-const FirstWrapper = styled.div``;
+const FirstWrapper = styled.div`
+  padding: 0 1rem;
+`;
 
 const C = styled.section``;
 
+const ContentImg = styled.img``;
+
 const PostContent = styled.section`
-  border: 1px solid red;
-  height: 15.75rem;
+  margin-top: 2.5rem;
+  padding: 0rem 1.5rem;
+  &::before {
+    content: '';
+    position: absolute;
+    margin: -3.5rem -0px;
+    width: 8.5rem;
+    height: 1.375rem;
+    background-color: #1fb6ff;
+    line-height: 22px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0px 5px 0px 5px;
+    color: white;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const PostTitle = styled.section`
@@ -135,6 +157,7 @@ const ByWho = styled.section`
   line-height: 1.5rem;
   color: #3c4858;
 
+  margin-top: 1rem;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -158,7 +181,8 @@ const PostBody = styled.section`
 `;
 
 const PostButtonWrapper = styled.section`
-  margin: 2rem 0;
+  margin: 1.5rem 0;
+  padding: 0rem 1.5rem;
 `;
 
 export default Grid;

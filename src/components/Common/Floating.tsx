@@ -3,9 +3,13 @@ import styled from 'styled-components';
 import { getScrollTop } from '../../lib/styles/getScroll';
 import Header from '../Base/Header';
 
-export type FloatingHeaderProps = {};
+export type FloatingHeaderProps = {
+  getUser: any;
+  loading: any;
+  logoutButton: any;
+};
 
-function FloatingHeader(props: FloatingHeaderProps) {
+function FloatingHeader({ getUser, loading, logoutButton }: FloatingHeaderProps) {
   const [visible, setVisible] = useState(false);
   const blockRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
@@ -72,7 +76,7 @@ function FloatingHeader(props: FloatingHeaderProps) {
             }
       }
       ref={blockRef}>
-      <Header />
+      <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
     </Block>
   );
 }
