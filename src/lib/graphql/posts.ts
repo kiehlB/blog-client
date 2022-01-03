@@ -80,13 +80,8 @@ export const UPLOAD_IMAGE_TO_CLOUDINARY = gql`
 `;
 
 export const Create_Post = gql`
-  mutation CreatePost(
-    $body: String!
-    $title: String!
-    $thumbnail: String!
-    $tags: String
-  ) {
-    createPost(body: $body, title: $title, thumbnail: $thumbnail, tags: $tags) {
+  mutation CreatePost($body: String!, $title: String!) {
+    createPost(body: $body, title: $title) {
       id
       title
       body
