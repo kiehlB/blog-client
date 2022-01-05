@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-import QuillEditor from '../components/Write';
+import EditorMain from '../components/Write';
 
 export type WriteProps = {};
 
 function Write({}: WriteProps) {
-  const isBrowser = typeof window !== 'undefined';
-
-  return <WriteBlock>{isBrowser ? <QuillEditor /> : null}</WriteBlock>;
+  return (
+    <WriteBlock>
+      <EditorMain />
+    </WriteBlock>
+  );
 }
 
 const WriteBlock = styled.div``;

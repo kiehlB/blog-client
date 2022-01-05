@@ -1,20 +1,27 @@
 import { useMemo } from 'react';
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloClient, HttpLink, InMemoryCache, concat } from '@apollo/client';
 import { concatPagination } from '@apollo/client/utilities';
 import merge from 'deepmerge';
 import isEqual from 'lodash/isEqual';
+import { onError } from '@apollo/client/link/error';
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
 let apolloClient;
 
+const link = new HttpLink({
+  uri: 'http://localhost:4000/graphql', // Server URL (must be absolute)
+  credentials: 'include',
+});
+
+const errorLink = onError(({ graphQLErrors }) => {
+  if (graphQLErrors) graphQLErrors.map(({ message }) => console.log());
+});
+
 function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: new HttpLink({
-      uri: 'http://localhost:4000/graphql', // Server URL (must be absolute)
-      credentials: 'include',
-    }),
+    link: concat(errorLink, link),
     cache: new InMemoryCache({
       typePolicies: {
         Query: {
@@ -56,16 +63,7 @@ export function initializeApollo(initialState = null) {
   return _apolloClient;
 }
 
-export function addApolloState(client, pageProps) {
-  if (pageProps?.props) {
-    pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract();
-  }
-
-  return pageProps;
-}
-
 export function useApollo(pageProps) {
-  const state = pageProps[APOLLO_STATE_PROP_NAME];
-  const store = useMemo(() => initializeApollo(state), [state]);
+  const store = useMemo(() => initializeApollo(), []);
   return store;
 }

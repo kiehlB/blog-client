@@ -1,0 +1,67 @@
+$color: #9ccc65;
+
+
+.button {
+	display: block;
+	position: relative;
+	top: 0;
+	border: 0;
+	cursor: pointer;
+	background: $color;
+	color: lighten($color, 80%);
+	border-radius: 3px;
+	line-height: 1;
+	font-size: 1rem;
+	padding: 5px 10px;
+	outline: 0;
+	margin: 0.2rem;
+	box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+	@media (max-width: 768px) {
+		font-size: 0.6rem;
+	  }
+
+
+	&.shiny {
+		background: $color;
+		background: linear-gradient(
+			-45deg,
+			$color 50%,
+			lighten($color, 20%) 60%,
+			$color 70%
+		);
+		background-size: 600% 100%;
+		animation: shine 20s infinite;
+		animation-delay: 0s;
+		animation-timing-function: linear;
+	}
+
+	&.shinydarken {
+		background: $color;
+		background: linear-gradient(
+			-45deg,
+			$color 50%,
+			darken($color, 20%) 60%,
+			$color 70%
+		);
+		background-size: 600% 100%;
+		animation: shine 20s infinite;
+		animation-delay: 0s;
+		animation-timing-function: linear;
+	}
+	
+	&:active {
+		top: 2px;
+	}
+}
+
+@keyframes shine {
+	0% {
+		background-position-x: 400%;
+	}
+	50% {
+		background-position-x: 0%;
+	}
+	100% {
+		background-position-x: -400%;
+	}
+}

@@ -10,7 +10,7 @@ export type LabelInputProps = {
   value?: any;
   onChange?: React.ChangeEventHandler;
   type?: string;
-  className: string;
+  className?: string;
 };
 
 function LabelInput(props: LabelInputProps) {
@@ -24,7 +24,7 @@ function LabelInput(props: LabelInputProps) {
   }, []);
 
   return (
-    <div>
+    <>
       <input
         name={props.name}
         type={props.type}
@@ -35,7 +35,7 @@ function LabelInput(props: LabelInputProps) {
         onBlur={onBlur}
         {...props}
       />
-    </div>
+    </>
   );
 }
 

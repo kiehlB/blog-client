@@ -1,0 +1,18 @@
+.superFancyBlockquote {
+    color: #999;
+    font-family: 'Hoefler Text', Georgia, serif;
+    font-style: italic;
+    text-align: center;
+  }
+  .h1BlcokTag{
+    font-size: 2rem;
+
+  }
+  .h2BlcokTag{
+    font-size: 1.5rem;
+
+  }
+  .h3BlcokTag{
+    font-size: 1rem;
+
+  }
