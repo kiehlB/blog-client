@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown/with-html';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import style from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula';
 import { Image } from '../../components/Common/Image';
-import { addApolloState, initializeApollo } from '../../lib/apolloClient';
+import { initializeApollo } from '../../lib/apolloClient';
 import { GET_Posts } from '../../lib/graphql/posts';
 
 export default function Post({ post, frontmatter, nextPost, previousPost }) {
@@ -62,7 +62,5 @@ export async function getServerSideProps() {
     query: GET_Posts,
   });
 
-  return addApolloState(apolloClient, {
-    props: { post: postData.data.posts[0] },
-  });
+  return { props: { post: postData.data.posts[0] } };
 }
