@@ -28,17 +28,6 @@ export const GET_Posts = gql`
       views
       likes
       liked
-      tags {
-        name
-      }
-      user {
-        id
-        username
-      }
-      comments {
-        id
-        text
-      }
     }
   }
 `;

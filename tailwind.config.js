@@ -120,13 +120,13 @@ module.exports = {
               {
                 '> *': {
                   gridColumn: '1 / -1',
-
                   [`@media (min-width: ${theme('screens.lg')})`]: {
                     gridColumn: '3 / span 8',
                   },
                 },
                 p: {
                   marginTop: 0,
+                  color: '#dc2626',
                   marginBottom: theme('spacing.8'),
                   fontSize: fontSize('lg'),
                 },
@@ -159,7 +159,6 @@ module.exports = {
                   marginRight: `-${theme('spacing.10vw')}`,
                   padding: theme('spacing.8'),
                   borderRadius: 0,
-
                   [`@media (min-width: ${theme('screens.lg')})`]: {
                     borderRadius: theme('borderRadius.lg'),
                     ...breakout,
@@ -200,7 +199,6 @@ module.exports = {
                   marginTop: 0,
                   marginBottom: 0,
                   fontWeight: theme('fontWeight.normal'),
-
                   [`@media (min-width: ${theme('screens.lg')})`]: {
                     fontWeight: theme('fontWeight.medium'),
                   },

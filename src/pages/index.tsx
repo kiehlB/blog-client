@@ -152,6 +152,8 @@ const Home: NextPage = () => {
           </AppLayout.Third>
         }
       />
+
+      <h1>hello</h1>
     </>
   );
 };
