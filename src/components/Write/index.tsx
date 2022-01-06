@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { RichUtils } from 'draft-js';
+import { RichUtils, convertToRaw } from 'draft-js';
 import { convertToHTML } from 'draft-convert';
 import Editor, { composeDecorators } from 'draft-js-plugins-editor';
 import createHashtagPlugin from 'draft-js-hashtag-plugin';
@@ -333,7 +333,7 @@ function EditorMain(props: EditorMainProps) {
         value={value}
         data-style={style}
         onMouseDown={toggleInlineStyle}
-        className={buttonClass}
+        className="p-1.5 cursor-pointer    border-2"
       />
     );
   };
@@ -369,94 +369,66 @@ function EditorMain(props: EditorMainProps) {
 
   return (
     <>
-      <EditorMainTap>
-        <form>
-          <div className="my-little-app">
-            {/* <div className="home-button">
-              <BackButton />
-            </div> */}
-            <Title>
-              <input
-                name="title"
-                onChange={titleOnChange}
-                value={inputs}
-                className="draft-editor-title"
-                placeholder="Title"
-              />
-              <button
-                className="post-button"
-                onClick={e => (checkEmpty(inputs) ? handleSubmit(e) : EditSubmit(e))}>
-                완료
-              </button>
-            </Title>
-            <div style={{ marginTop: '1.5rem' }}>
-              <TagBlock></TagBlock>
-            </div>
-            <div className="thumbnail-wrapper">
-              <Thumbnail>
-                <div>Thumbnail</div>
-                <input
-                  id="fileInput"
-                  type="file"
-                  name="image"
-                  onChange={handleFileInputChange}
-                  value={fileInputState}
-                  className="form-input"
-                  style={{ margin: '.5rem 0' }}
-                />
+      <div className="w-2/4 border-2 h-full">
+        <form className="h-5/6  p-9">
+          <input
+            className="text-5xl  font-bold focus:outline-none"
+            name="title"
+            onChange={titleOnChange}
+            value={inputs}
+            placeholder="제목을 입력하세요"
+          />
 
-                {previewSource && (
-                  <img src={previewSource} alt="chosen" style={{ height: '300px' }} />
-                )}
-              </Thumbnail>
-            </div>
-            <div className="editor-style-wrapeer">
-              <div className="inline-style-options">
-                {inlineStyleButtons.map(button => {
-                  return renderInlineStyleButton(button.value, button.style);
-                })}
-              </div>
-            </div>
-            <div className="ImgAdd-button">
-              <ImageAdd
-                // @ts-ignore
-                editorState={editorState}
-                onChange={onChange}
-                modifier={imagePlugin.addImage}
-              />
-            </div>
-            <div
-              className="draft-editor-body"
-              onMouseOver={() => inputEl.current.focus()}>
-              <Editor
-                // @ts-ignore
-                customStyleMap={styleMap}
-                editorState={editorState}
-                onChange={onChange}
-                blockStyleFn={myBlockStyleFn}
-                handleKeyCommand={handleKeyCommand}
-                ref={inputEl}
-                plugins={plugins}
-                customStyleFn={customStyleFn}
-              />
-              <InlineToolbar>
-                {externalProps => (
-                  <>
-                    {/* 
-  // @ts-ignore */}
-                    <BoldButton {...externalProps} />
-                    {/* 
-  // @ts-ignore */}
-                    <linkPlugin.LinkButton {...externalProps} />
-                  </>
-                )}
-              </InlineToolbar>
-            </div>
+          <hr className="border-2 w-6/12 mt-3.5 " />
+          <input className="text-lg  block mt-3.5" placeholder="태그를 입력하세요" />
+          <div className="mt-3.5">
+            {inlineStyleButtons.map(button => {
+              return renderInlineStyleButton(button.value, button.style);
+            })}
           </div>
+          <div className="mt-3.5">
+            <ImageAdd
+              editorState={editorState}
+              onChange={onChange}
+              modifier={imagePlugin.addImage}
+            />
+          </div>
+
+          <EW className="overflow-y-scroll mt-3.5" style={{ lineHeight: '75%' }}>
+            <Editor
+              customStyleMap={styleMap}
+              editorState={editorState}
+              onChange={onChange}
+              blockStyleFn={myBlockStyleFn}
+              handleKeyCommand={handleKeyCommand}
+              ref={inputEl}
+              plugins={plugins}
+              customStyleFn={customStyleFn}
+            />
+          </EW>
         </form>
-      </EditorMainTap>
+      </div>
     </>
   );
+}
+
+{
+  /* <Thumbnail>
+<div>Thumbnail</div>
+<input
+  id="fileInput"
+  type="file"
+  name="image"
+  onChange={handleFileInputChange}
+  value={fileInputState}
+  className="form-input"
+  style={{ margin: '.5rem 0' }}
+/>
+
+{previewSource && (
+  <img src={previewSource} alt="chosen" style={{ height: '300px' }} />
+)}
+</Thumbnail> */
 }
 
 export default EditorMain;
@@ -492,3 +464,7 @@ const styleMap = {
     fontSize: '1.7rem',
   },
 };
+
+const EW = styled.div`
+  height: calc(100% - 85px) !important;
+`;

@@ -6,6 +6,7 @@ import { useApollo } from '../lib/apolloClient';
 import { ApolloProvider } from '@apollo/client';
 import { Provider } from 'react-redux';
 import store from '../store/store';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);

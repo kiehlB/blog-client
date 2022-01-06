@@ -99,7 +99,7 @@ export default class ImageAdd extends Component {
 
     return (
       <>
-        <div className={styles.addImage}>
+        <div>
           <button className={buttonClassName} onMouseUp={this.openPopover} type="button">
             +
           </button>

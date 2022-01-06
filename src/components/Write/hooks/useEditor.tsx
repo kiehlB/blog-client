@@ -9,7 +9,7 @@ import {
 import { useState } from 'react';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 import { useSelector } from 'react-redux';
- 
+
 import { useRouter } from 'next/router';
 import { RootState } from '../../../store/rootReducer';
 

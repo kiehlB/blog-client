@@ -5,12 +5,26 @@ import style from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula';
 import { Image } from '../../components/Common/Image';
 import { initializeApollo } from '../../lib/apolloClient';
 import { GET_Posts } from '../../lib/graphql/posts';
+import draftToHtml from 'draftjs-to-html';
+
+import { useState } from 'react';
+import { EditorState, convertFromRaw } from 'draft-js';
+import Editor from 'draft-js-plugins-editor';
+import createLinkDecorator from '../../components/Write/Decorators';
 
 export default function Post({ post, frontmatter, nextPost, previousPost }) {
-  console.log(post);
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  console.log(JSON.parse(post.body));
+  const decorator = createLinkDecorator();
+
+  const defaultEditorState = EditorState.createWithContent(
+    convertFromRaw(JSON.parse(post.body)),
+    decorator,
+  );
+
   return (
     <>
-      <div>
+      {/* <div>
         <article>
           <header className="mb-8">
             <h1
@@ -29,10 +43,9 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
         </article>
       </div>
       <div dangerouslySetInnerHTML={{ __html: post.body }} />
-      <h1>hello h1</h1>
-      <h2>hello h2</h2>
-      <h3>hello h3</h3>
-      <p>im red</p>
+      <textarea disabled value={draftToHtml(JSON.parse(post.body))} /> */}
+
+      <Editor editorState={defaultEditorState} readonly customStyleMap={styleMap} />
     </>
   );
 }
@@ -64,3 +77,35 @@ export async function getServerSideProps() {
 
   return { props: { post: postData.data.posts[0] } };
 }
+
+const styleMap = {
+  CODE: {
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
+    fontSize: 16,
+    padding: 4,
+  },
+  BOLD: {
+    color: '#395296',
+    fontWeight: 'bold',
+  },
+  ANYCUSTOMSTYLE: {
+    color: '#00e400',
+  },
+  FANCYBLOCKQUOTE: {
+    color: '#999',
+    fontStyle: 'italic',
+    fontFamily: `'Hoefler Text', Georgia, serif`,
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  H1: {
+    fontSize: '2rem',
+  },
+  H2: {
+    fontSize: '1.5rem',
+  },
+  H3: {
+    fontSize: '1.7rem',
+  },
+};
