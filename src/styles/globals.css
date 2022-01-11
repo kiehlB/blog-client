@@ -53,8 +53,17 @@ a {
   font-display: swap;
 }
 
-.quill {
-  height: 100%;
+ 
+div.DraftEditor-root {
+ 
+  
 }
  
 
+div > span{
+ 
+
+ 
+
+}
+ 

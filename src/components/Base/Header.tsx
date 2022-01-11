@@ -75,9 +75,9 @@ const recentPosts = [
 ];
 
 export type HeaderProps = {
-  getUser: any;
-  loading: any;
-  logoutButton: any;
+  getUser?: any;
+  loading?: any;
+  logoutButton?: any;
 };
 
 function classNames(...classes) {
@@ -88,10 +88,10 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
   return (
     <Popover className="relative bg-white">
       <div className="max-w-9xl mx-auto sm:px-6 m2xl:px-10 mmd:px-4">
-        <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+        <div className="flex justify-between items-center  border-gray-100 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="#">
-              <span className="sr-only">Workflow</span>
+              <div className="sr-only">Workflow</div>
               <div className="flex  items-center">
                 <svg
                   width="100"
@@ -123,21 +123,21 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
           </div>
           <div className="-mr-2 -my-2 md:hidden">
             <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-              <span className="sr-only">Open menu</span>
+              <div className="sr-only">Open menu</div>
               <MenuIcon className="h-6 w-6" aria-hidden="true" />
             </Popover.Button>
           </div>
           <Popover.Group as="nav" className="hidden md:flex space-x-10">
-            <a
-              href="#"
-              className="text-base font-medium text-gray-500 hover:text-gray-900">
-              Blog
-            </a>
-            <a
-              href="#"
-              className="text-base font-medium text-gray-500 hover:text-gray-900">
-              About
-            </a>
+            <Link href="/">
+              <a className="text-base font-medium text-gray-500 hover:text-gray-900">
+                Blog
+              </a>
+            </Link>
+            <Link href="/about">
+              <a className="text-base font-medium text-gray-500 hover:text-gray-900">
+                About
+              </a>
+            </Link>
 
             <Popover className="relative">
               {({ open }) => (
@@ -147,7 +147,7 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                       open ? 'text-gray-900' : 'text-gray-500',
                       'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
                     )}>
-                    <span>Projects</span>
+                    <div>Projects</div>
                     <ChevronDownIcon
                       className={classNames(
                         open ? 'text-gray-600' : 'text-gray-400',
@@ -198,7 +198,7 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                                   className="flex-shrink-0 h-6 w-6 text-gray-400"
                                   aria-hidden="true"
                                 />
-                                <span className="ml-3">{item.name}</span>
+                                <div className="ml-3">{item.name}</div>
                               </a>
                             </div>
                           ))}
@@ -220,7 +220,7 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                     )}>
                     {!loading && getUser?.me ? (
                       <>
-                        <span>Setting</span>
+                        <div>Setting</div>
                         <ChevronDownIcon
                           className={classNames(
                             open ? 'text-gray-600' : 'text-gray-400',
@@ -287,7 +287,7 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                               href="#"
                               className="font-medium text-indigo-600 hover:text-indigo-500">
                               {' '}
-                              View all posts <span aria-hidden="true">&rarr;</span>
+                              View all posts <div aria-hidden="true">&rarr;</div>
                             </a>
                           </div>
                         </div>
@@ -349,7 +349,7 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                 </div>
                 <div className="-mr-2">
                   <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                    <span className="sr-only">Close menu</span>
+                    <div className="sr-only">Close menu</div>
                     <XIcon className="h-6 w-6" aria-hidden="true" />
                   </Popover.Button>
                 </div>
@@ -365,9 +365,9 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                         className="flex-shrink-0 h-6 w-6 text-indigo-600"
                         aria-hidden="true"
                       />
-                      <span className="ml-3 text-base font-medium text-gray-900">
+                      <div className="ml-3 text-base font-medium text-gray-900">
                         {item.name}
-                      </span>
+                      </div>
                     </a>
                   ))}
                 </nav>

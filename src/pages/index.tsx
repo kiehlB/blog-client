@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import Banner from '../components/Banner';
 import Header from '../components/Base/Header';
 import styled from 'styled-components';
@@ -11,11 +11,12 @@ import FloatingHeader from '../components/Common/Floating';
 import AppLayout from '../components/AppLayout';
 import View from '../components/View';
 import useGetUser from '../components/Base/hooks/useGetUser';
+import { initializeApollo } from '../lib/apolloClient';
+import { GET_Posts } from '../lib/graphql/posts';
 
-const Home: NextPage = () => {
+const Home: NextPage = post => {
   const { getUser, loading, error, logoutButton } = useGetUser();
 
-  console.log(getUser);
   // if (process.browser) {
   //   const canvas = document.querySelector('canvas');
   //   const c = canvas.getContext('2d');
@@ -139,7 +140,7 @@ const Home: NextPage = () => {
         second={
           <AppLayout.Second>
             <C>
-              <Grid />
+              <Grid post={post} />
             </C>
             <E>
               <Next />
@@ -169,3 +170,13 @@ const E = styled.div`
         <canvas></canvas>
       </C> */
 }
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const apolloClient = initializeApollo();
+
+  const postData = await apolloClient.query({
+    query: GET_Posts,
+  });
+
+  return { props: { post: postData.data.posts } };
+};

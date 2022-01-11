@@ -16,11 +16,19 @@ const Img = ({ entityKey, contentState }) => {
   const resizeData = entityKey ? contentState.getEntity(entityKey).data.width : {};
   const resizeData2 = resizeData * 7;
   return (
-    <img
-      src={src}
-      style={{ width: resizeData ? `${resizeData2}px` : '300px' }}
-      alt="img"
-    />
+    <div
+      style={{
+        width: '100%',
+      }}>
+      <img
+        src={src}
+        style={{
+          border: '1px solid red',
+          width: '100%',
+        }}
+        alt="img"
+      />
+    </div>
   );
 };
 

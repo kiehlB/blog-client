@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { RichUtils, convertToRaw } from 'draft-js';
 import { convertToHTML } from 'draft-convert';
-import Editor, { composeDecorators } from 'draft-js-plugins-editor';
+import Editor, { composeDecorators } from '@draft-js-plugins/editor';
 import createHashtagPlugin from 'draft-js-hashtag-plugin';
 import hashtagStyles from './hashtagStyles.module.css';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
@@ -10,21 +10,25 @@ import createLinkPlugin from 'draft-js-anchor-plugin';
 import { BoldButton } from 'draft-js-buttons';
 import linkStyles from './linkStyles.module.css';
 import BlockStyling from './BlockStyling.module.css';
+import createAlignmentPlugin from '@draft-js-plugins/alignment';
 import ImageAdd from './ImageAdd';
 import createStyles from 'draft-js-custom-styles';
 import buttonStyle from './button.module.scss';
 import classNames from 'classnames';
 import useEditor from './hooks/useEditor';
 import { useRouter } from 'next/router';
-import createImagePlugin from 'draft-js-image-plugin';
-import createFocusPlugin from 'draft-js-focus-plugin';
-import createResizeablePlugin from 'draft-js-resizeable-plugin';
-import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
+import createImagePlugin from '@draft-js-plugins/image';
+import createFocusPlugin from '@draft-js-plugins/focus';
+import createResizeablePlugin from '@draft-js-plugins/resizeable';
+import createBlockDndPlugin from '@draft-js-plugins/drag-n-drop';
+import createDragNDropUploadPlugin from '@draft-js-plugins/drag-n-drop-upload';
 
 import { useDispatch, useSelector } from 'react-redux';
 import media from '../../lib/styles/media';
 import { PostInit } from '../../store/post';
 import { checkEmpty } from '../../utils/isNull';
+
+import createColorBlockPlugin from './colorBlockPlugin';
 
 const Title = styled.div`
   width: 60%;
@@ -254,14 +258,15 @@ const inlineToolbarPlugin = createInlineToolbarPlugin();
 const { InlineToolbar } = inlineToolbarPlugin;
 const focusPlugin = createFocusPlugin();
 const resizeablePlugin = createResizeablePlugin();
+const alignmentPlugin = createAlignmentPlugin();
 const blockDndPlugin = createBlockDndPlugin();
-const decorator = composeDecorators(
-  resizeablePlugin.decorator,
-  focusPlugin.decorator,
-  blockDndPlugin.decorator,
-);
+const { AlignmentTool } = alignmentPlugin;
+
+const decorator = composeDecorators(alignmentPlugin.decorator, focusPlugin.decorator);
 
 const imagePlugin = createImagePlugin({ decorator });
+
+const colorBlockPlugin = createColorBlockPlugin({ decorator });
 
 const plugins = [
   imagePlugin,
@@ -273,7 +278,13 @@ const plugins = [
   blockDndPlugin,
   focusPlugin,
   resizeablePlugin,
+  alignmentPlugin,
+  colorBlockPlugin,
 ];
+
+function BlockWrapper({ children }) {
+  return <div>{children}</div>;
+}
 
 export type EditorMainProps = {};
 
@@ -369,8 +380,8 @@ function EditorMain(props: EditorMainProps) {
 
   return (
     <>
-      <div className="w-2/4 border-2 h-full">
-        <form className="h-5/6  p-9">
+      <div className="w-2/4  border-r-2 h-full">
+        <form className="h-4/6  p-9">
           <input
             className="text-5xl  font-bold focus:outline-none"
             name="title"
@@ -406,6 +417,10 @@ function EditorMain(props: EditorMainProps) {
               customStyleFn={customStyleFn}
             />
           </EW>
+          <AlignmentTool />
+          <button className="post-button" onClick={e => handleSubmit(e)}>
+            완료
+          </button>
         </form>
       </div>
     </>
@@ -453,6 +468,9 @@ const styleMap = {
     fontFamily: `'Hoefler Text', Georgia, serif`,
     display: 'flex',
     justifyContent: 'center',
+    flexWrap: 'wrap',
+    width: '100%',
+    border: '1px solid red',
   },
   H1: {
     fontSize: '2rem',
