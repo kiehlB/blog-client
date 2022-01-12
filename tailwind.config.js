@@ -24,7 +24,7 @@ module.exports = {
     screens: {
       si: '768px',
       md: '900px',
-      lg: '1024px',
+      lg: '1025px',
       xl: '1500px', // this is the "design resolution",
       m2xl: { max: '1440px' },
       mxl: { max: '1200px' },

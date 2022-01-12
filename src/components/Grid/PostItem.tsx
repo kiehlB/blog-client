@@ -21,22 +21,21 @@ function PostItem({ post }: PostItemProps) {
     .map(block => (!block.text.trim() && '\n') || block.text)
     .join('\n');
 
-  console.log(value);
-
   return (
     <C className="border border-black">
-      <ContentImg
-        src="https://media.vlpt.us/images/ictechgy/post/6504eca7-b160-4e21-8ce4-39fe1f02e55c/MVVM%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4%ED%91%9C%EC%A7%80.png"
-        alt="Picture of the author"
-      />
+      {post?.thumbnail ? (
+        <ContentImg src={post.thumbnail} alt="Picture of the author" />
+      ) : (
+        ''
+      )}
 
       <PostContent>
         <PostTitle>{post.title}</PostTitle>
-        <ByWho>나는야 텍스트 나는야 텍스트나는야 텍스트나는야 텍스트나는야 텍스트</ByWho>
+        <ByWho>나는 어서</ByWho>
         <PostBody>{value}</PostBody>
       </PostContent>
       <PostButtonWrapper>
-        <Button>Read more</Button>
+        <Button className="text-zinc-600 font-bold  text-sm  w-32 h-10">Read more</Button>
       </PostButtonWrapper>
     </C>
   );
@@ -48,17 +47,19 @@ export default PostItem;
 
 const C = styled.section``;
 
-const ContentImg = styled.img``;
+const ContentImg = styled.img`
+  width: 100%;
+`;
 
 const PostContent = styled.section`
   margin-top: 2.5rem;
   padding: 0rem 1.5rem;
 
   &::before {
-    content: '';
+    content: 'Read this';
     position: absolute;
     margin: -3.5rem -0px;
-    width: 8.5rem;
+    width: 8rem;
     height: 1.375rem;
     background-color: #1fb6ff;
     line-height: 22px;

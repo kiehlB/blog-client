@@ -26,7 +26,7 @@ function Main({}: MainProps) {
         <ButtonWapprer>
           <Button
             bgColor="regal-sky"
-            className="text-sm !font-medium w-36 h-10  !rounded-full">
+            className="text-sm !font-medium w-36 h-10  !rounded-full -z-50">
             Search Now
           </Button>
         </ButtonWapprer>

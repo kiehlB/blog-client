@@ -1,9 +1,9 @@
-let accessToken = '';
+let refresh_token = '';
 
-export const setAccessToken = (s: string) => {
-  accessToken = s;
+export const setrefresh_token = (s: string) => {
+  refresh_token = s;
 };
 
-export const getAccessToken = () => {
-  return accessToken;
+export const getrefresh_token = () => {
+  return refresh_token;
 };

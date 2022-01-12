@@ -6,7 +6,7 @@ import { Image } from '../../components/Common/Image';
 import { initializeApollo } from '../../lib/apolloClient';
 import { GET_Posts } from '../../lib/graphql/posts';
 import draftToHtml from 'draftjs-to-html';
-
+import styled from 'styled-components';
 import { useState } from 'react';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
@@ -33,7 +33,7 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
     .map(block => (!block.text.trim() && '\n') || block.text)
     .join('\n');
 
-  console.log(value);
+  console.log(post);
 
   return (
     <>
@@ -50,12 +50,16 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
       {/* <div dangerouslySetInnerHTML={{ __html: post.body }} />
       <textarea disabled value={draftToHtml(JSON.parse(post.body))} /> */}
 
-      <div style={{ margin: '0 auto', width: '40%', border: '1px solid red' }}>
-        <div>title</div>
-        <div>date</div>
-
+      <PostWrapper>
+        <PostHeader>
+          <BlogHeader>Blog</BlogHeader>
+          <BlogTitle>im title</BlogTitle>
+          <BlogDate>date</BlogDate>
+        </PostHeader>
+      </PostWrapper>
+      <EditorWrapper>
         <Editor editorState={defaultEditorState} readonly customStyleMap={styleMap} />
-      </div>
+      </EditorWrapper>
     </>
   );
 }
@@ -93,21 +97,13 @@ const styleMap = {
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
     fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
     fontSize: 16,
-    border: '1px solid red',
-    padding: 4,
-    display: 'flex',
-    justifyContent: 'center',
   },
   BOLD: {
     color: '#395296',
     fontWeight: 'bold',
-    display: 'flex',
-    justifyContent: 'center',
   },
   ANYCUSTOMSTYLE: {
     color: '#00e400',
-    display: 'flex',
-    justifyContent: 'center',
   },
   FANCYBLOCKQUOTE: {
     color: '#999',
@@ -120,17 +116,46 @@ const styleMap = {
   },
   H1: {
     fontSize: '2rem',
-    display: 'flex',
-    justifyContent: 'center',
   },
   H2: {
     fontSize: '1.5rem',
-    display: 'flex',
-    justifyContent: 'center',
   },
   H3: {
     fontSize: '1.7rem',
-    display: 'flex',
-    justifyContent: 'center',
   },
 };
+const BlogHeader = styled.div`
+  font-size: 1rem;
+  color: #8492a6;
+`;
+
+const BlogTitle = styled.div`
+  font-size: 2.375rem;
+  color: #1f2d3d;
+  font-weight: 600;
+`;
+
+const BlogDate = styled.div`
+  font-size: 1.125rem;
+  color: #3c4858;
+  font-weight: 600;
+`;
+
+const PostHeader = styled.div`
+  margin: 0 auto;
+  width: 40%;
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const PostWrapper = styled.div`
+  margin: 5rem 0;
+  height: 10rem;
+`;
+
+const EditorWrapper = styled.div`
+  margin: 0 auto;
+  width: 40%;
+`;

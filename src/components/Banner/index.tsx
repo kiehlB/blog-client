@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import media from '../../lib/styles/media';
 import Button from '../Common/TailButton';
+import Link from 'next/link';
 
 export type BannerProps = {};
 
@@ -12,7 +13,9 @@ function Banner({}: BannerProps) {
           📹 New! Remote User Testing - Get video + voice feedback on designs and
           prototypes
         </BannerText>
-        <Button className="text-sm !font-medium">Read More</Button>
+        <Link href="/about">
+          <Button className="text-sm !font-medium">Read More</Button>
+        </Link>
       </BannerWrapper>
     </BannerBlock>
   );

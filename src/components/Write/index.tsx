@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { RichUtils, convertToRaw } from 'draft-js';
+import { RichUtils, convertToRaw, getDefaultKeyBinding } from 'draft-js';
 import { convertToHTML } from 'draft-convert';
 import Editor, { composeDecorators } from '@draft-js-plugins/editor';
 import createHashtagPlugin from 'draft-js-hashtag-plugin';
@@ -27,8 +27,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import media from '../../lib/styles/media';
 import { PostInit } from '../../store/post';
 import { checkEmpty } from '../../utils/isNull';
-
+import createEmojiPlugin from '@draft-js-plugins/emoji';
 import createColorBlockPlugin from './colorBlockPlugin';
+import Button from '../Common/TailButton';
+import Tags from '../Tags';
+import TagsForm from '../Tags/TagsForm';
 
 const Title = styled.div`
   width: 60%;
@@ -186,8 +189,7 @@ const EditorMainTap = styled.div`
 
 const TagBlock = styled.div`
   display: flex;
-  width: 60%;
-  margin: 0 auto;
+
   flex-wrap: wrap;
   border: 1px solid #ccc;
   padding: 0.5rem;
@@ -227,10 +229,6 @@ const inlineStyleButtons = [
     style: 'CODE',
   },
   {
-    value: 'Anycustomstyle',
-    style: 'ANYCUSTOMSTYLE',
-  },
-  {
     value: 'FANCYBLOCKQUOTE',
     style: 'FANCYBLOCKQUOTE',
   },
@@ -248,6 +246,23 @@ const inlineStyleButtons = [
   },
 ];
 
+const myBlockStyleFn = contentBlock => {
+  const type = contentBlock.getType();
+
+  console.log(type);
+  if (type === 'blockquote') {
+    return `${BlockStyling.superFancyBlockquote}`;
+  } else if (type === 'CODE') {
+    return 'h2BlcokTag';
+  } else if (type === 'header-two') {
+    return 'h2BlcokTag';
+  } else if (type === 'header-three') {
+    return 'h3BlcokTag';
+  } else if (type === 'unstyled') {
+    return <p />;
+  }
+};
+
 const { customStyleFn } = createStyles(['font-size']);
 const hashtagPlugin = createHashtagPlugin({ theme: hashtagStyles });
 const linkPlugin = createLinkPlugin({
@@ -256,11 +271,13 @@ const linkPlugin = createLinkPlugin({
 });
 const inlineToolbarPlugin = createInlineToolbarPlugin();
 const { InlineToolbar } = inlineToolbarPlugin;
+const emojiPlugin = createEmojiPlugin();
 const focusPlugin = createFocusPlugin();
 const resizeablePlugin = createResizeablePlugin();
 const alignmentPlugin = createAlignmentPlugin();
 const blockDndPlugin = createBlockDndPlugin();
 const { AlignmentTool } = alignmentPlugin;
+const { EmojiSuggestions, EmojiSelect } = emojiPlugin;
 
 const decorator = composeDecorators(alignmentPlugin.decorator, focusPlugin.decorator);
 
@@ -280,6 +297,7 @@ const plugins = [
   resizeablePlugin,
   alignmentPlugin,
   colorBlockPlugin,
+  emojiPlugin,
 ];
 
 function BlockWrapper({ children }) {
@@ -312,19 +330,6 @@ function EditorMain(props: EditorMainProps) {
   } = useEditor();
   const buttonClass = classNames(`${buttonStyle.button} ${buttonStyle.shinydarken}`);
 
-  const myBlockStyleFn = contentBlock => {
-    const type = contentBlock.getType();
-    if (type === 'blockquote') {
-      return `${BlockStyling.superFancyBlockquote}`;
-    } else if (type === 'header-one') {
-      return 'h1BlcokTag';
-    } else if (type === 'header-two') {
-      return 'h2BlcokTag';
-    } else if (type === 'header-three') {
-      return 'h3BlcokTag';
-    }
-  };
-
   const onChange = editorState => {
     setEditorState(editorState);
   };
@@ -344,7 +349,7 @@ function EditorMain(props: EditorMainProps) {
         value={value}
         data-style={style}
         onMouseDown={toggleInlineStyle}
-        className="p-1.5 cursor-pointer    border-2"
+        className="p-1.5 cursor-pointer hover:bg-neutral-100 transition-all"
       />
     );
   };
@@ -359,12 +364,22 @@ function EditorMain(props: EditorMainProps) {
 
   const handleKeyCommand = command => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
+
     if (newState) {
       setEditorState(newState);
       return 'handled';
     } else {
       return 'not-handled';
     }
+  };
+
+  const handleReturn = e => {
+    if (e.shiftKey) {
+      setEditorState(RichUtils.insertSoftNewline(editorState));
+
+      return 'handled';
+    }
+    return 'not-handled';
   };
 
   const addTag = text => {
@@ -380,10 +395,10 @@ function EditorMain(props: EditorMainProps) {
 
   return (
     <>
-      <div className="w-2/4  border-r-2 h-full">
+      <div className="w-2/4  border-r-2 h-full mlg:w-full">
         <form className="h-4/6  p-9">
           <input
-            className="text-5xl  font-bold focus:outline-none"
+            className="text-4xl  font-bold focus:outline-none w-full "
             name="title"
             onChange={titleOnChange}
             value={inputs}
@@ -391,12 +406,35 @@ function EditorMain(props: EditorMainProps) {
           />
 
           <hr className="border-2 w-6/12 mt-3.5 " />
-          <input className="text-lg  block mt-3.5" placeholder="태그를 입력하세요" />
+          {/* <TagBlock>
+            {tag.map((tags, index) => (
+              <Tags tags={tags} index={index} deleteTag={deleteTag} />
+            ))}
+            <TagsForm addTag={addTag} />
+          </TagBlock> */}
           <div className="mt-3.5">
             {inlineStyleButtons.map(button => {
               return renderInlineStyleButton(button.value, button.style);
             })}
           </div>
+          {/* 
+          <Thumbnail>
+            <div>Thumbnail</div>
+            <input
+              id="fileInput"
+              type="file"
+              name="image"
+              onChange={handleFileInputChange}
+              value={fileInputState}
+              className="form-input"
+              style={{ margin: '.5rem 0' }}
+            />
+
+            {previewSource && (
+              <img src={previewSource} alt="chosen" style={{ height: '300px' }} />
+            )}
+          </Thumbnail> */}
+
           <div className="mt-3.5">
             <ImageAdd
               editorState={editorState}
@@ -405,7 +443,7 @@ function EditorMain(props: EditorMainProps) {
             />
           </div>
 
-          <EW className="overflow-y-scroll mt-3.5" style={{ lineHeight: '75%' }}>
+          <EW className="overflow-y-scroll mt-6" style={{ lineHeight: '100%' }}>
             <Editor
               customStyleMap={styleMap}
               editorState={editorState}
@@ -417,10 +455,12 @@ function EditorMain(props: EditorMainProps) {
               customStyleFn={customStyleFn}
             />
           </EW>
-          <AlignmentTool />
-          <button className="post-button" onClick={e => handleSubmit(e)}>
-            완료
-          </button>
+
+          <ButtonWrapper>
+            <Button className="text-zinc-600" onClick={e => handleSubmit(e)}>
+              완료
+            </Button>
+          </ButtonWrapper>
         </form>
       </div>
     </>
@@ -451,9 +491,13 @@ export default EditorMain;
 const styleMap = {
   CODE: {
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
+
     fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
     fontSize: 16,
-    padding: 4,
+    padding: 20,
+    display: 'flex',
+    whiteSpace: 'pre-line',
+    lineBreak: 'strict',
   },
   BOLD: {
     color: '#395296',
@@ -469,8 +513,6 @@ const styleMap = {
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
-    width: '100%',
-    border: '1px solid red',
   },
   H1: {
     fontSize: '2rem',
@@ -485,4 +527,18 @@ const styleMap = {
 
 const EW = styled.div`
   height: calc(100% - 85px) !important;
+  border-radius: 0 0 3px 3px;
+  background-color: #fff;
+  font-weight: 300;
+  box-shadow: 0px 0px 3px 1px rgba(15, 15, 15, 0.17);
+  word-break: break-word;
+  padding: 2rem;
+  white-space: pre-line;
+  line-break: strict;
+`;
+
+const ButtonWrapper = styled.div`
+  margin-top: 4rem;
+  display: flex;
+  justify-content: flex-end;
 `;

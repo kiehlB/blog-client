@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { Editor } from '../components/Draftail';
+ 
 import EditorMain from '../components/Write';
 
 export type WriteProps = {};
@@ -15,7 +17,8 @@ function Write({}: WriteProps) {
           height: 100%;
         }
       `}</style>
-      <EditorMain />
+      {/* <EditorMain /> */}
+      <Editor />
     </WriteBlock>
   );
 }

@@ -25,7 +25,7 @@ function Grid({ post }: GridProps) {
             </GridAuto>
           </FisrtColumn>
         </FirstGrid> */}
-        {post?.post.map(ele => (
+        {post?.map(ele => (
           <>
             <PostItem post={ele} />
           </>

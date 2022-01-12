@@ -7,7 +7,7 @@ function Next({}: NextProps) {
     <NextBlock>
       <Wrapper>
         <TextWrapper>
-          <span>Next</span>
+          <h1>Next</h1>
           <Arrow>
             <svg
               width="34"

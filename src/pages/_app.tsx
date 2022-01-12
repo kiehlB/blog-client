@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import store from '../store/store';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import '@draft-js-plugins/alignment/lib/plugin.css';
+import '../styles/font.css';
+import '@draft-js-plugins/emoji/lib/plugin.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);

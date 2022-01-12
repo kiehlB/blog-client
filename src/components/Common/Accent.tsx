@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
-type AccentType = React.ComponentPropsWithoutRef<'span'>;
+type AccentType = React.ComponentPropsWithoutRef<'div'>;
 
 export default function Accent({ children, className }: AccentType) {
   return (
-    <span
+    <div
       className={clsx(
         className,
         'transition-colors',
@@ -13,6 +13,6 @@ export default function Accent({ children, className }: AccentType) {
         'dark:text-transparent dark:bg-clip-text dark:from-primary-300 dark:to-primary-400',
       )}>
       {children}
-    </span>
+    </div>
   );
 }

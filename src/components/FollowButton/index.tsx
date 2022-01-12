@@ -45,7 +45,7 @@ function Face(props: FaceProps) {
               <h1 className={card.alert}>Error!</h1>
               <p>
                 {props.error?.graphQLErrors.map(({ message }, i) => (
-                  <span key={i}>{message}</span>
+                  <div key={i}>{message}</div>
                 ))}
               </p>
             </div>
@@ -72,13 +72,13 @@ function Face(props: FaceProps) {
         //     {props.BooleanIsFollowing && !loading && getUser.me ? (
         //       <button className={card.buttonBox} onClick={props.unFollowHandleSubmit}>
         //         <h1 className={card.green}>
-        //           <span>Unfollow</span>
+        //           <div>Unfollow</div>
         //         </h1>
         //       </button>
         //     ) : (
         //       <button className={card.buttonBox} onClick={props.followHandleSubmit}>
         //         <h1 className={card.green}>
-        //           <span>Follow</span>
+        //           <div>Follow</div>
         //         </h1>
         //       </button>
         //     )}

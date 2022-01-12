@@ -1,4 +1,4 @@
-import { setAccessToken } from '../../../lib/accessToken';
+import { setrefresh_token } from '../../../lib/accessToken';
 import { useLogoutMutation, useMeQuery } from '../../../types/apolloComponent';
 
 export default function useGetUser() {
@@ -6,10 +6,9 @@ export default function useGetUser() {
   const [logout, { client }] = useLogoutMutation();
 
   const logoutButton = async () => {
-    console.log('yo im clicked');
     if (!loading && getUser.me) {
       await logout();
-      setAccessToken('');
+      setrefresh_token('');
       await client!.resetStore();
     }
   };

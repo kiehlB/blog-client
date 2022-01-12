@@ -14,8 +14,10 @@ import useGetUser from '../components/Base/hooks/useGetUser';
 import { initializeApollo } from '../lib/apolloClient';
 import { GET_Posts } from '../lib/graphql/posts';
 
-const Home: NextPage = post => {
+const Home: NextPage = (post: any) => {
   const { getUser, loading, error, logoutButton } = useGetUser();
+
+  const limitPosts = post?.post?.slice(0, 12);
 
   // if (process.browser) {
   //   const canvas = document.querySelector('canvas');
@@ -140,7 +142,7 @@ const Home: NextPage = post => {
         second={
           <AppLayout.Second>
             <C>
-              <Grid post={post} />
+              <Grid post={limitPosts} />
             </C>
             <E>
               <Next />
