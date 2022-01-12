@@ -58,6 +58,8 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
         </PostHeader>
       </PostWrapper>
       <EditorWrapper>
+
+        {/* @ts-ignore */}
         <Editor editorState={defaultEditorState} readonly customStyleMap={styleMap} />
       </EditorWrapper>
     </>
