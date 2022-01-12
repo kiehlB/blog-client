@@ -12,7 +12,7 @@ const Icon = ({ icon, title, className }) => {
       children = <path d={icon} />;
     }
   } else if (Array.isArray(icon)) {
-    // eslint-disable-next-line @thibaudcolas/cookbook/react/no-array-index-key
+
     children = icon.map((d, i) => <path key={i} d={d} />);
   } else {
     return icon;
