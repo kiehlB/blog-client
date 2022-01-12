@@ -12,6 +12,7 @@ const Document = ({ entityKey, contentState, children, onEdit, onRemove }) => {
 
   return (
     <TooltipEntity
+      /* @ts-ignore */
       entityKey={entityKey}
       contentState={contentState}
       onEdit={onEdit}

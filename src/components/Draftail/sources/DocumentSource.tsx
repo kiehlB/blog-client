@@ -7,6 +7,7 @@ class DocumentSource extends Component {
   constructor(props) {
     super(props);
 
+    /* @ts-ignore */
     const { entity } = this.props;
     const state = {
       url: ""
@@ -22,7 +23,9 @@ class DocumentSource extends Component {
 
   /* :: onConfirm: (e: Event) => void; */
   onConfirm = e => {
+    /* @ts-ignore */
     const { editorState, entityType, onComplete } = this.props;
+    /* @ts-ignore */
     const { url } = this.state;
 
     e.preventDefault();
@@ -51,6 +54,7 @@ class DocumentSource extends Component {
 
   /* :: onRequestClose: (e: SyntheticEvent<>) => void; */
   onRequestClose = e => {
+    /* @ts-ignore */
     const { onClose } = this.props;
     e.preventDefault();
 
@@ -59,6 +63,7 @@ class DocumentSource extends Component {
 
   /* :: onAfterOpen: () => void; */
   onAfterOpen = () => {
+    /* @ts-ignore */
     const input = this.inputRef;
 
     if (input) {
@@ -76,6 +81,7 @@ class DocumentSource extends Component {
   };
 
   render() {
+    /* @ts-ignore */
     const { url } = this.state;
     return (
       <Modal
@@ -89,6 +95,7 @@ class DocumentSource extends Component {
             <span className="form-field__label">Document URL</span>
             <input
               ref={inputRef => {
+                /* @ts-ignore */
                 this.inputRef = inputRef;
               }}
               type="text"

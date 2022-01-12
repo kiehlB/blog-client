@@ -7,6 +7,7 @@ class EmbedSource extends Component {
   constructor(props) {
     super(props);
 
+    /* @ts-ignore */
     const { entity } = this.props;
     const state = {
       url: ""
@@ -23,12 +24,18 @@ class EmbedSource extends Component {
   /* :: onConfirm: (e: Event) => void; */
   onConfirm = e => {
     const {
+      /* @ts-ignore */
       editorState,
+      /* @ts-ignore */
       entity,
+      /* @ts-ignore */
       entityKey,
+      /* @ts-ignore */
       entityType,
+      /* @ts-ignore */
       onComplete
     } = this.props;
+    /* @ts-ignore */
     const { url } = this.state;
     const content = editorState.getCurrentContent();
     let nextState;
@@ -69,6 +76,7 @@ class EmbedSource extends Component {
 
   /* :: onRequestClose: (e: SyntheticEvent<>) => void; */
   onRequestClose = e => {
+    /* @ts-ignore */
     const { onClose } = this.props;
     e.preventDefault();
 
@@ -77,6 +85,7 @@ class EmbedSource extends Component {
 
   /* :: onAfterOpen: () => void; */
   onAfterOpen = () => {
+    /* @ts-ignore */
     const input = this.inputRef;
 
     if (input) {
@@ -94,6 +103,7 @@ class EmbedSource extends Component {
   };
 
   render() {
+    /* @ts-ignore */
     const { url } = this.state;
     return (
       <Modal
@@ -107,6 +117,7 @@ class EmbedSource extends Component {
             <span className="form-field__label">Embed URL</span>
             <input
               ref={inputRef => {
+                /* @ts-ignore */
                 this.inputRef = inputRef;
               }}
               type="text"

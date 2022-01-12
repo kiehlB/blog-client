@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Icon } from "../components/Icon";
 import Tooltip from "../components/Tooltip";
 import Portal from "../components/Portal";
 
@@ -47,6 +46,7 @@ class MediaBlock extends Component {
   /* :: renderTooltip: () => ?Node; */
   renderTooltip = () => {
     const { children } = this.props;
+    /* @ts-ignore */
     const { tooltip } = this.state;
 
     if (!tooltip) {
@@ -58,6 +58,7 @@ class MediaBlock extends Component {
 
     return (
       <Portal
+        /* @ts-ignore */
         onClose={this.closeTooltip}
         closeOnClick
         closeOnType
@@ -71,6 +72,7 @@ class MediaBlock extends Component {
   };
 
   render() {
+    /* @ts-ignore */
     const { blockProps, src, label, isLoading } = this.props;
     const { entityType } = blockProps;
 

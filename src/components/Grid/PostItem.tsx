@@ -225,8 +225,9 @@ const PostBody = styled.section`
 const PostButtonWrapper = styled.section`
   margin-bottom: 2rem;
   padding: 0rem 1.5rem;
+ 
 `;
 const WithoutPostButtonWrapper = styled.section`
-  
+   
   padding: 1.5rem 1.5rem;
 `;

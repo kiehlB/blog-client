@@ -29,11 +29,13 @@ const openTooltip = e => {
   const trigger = e.target;
   if (trigger instanceof Element) {
     let rect = trigger.getBoundingClientRect();
+    /* @ts-ignore */
     this.setState({ showTooltipAt: rect });
   }
 };
 
 const closeTooltip = () => {
+  /* @ts-ignore */
   this.setState({ showTooltipAt: null });
 };
 
@@ -44,6 +46,7 @@ const Link = ({ entityKey, contentState, children, onEdit, onRemove }) => {
 
   return (
     <TooltipEntity
+      /* @ts-ignore */
       entityKey={entityKey}
       contentState={contentState}
       onEdit={onEdit}

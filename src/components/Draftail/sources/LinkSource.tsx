@@ -9,6 +9,7 @@ class LinkSource extends Component {
 
     console.log("LinkSource", props);
 
+    /* @ts-ignore */
     const { entity } = this.props;
     const state = {
       url: ""
@@ -24,7 +25,9 @@ class LinkSource extends Component {
 
   /* :: onConfirm: (e: Event) => void; */
   onConfirm = e => {
+    /* @ts-ignore */
     const { editorState, entityType, onComplete } = this.props;
+    /* @ts-ignore */
     const { url } = this.state;
 
     e.preventDefault();
@@ -53,6 +56,7 @@ class LinkSource extends Component {
 
   /* :: onRequestClose: (e: SyntheticEvent<>) => void; */
   onRequestClose = e => {
+    /* @ts-ignore */
     const { onClose } = this.props;
     e.preventDefault();
 
@@ -61,6 +65,7 @@ class LinkSource extends Component {
 
   /* :: onAfterOpen: () => void; */
   onAfterOpen = () => {
+    /* @ts-ignore */
     const input = this.inputRef;
 
     if (input) {
@@ -78,6 +83,7 @@ class LinkSource extends Component {
   };
 
   render() {
+    /* @ts-ignore */
     const { url } = this.state;
     return (
       <Modal
@@ -91,6 +97,7 @@ class LinkSource extends Component {
             <span className="form-field__label">Link URL</span>
             <input
               ref={inputRef => {
+                /* @ts-ignore */
                 this.inputRef = inputRef;
               }}
               type="text"

@@ -28,14 +28,21 @@ class TooltipEntity extends Component {
 
   render() {
     const {
+      /* @ts-ignore */
       entityKey,
+      /* @ts-ignore */
       contentState,
       children,
+      /* @ts-ignore */
       onEdit,
+      /* @ts-ignore */
       onRemove,
+      /* @ts-ignore */
       icon,
+      /* @ts-ignore */
       label
     } = this.props;
+    /* @ts-ignore */
     const { showTooltipAt } = this.state;
     const { url } = contentState.getEntity(entityKey).getData();
 
@@ -47,6 +54,7 @@ class TooltipEntity extends Component {
         <span className="TooltipEntity__text">{children}</span>
         {showTooltipAt && (
           <Portal
+            /* @ts-ignore */
             onClose={this.closeTooltip}
             closeOnClick
             closeOnType

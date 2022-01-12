@@ -436,6 +436,7 @@ function EditorMain(props: EditorMainProps) {
 
           <div className="mt-3.5">
             <ImageAdd
+              /* @ts-ignore */
               editorState={editorState}
               onChange={onChange}
               modifier={imagePlugin.addImage}

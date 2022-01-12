@@ -13,6 +13,7 @@ class ImageBlock extends Component {
 
   /* :: changeAlt: (e: Event) => void; */
   changeAlt(e) {
+    /* @ts-ignore */
     const { block, blockProps } = this.props;
     const { editorState, onChange } = blockProps;
 
@@ -26,6 +27,7 @@ class ImageBlock extends Component {
   }
 
   render() {
+    /* @ts-ignore */
     const { blockProps } = this.props;
     const { entity, onEditEntity, onRemoveEntity } = blockProps;
     const { src, alt } = entity.getData();
@@ -33,6 +35,7 @@ class ImageBlock extends Component {
     return (
       <MediaBlock
         {...this.props}
+        /* @ts-ignore */
         src={src.toString()}
         label={alt || ""}
         isLoading={false}

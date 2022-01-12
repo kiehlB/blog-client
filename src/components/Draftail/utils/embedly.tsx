@@ -11,6 +11,7 @@ const getJSON = (endpoint, data, successCallback) => {
 };
 
 /* global EMBEDLY_API_KEY */
+/* @ts-ignore */
 const key = typeof EMBEDLY_API_KEY === "undefined" ? "key" : EMBEDLY_API_KEY;
 const EMBEDLY_ENDPOINT = `https://api.embedly.com/1/oembed?key=${key}`;
 
