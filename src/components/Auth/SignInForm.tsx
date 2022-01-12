@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { setAccessToken } from '../../lib/accessToken';
+import { setRefresh_token } from '../../lib/accessToken';
 import { MeDocument, MeQuery } from '../../types/apolloComponent';
 import LabelInput from '../LabelInput/LabelInput';
 import useLogin from './hooks/useLogin';
 
 export type SignInFormProps = {};
 
-function SignInForm({}: SignInFormProps) {
+function SignInForm({ }: SignInFormProps) {
   const { inputs, handleChange, login } = useLogin();
 
   const handleSubmit = async e => {
@@ -27,8 +27,8 @@ function SignInForm({}: SignInFormProps) {
       },
     });
 
-    if (response.data) {
-      setAccessToken(response.data.login.accessToken);
+    if (response?.data) {
+      setRefresh_token(response?.data?.login?.accessToken);
     }
   };
 
@@ -71,8 +71,8 @@ function SignInForm({}: SignInFormProps) {
 
       <button
         type="submit"
-        className="w-full block bg-indigo-500 hover:bg-indigo-400  text-white font-semibold rounded-lg
-          px-4 py-3 mt-6">
+        className="w-full block bg-regal-sky hover:bg-sky-600 text-white font-semibold rounded-lg
+        px-4 py-3 mt-6">
         Log In
       </button>
     </form>

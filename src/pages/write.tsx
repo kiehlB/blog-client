@@ -17,8 +17,8 @@ function Write({ }: WriteProps) {
           height: 100%;
         }
       `}</style>
-      {/* <EditorMain /> */}
-      <Editor />
+      <EditorMain />
+
     </WriteBlock>
   );
 }

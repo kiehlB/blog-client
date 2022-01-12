@@ -6,7 +6,7 @@ import TailInput from '../Common/TailInput';
 
 export type MainProps = {};
 
-function Main({}: MainProps) {
+function Main({ }: MainProps) {
   const WindowWidth = useWindowSize();
 
   return (
@@ -26,7 +26,7 @@ function Main({}: MainProps) {
         <ButtonWapprer>
           <Button
             bgColor="regal-sky"
-            className="text-sm !font-medium w-36 h-10  !rounded-full -z-50">
+            className="text-sm !font-bold w-32 h-10  !rounded-full -z-50">
             Search Now
           </Button>
         </ButtonWapprer>

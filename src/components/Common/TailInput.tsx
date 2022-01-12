@@ -7,7 +7,7 @@ export default function TailInput({
 }: React.ComponentPropsWithoutRef<'input'>) {
   return (
     <input
-      placeholder="blah blahblah blah"
+      placeholder="Search..."
       className={clsx(
         className,
         'w-96 py-1.5 px-3 rounded-md dark:bg-dark mmd:w-5/6',

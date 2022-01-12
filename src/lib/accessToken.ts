@@ -1,9 +1,9 @@
 let refresh_token = '';
 
-export const setrefresh_token = (s: string) => {
+export const setRefresh_token = (s: string) => {
   refresh_token = s;
 };
 
-export const getrefresh_token = () => {
+export const getRefresh_token = () => {
   return refresh_token;
 };

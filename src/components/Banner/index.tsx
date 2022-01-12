@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export type BannerProps = {};
 
-function Banner({}: BannerProps) {
+function Banner({ }: BannerProps) {
   return (
     <BannerBlock>
       <BannerWrapper>
@@ -14,7 +14,7 @@ function Banner({}: BannerProps) {
           prototypes
         </BannerText>
         <Link href="/about">
-          <Button className="text-sm !font-medium">Read More</Button>
+          <Button className="text-sm ! font-medium">Read More</Button>
         </Link>
       </BannerWrapper>
     </BannerBlock>

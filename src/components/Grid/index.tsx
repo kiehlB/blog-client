@@ -11,6 +11,8 @@ export type GridProps = {
 };
 
 function Grid({ post }: GridProps) {
+
+  const a = 'a'
   return (
     <GridBlock>
       <FirstWrapper className="grid gap-9 grid-cols-3 mxl:grid-cols-2 mmd:grid-cols-1 auto-rows-fr">
@@ -26,9 +28,7 @@ function Grid({ post }: GridProps) {
           </FisrtColumn>
         </FirstGrid> */}
         {post?.map(ele => (
-          <>
-            <PostItem post={ele} />
-          </>
+          <PostItem post={ele} hello={false} />
         ))}
       </FirstWrapper>
     </GridBlock>

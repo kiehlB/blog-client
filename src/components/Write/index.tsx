@@ -27,7 +27,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import media from '../../lib/styles/media';
 import { PostInit } from '../../store/post';
 import { checkEmpty } from '../../utils/isNull';
-import createEmojiPlugin from '@draft-js-plugins/emoji';
 import createColorBlockPlugin from './colorBlockPlugin';
 import Button from '../Common/TailButton';
 import Tags from '../Tags';
@@ -271,13 +270,13 @@ const linkPlugin = createLinkPlugin({
 });
 const inlineToolbarPlugin = createInlineToolbarPlugin();
 const { InlineToolbar } = inlineToolbarPlugin;
-const emojiPlugin = createEmojiPlugin();
+
 const focusPlugin = createFocusPlugin();
 const resizeablePlugin = createResizeablePlugin();
 const alignmentPlugin = createAlignmentPlugin();
 const blockDndPlugin = createBlockDndPlugin();
 const { AlignmentTool } = alignmentPlugin;
-const { EmojiSuggestions, EmojiSelect } = emojiPlugin;
+
 
 const decorator = composeDecorators(alignmentPlugin.decorator, focusPlugin.decorator);
 
@@ -297,7 +296,7 @@ const plugins = [
   resizeablePlugin,
   alignmentPlugin,
   colorBlockPlugin,
-  emojiPlugin,
+
 ];
 
 function BlockWrapper({ children }) {
@@ -417,7 +416,7 @@ function EditorMain(props: EditorMainProps) {
               return renderInlineStyleButton(button.value, button.style);
             })}
           </div>
-          {/* 
+
           <Thumbnail>
             <div>Thumbnail</div>
             <input
@@ -433,7 +432,7 @@ function EditorMain(props: EditorMainProps) {
             {previewSource && (
               <img src={previewSource} alt="chosen" style={{ height: '300px' }} />
             )}
-          </Thumbnail> */}
+          </Thumbnail>
 
           <div className="mt-3.5">
             <ImageAdd

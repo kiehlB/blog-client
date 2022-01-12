@@ -4,7 +4,7 @@ import useRegister from './hooks/useRegister';
 
 export type SignUpFormProps = {};
 
-function SignUpForm({}: SignUpFormProps) {
+function SignUpForm({ }: SignUpFormProps) {
   const { inputs, handleChange, signUp } = useRegister();
 
   const handleSubmit = async e => {
@@ -68,7 +68,7 @@ function SignUpForm({}: SignUpFormProps) {
         type="submit"
         className="w-full block bg-regal-sky hover:bg-sky-600 text-white font-semibold rounded-lg
             px-4 py-3 mt-6">
-        Log In
+        Sign Up
       </button>
     </form>
   );
