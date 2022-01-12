@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { Editor } from '../components/Draftail';
- 
+
 import EditorMain from '../components/Write';
 
 export type WriteProps = {};
 
-function Write({}: WriteProps) {
+function Write({ }: WriteProps) {
   return (
     <WriteBlock>
       <style global jsx>{`
