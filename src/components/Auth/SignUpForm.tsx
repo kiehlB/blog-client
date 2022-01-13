@@ -5,14 +5,9 @@ import useRegister from './hooks/useRegister';
 export type SignUpFormProps = {};
 
 function SignUpForm({ }: SignUpFormProps) {
-  const { inputs, handleChange, signUp } = useRegister();
+  const { inputs, handleChange, signUp, handleSubmit } = useRegister();
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    signUp({
-      variables: inputs,
-    });
-  };
+
 
   return (
     <form className="mt-8" onSubmit={handleSubmit}>
