@@ -16,28 +16,28 @@ function SocialForm({ }: SocialFormProps) {
     bio: '',
   });
 
-  const register = async e => {
-    e.preventDefault();
-    const auths = JSON.stringify(inputs);
+  // const register = async e => {
+  //   e.preventDefault();
+  //   const auths = JSON.stringify(inputs);
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
+  //   const config = {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   };
 
-    await axios
-      .post('http://localhost:3000/api/v2/auth/register', auths, config)
-      .then(res => {
-        console.log(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
+  //   await axios
+  //     .post('http://localhost:3000/api/v2/auth/register', auths, config)
+  //     .then(res => {
+  //       console.log(res.data);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
+  //onSubmit={register}
   return (
-    <form className="mt-8" onSubmit={register}>
+    <form className="mt-8"  >
       <div>
         <label className="block text-gray-700">Profile Name</label>
         <LabelInput
