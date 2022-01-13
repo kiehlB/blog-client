@@ -188,7 +188,6 @@ const EditorMainTap = styled.div`
 
 const TagBlock = styled.div`
   display: flex;
-
   flex-wrap: wrap;
   border: 1px solid #ccc;
   padding: 0.5rem;
@@ -196,11 +195,12 @@ const TagBlock = styled.div`
 `;
 
 const Thumbnail = styled.div`
-  border: 1px solid red;
-  width: 60%;
   margin: 0 auto;
   border: 1px solid #ccc;
   padding: 0.5rem;
+  display: flex;
+  align-items: center;
+
 `;
 const inlineStyleButtons = [
   {
@@ -418,7 +418,7 @@ function EditorMain(props: EditorMainProps) {
           </div>
 
           <Thumbnail>
-            <div>Thumbnail</div>
+            <div style={{ marginRight: '.5rem' }}>Thumbnail</div>
             <input
               id="fileInput"
               type="file"
@@ -429,9 +429,9 @@ function EditorMain(props: EditorMainProps) {
               style={{ margin: '.5rem 0' }}
             />
 
-            {previewSource && (
-              <img src={previewSource} alt="chosen" style={{ height: '300px' }} />
-            )}
+            {/* {previewSource && (
+              <img src={previewSource} alt="chosen" style={{ height: '20px' }} />
+            )} */}
           </Thumbnail>
 
           <div className="mt-3.5">
@@ -467,24 +467,7 @@ function EditorMain(props: EditorMainProps) {
   );
 }
 
-{
-  /* <Thumbnail>
-<div>Thumbnail</div>
-<input
-  id="fileInput"
-  type="file"
-  name="image"
-  onChange={handleFileInputChange}
-  value={fileInputState}
-  className="form-input"
-  style={{ margin: '.5rem 0' }}
-/>
 
-{previewSource && (
-  <img src={previewSource} alt="chosen" style={{ height: '300px' }} />
-)}
-</Thumbnail> */
-}
 
 export default EditorMain;
 

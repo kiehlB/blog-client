@@ -34,7 +34,7 @@ function PostItem(props: PostItemProps) {
           <PostContent>
             <PostTitle>{props.post.title}</PostTitle>
             <ByWho>나는 어서</ByWho>
-            <GG2>hello</GG2>
+            <TagBlock>hello</TagBlock>
             <WithoutPostBody>{value}</WithoutPostBody>
           </PostContent>
           <WithoutPostButtonWrapper>
@@ -57,7 +57,7 @@ function PostItem(props: PostItemProps) {
         )}
 
         <PostContent>
-          <GG>hello</GG>
+          <TagB>hello</TagB>
           <PostTitle>{props.post.title}</PostTitle>
           <ByWho>나는 어서</ByWho>
           <PostBody>{value}</PostBody>
@@ -118,14 +118,12 @@ const FlexWrapper = styled.section<{
 `;
 
 const WithoutPostBody = styled.section`
+  
   line-height: 24px;
   color: #3c4858;
   font-weight: 300;
   display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  margin-top:4rem;
   max-height: 20.4375rem;
   display: -webkit-box;
     
@@ -138,12 +136,12 @@ const WithoutPostBody = styled.section`
 
 `;
 
-const GG = styled.section<{
+const TagB = styled.section<{
   hello: boolean;
 }>`
   position: absolute;
   margin: -3.2rem -0px;
-  width: 8rem;
+  
   height: 1.375rem;
   background-color: #1fb6ff;
   line-height: 22px;
@@ -157,12 +155,12 @@ const GG = styled.section<{
   align-items: center;
 `;
 
-const GG2 = styled.section<{
+const TagBlock = styled.section<{
   hello: boolean;
 }>`
-  
+   
   margin-top:1rem;
-  width: 8rem;
+  position: absolute;
   height: 1.375rem;
   background-color: #1fb6ff;
   line-height: 22px;
@@ -170,11 +168,11 @@ const GG2 = styled.section<{
   font-weight: 500;
   padding: 0px 5px 0px 5px;
   color: white;
-
   border-radius: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
+
 `;
 
 const PostTitle = styled.section`
