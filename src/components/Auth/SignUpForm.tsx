@@ -8,7 +8,7 @@ function SignUpForm({ }: SignUpFormProps) {
   const { inputs, handleChange, signUp, handleSubmit } = useRegister();
 
 
-  console.log(inputs)
+
   return (
     <form className="mt-8" onSubmit={handleSubmit}>
       <div>

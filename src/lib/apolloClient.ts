@@ -9,8 +9,9 @@ export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 export const prod = process.env.NODE_ENV === 'production';
 let apolloClient;
 
+//  prod ? process.env.API_URL : 'http://localhost:4000/graphql',
 const link = new HttpLink({
-  uri: prod ? process.env.API_URL : 'http://localhost:4000/graphql',
+  uri: 'https://api.woongblog.ga/graphql',
   credentials: 'include',
 });
 
