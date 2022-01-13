@@ -129,7 +129,7 @@ const Home: NextPage = (post: any) => {
 
   return (
     <>
-      {/* <AppLayout.MainNav>
+      <AppLayout.MainNav>
         <Banner />
         <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
         <FloatingHeader getUser={getUser} loading={loading} logoutButton={logoutButton} />
@@ -156,8 +156,7 @@ const Home: NextPage = (post: any) => {
             <Footer />
           </AppLayout.Third>
         }
-      /> */}
-      <div>hello</div>
+      />
     </>
   );
 };
@@ -176,12 +175,12 @@ const E = styled.div`
       </C> */
 }
 
-// export const getServerSideProps: GetServerSideProps = async context => {
-//   const apolloClient = initializeApollo();
+export const getServerSideProps: GetServerSideProps = async context => {
+  const apolloClient = initializeApollo();
 
-//   const postData = await apolloClient.query({
-//     query: GET_Posts,
-//   });
+  const postData = await apolloClient.query({
+    query: GET_Posts,
+  });
 
-//   return { props: { post: postData.data.posts } };
-// };
+  return { props: { post: postData.data.posts } };
+};
