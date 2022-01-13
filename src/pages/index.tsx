@@ -125,6 +125,8 @@ const Home: NextPage = (post: any) => {
   //   init();
   //   animate();
   // }
+
+
   return (
     <>
       <AppLayout.MainNav>

@@ -43,7 +43,7 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
   const getPost = useSelector((state: RootState) => state.post);
   const { getUser: userData, loading: userLoding } = useGetUser();
   const { loading, error: getError, data } = useGetPosts();
-  // const { commentsLoading, commentsError, commentstData } = useGetComments();
+  const { commentsLoading, commentsError, commentstData } = useGetComments();
   const {
     textOnChange,
     subTextOnChange,
@@ -60,9 +60,9 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
 
   // const { LikehandleSubmit, isLikeBoolean } = usePostLike();
   // const { UnlikehandleSubmit, isUnLikeBoolean } = usePostUnLike();
-  // const { DeletePostSubmit } = useDeletePost();
-  // const { EditCommentSubmit } = useEditComment();
-  // const { DeleteCommentSubmit } = useDeleteComment();
+  const { DeletePostSubmit } = useDeletePost();
+  const { EditCommentSubmit } = useEditComment();
+  const { DeleteCommentSubmit } = useDeleteComment();
 
   const [on, toggle] = useState(false);
   const router = useRouter();

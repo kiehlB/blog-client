@@ -6,7 +6,10 @@ import axios from 'axios';
 
 export type SocialFormProps = {};
 
-function SocialForm({}: SocialFormProps) {
+export const prod = process.env.NODE_ENV === 'production';
+
+
+function SocialForm({ }: SocialFormProps) {
   const [inputs, handleChange] = useForms({
     profileName: '',
     username: '',
