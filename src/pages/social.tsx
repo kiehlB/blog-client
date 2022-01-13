@@ -13,7 +13,7 @@ export type SocialProps = {};
 function Social({ }: SocialProps) {
   return (
     <>
-      {/* <View.Container>
+      <View.Container>
         <View.Body>
           <section className="flex flex-col md:flex-row items-center">
             <div className="bg-indigo-600 hidden lg:block w-full lg:w-1/2 xl:w-2/3 h-screen">
@@ -36,7 +36,7 @@ function Social({ }: SocialProps) {
             </div>
           </section>
         </View.Body>
-      </View.Container> */}
+      </View.Container>
     </>
   );
 }
