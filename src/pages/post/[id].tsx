@@ -4,7 +4,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import style from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula';
 import { Image } from '../../components/Common/Image';
 import { initializeApollo } from '../../lib/apolloClient';
-import { GET_Posts } from '../../lib/graphql/posts';
+import { GET_Post, GET_Posts } from '../../lib/graphql/posts';
 import draftToHtml from 'draftjs-to-html';
 import styled from 'styled-components';
 import { useState } from 'react';
@@ -35,9 +35,9 @@ import usePostUnLike from '../../components/PostLike/hooks/usePostUnLike';
 import useEditComment from '../../components/Comments/hooks/useEditComment';
 import useDeleteComment from '../../components/Comments/hooks/useDeleteComment';
 import useDeletePost from '../../components/Post/hooks/useDeletePost';
+import Face from '../../components/FollowButton';
 
 export default function Post({ post, frontmatter, nextPost, previousPost }) {
-
   const dispatch = useDispatch();
   const [isInput, setisInput] = useState(false);
   const getPost = useSelector((state: RootState) => state.post);
@@ -55,30 +55,23 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
     setIsopen,
   } = useCreateComment();
 
-  // const { followHandleSubmit, error, BooleanIsFollowing } = useFollowUser();
-  // const { unFollowHandleSubmit, unfollowError } = useUnfollowUser();
+  const { followHandleSubmit, error, BooleanIsFollowing } = useFollowUser();
+
+  const { unFollowHandleSubmit, unfollowError } = useUnfollowUser();
 
   // const { LikehandleSubmit, isLikeBoolean } = usePostLike();
   // const { UnlikehandleSubmit, isUnLikeBoolean } = usePostUnLike();
-  const { DeletePostSubmit } = useDeletePost();
-  const { EditCommentSubmit } = useEditComment();
-  const { DeleteCommentSubmit } = useDeleteComment();
+  // const { DeletePostSubmit } = useDeletePost();
+  // const { EditCommentSubmit } = useEditComment();
+  // const { DeleteCommentSubmit } = useDeleteComment();
 
   const [on, toggle] = useState(false);
   const router = useRouter();
-  const [editorState, setEditorState] = useState(
-    EditorState.createWithContent(convertFromRaw(JSON.parse(post.body))),
-  );
-
-
-
 
   const [editComment, setEditComment] = useState(false);
 
   const [editText, setEditText] = useState('');
   const [subEditText, subSetEditText] = useState('');
-
-
 
   if (getError) return <p>zzzzzzzzzzz</p>;
   if (loading) return <p>loading</p>;
@@ -87,9 +80,6 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
   // if (commentsError) return <p>Error !!!!!!!!!!:(</p>;
 
   // const findData = data.posts.find(ele => ele.id == router.query.slug);
-
-
-
 
   // const getComments = commentstData.comment.filter(el => el.post_id == router.query.slug);
 
@@ -133,19 +123,23 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
     decorator,
   );
 
-
-
-  const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
-  const value = blocks
-    .map(block => (!block.text.trim() && '\n') || block.text)
-    .join('\n');
-
-
-
+  const FindUser = post?.user?.username;
   return (
     <>
       <Banner />
       <Header />
+      <div className="sticky-wrapper">
+        <div className="card-wrapper">
+          <Face
+            username={FindUser}
+            followHandleSubmit={followHandleSubmit}
+            error={error}
+            unFollowHandleSubmit={unFollowHandleSubmit}
+            unfollowError={unfollowError}
+            BooleanIsFollowing={BooleanIsFollowing}
+          />
+        </div>
+      </div>
 
       {/* <ReactMarkdown
             className="mb-4 prose lg:prose-lg dark:prose-dark"
@@ -165,7 +159,6 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
         </PostHeader>
       </PostWrapper>
       <EditorWrapper>
-
         {/* @ts-ignore */}
         <Editor editorState={defaultEditorState} readonly customStyleMap={styleMap} />
         <div>helloM</div>
@@ -176,7 +169,6 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
           <div className="comments-mini">
             {/* <div className="comments-count">{getComments.length} 개의 댓글</div> */}
           </div>
-
         </div>
         {/* <CommentForm
           findId={findId}
@@ -242,8 +234,6 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
         ))} */}
       </div>
       <Footer />
-
-
     </>
   );
 }
@@ -266,14 +256,19 @@ const CodeBlock = ({ language, value }) => {
 //   />
 // );
 
-export async function getServerSideProps() {
-  const apolloClient = initializeApollo();
+export async function getServerSideProps(context) {
+  if (context.query.id && typeof context.query.id === 'string') {
+    const { id } = context.query;
 
-  const postData = await apolloClient.query({
-    query: GET_Posts,
-  });
+    const apolloClient = initializeApollo();
 
-  return { props: { post: postData.data.posts[0] } };
+    const postData = await apolloClient.query({
+      query: GET_Post,
+      variables: { id: id },
+    });
+
+    return { props: { post: postData?.data?.post || null } };
+  }
 }
 
 const styleMap = {
@@ -343,7 +338,6 @@ const EditorWrapper = styled.div`
   margin: 0 auto;
   width: 40%;
 `;
-
 
 const PostPageTap = styled.div`
   .post-wrapper {

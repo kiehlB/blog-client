@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Button from '../Common/TailButton';
 import media from '../../lib/styles/media';
 import draftToHtml from 'draftjs-to-html';
-
+import Link from 'next/link';
 import PostItem from './PostItem';
 
 export type GridProps = {
@@ -11,8 +11,7 @@ export type GridProps = {
 };
 
 function Grid({ post }: GridProps) {
-
-  const a = 'a'
+  const a = 'a';
   return (
     <GridBlock>
       <FirstWrapper className="grid gap-9 grid-cols-3 mxl:grid-cols-2 mmd:grid-cols-1 auto-rows-fr">
@@ -27,7 +26,8 @@ function Grid({ post }: GridProps) {
             </GridAuto>
           </FisrtColumn>
         </FirstGrid> */}
-        {post?.map((ele) => (
+
+        {post?.map(ele => (
           <PostItem post={ele} hello={false} key={ele.id} />
         ))}
       </FirstWrapper>

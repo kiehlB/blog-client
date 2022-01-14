@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import createLinkDecorator from '../../components/Write/Decorators';
+import Link from 'next/link';
 
 export type PostItemProps = {
   post: any;
@@ -24,31 +25,33 @@ function PostItem(props: PostItemProps) {
 
   const withoutThumbnail = (
     <>
-      <C className="">
-        {props.post?.thumbnail ? (
-          <ContentImg src={props.post.thumbnail} alt="Picture of the author" />
-        ) : (
-          ''
-        )}
-        <FlexWrapper>
-          <PostContent>
-            <PostTitle>{props.post.title}</PostTitle>
-            <ByWho>나는 어서</ByWho>
-            <TagBlock>hello</TagBlock>
-            <WithoutPostBody>{value}</WithoutPostBody>
-          </PostContent>
-          <WithoutPostButtonWrapper>
-            <Button className="text-zinc-600 font-bold  text-sm  w-32 h-10">
-              Read more
-            </Button>
-          </WithoutPostButtonWrapper>
-        </FlexWrapper>
-      </C>
+      <Link href={`/post/${props.post.id}`}>
+        <C className="">
+          {props.post?.thumbnail ? (
+            <ContentImg src={props.post.thumbnail} alt="Picture of the author" />
+          ) : (
+            ''
+          )}
+          <FlexWrapper>
+            <PostContent>
+              <PostTitle>{props.post.title}</PostTitle>
+              <ByWho>나는 어서</ByWho>
+              <TagBlock>hello</TagBlock>
+              <WithoutPostBody>{value}</WithoutPostBody>
+            </PostContent>
+            <WithoutPostButtonWrapper>
+              <Button className="text-zinc-600 font-bold  text-sm  w-32 h-10">
+                Read more
+              </Button>
+            </WithoutPostButtonWrapper>
+          </FlexWrapper>
+        </C>
+      </Link>
     </>
   );
 
   const withThumbnail = (
-    <>
+    <Link href={`/post/${props.post.id}`}>
       <C className="">
         {props.post?.thumbnail ? (
           <ContentImg src={props.post.thumbnail} alt="Picture of the author" />
@@ -68,7 +71,7 @@ function PostItem(props: PostItemProps) {
           </Button>
         </PostButtonWrapper>
       </C>
-    </>
+    </Link>
   );
 
   return <>{props.post.thumbnail ? withThumbnail : withoutThumbnail}</>;
@@ -104,36 +107,32 @@ const PostContent = styled.section<{
 }>`
   margin-top: 2.5rem;
   padding: 0rem 1.5rem;
- 
 `;
 
 const FlexWrapper = styled.section<{
   hello: boolean;
 }>`
-   display: flex;
+  display: flex;
   flex-direction: column;
-  height:100%;
+  height: 100%;
   justify-content: space-between;
-   
 `;
 
 const WithoutPostBody = styled.section`
-  
   line-height: 24px;
   color: #3c4858;
   font-weight: 300;
   display: block;
-  margin-top:4rem;
+  margin-top: 4rem;
   max-height: 20.4375rem;
   display: -webkit-box;
-    
-    -webkit-line-clamp: 9;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    white-space: initial;
-    word-wrap: break-word;
-    overflow: hidden;
 
+  -webkit-line-clamp: 9;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: initial;
+  word-wrap: break-word;
+  overflow: hidden;
 `;
 
 const TagB = styled.section<{
@@ -141,7 +140,7 @@ const TagB = styled.section<{
 }>`
   position: absolute;
   margin: -3.2rem -0px;
-  
+
   height: 1.375rem;
   background-color: #1fb6ff;
   line-height: 22px;
@@ -158,8 +157,7 @@ const TagB = styled.section<{
 const TagBlock = styled.section<{
   hello: boolean;
 }>`
-   
-  margin-top:1rem;
+  margin-top: 1rem;
   position: absolute;
   height: 1.375rem;
   background-color: #1fb6ff;
@@ -172,7 +170,6 @@ const TagBlock = styled.section<{
   display: flex;
   justify-content: center;
   align-items: center;
-
 `;
 
 const PostTitle = styled.section`
@@ -180,15 +177,14 @@ const PostTitle = styled.section`
   line-height: 2.125rem;
   color: #1f2d2d;
   display: -webkit-box;
-    
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    white-space: initial;
-    word-wrap: break-word;
-    overflow: hidden;
-  max-height:6.375rem;
- 
+
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: initial;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 6.375rem;
 `;
 
 const ByWho = styled.section`
@@ -223,9 +219,7 @@ const PostBody = styled.section`
 const PostButtonWrapper = styled.section`
   margin-bottom: 2rem;
   padding: 0rem 1.5rem;
- 
 `;
 const WithoutPostButtonWrapper = styled.section`
-   
   padding: 1.5rem 1.5rem;
 `;

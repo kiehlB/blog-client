@@ -1,17 +1,22 @@
 import gql from 'graphql-tag';
 
 export const GET_Post = gql`
-  query GetPost {
-    post @client {
+  query GetPost($id: String!) {
+    post(id: $id) {
       id
       title
       thumbnail
       created_at
       views
+      body
       likes
       liked
-      tags {
-        name
+      user {
+        id
+        username
+        follower {
+          id
+        }
       }
     }
   }
@@ -28,6 +33,17 @@ export const GET_Posts = gql`
       views
       likes
       liked
+      tags {
+        name
+      }
+      user {
+        id
+        username
+      }
+      comments {
+        id
+        text
+      }
     }
   }
 `;
@@ -69,12 +85,16 @@ export const UPLOAD_IMAGE_TO_CLOUDINARY = gql`
 `;
 
 export const Create_Post = gql`
-  mutation CreatePost($body: String!, $title: String!, $thumbnail: String!) {
-    createPost(body: $body, title: $title, thumbnail: $thumbnail) {
+  mutation CreatePost(
+    $body: String!
+    $title: String!
+    $thumbnail: String!
+    $tags: String
+  ) {
+    createPost(body: $body, title: $title, thumbnail: $thumbnail, tags: $tags) {
       id
       title
       body
-      thumbnail
     }
   }
 `;
@@ -93,9 +113,9 @@ export const Get_Comment = gql`
     comment {
       id
       text
+      post_id
       reply
       has_replies
-      post_id
       replies {
         id
         text
