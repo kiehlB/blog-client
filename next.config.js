@@ -9,14 +9,14 @@ module.exports = {
     ],
   },
 
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/api/v2/auth/register',
-  //       destination: 'http://localhost:4000/api/v2/auth/register',
-  //     },
-  //   ];
-  // },
+  async rewrites() {
+    return [
+      {
+        source: '/api/v2/auth/register',
+        destination: 'http://localhost:4000/api/v2/auth/register',
+      },
+    ];
+  },
 
   webpack(config) {
     config.module.rules.push({

@@ -3,6 +3,7 @@ import AppLayout from '../components/AppLayout';
 import AuthHeader from '../components/Auth/AuthHeader';
 
 import AuthSocialButtonGroup from '../components/Auth/AuthSocialButtonGroup';
+import GithubButton from '../components/Auth/github';
 
 import SignUpForm from '../components/Auth/SignUpForm';
 import CircleButton from '../components/Common/CircleButton';
@@ -32,7 +33,8 @@ function SignUp({}: SignUpProps) {
                 <AuthHeader HeaderName="Sign Up" />
                 <SignUpForm />
                 <div className="my-6 border-gray-300 w-full" />
-                <AuthSocialButtonGroup />
+
+                <GithubButton />
               </div>
             </div>
           </section>

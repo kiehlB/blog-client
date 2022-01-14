@@ -3,18 +3,19 @@ import useForms from '../../hooks/useForm';
 import LabelInput from '../LabelInput/LabelInput';
 import useRegister from './hooks/useRegister';
 import axios from 'axios';
-
+import { useRouter } from 'next/router';
 export type SocialFormProps = {};
 
 export const prod = process.env.NODE_ENV === 'production';
 
-
-function SocialForm({ }: SocialFormProps) {
+function SocialForm({}: SocialFormProps) {
   const [inputs, handleChange] = useForms({
     profileName: '',
     username: '',
     bio: '',
   });
+
+  const router = useRouter();
 
   const register = async e => {
     e.preventDefault();
@@ -29,6 +30,7 @@ function SocialForm({ }: SocialFormProps) {
     await axios
       .post('http://localhost:3000/api/v2/auth/register', auths, config)
       .then(res => {
+        router.push('/');
         console.log(res.data);
       })
       .catch(err => {
