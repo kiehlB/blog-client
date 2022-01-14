@@ -36,6 +36,7 @@ import useEditComment from '../../components/Comments/hooks/useEditComment';
 import useDeleteComment from '../../components/Comments/hooks/useDeleteComment';
 import useDeletePost from '../../components/Post/hooks/useDeletePost';
 import Face from '../../components/FollowButton';
+import PostLike from '../../components/PostLike';
 
 export default function Post({ post, frontmatter, nextPost, previousPost }) {
   const dispatch = useDispatch();
@@ -59,8 +60,8 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
 
   const { unFollowHandleSubmit, unfollowError } = useUnfollowUser();
 
-  // const { LikehandleSubmit, isLikeBoolean } = usePostLike();
-  // const { UnlikehandleSubmit, isUnLikeBoolean } = usePostUnLike();
+  const { LikehandleSubmit, isLikeBoolean } = usePostLike();
+  const { UnlikehandleSubmit, isUnLikeBoolean } = usePostUnLike();
   // const { DeletePostSubmit } = useDeletePost();
   // const { EditCommentSubmit } = useEditComment();
   // const { DeleteCommentSubmit } = useDeleteComment();
@@ -125,9 +126,19 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
 
   const FindUser = post?.user?.username;
   return (
-    <>
+    <PostPageTap>
       <Banner />
       <Header />
+      <div className="sticky-wrapper">
+        <div className="like-button-wrapper">
+          <PostLike
+            LikehandleSubmit={LikehandleSubmit}
+            isLikeBoolean={isLikeBoolean}
+            UnlikehandleSubmit={UnlikehandleSubmit}
+          />
+        </div>
+      </div>
+
       <div className="sticky-wrapper">
         <div className="card-wrapper">
           <Face
@@ -234,7 +245,7 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
         ))} */}
       </div>
       <Footer />
-    </>
+    </PostPageTap>
   );
 }
 
@@ -340,23 +351,6 @@ const EditorWrapper = styled.div`
 `;
 
 const PostPageTap = styled.div`
-  .post-wrapper {
-    width: 40%;
-    margin: 0 auto;
-    padding: 6rem;
-    ${media.custom(1000)} {
-      padding: 0rem;
-    }
-    ${media.custom(768)} {
-      width: 60%;
-    }
-    ${media.custom(600)} {
-      width: 80%;
-    }
-    ${media.custom(400)} {
-      width: 90%;
-    }
-  }
   .card-wrapper {
     width: 50%;
     right: 0;
