@@ -37,13 +37,14 @@ import useDeleteComment from '../../components/Comments/hooks/useDeleteComment';
 import useDeletePost from '../../components/Post/hooks/useDeletePost';
 import Face from '../../components/FollowButton';
 import PostLike from '../../components/PostLike';
+import useGetPost from '../../components/Post/hooks/useGerPost';
 
 export default function Post({ post, frontmatter, nextPost, previousPost }) {
   const dispatch = useDispatch();
   const [isInput, setisInput] = useState(false);
   const getPost = useSelector((state: RootState) => state.post);
   const { getUser: userData, loading: userLoding } = useGetUser();
-  const { loading, error: getError, data } = useGetPosts();
+  const { singlePostLoding, singlePostError, singlePostData } = useGetPost();
   const { commentsLoading, commentsError, commentstData } = useGetComments();
   const {
     textOnChange,
@@ -62,9 +63,9 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
 
   const { LikehandleSubmit, isLikeBoolean } = usePostLike();
   const { UnlikehandleSubmit, isUnLikeBoolean } = usePostUnLike();
-  // const { DeletePostSubmit } = useDeletePost();
-  // const { EditCommentSubmit } = useEditComment();
-  // const { DeleteCommentSubmit } = useDeleteComment();
+  const { DeletePostSubmit } = useDeletePost();
+  const { EditCommentSubmit } = useEditComment();
+  const { DeleteCommentSubmit } = useDeleteComment();
 
   const [on, toggle] = useState(false);
   const router = useRouter();
@@ -74,22 +75,18 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
   const [editText, setEditText] = useState('');
   const [subEditText, subSetEditText] = useState('');
 
-  if (getError) return <p>zzzzzzzzzzz</p>;
-  if (loading) return <p>loading</p>;
+  if (commentsLoading) return <p>Loading...</p>;
+  if (commentsError) return <p>Error !!!!!!!!!!:(</p>;
 
-  // if (commentsLoading) return <p>Loading...</p>;
-  // if (commentsError) return <p>Error !!!!!!!!!!:(</p>;
-
-  // const findData = data.posts.find(ele => ele.id == router.query.slug);
-
-  // const getComments = commentstData.comment.filter(el => el.post_id == router.query.slug);
+  const getComments = commentstData.comment.filter(el => el.post_id == router.query.id);
 
   // const username = findData.user.username;
-  // const findId = findData.id;
+  const findData = singlePostData?.post;
+  const findId = singlePostData?.post?.id;
 
-  // const getPostData = () => {
-  //   dispatch(PostGet(findData));
-  // };
+  const getPostData = () => {
+    dispatch(PostGet(findData));
+  };
 
   const editCommentInput = e => {
     setEditText(e.target.value);
@@ -178,10 +175,10 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
       <div className="comments-wrapper">
         <div className="comments-text-wrapper">
           <div className="comments-mini">
-            {/* <div className="comments-count">{getComments.length} 개의 댓글</div> */}
+            <div className="comments-count">{getComments.length} 개의 댓글</div>
           </div>
         </div>
-        {/* <CommentForm
+        <CommentForm
           findId={findId}
           handleSubmit={handleSubmit}
           getText={getText}
@@ -189,9 +186,9 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
           userData={userData}
           onClickNotify={onClickNotify}
           onClickNotifyCheckString={onClickNotifyCheckString}
-        /> */}
+        />
 
-        {/* {getComments.map((el, id) => (
+        {getComments.map((el, id) => (
           <>
             <div key={id}>
               <Comments
@@ -242,7 +239,7 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
               </>
             ))}
           </>
-        ))} */}
+        ))}
       </div>
       <Footer />
     </PostPageTap>
@@ -367,7 +364,6 @@ const PostPageTap = styled.div`
     top: 0;
   }
   .comments-count {
-    margin: 1rem;
   }
   .dataFormat {
     border-bottom: 2px solid transparent;
@@ -388,21 +384,6 @@ const PostPageTap = styled.div`
   .comments-wrapper {
     width: 40%;
     margin: 0 auto;
-    padding: 6rem;
-    ${media.custom(1000)} {
-      padding: 3rem;
-    }
-    ${media.custom(768)} {
-      padding: 0rem;
-      width: 60%;
-      margin-top: 3rem;
-    }
-    ${media.custom(600)} {
-      width: 80%;
-    }
-    ${media.custom(400)} {
-      width: 90%;
-    }
   }
   .comments-text-wrapper {
     display: flex;
@@ -439,7 +420,7 @@ const PostPageTap = styled.div`
   }
   .commentsInput {
     margin-bottom: 1.5rem;
-    width: 95%;
+    width: 100%;
     font-size: 1rem;
     color: rgb(33, 37, 41);
     line-height: 1.75;

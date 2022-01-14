@@ -7,6 +7,7 @@ import useGetUser from '../Base/hooks/useGetUser';
 
 const FaceTap = styled.div`
   ${media.custom(1900)} {
+    display: none;
   }
 `;
 
@@ -67,7 +68,7 @@ function Face(props: FaceProps) {
             <div className={shadowClass} />
             <div className={card.message}>
               <h1 className={card.alert}>Follow me!</h1>
-              <div>By {props.username}</div>
+              <div>Writer {props.username}</div>
             </div>
             {props.BooleanIsFollowing && !loading && getUser.me ? (
               <button className={card.buttonBox} onClick={props.unFollowHandleSubmit}>

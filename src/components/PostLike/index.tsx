@@ -2,11 +2,12 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import styles from './index.module.scss';
 import media from '../../lib/styles/media';
-import Script from 'next/script';
+
 import useGetUser from '../Base/hooks/useGetUser';
 import { toast, ToastContainer } from 'react-nextjs-toast';
 const PostLikeTap = styled.div<{ isLikeBoolean: boolean }>`
   ${media.custom(1900)} {
+    display: none;
   }
   .heart {
     width: 0.5em;
@@ -61,7 +62,6 @@ function PostLike(props: PostLikeProps) {
             {props.isLikeBoolean ? (
               <div onClick={props.UnlikehandleSubmit}>
                 <a style={{ color: '#000' }} />
-                <script src="https://codepen.io/shshaw/pen/QmZYMG.js" />
 
                 <button className={styles.likebutton}>
                   <div className={styles.likewrapper}>
@@ -78,7 +78,6 @@ function PostLike(props: PostLikeProps) {
                   props.LikehandleSubmit(e);
                 }}>
                 <a style={{ color: '#000' }} />
-                <script src="https://codepen.io/shshaw/pen/QmZYMG.js" />
 
                 <button className={styles.likebutton}>
                   <div className={styles.likewrapper}>
@@ -101,7 +100,6 @@ function PostLike(props: PostLikeProps) {
                 onClickNotify();
               }}>
               <a style={{ color: '#000' }} />
-              <script src="https://codepen.io/shshaw/pen/QmZYMG.js" />
 
               <button className={styles.likebutton}>
                 <div className={styles.likewrapper}>
