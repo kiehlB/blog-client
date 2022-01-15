@@ -35,7 +35,15 @@ function PostItem(props: PostItemProps) {
           <FlexWrapper>
             <PostContent>
               <PostTitle>{props.post.title}</PostTitle>
-              <ByWho>나는 어서</ByWho>
+              <ByWho>
+                <Author>
+                  <img
+                    src="https://secure.gravatar.com/avatar/ceb84f6559c4206c1a588e0e31c0a048?s=22&d=mm&r=g"
+                    style={{ borderRadius: '50%' }}
+                  />
+                  <AuthorText>{props.post?.user?.username}</AuthorText>
+                </Author>
+              </ByWho>
               <TagBlock>hello</TagBlock>
               <WithoutPostBody>{value}</WithoutPostBody>
             </PostContent>
@@ -59,17 +67,28 @@ function PostItem(props: PostItemProps) {
           ''
         )}
 
-        <PostContent>
-          <TagB>hello</TagB>
-          <PostTitle>{props.post.title}</PostTitle>
-          <ByWho>나는 어서</ByWho>
-          <PostBody>{value}</PostBody>
-        </PostContent>
-        <PostButtonWrapper>
-          <Button className="text-zinc-600 font-bold  text-sm  w-32 h-10">
-            Read more
-          </Button>
-        </PostButtonWrapper>
+        <WithFlexWrapper>
+          <PostContent>
+            <TagB>hello</TagB>
+            <PostTitle>{props.post.title}</PostTitle>
+
+            <ByWho>
+              <Author>
+                <img
+                  src="https://secure.gravatar.com/avatar/ceb84f6559c4206c1a588e0e31c0a048?s=22&d=mm&r=g"
+                  style={{ borderRadius: '50%' }}
+                />
+                <AuthorText>{props.post?.user?.username}</AuthorText>
+              </Author>
+            </ByWho>
+            <PostBody>{value}</PostBody>
+          </PostContent>
+          <PostButtonWrapper>
+            <Button className="text-zinc-600 font-bold  text-sm  w-32 h-10">
+              Read more
+            </Button>
+          </PostButtonWrapper>
+        </WithFlexWrapper>
       </C>
     </Link>
   );
@@ -115,18 +134,24 @@ const FlexWrapper = styled.section<{
   display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: space-between;
+`;
+
+const WithFlexWrapper = styled.section<{
+  hello: boolean;
+}>`
+  display: flex;
+  flex-direction: column;
+  height: 21.875rem;
 `;
 
 const WithoutPostBody = styled.section`
-  line-height: 24px;
   color: #3c4858;
-  font-weight: 300;
+  font-weight: 500;
   display: block;
   margin-top: 4rem;
   max-height: 20.4375rem;
   display: -webkit-box;
-
+  line-height: 1.5rem;
   -webkit-line-clamp: 9;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
@@ -177,8 +202,10 @@ const PostTitle = styled.section`
   line-height: 2.125rem;
   color: #1f2d2d;
   display: -webkit-box;
+  font-weight: 600;
+  color: #1f2d3d;
 
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   white-space: initial;
@@ -203,7 +230,7 @@ const ByWho = styled.section`
 const PostBody = styled.section`
   line-height: 24px;
   color: #3c4858;
-  font-weight: 300;
+  font-weight: 500;
   display: block;
   margin-block-start: 1em;
   margin-block-end: 1em;
@@ -219,7 +246,33 @@ const PostBody = styled.section`
 const PostButtonWrapper = styled.section`
   margin-bottom: 2rem;
   padding: 0rem 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-end;
 `;
 const WithoutPostButtonWrapper = styled.section`
-  padding: 1.5rem 1.5rem;
+  padding: 0 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-bottom: 2rem;
+  justify-content: flex-end;
+`;
+
+const Author = styled.section`
+  display: flex;
+  color: #3c4858;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: initial;
+  word-wrap: break-word;
+  overflow: hidden;
+`;
+
+const AuthorText = styled.section`
+  margin-left: 0.8rem;
 `;
