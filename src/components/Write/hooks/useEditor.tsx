@@ -44,6 +44,7 @@ export default function useEditor() {
     (getPosts as any).title ? (getPosts as any).title : '',
   );
   const [fileInputState, setFileInputState] = useState('');
+  const [readyForFile, setreadyForFile] = useState(0);
   const [previewSource, setPreviewSource] = useState('');
   const [tag, setTag] = useState([]);
   const [url, setUrl] = useState('');
@@ -58,6 +59,7 @@ export default function useEditor() {
 
   const handleFileInputChange = e => {
     const file = e.target.files[0];
+    setreadyForFile(1);
     previewFile(file);
     setFileInputState(e.target.value);
     const reader = new FileReader();
@@ -69,6 +71,7 @@ export default function useEditor() {
         },
         update: (_proxy, { data: newData }) => {
           console.log(newData.uploadImage.url);
+          setreadyForFile(2);
           setUrl(newData.uploadImage.url);
         },
       });
@@ -163,5 +166,6 @@ export default function useEditor() {
     fileInputState,
     tag,
     setTag,
+    readyForFile,
   };
 }

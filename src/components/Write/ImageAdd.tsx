@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './styles.module.css';
 import imageCompression from 'browser-image-compression';
+import styled from 'styled-components';
 
 export default class ImageAdd extends Component {
   // Start the popover closed
@@ -99,21 +100,38 @@ export default class ImageAdd extends Component {
 
     return (
       <>
-        <div>
-          <button className={buttonClassName} onMouseUp={this.openPopover} type="button">
-            +
-          </button>
-          <div className={popoverClassName} onClick={this.onPopoverClick}>
-            <input
-              id="fileInput"
-              type="file"
-              name="image"
-              onChange={this.handleFileInputChange}
-              value={this.state.fileInputState}
-            />
-          </div>
-        </div>
+        <ButtonStyles>
+          <label htmlFor="fileInput">
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 24 24"
+              height="1.5rem"
+              width="1.5rem"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"></path>
+            </svg>
+          </label>
+
+          <input
+            id="fileInput"
+            name="image"
+            type="file"
+            className="p-1.5 cursor-pointer hover:bg-neutral-100 transition-all"
+            onChange={this.handleFileInputChange}
+            value={this.state.fileInputState}
+            style={{ display: 'none' }}
+          />
+        </ButtonStyles>
       </>
     );
   }
 }
+
+const ButtonStyles = styled.div`
+  font-size: 1rem;
+  font-weight: bold;
+  color: rgb(134, 142, 150);
+  cursor: pointer;
+`;
