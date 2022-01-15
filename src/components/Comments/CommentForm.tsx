@@ -4,6 +4,7 @@ import media from '../../lib/styles/media';
 import { MeQuery } from '../../types/apolloComponent';
 import { checkEmpty } from '../../utils/isNull';
 import Button from '../Common/TailButton';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const CommentFormTap = styled.div`
   width: 100%;
@@ -53,17 +54,18 @@ function CommentForm(props: CommentFormProps) {
           props.userData.me ? setText('') : '';
         }}>
         <div>
-          <input
+          <TextareaAutosize
+            rows={4}
+            defaultValue="댓글을 입력하세요"
             className="commentsInput"
-            placeholder="댓글을 입력하세요"
-            name="text"
             value={Text}
-            type="text"
             onChange={textOnChange}
           />
         </div>
         <div className="button-flex">
-          <Button className="text-zinc-400">댓글 작성</Button>
+          <Button className="ml-8 cursor-pointer whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-bold text-white bg-regal-sky">
+            댓글 작성
+          </Button>
         </div>
       </form>
     </CommentFormTap>

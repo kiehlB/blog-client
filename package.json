@@ -75,6 +75,7 @@
     "react-redux": "^7.2.1",
     "react-spring": "^9.2.4",
     "react-syntax-highlighter": "^15.4.5",
+    "react-textarea-autosize": "^8.3.3",
     "react-tippy": "^1.4.0",
     "react-toggle-dark-mode": "^1.0.4",
     "reading-time": "^1.5.0",

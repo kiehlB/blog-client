@@ -169,7 +169,6 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
       <EditorWrapper>
         {/* @ts-ignore */}
         <Editor editorState={defaultEditorState} readonly customStyleMap={styleMap} />
-        <div>helloM</div>
       </EditorWrapper>
 
       <div className="comments-wrapper">
@@ -364,6 +363,10 @@ const PostPageTap = styled.div`
     top: 0;
   }
   .comments-count {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #343a40;
+    margin-bottom: 1rem;
   }
   .dataFormat {
     border-bottom: 2px solid transparent;
@@ -398,23 +401,22 @@ const PostPageTap = styled.div`
     }
   }
   .comments-layout {
-    text-align: left;
-    color: rgb(52, 58, 64);
-    margin: auto;
-    padding: 1rem;
-    outline: none;
-    border-width: 1px;
-    border-style: solid;
+    color: rgb(33, 37, 41);
+
+    border: 1px solid rgb(33, 37, 41);
     border-color: rgb(233, 236, 239);
-    border-image: initial;
     border-radius: 4px;
+    padding: 1rem;
   }
   .comments-text {
     padding-top: 1rem;
+    white-space: pre-line;
   }
   .comment-write-button {
     display: flex;
     justify-content: space-between;
+
+    align-items: center;
     color: rgb(134, 142, 150);
     margin-top: 1rem;
   }
@@ -422,31 +424,32 @@ const PostPageTap = styled.div`
     margin-bottom: 1.5rem;
     width: 100%;
     font-size: 1rem;
+
     color: rgb(33, 37, 41);
     line-height: 1.75;
     padding: 1rem 1rem 1.5rem;
     outline: none;
     border-width: 1px;
+
     border-style: solid;
     border-color: rgb(233, 236, 239);
     border-image: initial;
     border-radius: 4px;
   }
-  .button-flex {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    margin-bottom: 1rem;
-  }
+
   .subcomments-wrapper {
-    margin: 0.5rem;
     display: flex;
     justify-content: flex-end;
     flex-wrap: nowrap;
+
+    text-align: left;
+
+    color: rgb(52, 58, 64);
   }
   .comments-edit-wrapper {
     display: flex;
     justify-content: flex-end;
+
     & div {
       margin-right: 0.4rem;
     }
@@ -454,6 +457,7 @@ const PostPageTap = styled.div`
   .edit-button {
     cursor: pointer;
     display: flex;
+    align-items: center;
     & div {
       margin-right: 0.4rem;
     }
