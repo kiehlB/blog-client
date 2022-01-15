@@ -3,7 +3,7 @@ import AppLayout from '../components/AppLayout';
 import AuthHeader from '../components/Auth/AuthHeader';
 
 import AuthSocialButtonGroup from '../components/Auth/AuthSocialButtonGroup';
-import GithubButton from '../components/Auth/github';
+import GithubButton from '../components/Auth/Github';
 
 import SignUpForm from '../components/Auth/SignUpForm';
 import CircleButton from '../components/Common/CircleButton';
