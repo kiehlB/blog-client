@@ -105,7 +105,7 @@ export default class ImageAdd extends Component {
             <svg
               stroke="currentColor"
               fill="currentColor"
-              stroke-width="0"
+              strokeWidth="0"
               viewBox="0 0 24 24"
               height="1.5rem"
               width="1.5rem"
