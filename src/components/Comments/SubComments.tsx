@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { MeQuery } from '../../types/apolloComponent';
 import { checkEmpty } from '../../utils/isNull';
 import TextareaAutosize from 'react-textarea-autosize';
+import Moment from 'react-moment';
 
 const SubCommentsTap = styled.div`
   width: 90%;
@@ -62,6 +63,13 @@ function SubComments(props: SubCommentsProps) {
                   style={{ borderRadius: '50%', marginRight: '.5rem' }}
                 />
                 {props.el.user?.username}
+                <Dot className="color-base-30 px-2 m:pl-0" role="presentation">
+                  •
+                </Dot>
+
+                <CommentMoment>
+                  <Moment fromNow>{props.el.created_at}</Moment>
+                </CommentMoment>
               </div>
               {editSubComment ? (
                 <div>
@@ -128,3 +136,13 @@ function SubComments(props: SubCommentsProps) {
 }
 
 export default SubComments;
+
+const CommentMoment = styled.div`
+  font-size: 0.875rem;
+  color: #575757;
+`;
+
+const Dot = styled.div`
+  font-size: 1rem;
+  color: #dbdbdb;
+`;

@@ -9,11 +9,15 @@ import Link from 'next/link';
 
 export type PostItemProps = {
   post: any;
-  hello: any;
 };
 
 function PostItem(props: PostItemProps) {
-  console.log(props.post);
+  const tags = props.post?.tags?.name.split('%20');
+
+  if (tags) {
+    console.log(tags[0]);
+  }
+
   const [editorState, setEditorState] = useState(
     EditorState.createWithContent(convertFromRaw(JSON.parse(props.post.body))),
   );
@@ -44,7 +48,7 @@ function PostItem(props: PostItemProps) {
                   <AuthorText>{props.post?.user?.username}</AuthorText>
                 </Author>
               </ByWho>
-              <TagBlock>hello</TagBlock>
+              {tags ? <TagBlock> {tags[0]} </TagBlock> : ''}
               <WithoutPostBody>{value}</WithoutPostBody>
             </PostContent>
             <WithoutPostButtonWrapper>
@@ -69,7 +73,8 @@ function PostItem(props: PostItemProps) {
 
         <WithFlexWrapper>
           <PostContent>
-            <TagB>hello</TagB>
+            {tags ? <TagB> {tags[0]}</TagB> : ''}
+
             <PostTitle>{props.post.title}</PostTitle>
 
             <ByWho>
@@ -121,24 +126,18 @@ const ContentImg = styled.img`
   border-top-left-radius: 15px;
 `;
 
-const PostContent = styled.section<{
-  hello: boolean;
-}>`
+const PostContent = styled.section`
   margin-top: 2.5rem;
   padding: 0rem 1.5rem;
 `;
 
-const FlexWrapper = styled.section<{
-  hello: boolean;
-}>`
+const FlexWrapper = styled.section`
   display: flex;
   flex-direction: column;
   height: 100%;
 `;
 
-const WithFlexWrapper = styled.section<{
-  hello: boolean;
-}>`
+const WithFlexWrapper = styled.section`
   display: flex;
   flex-direction: column;
   height: 21.875rem;
@@ -160,9 +159,7 @@ const WithoutPostBody = styled.section`
   overflow: hidden;
 `;
 
-const TagB = styled.section<{
-  hello: boolean;
-}>`
+const TagB = styled.section`
   position: absolute;
   margin: -3.2rem -0px;
 
@@ -179,9 +176,7 @@ const TagB = styled.section<{
   align-items: center;
 `;
 
-const TagBlock = styled.section<{
-  hello: boolean;
-}>`
+const TagBlock = styled.section`
   margin-top: 1rem;
   position: absolute;
   height: 1.375rem;

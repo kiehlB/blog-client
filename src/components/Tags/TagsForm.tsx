@@ -8,8 +8,13 @@ export type TagsFormProps = {
 function TagsForm(props: TagsFormProps) {
   const [value, setValue] = useState('');
 
+  const checkKeyDown = e => {
+    if (e.code === 'Enter') e.preventDefault();
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
+    e.stopPropagation();
     if (!value) return;
     props.addTag(value);
     setValue('');
@@ -21,7 +26,7 @@ function TagsForm(props: TagsFormProps) {
           type="text"
           value={value}
           onChange={e => setValue(e.target.value)}
-          placeholder="plz Enter after Writing tag"
+          placeholder="Enter after Writing tag"
         />
       </form>
     </>

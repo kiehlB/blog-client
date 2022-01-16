@@ -38,6 +38,7 @@ import useDeletePost from '../../components/Post/hooks/useDeletePost';
 import Face from '../../components/FollowButton';
 import PostLike from '../../components/PostLike';
 import useGetPost from '../../components/Post/hooks/useGerPost';
+import Moment from 'react-moment';
 
 export default function Post({ post, frontmatter, nextPost, previousPost }) {
   const dispatch = useDispatch();
@@ -162,8 +163,10 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
       <PostWrapper>
         <PostHeader>
           <BlogHeader>Blog</BlogHeader>
-          <BlogTitle>im title</BlogTitle>
-          <BlogDate>date</BlogDate>
+          <BlogTitle>{post.title}</BlogTitle>
+          <BlogDate>
+            <Moment format="YYYY/MM/DD">{post.created_at}</Moment>
+          </BlogDate>
         </PostHeader>
       </PostWrapper>
       <EditorWrapper>

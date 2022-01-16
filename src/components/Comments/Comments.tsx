@@ -5,7 +5,7 @@ import { RiArrowDropDownLine } from 'react-icons/ri';
 import { MeQuery } from '../../types/apolloComponent';
 import { checkEmpty } from '../../utils/isNull';
 import TextareaAutosize from 'react-textarea-autosize';
-const CommentsTap = styled.div``;
+import Moment from 'react-moment';
 
 export type CommentsProps = {
   el: any;
@@ -50,12 +50,20 @@ function Comments(props: CommentsProps) {
       ) : (
         <div>
           <div className="comments-layout">
-            <div className="flex ">
+            <div className="flex items-center">
               <img
                 src="https://secure.gravatar.com/avatar/ceb84f6559c4206c1a588e0e31c0a048?s=22&d=mm&r=g"
                 style={{ borderRadius: '50%', marginRight: '.5rem' }}
               />
-              {props.el.user?.username}
+              <div>{props.el.user?.username}</div>
+
+              <Dot className="color-base-30 px-2 m:pl-0" role="presentation">
+                •
+              </Dot>
+
+              <CommentMoment>
+                <Moment fromNow>{props.el.created_at}</Moment>
+              </CommentMoment>
             </div>
             <div className="comments-text">
               {editComment ? (
@@ -134,3 +142,13 @@ function Comments(props: CommentsProps) {
 }
 
 export default Comments;
+
+const CommentMoment = styled.div`
+  font-size: 0.875rem;
+  color: #575757;
+`;
+
+const Dot = styled.div`
+  font-size: 1rem;
+  color: #dbdbdb;
+`;

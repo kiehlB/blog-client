@@ -191,8 +191,8 @@ const EditorMainTap = styled.div`
 const TagBlock = styled.div`
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid #ccc;
-  padding: 0.5rem;
+  margin-top: 1rem;
+
   align-items: center;
 `;
 
@@ -414,25 +414,32 @@ function EditorMain(props: EditorMainProps) {
       );
     }
   };
+  const checkKeyDown = e => {
+    if (e.code === 'Enter') e.preventDefault();
+  };
+
   return (
     <>
       <div className="w-2/4  border-r-2 h-full mlg:w-full">
-        <form className="h-4/6  p-9">
+        <div className="h-4/6  p-9">
           <input
             className="text-4xl  font-bold focus:outline-none w-full "
             name="title"
             onChange={titleOnChange}
             value={inputs}
             placeholder="제목을 입력하세요"
+            onKeyDown={e => checkKeyDown(e)}
           />
 
           <hr className="border-2 w-6/12 mt-3.5 " />
-          {/* <TagBlock>
+          <TagBlock>
             {tag.map((tags, index) => (
               <Tags tags={tags} index={index} deleteTag={deleteTag} />
             ))}
-            <TagsForm addTag={addTag} />
-          </TagBlock> */}
+            <>
+              <TagsForm addTag={addTag} />
+            </>
+          </TagBlock>
           <div className="mt-3.5 flex items-center flex-wrap">
             {inlineStyleButtons.map(button => {
               return renderInlineStyleButton(button.value, button.style);
@@ -481,11 +488,11 @@ function EditorMain(props: EditorMainProps) {
           </EW>
 
           <ButtonWrapper>
-            <Button className="text-zinc-600" onClick={e => handleSubmit(e)}>
+            <Button className="text-zinc-600 " onClick={e => handleSubmit(e)}>
               완료
             </Button>
           </ButtonWrapper>
-        </form>
+        </div>
       </div>
     </>
   );

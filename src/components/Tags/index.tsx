@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 const TagsTap = styled.div`
-  background: none repeat scroll 0 0 #019f86;
+  background: none repeat scroll 0 0 #1fb6ff;
   border-radius: 2px;
   color: #fff;
-  padding: 0.25em;
+  padding: 0.3em;
   float: left;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
-  margin-bottom: 0.5rem;
+
+  margin-right: 1rem;
+
   .tag-delete-button {
     cursor: pointer;
     display: inline-block;
