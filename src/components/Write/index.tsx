@@ -434,7 +434,7 @@ function EditorMain(props: EditorMainProps) {
           <hr className="border-2 w-6/12 mt-3.5 " />
           <TagBlock>
             {tag.map((tags, index) => (
-              <Tags tags={tags} index={index} deleteTag={deleteTag} />
+              <Tags tags={tags} key={index} deleteTag={deleteTag} />
             ))}
             <>
               <TagsForm addTag={addTag} />
