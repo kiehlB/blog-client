@@ -5,9 +5,13 @@ import { MeQuery } from '../../types/apolloComponent';
 import { checkEmpty } from '../../utils/isNull';
 import TextareaAutosize from 'react-textarea-autosize';
 import Moment from 'react-moment';
+import media from '../../lib/styles/media';
 
 const SubCommentsTap = styled.div`
   width: 90%;
+
+  margin-left: 10%;
+
   font-size: 1rem;
   color: rgb(33, 37, 41);
   margin-bottom: 1rem;
@@ -140,6 +144,9 @@ export default SubComments;
 const CommentMoment = styled.div`
   font-size: 0.875rem;
   color: #575757;
+  ${media.custom(319)} {
+    display: none;
+  }
 `;
 
 const Dot = styled.div`

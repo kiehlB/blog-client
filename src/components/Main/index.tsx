@@ -1,12 +1,13 @@
 import styled from 'styled-components';
+import { useWindowSize } from '../../hooks/useWindowSize';
 import media from '../../lib/styles/media';
-import useWindowSize from '../../lib/styles/useWindowSize';
+
 import Button from '../Common/TailButton';
 import TailInput from '../Common/TailInput';
 
 export type MainProps = {};
 
-function Main({ }: MainProps) {
+function Main({}: MainProps) {
   const WindowWidth = useWindowSize();
 
   return (

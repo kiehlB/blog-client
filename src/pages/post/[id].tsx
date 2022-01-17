@@ -7,7 +7,7 @@ import { initializeApollo } from '../../lib/apolloClient';
 import { GET_Post, GET_Posts } from '../../lib/graphql/posts';
 import draftToHtml from 'draftjs-to-html';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import createLinkDecorator from '../../components/Write/Decorators';
@@ -39,10 +39,18 @@ import Face from '../../components/FollowButton';
 import PostLike from '../../components/PostLike';
 import useGetPost from '../../components/Post/hooks/useGerPost';
 import Moment from 'react-moment';
+import RelatedPost from '../../components/RelatedPost.tsx';
 
-export default function Post({ post, frontmatter, nextPost, previousPost }) {
+export default function Post({ post, posts, frontmatter, nextPost, previousPost }) {
   const dispatch = useDispatch();
+  const div = useCallback(node => {
+    if (node !== null) {
+      setHeight(node.getBoundingClientRect().height);
+    }
+  }, []);
+
   const [isInput, setisInput] = useState(false);
+  const [height, setHeight] = useState(null);
   const getPost = useSelector((state: RootState) => state.post);
   const { getUser: userData, loading: userLoding } = useGetUser();
   const { singlePostLoding, singlePostError, singlePostData } = useGetPost();
@@ -59,6 +67,7 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
   } = useCreateComment();
 
   const { followHandleSubmit, error, BooleanIsFollowing } = useFollowUser();
+  const { getUser, loading, error: asError, logoutButton } = useGetUser();
 
   const { unFollowHandleSubmit, unfollowError } = useUnfollowUser();
 
@@ -123,126 +132,137 @@ export default function Post({ post, frontmatter, nextPost, previousPost }) {
   );
 
   const FindUser = post?.user?.username;
+
+  console.log(height);
   return (
     <PostPageTap>
       <Banner />
-      <Header />
-      <div className="sticky-wrapper">
-        <div className="like-button-wrapper">
-          <PostLike
-            LikehandleSubmit={LikehandleSubmit}
-            isLikeBoolean={isLikeBoolean}
-            UnlikehandleSubmit={UnlikehandleSubmit}
-          />
+      <div ref={div}>
+        <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
+        <div className="sticky-wrapper">
+          <div className="like-button-wrapper">
+            <PostLike
+              height={height}
+              LikehandleSubmit={LikehandleSubmit}
+              isLikeBoolean={isLikeBoolean}
+              UnlikehandleSubmit={UnlikehandleSubmit}
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="sticky-wrapper">
-        <div className="card-wrapper">
-          <Face
-            username={FindUser}
-            followHandleSubmit={followHandleSubmit}
-            error={error}
-            unFollowHandleSubmit={unFollowHandleSubmit}
-            unfollowError={unfollowError}
-            BooleanIsFollowing={BooleanIsFollowing}
-          />
+        <div className="sticky-wrapper">
+          <div className="card-wrapper">
+            <Face
+              height={height}
+              username={FindUser}
+              followHandleSubmit={followHandleSubmit}
+              error={error}
+              unFollowHandleSubmit={unFollowHandleSubmit}
+              unfollowError={unfollowError}
+              BooleanIsFollowing={BooleanIsFollowing}
+            />
+          </div>
         </div>
-      </div>
 
-      {/* <ReactMarkdown
+        {/* <ReactMarkdown
             className="mb-4 prose lg:prose-lg dark:prose-dark"
             escapeHtml={false}
             source={post.body}
             renderers={{ code: CodeBlock }}
           /> */}
 
-      {/* <div dangerouslySetInnerHTML={{ __html: post.body }} />
+        {/* <div dangerouslySetInnerHTML={{ __html: post.body }} />
       <textarea disabled value={draftToHtml(JSON.parse(post.body))} /> */}
 
-      <PostWrapper>
-        <PostHeader>
-          <BlogHeader>Blog</BlogHeader>
-          <BlogTitle>{post.title}</BlogTitle>
-          <BlogDate>
-            <Moment format="YYYY/MM/DD">{post.created_at}</Moment>
-          </BlogDate>
-        </PostHeader>
-      </PostWrapper>
-      <EditorWrapper>
-        {/* @ts-ignore */}
-        <Editor editorState={defaultEditorState} readonly customStyleMap={styleMap} />
-      </EditorWrapper>
+        <PostWrapper>
+          <PostHeader>
+            <BlogHeader>Blog</BlogHeader>
+            <BlogTitle>{post.title}</BlogTitle>
+            <BlogDate>
+              <Moment format="YYYY/MM/DD">{post.created_at}</Moment>
+            </BlogDate>
+          </PostHeader>
+        </PostWrapper>
+        <EditorWrapper>
+          {/* @ts-ignore */}
+          <Editor editorState={defaultEditorState} readonly customStyleMap={styleMap} />
+        </EditorWrapper>
 
-      <div className="comments-wrapper">
-        <div className="comments-text-wrapper">
-          <div className="comments-mini">
-            <div className="comments-count">{getComments.length} 개의 댓글</div>
-          </div>
-        </div>
-        <CommentForm
-          findId={findId}
-          handleSubmit={handleSubmit}
-          getText={getText}
-          textOnChange={textOnChange}
-          userData={userData}
-          onClickNotify={onClickNotify}
-          onClickNotifyCheckString={onClickNotifyCheckString}
-        />
-
-        {getComments.map((el, id) => (
-          <>
-            <div key={id}>
-              <Comments
-                el={el}
-                editComment={editComment}
-                editText={editText}
-                editCommentInput={editCommentInput}
-                toggle={toggle}
-                on={on}
-                EditCommentSubmit={EditCommentSubmit}
-                fixComment={fixComment}
-                DeleteCommentSubmit={DeleteCommentSubmit}
-                setIsopen={setIsopen}
-                userData={userData}
-                onClickNotifyCheckString={onClickNotifyCheckString}
-              />
+        <div className="comments-wrapper">
+          <div className="comments-text-wrapper">
+            <div className="comments-mini">
+              <div className="comments-count">{getComments.length} 개의 댓글</div>
             </div>
+          </div>
+          <CommentForm
+            findId={findId}
+            handleSubmit={handleSubmit}
+            getText={getText}
+            textOnChange={textOnChange}
+            userData={userData}
+            onClickNotify={onClickNotify}
+            onClickNotifyCheckString={onClickNotifyCheckString}
+          />
 
-            {el.id == isOpen && on ? (
-              <>
-                <SubCommentsForm
-                  userData={userData}
-                  subHandleSubmit={subHandleSubmit}
-                  findData={findData}
-                  onClickNotify={onClickNotify}
-                  isOpen={isOpen}
-                  on={on}
-                  toggle={toggle}
-                  onClickNotifyCheckString={onClickNotifyCheckString}
-                />
-              </>
-            ) : (
-              ''
-            )}
-            {getComments.map((ele, id) => (
-              <>
-                <SubComments
-                  ele={ele}
+          {getComments.map((el, id) => (
+            <>
+              <div key={id}>
+                <Comments
                   el={el}
-                  subEditText={subEditText}
-                  editSubCommentInput={editSubCommentInput}
+                  editComment={editComment}
+                  editText={editText}
+                  editCommentInput={editCommentInput}
+                  toggle={toggle}
+                  on={on}
                   EditCommentSubmit={EditCommentSubmit}
+                  fixComment={fixComment}
                   DeleteCommentSubmit={DeleteCommentSubmit}
+                  setIsopen={setIsopen}
                   userData={userData}
-                  findData={findData}
                   onClickNotifyCheckString={onClickNotifyCheckString}
                 />
-              </>
-            ))}
-          </>
-        ))}
+              </div>
+
+              {el.id == isOpen && on ? (
+                <>
+                  <SubCommentsForm
+                    userData={userData}
+                    subHandleSubmit={subHandleSubmit}
+                    findData={findData}
+                    onClickNotify={onClickNotify}
+                    isOpen={isOpen}
+                    on={on}
+                    toggle={toggle}
+                    onClickNotifyCheckString={onClickNotifyCheckString}
+                  />
+                </>
+              ) : (
+                ''
+              )}
+              {getComments.map((ele, id) => (
+                <>
+                  <SubComments
+                    ele={ele}
+                    el={el}
+                    subEditText={subEditText}
+                    editSubCommentInput={editSubCommentInput}
+                    EditCommentSubmit={EditCommentSubmit}
+                    DeleteCommentSubmit={DeleteCommentSubmit}
+                    userData={userData}
+                    findData={findData}
+                    onClickNotifyCheckString={onClickNotifyCheckString}
+                  />
+                </>
+              ))}
+            </>
+          ))}
+        </div>
       </div>
+
+      <div>
+        <RelatedPost posts={posts} />
+      </div>
+
       <Footer />
     </PostPageTap>
   );
@@ -277,7 +297,11 @@ export async function getServerSideProps(context) {
       variables: { id: id },
     });
 
-    return { props: { post: postData?.data?.post || null } };
+    const postsData = await apolloClient.query({
+      query: GET_Posts,
+    });
+
+    return { props: { post: postData?.data?.post || null, posts: postsData.data.posts } };
   }
 }
 
@@ -331,8 +355,15 @@ const BlogDate = styled.div`
 `;
 
 const PostHeader = styled.div`
+  width: 768px;
   margin: 0 auto;
-  width: 40%;
+  ${media.custom(1024)} {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  ${media.custom(768)} {
+    width: 100%;
+  }
   height: 10rem;
   display: flex;
   flex-direction: column;
@@ -345,9 +376,18 @@ const PostWrapper = styled.div`
 `;
 
 const EditorWrapper = styled.div`
+  width: 768px;
   margin: 0 auto;
-  width: 40%;
+  ${media.custom(1024)} {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  ${media.custom(768)} {
+    width: 100%;
+  }
 `;
+
+const EditorFlex = styled.div``;
 
 const PostPageTap = styled.div`
   .card-wrapper {
@@ -388,8 +428,20 @@ const PostPageTap = styled.div`
     line-height: 1.6;
   }
   .comments-wrapper {
-    width: 40%;
+    width: 768px;
     margin: 0 auto;
+    ${media.custom(1024)} {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      margin-top: 8rem;
+    }
+
+    ${media.custom(768)} {
+      width: 100%;
+      margin-top: 4rem;
+    }
+
+    margin-top: 16rem;
   }
   .comments-text-wrapper {
     display: flex;

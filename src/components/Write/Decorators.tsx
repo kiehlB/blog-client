@@ -23,7 +23,6 @@ const Img = ({ entityKey, contentState }) => {
       <img
         src={src}
         style={{
-          border: '1px solid red',
           width: '100%',
         }}
         alt="img"

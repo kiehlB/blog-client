@@ -18,7 +18,6 @@ const CommentFormTap = styled.div`
   }
   .commentsInput {
     width: 100%;
-    border: 1px solid blue;
   }
 `;
 

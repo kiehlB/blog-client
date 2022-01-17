@@ -6,6 +6,7 @@ import { MeQuery } from '../../types/apolloComponent';
 import { checkEmpty } from '../../utils/isNull';
 import TextareaAutosize from 'react-textarea-autosize';
 import Moment from 'react-moment';
+import media from '../../lib/styles/media';
 
 export type CommentsProps = {
   el: any;
@@ -48,7 +49,7 @@ function Comments(props: CommentsProps) {
       {props.el.reply ? (
         ''
       ) : (
-        <div>
+        <C>
           <div className="comments-layout">
             <div className="flex items-center">
               <img
@@ -135,7 +136,7 @@ function Comments(props: CommentsProps) {
             </div>
           </div>
           <RiArrowDropDownLine />
-        </div>
+        </C>
       )}
     </>
   );
@@ -146,9 +147,14 @@ export default Comments;
 const CommentMoment = styled.div`
   font-size: 0.875rem;
   color: #575757;
+  ${media.custom(319)} {
+    display: none;
+  }
 `;
 
 const Dot = styled.div`
   font-size: 1rem;
   color: #dbdbdb;
 `;
+
+const C = styled.div``;
