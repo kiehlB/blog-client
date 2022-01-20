@@ -139,7 +139,7 @@ export default function Post({ frontmatter, nextPost, previousPost }) {
   const decorator = createLinkDecorator();
 
   const defaultEditorState = EditorState.createWithContent(
-    convertFromRaw(JSON.parse(post.body)),
+    convertFromRaw(JSON.parse(post?.body)),
     decorator,
   );
 
@@ -188,9 +188,9 @@ export default function Post({ frontmatter, nextPost, previousPost }) {
         <PostWrapper>
           <PostHeader>
             <BlogHeader>Blog</BlogHeader>
-            <BlogTitle>{post.title}</BlogTitle>
+            <BlogTitle>{post?.title}</BlogTitle>
             <BlogDate>
-              <Moment format="YYYY/MM/DD">{post.created_at}</Moment>
+              <Moment format="YYYY/MM/DD">{post?.created_at}</Moment>
             </BlogDate>
           </PostHeader>
         </PostWrapper>
