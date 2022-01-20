@@ -13,7 +13,7 @@ module.exports = {
     return [
       {
         source: '/api/v2/auth/register',
-        destination: 'http://localhost:4000/api/v2/auth/register',
+        destination: 'https://woongblog.xyz/api/v2/auth/register',
       },
     ];
   },
