@@ -11,7 +11,7 @@ let apolloClient;
 
 //  prod ? process.env.API_URL : 'http://localhost:4000/graphql',
 const link = new HttpLink({
-  uri: 'https://api.woongblog.shop/graphql',
+  uri: 'https://api.woongblog.xyz/graphql',
   credentials: 'include',
 });
 
