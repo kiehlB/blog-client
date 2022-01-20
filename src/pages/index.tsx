@@ -13,14 +13,11 @@ import View from '../components/View';
 import useGetUser from '../components/Base/hooks/useGetUser';
 import { initializeApollo } from '../lib/apolloClient';
 import { GET_Posts } from '../lib/graphql/posts';
-import useGetPosts from '../components/Post/hooks/useGetPosts';
 
-const Home: NextPage = () => {
-  const { loading: a, error: b, data: post } = useGetPosts();
-
+const Home: NextPage = (post: any) => {
   const { getUser, loading, error, logoutButton } = useGetUser();
 
-  const limitPosts = post?.posts?.slice(0, 12);
+  const limitPosts = post?.post?.slice(0, 12);
 
   // if (process.browser) {
   //   const canvas = document.querySelector('canvas');
