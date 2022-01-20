@@ -9,7 +9,7 @@ export type SocialFormProps = {};
 export const prod = process.env.NODE_ENV === 'production';
 
 const isProd = prod
-  ? 'https://api.woongblog.ga/api/v2/auth/register'
+  ? 'https://api.woongblog.xyz/api/v2/auth/register'
   : 'http://localhost:3000/api/v2/auth/register';
 
 function SocialForm({}: SocialFormProps) {
@@ -32,7 +32,7 @@ function SocialForm({}: SocialFormProps) {
     };
 
     await axios
-      .post(isProd, auths, config)
+      .post('https://api.woongblog.xyz/api/v2/auth/register', auths, config)
       .then(res => {
         router.push('/');
         console.log(res.data);
