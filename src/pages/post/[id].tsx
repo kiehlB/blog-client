@@ -40,11 +40,9 @@ import PostLike from '../../components/PostLike';
 import useGetPost from '../../components/Post/hooks/useGerPost';
 import Moment from 'react-moment';
 import RelatedPost from '../../components/RelatedPost.tsx';
-import { useQuery } from '@apollo/client';
 
-export default function Post({ frontmatter, nextPost, previousPost }) {
+export default function Post({ post, posts, frontmatter, nextPost, previousPost }) {
   const dispatch = useDispatch();
-  const router = useRouter();
   const div = useCallback(node => {
     if (node !== null) {
       setHeight(node.getBoundingClientRect().height);
@@ -55,8 +53,7 @@ export default function Post({ frontmatter, nextPost, previousPost }) {
   const [height, setHeight] = useState(null);
   const getPost = useSelector((state: RootState) => state.post);
   const { getUser: userData, loading: userLoding } = useGetUser();
-  // const { singlePostLoding, singlePostError, singlePostData } = useGetPost();
-  const { loading: postsLoading, error: postsError, data: posts } = useGetPosts();
+  const { singlePostLoding, singlePostError, singlePostData } = useGetPost();
   const { commentsLoading, commentsError, commentstData } = useGetComments();
   const {
     textOnChange,
@@ -68,13 +65,6 @@ export default function Post({ frontmatter, nextPost, previousPost }) {
     isOpen,
     setIsopen,
   } = useCreateComment();
-  const {
-    loading: singlePostLoding,
-    error: singlePostError,
-    data: singlePostData,
-  } = useQuery(GET_Post, {
-    variables: { id: router.query.id },
-  });
 
   const { followHandleSubmit, error, BooleanIsFollowing } = useFollowUser();
   const { getUser, loading, error: asError, logoutButton } = useGetUser();
@@ -88,6 +78,7 @@ export default function Post({ frontmatter, nextPost, previousPost }) {
   const { DeleteCommentSubmit } = useDeleteComment();
 
   const [on, toggle] = useState(false);
+  const router = useRouter();
 
   const [editComment, setEditComment] = useState(false);
 
@@ -133,18 +124,16 @@ export default function Post({ frontmatter, nextPost, previousPost }) {
       type: 'error',
     });
   };
-
-  const post = singlePostData?.post;
-
   const decorator = createLinkDecorator();
 
   const defaultEditorState = EditorState.createWithContent(
-    convertFromRaw(JSON.parse(post?.body)),
+    convertFromRaw(JSON.parse(post.body)),
     decorator,
   );
 
   const FindUser = post?.user?.username;
 
+  console.log(height);
   return (
     <PostPageTap>
       <Banner />
@@ -188,9 +177,9 @@ export default function Post({ frontmatter, nextPost, previousPost }) {
         <PostWrapper>
           <PostHeader>
             <BlogHeader>Blog</BlogHeader>
-            <BlogTitle>{post?.title}</BlogTitle>
+            <BlogTitle>{post.title}</BlogTitle>
             <BlogDate>
-              <Moment format="YYYY/MM/DD">{post?.created_at}</Moment>
+              <Moment format="YYYY/MM/DD">{post.created_at}</Moment>
             </BlogDate>
           </PostHeader>
         </PostWrapper>
@@ -270,7 +259,9 @@ export default function Post({ frontmatter, nextPost, previousPost }) {
         </div>
       </div>
 
-      <div>{/* <RelatedPost posts={posts} /> */}</div>
+      <div>
+        <RelatedPost posts={posts} />
+      </div>
 
       <Footer />
     </PostPageTap>
@@ -295,24 +286,24 @@ const CodeBlock = ({ language, value }) => {
 //   />
 // );
 
-// export async function getServerSideProps(context) {
-//   if (context.query.id && typeof context.query.id === 'string') {
-//     const { id } = context.query;
+export async function getServerSideProps(context) {
+  if (context.query.id && typeof context.query.id === 'string') {
+    const { id } = context.query;
 
-//     const apolloClient = initializeApollo();
+    const apolloClient = initializeApollo();
 
-//     const postData = await apolloClient.query({
-//       query: GET_Post,
-//       variables: { id: id },
-//     });
+    const postData = await apolloClient.query({
+      query: GET_Post,
+      variables: { id: id },
+    });
 
-//     const postsData = await apolloClient.query({
-//       query: GET_Posts,
-//     });
+    const postsData = await apolloClient.query({
+      query: GET_Posts,
+    });
 
-//     return { props: { post: postData?.data?.post || null, posts: postsData.data.posts } };
-//   }
-// }
+    return { props: { post: postData?.data?.post || null, posts: postsData.data.posts } };
+  }
+}
 
 const styleMap = {
   CODE: {
