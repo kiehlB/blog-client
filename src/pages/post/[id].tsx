@@ -43,11 +43,11 @@ import RelatedPost from '../../components/RelatedPost.tsx';
 
 export default function Post({ post, posts, frontmatter, nextPost, previousPost }) {
   const dispatch = useDispatch();
-  // const div = useCallback(node => {
-  //   if (node !== null) {
-  //     setHeight(node.getBoundingClientRect().height);
-  //   }
-  // }, []);
+  const div = useCallback(node => {
+    if (node !== null) {
+      setHeight(node.getBoundingClientRect().height);
+    }
+  }, []);
 
   const [isInput, setisInput] = useState(false);
   const [height, setHeight] = useState(null);
@@ -133,11 +133,10 @@ export default function Post({ post, posts, frontmatter, nextPost, previousPost 
 
   const FindUser = post?.user?.username;
 
-  //  ref={div}
   return (
     <PostPageTap>
       <Banner />
-      <div>
+      <div ref={div}>
         <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
         <div className="sticky-wrapper">
           <div className="like-button-wrapper">

@@ -15,7 +15,6 @@ function PostItem(props: PostItemProps) {
   const tags = props.post?.tags?.name.split('%20');
 
   if (tags) {
-    console.log(tags[0]);
   }
 
   const [editorState, setEditorState] = useState(

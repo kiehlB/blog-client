@@ -70,7 +70,6 @@ export default function useEditor() {
           body: reader.result,
         },
         update: (_proxy, { data: newData }) => {
-          console.log(newData.uploadImage.url);
           setreadyForFile(2);
           setUrl(newData.uploadImage.url);
         },
@@ -137,9 +136,6 @@ export default function useEditor() {
         const data = proxy.readQuery({
           query: GET_Posts,
         });
-
-        console.log(data);
-        console.log(createPost);
 
         proxy.writeQuery({
           query: GET_Posts,

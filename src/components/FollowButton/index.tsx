@@ -46,8 +46,6 @@ function Face(props: FaceProps) {
 
   const newHeight = props.height - 16 * 15;
 
-  console.log(props.height);
-
   return (
     <>
       {scrollPosition < newHeight ? (
