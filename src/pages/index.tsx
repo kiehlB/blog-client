@@ -13,11 +13,13 @@ import View from '../components/View';
 import useGetUser from '../components/Base/hooks/useGetUser';
 import { initializeApollo } from '../lib/apolloClient';
 import { GET_Posts } from '../lib/graphql/posts';
+import useGetPosts from '../components/Post/hooks/useGetPosts';
 
 const Home: NextPage = (post: any) => {
   const { getUser, loading, error, logoutButton } = useGetUser();
+  const { loading: PostsLoading, error: PostsError, data } = useGetPosts();
 
-  const limitPosts = post?.post?.slice(0, 12);
+  const limitPosts = data?.posts?.slice(0, 12);
 
   // if (process.browser) {
   //   const canvas = document.querySelector('canvas');
@@ -174,12 +176,12 @@ const E = styled.div`
       </C> */
 }
 
-export const getServerSideProps: GetServerSideProps = async context => {
-  const apolloClient = initializeApollo();
+// export const getServerSideProps: GetServerSideProps = async context => {
+//   const apolloClient = initializeApollo();
 
-  const postData = await apolloClient.query({
-    query: GET_Posts,
-  });
+//   const postData = await apolloClient.query({
+//     query: GET_Posts,
+//   });
 
-  return { props: { post: postData.data.posts } };
-};
+//   return { props: { post: postData.data.posts } };
+// };
