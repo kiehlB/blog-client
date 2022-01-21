@@ -88,7 +88,7 @@ export default function Post({ frontmatter, nextPost, previousPost }) {
 
   if (commentsLoading) return <p>Loading...</p>;
   if (commentsError) return <p>Error !!!!!!!!!!:(</p>;
-
+  if (singlePostLoding) return <p>Loading...</p>;
   const getComments = commentstData.comment.filter(el => el.post_id == router.query.id);
 
   // const username = findData.user.username;
@@ -127,8 +127,6 @@ export default function Post({ frontmatter, nextPost, previousPost }) {
   };
   const decorator = createLinkDecorator();
 
-  console.log(singlePostData);
-  console.log(data);
   const defaultEditorState = EditorState.createWithContent(
     convertFromRaw(JSON.parse(singlePostData?.post?.body)),
     decorator,
