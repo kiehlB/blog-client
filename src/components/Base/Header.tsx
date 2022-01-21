@@ -40,6 +40,30 @@ const callsToAction = [
 ];
 const resources = [
   {
+    name: 'Watch Demo',
+    description: 'Get all of your questions answered in our forums or contact support.',
+    href: '/',
+    icon: SupportIcon,
+  },
+  {
+    name: 'Contact Me',
+    description: 'Learn how to maximize our platform to get the most out of it.',
+    href: '/',
+    icon: BookmarkAltIcon,
+  },
+];
+const recentPosts = [
+  { id: 1, name: 'Boost your conversion rate', href: '#' },
+  {
+    id: 2,
+    name: 'How to use search engine optimization to drive traffic to your site',
+    href: '#',
+  },
+  { id: 3, name: 'Improve your customer experience', href: '#' },
+];
+
+const withLoginresources = [
+  {
     name: '내가 쓴 글',
     description: 'Get all of your questions answered in our forums or contact support.',
     href: '/',
@@ -57,21 +81,6 @@ const resources = [
     href: '/',
     icon: CalendarIcon,
   },
-  {
-    name: '로그아웃',
-    description: 'Understand how we take your privacy seriously.',
-    href: '/',
-    icon: ShieldCheckIcon,
-  },
-];
-const recentPosts = [
-  { id: 1, name: 'Boost your conversion rate', href: '#' },
-  {
-    id: 2,
-    name: 'How to use search engine optimization to drive traffic to your site',
-    href: '#',
-  },
-  { id: 3, name: 'Improve your customer experience', href: '#' },
 ];
 
 export type HeaderProps = {
@@ -385,38 +394,51 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
             </div>
             <div className="py-6 px-5 space-y-6">
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                <a
-                  href="#"
-                  className="text-base font-bold text-gray-900 hover:text-gray-700">
-                  Pricing
-                </a>
-
-                <a
-                  href="#"
-                  className="text-base font-bold text-gray-900 hover:text-gray-700">
-                  Docs
-                </a>
-                {resources.map(item => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="text-base font-bold text-gray-900 hover:text-gray-700">
-                    {item.name}
+                <Link href="/">
+                  <a className="text-base font-bold text-gray-900 hover:text-gray-700">
+                    Blog
                   </a>
-                ))}
+                </Link>
+
+                <Link href="/about">
+                  <a className="text-base font-bold text-gray-900 hover:text-gray-700">
+                    About
+                  </a>
+                </Link>
+                {getUser?.me?.id
+                  ? withLoginresources.map(item => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className="text-base font-bold text-gray-900 hover:text-gray-700">
+                        {item.name}
+                      </a>
+                    ))
+                  : resources.map(item => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className="text-base font-bold text-gray-900 hover:text-gray-700">
+                        {item.name}
+                      </a>
+                    ))}
               </div>
               <div>
-                <a
-                  href="#"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-bold text-white bg-indigo-600 hover:bg-indigo-700">
-                  Sign up
-                </a>
-                <p className="mt-6 text-center text-base font-bold text-gray-500">
-                  Existing customer?{' '}
-                  <a href="#" className="text-indigo-600 hover:text-indigo-500">
-                    Sign in
+                {getUser?.me?.id ? (
+                  <a
+                    href="#"
+                    className="w-full flex items-center justify-center   bg-regal-sky hover:bg-sky-600 text-white font-semibold rounded-lg
+        px-4 py-3 mt-6">
+                    로그아웃
                   </a>
-                </p>
+                ) : (
+                  <p className="mt-6 text-center text-base font-bold text-gray-500">
+                    Existing customer?{' '}
+                    <a href="#" className="text-indigo-600 hover:text-indigo-500">
+                      Sign in
+                    </a>
+                  </p>
+                )}
               </div>
             </div>
           </div>
