@@ -41,7 +41,7 @@ import useGetPost from '../../components/Post/hooks/useGerPost';
 import Moment from 'react-moment';
 import RelatedPost from '../../components/RelatedPost.tsx';
 
-export default function Post({ post, posts, frontmatter, nextPost, previousPost }) {
+export default function Post({ frontmatter, nextPost, previousPost }) {
   const dispatch = useDispatch();
   const div = useCallback(node => {
     if (node !== null) {
@@ -54,6 +54,7 @@ export default function Post({ post, posts, frontmatter, nextPost, previousPost 
   const getPost = useSelector((state: RootState) => state.post);
   const { getUser: userData, loading: userLoding } = useGetUser();
   const { singlePostLoding, singlePostError, singlePostData } = useGetPost();
+  const { loading: PostsLoading, error: PostsError, data } = useGetPosts();
   const { commentsLoading, commentsError, commentstData } = useGetComments();
   const {
     textOnChange,
@@ -126,13 +127,15 @@ export default function Post({ post, posts, frontmatter, nextPost, previousPost 
   };
   const decorator = createLinkDecorator();
 
+  console.log(singlePostData);
+  console.log(data);
   const defaultEditorState = EditorState.createWithContent(
-    convertFromRaw(JSON.parse(post.body)),
+    convertFromRaw(JSON.parse(singlePostData?.post?.body)),
     decorator,
   );
 
-  const FindUser = post?.user?.username;
-
+  const FindUser = singlePostData?.post?.user?.username;
+  const slicePost = data?.posts?.slice(0, 3);
   return (
     <PostPageTap>
       <Banner />
@@ -176,9 +179,9 @@ export default function Post({ post, posts, frontmatter, nextPost, previousPost 
         <PostWrapper>
           <PostHeader>
             <BlogHeader>Blog</BlogHeader>
-            <BlogTitle>{post.title}</BlogTitle>
+            <BlogTitle>{singlePostData?.post?.title}</BlogTitle>
             <BlogDate>
-              <Moment format="YYYY/MM/DD">{post.created_at}</Moment>
+              <Moment format="YYYY/MM/DD">{singlePostData?.post?.created_at}</Moment>
             </BlogDate>
           </PostHeader>
         </PostWrapper>
@@ -259,7 +262,7 @@ export default function Post({ post, posts, frontmatter, nextPost, previousPost 
       </div>
 
       <div>
-        <RelatedPost posts={posts} />
+        <RelatedPost posts={slicePost} />
       </div>
 
       <Footer />
@@ -285,24 +288,24 @@ const CodeBlock = ({ language, value }) => {
 //   />
 // );
 
-export async function getServerSideProps(context) {
-  if (context.query.id && typeof context.query.id === 'string') {
-    const { id } = context.query;
+// export async function getServerSideProps(context) {
+//   if (context.query.id && typeof context.query.id === 'string') {
+//     const { id } = context.query;
 
-    const apolloClient = initializeApollo();
+//     const apolloClient = initializeApollo();
 
-    const postData = await apolloClient.query({
-      query: GET_Post,
-      variables: { id: id },
-    });
+//     const postData = await apolloClient.query({
+//       query: GET_Post,
+//       variables: { id: id },
+//     });
 
-    const postsData = await apolloClient.query({
-      query: GET_Posts,
-    });
+//     const postsData = await apolloClient.query({
+//       query: GET_Posts,
+//     });
 
-    return { props: { post: postData?.data?.post || null, posts: postsData.data.posts } };
-  }
-}
+//     return { props: { post: postData?.data?.post || null, posts: postsData.data.posts } };
+//   }
+// }
 
 const styleMap = {
   CODE: {

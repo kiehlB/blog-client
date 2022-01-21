@@ -10,9 +10,6 @@ export type RelatedPostProps = {
 };
 
 function RelatedPost(props: RelatedPostProps) {
-  const slicePost = props?.posts?.slice(0, 3);
-  const size = useWindowSize();
-
   return (
     <RelatedPostBlock>
       <RelatedPostTitle>Related Posts</RelatedPostTitle>
@@ -30,7 +27,7 @@ function RelatedPost(props: RelatedPostProps) {
           </FisrtColumn>
         </FirstGrid> */}
 
-          {slicePost?.map(ele => (
+          {props.posts?.map(ele => (
             <PostItem post={ele} key={ele.id} />
           ))}
         </FirstWrapper>
