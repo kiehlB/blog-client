@@ -7,6 +7,7 @@ import PostItem from '../Grid/PostItem';
 export type RelatedPostProps = {
   posts: any;
   div?: any;
+  PostsLoading?: any;
 };
 
 function RelatedPost(props: RelatedPostProps) {
@@ -28,7 +29,7 @@ function RelatedPost(props: RelatedPostProps) {
         </FirstGrid> */}
 
           {props.posts?.map(ele => (
-            <PostItem post={ele} key={ele.id} />
+            <PostItem post={ele} key={ele.id} PostsLoading={props.PostsLoading} />
           ))}
         </FirstWrapper>
       </GridBlock>
