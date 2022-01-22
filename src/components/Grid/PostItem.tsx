@@ -14,9 +14,6 @@ export type PostItemProps = {
 function PostItem(props: PostItemProps) {
   const tags = props.post?.tags?.name.split('%20');
 
-  if (tags) {
-  }
-
   const [editorState, setEditorState] = useState(
     EditorState.createWithContent(convertFromRaw(JSON.parse(props.post.body))),
   );
@@ -47,7 +44,8 @@ function PostItem(props: PostItemProps) {
                   <AuthorText>{props.post?.user?.username}</AuthorText>
                 </Author>
               </ByWho>
-              {tags ? <TagBlock> {tags[0]} </TagBlock> : ''}
+              {tags ? <TagBlock>{tags[0]}</TagBlock> : ''}
+
               <WithoutPostBody>{value}</WithoutPostBody>
             </PostContent>
             <WithoutPostButtonWrapper>

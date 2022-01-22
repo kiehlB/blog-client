@@ -5,12 +5,34 @@ import media from '../../lib/styles/media';
 import draftToHtml from 'draftjs-to-html';
 import Link from 'next/link';
 import PostItem from './PostItem';
+import { useState } from 'react';
 
 export type GridProps = {
   post: any;
+  input: any;
+  change: any;
+  searchField: any;
 };
 
-function Grid({ post }: GridProps) {
+function Grid({ post, input, searchField }: GridProps) {
+  const filteredPersons = post?.filter(ele => {
+    return ele.title.toLowerCase().includes(input.searchInput.toLowerCase());
+  });
+
+  function searchList() {
+    return (
+      <>
+        {filteredPersons?.map(ele => (
+          <>
+            <PostItem post={ele} />
+          </>
+        ))}
+      </>
+    );
+  }
+
+  const slicePosts = post?.slice(0, 12);
+
   return (
     <GridBlock>
       <FirstWrapper className="grid gap-9 grid-cols-3 mxl:grid-cols-2 mmd:grid-cols-1 auto-rows-fr">
@@ -26,9 +48,9 @@ function Grid({ post }: GridProps) {
           </FisrtColumn>
         </FirstGrid> */}
 
-        {post?.map(ele => (
-          <PostItem post={ele} key={ele.id} />
-        ))}
+        {input.searchInput === ''
+          ? slicePosts?.map(ele => <PostItem post={ele} key={ele.id} />)
+          : searchList()}
       </FirstWrapper>
     </GridBlock>
   );

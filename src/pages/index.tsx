@@ -6,7 +6,7 @@ import Footer from '../components/Footer/Footer';
 import Grid from '../components/Grid';
 import Main from '../components/Main';
 import Next from '../components/Next';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import FloatingHeader from '../components/Common/Floating';
 import AppLayout from '../components/AppLayout';
 import View from '../components/View';
@@ -14,12 +14,18 @@ import useGetUser from '../components/Base/hooks/useGetUser';
 import { initializeApollo } from '../lib/apolloClient';
 import { GET_Posts } from '../lib/graphql/posts';
 import useGetPosts from '../components/Post/hooks/useGetPosts';
+import useForms from '../hooks/useForm';
 
 const Home: NextPage = (post: any) => {
   const { getUser, loading, error, logoutButton } = useGetUser();
   const { loading: PostsLoading, error: PostsError, data } = useGetPosts();
+  const [searchField, setSearchField] = useState('');
 
-  const limitPosts = data?.posts?.slice(0, 12);
+  const [inputs, handleChange] = useForms({
+    searchInput: '',
+  });
+
+  const limitPosts = data?.posts;
 
   // if (process.browser) {
   //   const canvas = document.querySelector('canvas');
@@ -139,13 +145,20 @@ const Home: NextPage = (post: any) => {
       <AppLayout
         first={
           <AppLayout.First>
-            <Main />
+            <Main input={inputs} change={handleChange} setSearchField={setSearchField} />
           </AppLayout.First>
         }
         second={
           <AppLayout.Second>
             <C>
-              <Grid post={limitPosts} />
+              {/* <Grid post={limitPosts} input={inputs} change={handleChange} /> */}
+
+              <Grid
+                post={limitPosts}
+                input={inputs}
+                change={handleChange}
+                searchField={searchField}
+              />
             </C>
             <E>
               <Next />

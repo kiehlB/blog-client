@@ -4,26 +4,44 @@ import media from '../../lib/styles/media';
 
 import Button from '../Common/TailButton';
 import TailInput from '../Common/TailInput';
+import LabelInput from '../LabelInput/LabelInput';
+import clsx from 'clsx';
 
-export type MainProps = {};
+export type MainProps = {
+  input: any;
+  change: any;
+  setSearchField: any;
+};
 
-function Main({}: MainProps) {
+function Main(props: MainProps) {
   const WindowWidth = useWindowSize();
 
   return (
     <MainBlock className="max-w-9xl mx-auto sm:px-6 m2xl:px-10  mmd:px-4">
       {WindowWidth.width > 768 ? (
         <MainTitle>
-          The best design
+          The best dev
           <br /> articles every day.
         </MainTitle>
       ) : (
-        <MinMainTitle>The best design articles every day.</MinMainTitle>
+        <MinMainTitle>The best dev articles every day.</MinMainTitle>
       )}
 
-      <MainSubTitle>Subscribe and get our weekly newsletter in your inbox.</MainSubTitle>
+      <MainSubTitle>Find the latest of my writing here.</MainSubTitle>
       <TailWrapper>
-        <TailInput />
+        <LabelInput
+          label="SearchInput"
+          name="searchInput"
+          type="text"
+          value={props.input?.searchInput}
+          onChange={props.change}
+          placeholder="Enter Email Address"
+          className={clsx(
+            'w-96 py-1.5 px-3 rounded-md dark:bg-dark mmd:w-5/6',
+            'border border-gray-300 dark:border-gray-600',
+            'dark:focus:border-primary-300 focus:border-primary-300 focus:ring-0 focus:outline-none',
+          )}
+        />
         <ButtonWapprer>
           <Button
             bgColor="regal-sky"

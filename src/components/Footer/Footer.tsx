@@ -27,9 +27,9 @@ export default function Footer() {
 function FooterLinks() {
   return (
     <div className="flex flex-wrap gap-y-4 gap-x-8 justify-center">
-      {footerLinks.map(({ href, text }) => (
+      {footerLinks.map(({ href, text, id }) => (
         <UnstyledLink
-          key={href}
+          key={id}
           className="animated-underline text-sm font-medium rounded-sm dark:text-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-primary-300"
           href={href}>
           {text}
@@ -81,26 +81,32 @@ function SocialLinks() {
 
 const footerLinks = [
   {
+    id: 1,
     href: '/',
     text: 'Docs',
   },
   {
+    id: 2,
     href: './',
     text: 'Book Notes',
   },
   {
+    id: 3,
     href: './',
     text: 'Polywork',
   },
   {
+    id: 4,
     href: './',
     text: 'Starter Templates',
   },
   {
+    id: 5,
     href: '/',
     text: 'Statistics',
   },
   {
+    id: 6,
     href: '/',
     text: 'Guestbook',
   },
