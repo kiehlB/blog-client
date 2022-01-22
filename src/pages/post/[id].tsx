@@ -260,7 +260,7 @@ export default function Post({ frontmatter, nextPost, previousPost }) {
       </div>
 
       <div>
-        <RelatedPost posts={slicePost} />
+        <RelatedPost posts={slicePost} PostsLoading={PostsLoading} />
       </div>
 
       <Footer />

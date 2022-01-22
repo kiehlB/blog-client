@@ -22,11 +22,15 @@ function Main(props: MainProps) {
   const onSearchChange = useCallback(
     e => {
       setSearchInput(e.target.value);
-      dispatch(getSearchInput(e.target.value));
     },
 
-    [searchInput],
+    [],
   );
+
+  const onSearchSubmit = () => {
+    console.log(searchInput);
+    dispatch(getSearchInput(searchInput));
+  };
 
   return (
     <MainBlock className="max-w-9xl mx-auto sm:px-6 m2xl:px-10  mmd:px-4">
@@ -56,6 +60,7 @@ function Main(props: MainProps) {
         />
         <ButtonWapprer>
           <Button
+            onClick={e => onSearchSubmit(e)}
             bgColor="regal-sky"
             className="text-sm !font-bold w-32 h-10  !rounded-full -z-50">
             Search Now
