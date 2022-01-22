@@ -60,7 +60,7 @@ function Main(props: MainProps) {
         />
         <ButtonWapprer>
           <Button
-            onClick={e => onSearchSubmit(e)}
+            onClick={e => onSearchSubmit()}
             bgColor="regal-sky"
             className="text-sm !font-bold w-32 h-10  !rounded-full -z-50">
             Search Now
