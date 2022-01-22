@@ -27,7 +27,7 @@ function Grid({ post, PostsLoading }: GridProps) {
       <>
         {filteredPersons?.map(ele => (
           <>
-            <PostItem post={ele} PostsLoading={PostsLoading} />
+            <PostItem post={ele} PostsLoading={PostsLoading} key={ele.id} />
           </>
         ))}
       </>
