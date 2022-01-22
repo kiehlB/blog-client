@@ -99,18 +99,7 @@ function PostItem(props: PostItemProps) {
     </Link>
   );
 
-  return (
-    <>
-      {props.PostsLoading ? (
-        <PostSkeleton />
-      ) : props.post.thumbnail ? (
-        withThumbnail
-      ) : (
-        withoutThumbnail
-      )}
-      {}
-    </>
-  );
+  return <>{props.post.thumbnail ? withThumbnail : withoutThumbnail}</>;
 }
 
 const PostItemBlock = styled.div``;

@@ -6,15 +6,27 @@ import Button from '../Common/TailButton';
 import TailInput from '../Common/TailInput';
 import LabelInput from '../LabelInput/LabelInput';
 import clsx from 'clsx';
+import { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getSearchInput } from '../../store/post';
 
-export type MainProps = {
-  input: any;
-  change: any;
-  setSearchField: any;
-};
+export type MainProps = {};
 
 function Main(props: MainProps) {
   const WindowWidth = useWindowSize();
+  const dispatch = useDispatch();
+
+  const [searchField, setSearchField] = useState('');
+  const [searchInput, setSearchInput] = useState('');
+
+  const onSearchChange = useCallback(
+    e => {
+      setSearchInput(e.target.value);
+      dispatch(getSearchInput(e.target.value));
+    },
+
+    [searchInput],
+  );
 
   return (
     <MainBlock className="max-w-9xl mx-auto sm:px-6 m2xl:px-10  mmd:px-4">
@@ -33,8 +45,8 @@ function Main(props: MainProps) {
           label="SearchInput"
           name="searchInput"
           type="text"
-          value={props.input?.searchInput}
-          onChange={props.change}
+          value={searchInput}
+          onChange={onSearchChange}
           placeholder="Search..."
           className={clsx(
             'w-96 py-1.5 px-3 rounded-md dark:bg-dark mmd:w-5/6',

@@ -6,18 +6,20 @@ import draftToHtml from 'draftjs-to-html';
 import Link from 'next/link';
 import PostItem from './PostItem';
 import { useState } from 'react';
+import { RootState } from '../../store/rootReducer';
+import { useSelector } from 'react-redux';
 
 export type GridProps = {
   post: any;
-  input: any;
-  change: any;
-  searchField: any;
+
   PostsLoading: any;
 };
 
-function Grid({ post, input, searchField, PostsLoading }: GridProps) {
+function Grid({ post, PostsLoading }: GridProps) {
+  const input = useSelector((state: RootState) => state.post.input);
+
   const filteredPersons = post?.filter(ele => {
-    return ele.title.toLowerCase().includes(input.searchInput.toLowerCase());
+    return ele.title.toLowerCase().includes(input.toLowerCase());
   });
 
   function searchList() {
@@ -49,7 +51,7 @@ function Grid({ post, input, searchField, PostsLoading }: GridProps) {
           </FisrtColumn>
         </FirstGrid> */}
 
-        {input.searchInput === ''
+        {input === ''
           ? slicePosts?.map(ele => (
               <PostItem post={ele} key={ele.id} PostsLoading={PostsLoading} />
             ))

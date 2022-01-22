@@ -6,7 +6,7 @@ import Footer from '../components/Footer/Footer';
 import Grid from '../components/Grid';
 import Main from '../components/Main';
 import Next from '../components/Next';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import FloatingHeader from '../components/Common/Floating';
 import AppLayout from '../components/AppLayout';
 import View from '../components/View';
@@ -19,11 +19,6 @@ import useForms from '../hooks/useForm';
 const Home: NextPage = (post: any) => {
   const { getUser, loading, error, logoutButton } = useGetUser();
   const { loading: PostsLoading, error: PostsError, data } = useGetPosts();
-  const [searchField, setSearchField] = useState('');
-
-  const [inputs, handleChange] = useForms({
-    searchInput: '',
-  });
 
   const limitPosts = data?.posts;
 
@@ -145,21 +140,15 @@ const Home: NextPage = (post: any) => {
       <AppLayout
         first={
           <AppLayout.First>
-            <Main input={inputs} change={handleChange} setSearchField={setSearchField} />
+            <Main />
           </AppLayout.First>
         }
         second={
           <AppLayout.Second>
             <C>
-              {/* <Grid post={limitPosts} input={inputs} change={handleChange} /> */}
+              {/* <Grid post={limitPosts} input={searchInput} change={onSearchChange} /> */}
 
-              <Grid
-                post={limitPosts}
-                input={inputs}
-                change={handleChange}
-                searchField={searchField}
-                PostsLoading={PostsLoading}
-              />
+              <Grid post={limitPosts} PostsLoading={PostsLoading} />
             </C>
             <E>
               <Next />
