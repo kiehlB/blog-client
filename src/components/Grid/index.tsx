@@ -12,9 +12,10 @@ export type GridProps = {
   input: any;
   change: any;
   searchField: any;
+  PostsLoading: any;
 };
 
-function Grid({ post, input, searchField }: GridProps) {
+function Grid({ post, input, searchField, PostsLoading }: GridProps) {
   const filteredPersons = post?.filter(ele => {
     return ele.title.toLowerCase().includes(input.searchInput.toLowerCase());
   });
@@ -24,7 +25,7 @@ function Grid({ post, input, searchField }: GridProps) {
       <>
         {filteredPersons?.map(ele => (
           <>
-            <PostItem post={ele} />
+            <PostItem post={ele} PostsLoading={PostsLoading} />
           </>
         ))}
       </>
@@ -49,7 +50,9 @@ function Grid({ post, input, searchField }: GridProps) {
         </FirstGrid> */}
 
         {input.searchInput === ''
-          ? slicePosts?.map(ele => <PostItem post={ele} key={ele.id} />)
+          ? slicePosts?.map(ele => (
+              <PostItem post={ele} key={ele.id} PostsLoading={PostsLoading} />
+            ))
           : searchList()}
       </FirstWrapper>
     </GridBlock>

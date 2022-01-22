@@ -35,7 +35,7 @@ function Main(props: MainProps) {
           type="text"
           value={props.input?.searchInput}
           onChange={props.change}
-          placeholder="Enter Email Address"
+          placeholder="Search..."
           className={clsx(
             'w-96 py-1.5 px-3 rounded-md dark:bg-dark mmd:w-5/6',
             'border border-gray-300 dark:border-gray-600',

@@ -158,6 +158,7 @@ const Home: NextPage = (post: any) => {
                 input={inputs}
                 change={handleChange}
                 searchField={searchField}
+                PostsLoading={PostsLoading}
               />
             </C>
             <E>

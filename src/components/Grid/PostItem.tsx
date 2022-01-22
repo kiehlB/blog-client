@@ -6,13 +6,17 @@ import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import createLinkDecorator from '../../components/Write/Decorators';
 import Link from 'next/link';
+import PostSkeleton from './PostSkeleton';
 
 export type PostItemProps = {
   post: any;
+  PostsLoading: any;
 };
 
 function PostItem(props: PostItemProps) {
   const tags = props.post?.tags?.name.split('%20');
+
+  console.log(props.PostsLoading);
 
   const [editorState, setEditorState] = useState(
     EditorState.createWithContent(convertFromRaw(JSON.parse(props.post.body))),
@@ -26,7 +30,7 @@ function PostItem(props: PostItemProps) {
   const withoutThumbnail = (
     <>
       <Link href={`/post/${props.post.id}`}>
-        <C className="">
+        <C>
           {props.post?.thumbnail ? (
             <ContentImg src={props.post.thumbnail} alt="Picture of the author" />
           ) : (
@@ -95,7 +99,18 @@ function PostItem(props: PostItemProps) {
     </Link>
   );
 
-  return <>{props.post.thumbnail ? withThumbnail : withoutThumbnail}</>;
+  return (
+    <>
+      {props.PostsLoading ? (
+        <PostSkeleton />
+      ) : props.post.thumbnail ? (
+        withThumbnail
+      ) : (
+        withoutThumbnail
+      )}
+      {}
+    </>
+  );
 }
 
 const PostItemBlock = styled.div``;

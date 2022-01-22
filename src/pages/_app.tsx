@@ -10,9 +10,9 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import '@draft-js-plugins/alignment/lib/plugin.css';
 import '../styles/font.css';
 import '@draft-js-plugins/emoji/lib/plugin.css';
-
-import "draft-js/dist/Draft.css";
-import "draftail/dist/draftail.css";
+import 'react-loading-skeleton/dist/skeleton.css';
+import 'draft-js/dist/Draft.css';
+import 'draftail/dist/draftail.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);
