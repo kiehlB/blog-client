@@ -27,8 +27,8 @@ function Main(props: MainProps) {
     [],
   );
 
-  const onSearchSubmit = () => {
-    console.log(searchInput);
+  const onSearchSubmit = e => {
+    e.preventDefault();
     dispatch(getSearchInput(searchInput));
   };
 
@@ -44,7 +44,7 @@ function Main(props: MainProps) {
       )}
 
       <MainSubTitle>Find the latest of my writing here.</MainSubTitle>
-      <TailWrapper>
+      <TailWrapper onClick={e => onSearchSubmit(e)}>
         <LabelInput
           label="SearchInput"
           name="searchInput"
@@ -60,7 +60,6 @@ function Main(props: MainProps) {
         />
         <ButtonWapprer>
           <Button
-            onClick={e => onSearchSubmit()}
             bgColor="regal-sky"
             className="text-sm !font-bold w-32 h-10  !rounded-full -z-50">
             Search Now
@@ -118,7 +117,7 @@ const MainSubTitle = styled.div`
   }
 `;
 
-const TailWrapper = styled.div`
+const TailWrapper = styled.form`
   ${media.custom(768)} {
     display: flex;
     flex-direction: column;

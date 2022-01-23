@@ -23,8 +23,8 @@ export const GET_Post = gql`
 `;
 
 export const GET_Posts = gql`
-  query GetPosts {
-    posts {
+  query GetPosts($cursor: String) {
+    posts(cursor: $cursor) {
       id
       title
       body

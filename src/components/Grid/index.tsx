@@ -5,18 +5,56 @@ import media from '../../lib/styles/media';
 import draftToHtml from 'draftjs-to-html';
 import Link from 'next/link';
 import PostItem from './PostItem';
-import { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { RootState } from '../../store/rootReducer';
 import { useSelector } from 'react-redux';
+import { Waypoint } from 'react-waypoint';
+import PaginateWithScroll from '../Common/PaginateScroll';
 
 export type GridProps = {
   post: any;
-
+  setIsLoding: any;
+  isLoding: any;
   PostsLoading: any;
+  PostsError: any;
+  fetchMore: any;
+  networkStatus: any;
 };
 
-function Grid({ post, PostsLoading }: GridProps) {
+function Grid({
+  post,
+  PostsLoading,
+  setIsLoding,
+  isLoding,
+  PostsError,
+  networkStatus,
+  fetchMore,
+}: GridProps) {
+  const observerRef = useRef(null);
+  const [buttonRef, setButtonRef] = useState(null);
   const input = useSelector((state: RootState) => state.post.input);
+  console.log(post);
+
+  const cursor = post?.length > 0 ? post[post.length - 1].id : null;
+
+  console.log(cursor);
+  const onLoadMore = useCallback(
+    (cursor: string) => {
+      fetchMore({
+        variables: {
+          cursor,
+        },
+        updateQuery: (prev, { fetchMoreResult }) => {
+          if (!fetchMoreResult) return prev;
+
+          return {
+            posts: [...fetchMoreResult.posts],
+          };
+        },
+      });
+    },
+    [post],
+  );
 
   const filteredPersons = post?.filter(ele => {
     return ele.title.toLowerCase().includes(input.toLowerCase());
@@ -34,11 +72,11 @@ function Grid({ post, PostsLoading }: GridProps) {
     );
   }
 
-  const slicePosts = post?.slice(0, 12);
-
   return (
     <GridBlock>
-      <FirstWrapper className="grid gap-9 grid-cols-3 mxl:grid-cols-2 mmd:grid-cols-1 auto-rows-fr">
+      <FirstWrapper
+        className="grid gap-9 grid-cols-3 mxl:grid-cols-2 mmd:grid-cols-1 auto-rows-fr"
+        id="list">
         {/* <FirstGrid className="border border-black col-span-3 mxl:col-span-2 mmd:col-span-1  ">
           <FisrtColumn className="">
             <GridAuto>
@@ -51,11 +89,36 @@ function Grid({ post, PostsLoading }: GridProps) {
           </FisrtColumn>
         </FirstGrid> */}
 
-        {input === ''
-          ? slicePosts?.map(ele => (
+        {/* {isLoding
+          ? post.map(ele => (
               <PostItem post={ele} key={ele.id} PostsLoading={PostsLoading} />
             ))
-          : searchList()}
+          : input === ''
+          ? post?.map(ele => (
+              <PostItem post={ele} key={ele.id} PostsLoading={PostsLoading} />
+            ))
+          : searchList()} */}
+
+        {/* {hasNextPage && (
+          <F
+            ref={setButtonRef}
+            id="buttonLoadMore"
+            disabled={isRefetching}
+            loading={isRefetching}
+            onClick={() =>
+              fetchMore({
+                variables: { cursor },
+              })
+            }>
+            load more
+          </F>
+        )} */}
+
+        {post?.map(ele => (
+          <PostItem post={ele} key={ele.id} PostsLoading={PostsLoading} />
+        ))}
+
+        <PaginateWithScroll cursor={cursor} onLoadMore={onLoadMore} />
       </FirstWrapper>
     </GridBlock>
   );
@@ -73,5 +136,7 @@ const FirstWrapper = styled.div`
     padding: 0 1.5rem;
   }
 `;
+
+const F = styled.button``;
 
 export default Grid;

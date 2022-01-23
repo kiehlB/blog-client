@@ -7,6 +7,7 @@ import Editor from 'draft-js-plugins-editor';
 import createLinkDecorator from '../../components/Write/Decorators';
 import Link from 'next/link';
 import PostSkeleton from './PostSkeleton';
+import { Waypoint } from 'react-waypoint';
 
 export type PostItemProps = {
   post: any;
@@ -15,8 +16,6 @@ export type PostItemProps = {
 
 function PostItem(props: PostItemProps) {
   const tags = props.post?.tags?.name.split('%20');
-
-  console.log(props.PostsLoading);
 
   const [editorState, setEditorState] = useState(
     EditorState.createWithContent(convertFromRaw(JSON.parse(props.post.body))),
