@@ -11,6 +11,8 @@ import { useSelector } from 'react-redux';
 import { Waypoint } from 'react-waypoint';
 import PaginateWithScroll from '../Common/PaginateScroll';
 import useGetSearchPosts from '../Main/hooks/useGetSearchPosts';
+import ContentLoader from 'react-content-loader';
+import { Skeleton, SkeletonTexts } from '../Common/Skeleton';
 
 export type GridProps = {
   post: any;

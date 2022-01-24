@@ -15,6 +15,7 @@ import { initializeApollo } from '../lib/apolloClient';
 import { GET_Posts } from '../lib/graphql/posts';
 import useGetPosts from '../components/Post/hooks/useGetPosts';
 import useForms from '../hooks/useForm';
+import ContentLoader from 'react-content-loader';
 
 const Home: NextPage = (post: any) => {
   const { getUser, loading, error, logoutButton } = useGetUser();

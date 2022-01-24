@@ -8,6 +8,8 @@ import createLinkDecorator from '../../components/Write/Decorators';
 import Link from 'next/link';
 import PostSkeleton from './PostSkeleton';
 import { Waypoint } from 'react-waypoint';
+import media from '../../lib/styles/media';
+import { Skeleton, SkeletonTexts } from '../Common/Skeleton';
 
 export type PostItemProps = {
   post: any;
@@ -98,12 +100,84 @@ function PostItem(props: PostItemProps) {
     </Link>
   );
 
-  return <>{props.post.thumbnail ? withThumbnail : withoutThumbnail}</>;
+  return (
+    <>
+      {props.PostsLoading && <PostCardListSkeleton forLoading hideUser={true} />}
+      {props.post.thumbnail ? withThumbnail : withoutThumbnail}
+    </>
+  );
 }
 
-const PostItemBlock = styled.div``;
+export function PostCardListSkeleton({
+  hideUser,
+  forLoading,
+}: PostCardListSkeletonProps) {
+  return (
+    <div>
+      {forLoading && <Separator />}
+      {Array.from({ length: forLoading ? 1 : 1 }).map((_, i) => (
+        <PostCardSkeleton hideUser={true} key={i} />
+      ))}
+    </div>
+  );
+}
 
 export default PostItem;
+export type PostCardListSkeletonProps = {
+  hideUser?: boolean;
+  forLoading?: boolean;
+};
+
+const Separator = styled.div`
+  border-top: 1px solid #e9ecef;
+`;
+
+export type PostCardSkeletonProps = {
+  hideUser?: boolean;
+};
+
+export function PostCardSkeleton({ hideUser }: PostCardSkeletonProps) {
+  return (
+    <SkeletonBlock>
+      {!hideUser && (
+        <div className="user-info">
+          <Skeleton className="user-thumbnail-skeleton" circle marginRight="1rem" />
+          <div className="username">
+            <Skeleton width="5rem" />
+          </div>
+        </div>
+      )}
+      <div className="post-thumbnail">
+        <div className="thumbnail-skeleton-wrapper">
+          <Skeleton className="skeleton" />
+        </div>
+      </div>
+      <h2>
+        <SkeletonTexts wordLengths={[4, 3, 2, 5, 3, 6]} useFlex />
+      </h2>
+      <div className="short-description">
+        <div className="line">
+          <SkeletonTexts wordLengths={[2, 4, 3, 6, 2, 7]} useFlex />
+        </div>
+        <div className="line">
+          <SkeletonTexts wordLengths={[3, 2, 3, 4, 7, 3]} useFlex />
+        </div>
+        <div className="line">
+          <SkeletonTexts wordLengths={[4, 3, 3]} />
+        </div>
+      </div>
+      <div className="tags-skeleton">
+        <Skeleton width="6rem" marginRight="0.875rem" />
+        <Skeleton width="4rem" marginRight="0.875rem" />
+        <Skeleton width="5rem" noSpacing />
+      </div>
+      <div className="subinfo">
+        <Skeleton width="3em" marginRight="1rem" />
+        <Skeleton width="6em" noSpacing />
+      </div>
+    </SkeletonBlock>
+  );
+}
 
 const C = styled.section`
   box-shadow: 0px 10px 20px rgba(34, 45, 65, 0.05), 0px 0px 2px rgba(0, 0, 0, 0.13);
@@ -270,4 +344,153 @@ const Author = styled.section`
 
 const AuthorText = styled.section`
   margin-left: 0.8rem;
+`;
+
+const PostCardBlock = styled.div`
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  ${media.custom(768)} {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  & > a {
+    color: inherit;
+    text-decoration: none;
+  }
+  &:first-child {
+    padding-top: 0;
+  }
+  .user-info {
+    display: flex;
+    align-items: center;
+    img {
+      width: 3rem;
+      height: 3rem;
+      display: block;
+      margin-right: 1rem;
+      background: '#F8F9FA';
+      object-fit: cover;
+      border-radius: 1.5rem;
+      box-shadow: 0px 0 8px rgba(0, 0, 0, 0.1);
+      ${media.custom(768)} {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 1rem;
+      }
+    }
+    .username {
+      font-size: 0.875rem;
+      color: #212529;
+      font-weight: bold;
+      a {
+        color: inherit;
+        text-decoration: none;
+        &:hover {
+          color: #343a40;
+        }
+      }
+    }
+    margin-bottom: 1.5rem;
+    ${media.custom(768)} {
+      margin-bottom: 0.75rem;
+    }
+  }
+  .post-thumbnail {
+    margin-bottom: 1rem;
+  }
+  line-height: 1.5;
+  h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #212529;
+    word-break: keep-all;
+    ${media.custom(768)} {
+      font-size: 1rem;
+    }
+  }
+  p {
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #495057;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    ${media.custom(768)} {
+      font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+  .subinfo {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    color: #868e96;
+    font-size: 0.875rem;
+    ${media.custom(768)} {
+      font-size: 0.75rem;
+    }
+    span {
+    }
+    .separator {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+  .tags-wrapper {
+    margin-bottom: -0.875rem;
+    ${media.custom(768)} {
+      margin-bottom: -0.5rem;
+    }
+  }
+
+  & + & {
+    border-top: 1px solid #e9ecef;
+  }
+`;
+
+const SkeletonBlock = styled(PostCardBlock)`
+  h2 {
+    display: flex;
+    margin-top: 1.375rem;
+    margin-bottom: 0.375rem;
+  }
+  .user-thumbnail-skeleton {
+    width: 3rem;
+    height: 3rem;
+    ${media.custom(768)} {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+  .thumbnail-skeleton-wrapper {
+    width: 100%;
+    padding-top: 52.35%;
+    position: relative;
+    .skeleton {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .short-description {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+    .line {
+      display: flex;
+    }
+    .line + .line {
+      margin-top: 0.5rem;
+    }
+  }
+  .tags-skeleton {
+    line-height: 1;
+    font-size: 2rem;
+    ${media.custom(768)} {
+      font-size: 1.25rem;
+    }
+  }
 `;
