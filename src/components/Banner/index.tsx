@@ -5,9 +5,9 @@ import Link from 'next/link';
 
 export type BannerProps = {};
 
-function Banner({ }: BannerProps) {
+function Banner({}: BannerProps) {
   return (
-    <BannerBlock>
+    <BannerBlock className="h-12 bg-banner-color">
       <BannerWrapper>
         <BannerText>
           📹 New! Remote User Testing - Get video + voice feedback on designs and
@@ -22,8 +22,6 @@ function Banner({ }: BannerProps) {
 }
 
 const BannerBlock = styled.div`
-  height: 3.125rem;
-  background-color: #7e5bef;
   ${media.custom(768)} {
     height: 6.5rem;
   }

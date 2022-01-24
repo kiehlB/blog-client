@@ -68,6 +68,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        'banner-color': '#7e5bef',
         'regal-sky': '#1fb6ff',
       },
       maxWidth: {
