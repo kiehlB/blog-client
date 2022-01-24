@@ -9,7 +9,7 @@ function Banner({}: BannerProps) {
   return (
     <BannerBlock className="h-12 bg-banner-color mmd:h-28">
       <BannerWrapper className="w-full flex justify-center  flex-wrap items-center mmd:h-28">
-        <BannerText className="flex text-white leading-4 justify-center items-center h-12 mr-4 mmd:text-center">
+        <BannerText className="font-mat flex text-white leading-4 justify-center items-center h-12 mr-4 mmd:text-center">
           📹 New! Remote User Testing - Get video + voice feedback on designs and
           prototypes
         </BannerText>
@@ -29,6 +29,5 @@ const BannerText = styled.div`
   font-size: 1rem;
   letter-spacing: -0.2px;
   text-decoration: none solid rgb(255, 255, 255);
-  font-family: 'Matter';
 `;
 export default Banner;

@@ -38,17 +38,19 @@ function Main(props: MainProps) {
   return (
     <MainBlock className="flex flex-col justify-around max-w-9xl h-72 mt-20 mx-auto sm:px-6 m2xl:px-10  mmd:px-4">
       {WindowWidth.width > 768 ? (
-        <MainTitle className="text-5xl font-semibold leading-tight text-main-text mmd:text-3xl">
+        <MainTitle className="font-mat text-5xl font-semibold leading-tight text-main-text mmd:text-3xl">
           The best dev
           <br /> articles every day.
         </MainTitle>
       ) : (
-        <MinMainTitle className="w-full text-5xl font-semibold leading-tight text-center text-main-text mmd:text-3xl">
+        <MinMainTitle className="font-mat w-full text-5xl font-semibold leading-tight text-center text-main-text mmd:text-3xl">
           The best dev articles every day.
         </MinMainTitle>
       )}
 
-      <MainSubTitle>Find the latest of my writing here.</MainSubTitle>
+      <MainSubTitle className="text-lg font-mat font-light leading-7 text-small-text mmd:text-center">
+        Find the latest of my writing here.
+      </MainSubTitle>
       <TailWrapper
         onClick={e => onSearchSubmit(e)}
         className="mmd:flex justify-center items-center flex-col">
@@ -79,23 +81,10 @@ function Main(props: MainProps) {
 
 const MainBlock = styled.div``;
 
-const MainTitle = styled.div`
-  font-family: 'Matter';
-`;
+const MainTitle = styled.div``;
 
-const MinMainTitle = styled.div`
-  font-family: 'Matter';
-`;
-const MainSubTitle = styled.div`
-  font-size: 1.125rem;
-  font-weight: 300;
-  line-height: 1.75rem;
-  color: #3c4858;
-  font-family: 'Matter';
-  ${media.custom(768)} {
-    text-align: center;
-  }
-`;
+const MinMainTitle = styled.div``;
+const MainSubTitle = styled.div``;
 
 const TailWrapper = styled.form``;
 

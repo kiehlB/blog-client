@@ -114,20 +114,24 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                       fill="#1FB6FF"
                     />
                   </svg>
-                  <HeaderTagWrapper className="flex ml-2">
+                  <HeaderTagWrapper className="flex ml-2 mmd:hidden">
                     <svg
+                      className="flex items-center h-6"
                       width="4"
                       height="10"
                       viewBox="0 0 4 10"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg">
                       <ContributeWrapper
+                        className="mxl:hidden"
                         d="M3.99975 10L0.564752 6.132C-0.185248 5.507 -0.191248 4.497 0.564752 3.868L3.99975 0V10Z"
                         fill="#1FB6FF"
                       />
                     </svg>
                     <Link href="https://github.com/kiehlB/blog-client" passHref={true}>
-                      <HeadTag>Contribute to the blog</HeadTag>
+                      <HeadTag className="bg-regal-sky leading-5 text-xs font-medium text-white px-1.5 flex justify-center items-center rounded-sm mxl:hidden">
+                        Contribute to the blog
+                      </HeadTag>
                     </Link>
                   </HeaderTagWrapper>
                 </div>
@@ -450,34 +454,13 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
 
 const HeaderTagWrapper = styled.nav`
   font-family: Fira Mono, monospace;
-  & > svg {
+  /* & > svg {
     display: flex;
     align-items: center;
     height: 1.375rem;
-  }
-  ${media.custom(768)} {
-    display: none;
-  }
+  } */
 `;
 
-const HeadTag = styled.div`
-  background-color: #1fb6ff;
-  line-height: 22px;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 0px 5px 0px 5px;
-  color: white;
-  border-radius: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  ${media.custom(1200)} {
-    display: none;
-  }
-`;
+const HeadTag = styled.div``;
 
-const ContributeWrapper = styled.path`
-  ${media.custom(1200)} {
-    display: none;
-  }
-`;
+const ContributeWrapper = styled.path``;

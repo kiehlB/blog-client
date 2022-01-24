@@ -35,7 +35,7 @@ module.exports = {
     fontFamily: {
       primary: ['Inter', ...fontFamily.sans],
       sans: ['Roboto', ...fontFamily.sans],
-      sans: ['Matter', ...fontFamily.sans],
+      mat: ['Matter', ...fontFamily.sans],
     },
 
     keyframes: {
@@ -71,6 +71,7 @@ module.exports = {
         'main-text': '#1f2d3d',
         'banner-color': '#7e5bef',
         'regal-sky': '#1fb6ff',
+        'small-text': '#3c4858',
       },
       maxWidth: {
         '9xl': '82.5rem',
