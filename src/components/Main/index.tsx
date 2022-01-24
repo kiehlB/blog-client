@@ -38,18 +38,20 @@ function Main(props: MainProps) {
   return (
     <MainBlock className="flex flex-col justify-around max-w-9xl h-72 mt-20 mx-auto sm:px-6 m2xl:px-10  mmd:px-4">
       {WindowWidth.width > 768 ? (
-        <MainTitle className="text-5xl font-semibold leading-tight text-main-text">
+        <MainTitle className="text-5xl font-semibold leading-tight text-main-text mmd:text-3xl">
           The best dev
           <br /> articles every day.
         </MainTitle>
       ) : (
-        <MinMainTitle className="w-full text-5xl font-semibold leading-tight text-center text-main-text">
+        <MinMainTitle className="w-full text-5xl font-semibold leading-tight text-center text-main-text mmd:text-3xl">
           The best dev articles every day.
         </MinMainTitle>
       )}
 
       <MainSubTitle>Find the latest of my writing here.</MainSubTitle>
-      <TailWrapper onClick={e => onSearchSubmit(e)}>
+      <TailWrapper
+        onClick={e => onSearchSubmit(e)}
+        className="mmd:flex justify-center items-center flex-col">
         <LabelInput
           label="SearchInput"
           name="searchInput"
@@ -63,7 +65,7 @@ function Main(props: MainProps) {
             'dark:focus:border-primary-300 focus:border-primary-300 focus:ring-0 focus:outline-none',
           )}
         />
-        <ButtonWapprer>
+        <ButtonWapprer className="mt-4 mmd:flex justify-center">
           <Button
             bgColor="regal-sky"
             className="text-sm !font-bold w-32 h-10  !rounded-full -z-50">
@@ -79,16 +81,10 @@ const MainBlock = styled.div``;
 
 const MainTitle = styled.div`
   font-family: 'Matter';
-  ${media.custom(768)} {
-    font-size: 2rem;
-  }
 `;
 
 const MinMainTitle = styled.div`
   font-family: 'Matter';
-  ${media.custom(768)} {
-    font-size: 2rem;
-  }
 `;
 const MainSubTitle = styled.div`
   font-size: 1.125rem;
@@ -101,20 +97,7 @@ const MainSubTitle = styled.div`
   }
 `;
 
-const TailWrapper = styled.form`
-  ${media.custom(768)} {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-`;
+const TailWrapper = styled.form``;
 
-const ButtonWapprer = styled.div`
-  padding-top: 1rem;
-  ${media.custom(768)} {
-    display: flex;
-    justify-content: center;
-  }
-`;
+const ButtonWapprer = styled.div``;
 export default Main;
