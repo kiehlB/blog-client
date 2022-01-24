@@ -9,6 +9,9 @@ import clsx from 'clsx';
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getSearchInput } from '../../store/post';
+import useGetSearchPosts from './hooks/useGetSearchPosts';
+import { useQuery, gql, useMutation } from '@apollo/client';
+import { GET_Search_Posts } from '../../lib/graphql/posts';
 
 export type MainProps = {};
 

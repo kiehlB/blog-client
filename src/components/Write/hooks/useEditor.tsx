@@ -137,17 +137,17 @@ export default function useEditor() {
           query: GET_Posts,
         });
 
-        proxy.writeQuery({
-          query: GET_Posts,
-          data: {
-            ...(data as any),
-            posts: [createPost?.createPost, ...(data as any)?.posts],
-          },
-        });
+        // proxy.writeQuery({
+        //   query: GET_Posts,
+        //   data: {
+        //     posts:  data?.posts.filter(p => p.id !== removeId),
+        //   },
+        // });
       },
     });
 
-    router.push('/');
+    window.location.replace('/');
+    // router.push('/');
   };
 
   return {

@@ -67,6 +67,28 @@ export const Get_TopPost = gql`
   }
 `;
 
+export const GET_Search_Posts = gql`
+  query SearchPosts($searchInput: String) {
+    searchPosts(searchInput: $searchInput) {
+      id
+      title
+      thumbnail
+      created_at
+      views
+      body
+      likes
+      liked
+      user {
+        id
+        username
+        follower {
+          id
+        }
+      }
+    }
+  }
+`;
+
 // export const GET_IMAGE_URL = gql`
 //   query GetImageUrl($imageName: String!, $transformOptions: TransformImageOptionsInput) {
 //     getImageUrl(imageName: $imageName, transformOptions: $transformOptions) {

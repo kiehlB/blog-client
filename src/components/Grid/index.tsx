@@ -10,6 +10,7 @@ import { RootState } from '../../store/rootReducer';
 import { useSelector } from 'react-redux';
 import { Waypoint } from 'react-waypoint';
 import PaginateWithScroll from '../Common/PaginateScroll';
+import useGetSearchPosts from '../Main/hooks/useGetSearchPosts';
 
 export type GridProps = {
   post: any;
@@ -33,41 +34,36 @@ function Grid({
   const observerRef = useRef(null);
   const [buttonRef, setButtonRef] = useState(null);
   const input = useSelector((state: RootState) => state.post.input);
-  console.log(post);
+  const { loading, error, data } = useGetSearchPosts(input);
 
+  console.log(data);
   const cursor = post?.length > 0 ? post[post.length - 1].id : null;
 
-  console.log(cursor);
-  const onLoadMore = useCallback(
-    (cursor: string) => {
-      fetchMore({
-        variables: {
-          cursor,
-        },
-        updateQuery: (prev, { fetchMoreResult }) => {
-          if (!fetchMoreResult) return prev;
+  const onLoadMore = useCallback((cursor: string) => {
+    fetchMore({
+      variables: {
+        cursor,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prev;
 
-          return {
-            posts: [...fetchMoreResult.posts],
-          };
-        },
-      });
-    },
-    [post],
-  );
-
-  const filteredPersons = post?.filter(ele => {
-    return ele.title.toLowerCase().includes(input.toLowerCase());
-  });
+        return {
+          posts: [...fetchMoreResult.posts],
+        };
+      },
+    });
+  }, []);
 
   function searchList() {
     return (
       <>
-        {filteredPersons?.map(ele => (
-          <>
-            <PostItem post={ele} PostsLoading={PostsLoading} key={ele.id} />
-          </>
-        ))}
+        {data
+          ? data?.searchPosts?.map(ele => (
+              <>
+                <PostItem post={ele} PostsLoading={PostsLoading} key={ele.id} />
+              </>
+            ))
+          : ''}
       </>
     );
   }
@@ -89,36 +85,14 @@ function Grid({
           </FisrtColumn>
         </FirstGrid> */}
 
-        {/* {isLoding
-          ? post.map(ele => (
-              <PostItem post={ele} key={ele.id} PostsLoading={PostsLoading} />
+        {data
+          ? data?.searchPosts?.map(ele => (
+              <PostItem post={ele} PostsLoading={PostsLoading} key={ele.id} />
             ))
-          : input === ''
-          ? post?.map(ele => (
+          : post?.map(ele => (
               <PostItem post={ele} key={ele.id} PostsLoading={PostsLoading} />
-            ))
-          : searchList()} */}
-
-        {/* {hasNextPage && (
-          <F
-            ref={setButtonRef}
-            id="buttonLoadMore"
-            disabled={isRefetching}
-            loading={isRefetching}
-            onClick={() =>
-              fetchMore({
-                variables: { cursor },
-              })
-            }>
-            load more
-          </F>
-        )} */}
-
-        {post?.map(ele => (
-          <PostItem post={ele} key={ele.id} PostsLoading={PostsLoading} />
-        ))}
-
-        <PaginateWithScroll cursor={cursor} onLoadMore={onLoadMore} />
+            ))}
+        {isLoding ? <PaginateWithScroll cursor={cursor} onLoadMore={onLoadMore} /> : ''}
       </FirstWrapper>
     </GridBlock>
   );
