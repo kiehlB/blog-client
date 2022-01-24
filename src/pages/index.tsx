@@ -19,16 +19,8 @@ import ContentLoader from 'react-content-loader';
 
 const Home: NextPage = (post: any) => {
   const { getUser, loading, error, logoutButton } = useGetUser();
-  const {
-    loading: PostsLoading,
-    error: PostsError,
-    data,
-    fetchMore,
-    networkStatus,
-  } = useGetPosts();
-  const [isLoding, setIsLoding] = useState(false);
 
-  const limitPosts = data?.posts;
+  const [isLoding, setIsLoding] = useState(false);
 
   // if (process.browser) {
   //   const canvas = document.querySelector('canvas');
@@ -156,15 +148,7 @@ const Home: NextPage = (post: any) => {
             <C>
               {/* <Grid post={limitPosts} input={searchInput} change={onSearchChange} /> */}
 
-              <Grid
-                networkStatus={networkStatus}
-                PostsError={PostsError}
-                fetchMore={fetchMore}
-                post={limitPosts}
-                PostsLoading={PostsLoading}
-                isLoding={isLoding}
-                setIsLoding={setIsLoding}
-              />
+              <Grid isLoding={isLoding} setIsLoding={setIsLoding} />
             </C>
             <E>
               <Next isLoding={isLoding} setIsLoding={setIsLoding} />

@@ -10,6 +10,8 @@ import PostSkeleton from './PostSkeleton';
 import { Waypoint } from 'react-waypoint';
 import media from '../../lib/styles/media';
 import { Skeleton, SkeletonTexts } from '../Common/Skeleton';
+import { useQuery } from '@apollo/client';
+import { GET_Posts } from '../../lib/graphql/posts';
 
 export type PostItemProps = {
   post: any;
@@ -100,26 +102,7 @@ function PostItem(props: PostItemProps) {
     </Link>
   );
 
-  return (
-    <>
-      {props.PostsLoading && <PostCardListSkeleton forLoading hideUser={true} />}
-      {props.post.thumbnail ? withThumbnail : withoutThumbnail}
-    </>
-  );
-}
-
-export function PostCardListSkeleton({
-  hideUser,
-  forLoading,
-}: PostCardListSkeletonProps) {
-  return (
-    <div>
-      {forLoading && <Separator />}
-      {Array.from({ length: forLoading ? 1 : 1 }).map((_, i) => (
-        <PostCardSkeleton hideUser={true} key={i} />
-      ))}
-    </div>
-  );
+  return <>{props.post.thumbnail ? withThumbnail : withoutThumbnail}</>;
 }
 
 export default PostItem;
