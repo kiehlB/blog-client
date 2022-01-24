@@ -66,10 +66,8 @@ function Grid({ setIsLoding, isLoding, forLoading }: GridProps) {
     );
   }
 
-  console.log(PostsLoading);
-
   return (
-    <GridBlock>
+    <GridBlock className="9xl mx-auto">
       <FirstWrapper
         className="grid gap-9 grid-cols-3 mxl:grid-cols-2 mmd:grid-cols-1 auto-rows-fr"
         id="list">
@@ -103,10 +101,7 @@ function Grid({ setIsLoding, isLoding, forLoading }: GridProps) {
   );
 }
 
-const GridBlock = styled.div`
-  max-width: 82.5rem;
-  margin: 0 auto;
-`;
+const GridBlock = styled.div``;
 
 const FirstWrapper = styled.div`
   grid-auto-rows: 1fr;
@@ -186,20 +181,6 @@ export function PostCardSkeleton({ hideUser }: PostCardSkeletonProps) {
     </SkeletonBlock>
   );
 }
-
-const C = styled.section`
-  box-shadow: 0px 10px 20px rgba(34, 45, 65, 0.05), 0px 0px 2px rgba(0, 0, 0, 0.13);
-  background-color: #fff;
-  border-radius: 15px;
-  transition: all 0.5s ease;
-
-  &: hover {
-    box-shadow: 0 5px 24px rgba(0, 0, 0, 0.1);
-    transform: translateY(-15px);
-    cursor: pointer;
-    opacity: 1;
-  }
-`;
 
 const ContentImg = styled.img`
   width: 100%;

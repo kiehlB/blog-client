@@ -36,14 +36,16 @@ function Main(props: MainProps) {
   };
 
   return (
-    <MainBlock className="max-w-9xl mx-auto sm:px-6 m2xl:px-10  mmd:px-4">
+    <MainBlock className="flex flex-col justify-around max-w-9xl h-72 mt-20 mx-auto sm:px-6 m2xl:px-10  mmd:px-4">
       {WindowWidth.width > 768 ? (
-        <MainTitle>
+        <MainTitle className="text-5xl font-semibold leading-tight text-main-text">
           The best dev
           <br /> articles every day.
         </MainTitle>
       ) : (
-        <MinMainTitle>The best dev articles every day.</MinMainTitle>
+        <MinMainTitle className="w-full text-5xl font-semibold leading-tight text-center text-main-text">
+          The best dev articles every day.
+        </MinMainTitle>
       )}
 
       <MainSubTitle>Find the latest of my writing here.</MainSubTitle>
@@ -73,23 +75,9 @@ function Main(props: MainProps) {
   );
 }
 
-const MainBlock = styled.div`
-  margin: 0 auto;
-  height: 18rem;
-  margin-top: 5rem;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  ${media.custom(768)} {
-  }
-`;
+const MainBlock = styled.div``;
 
 const MainTitle = styled.div`
-  font-size: 2.875rem;
-  font-weight: 600;
-  line-height: 3.625rem;
-  color: #1f2d3d;
   font-family: 'Matter';
   ${media.custom(768)} {
     font-size: 2rem;
@@ -97,13 +85,6 @@ const MainTitle = styled.div`
 `;
 
 const MinMainTitle = styled.div`
-  font-size: 2.875rem;
-  font-weight: 600;
-  line-height: 3.625rem;
-  width: 100%;
-  text-align: center;
-
-  color: #1f2d3d;
   font-family: 'Matter';
   ${media.custom(768)} {
     font-size: 2rem;

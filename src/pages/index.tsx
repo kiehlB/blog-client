@@ -145,14 +145,14 @@ const Home: NextPage = (post: any) => {
         }
         second={
           <AppLayout.Second>
-            <C>
+            <section className="my-24">
               {/* <Grid post={limitPosts} input={searchInput} change={onSearchChange} /> */}
 
               <Grid isLoding={isLoding} setIsLoding={setIsLoding} />
-            </C>
-            <E>
+            </section>
+            <div className="h-fulll">
               <Next isLoding={isLoding} setIsLoding={setIsLoding} />
-            </E>
+            </div>
           </AppLayout.Second>
         }
         third={
@@ -166,13 +166,7 @@ const Home: NextPage = (post: any) => {
 };
 
 export default Home;
-const C = styled.div`
-  margin: 6rem 0;
-`;
 
-const E = styled.div`
-  height: 100%;
-`;
 {
   /* <C>
         <canvas></canvas>

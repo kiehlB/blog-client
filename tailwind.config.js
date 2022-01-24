@@ -68,6 +68,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        'main-text': '#1f2d3d',
         'banner-color': '#7e5bef',
         'regal-sky': '#1fb6ff',
       },

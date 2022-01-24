@@ -114,7 +114,7 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                       fill="#1FB6FF"
                     />
                   </svg>
-                  <HeaderTagWrapper>
+                  <HeaderTagWrapper className="flex ml-2">
                     <svg
                       width="4"
                       height="10"
@@ -449,8 +449,6 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
 }
 
 const HeaderTagWrapper = styled.nav`
-  display: flex;
-  margin-left: 0.5rem;
   font-family: Fira Mono, monospace;
   & > svg {
     display: flex;

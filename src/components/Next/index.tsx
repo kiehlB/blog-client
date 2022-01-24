@@ -16,9 +16,9 @@ function Next({ setIsLoding, isLoding }: NextProps) {
       {isLoding ? (
         ''
       ) : (
-        <NextBlock onClick={onClick}>
-          <Wrapper>
-            <TextWrapper>
+        <NextBlock onClick={onClick} className="w-full h-32 bg-regal-sky cursor-pointer">
+          <Wrapper className="flex justify-center items-center h-full text-3xl font-semibold text-white">
+            <TextWrapper className="w-full flex justify-center items-center ">
               <h1>Next</h1>
               <Arrow>
                 <svg
@@ -48,29 +48,11 @@ function Next({ setIsLoding, isLoding }: NextProps) {
   );
 }
 
-const NextBlock = styled.div`
-  width: 100%;
-  height: 7.875rem;
-  background-color: #1fb6ff;
-  cursor: pointer;
-`;
+const NextBlock = styled.div``;
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  font-size: 1.625rem;
-  font-weight: 600;
-  color: #fff;
-`;
+const Wrapper = styled.div``;
 
 const TextWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: center;
-
   & > div {
     position: absolute;
 

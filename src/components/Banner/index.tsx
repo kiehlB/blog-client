@@ -8,7 +8,7 @@ export type BannerProps = {};
 function Banner({}: BannerProps) {
   return (
     <BannerBlock className="h-12 bg-banner-color">
-      <BannerWrapper>
+      <BannerWrapper className="w-full flex justify-center  flex-wrap items-center">
         <BannerText>
           📹 New! Remote User Testing - Get video + voice feedback on designs and
           prototypes
@@ -28,11 +28,6 @@ const BannerBlock = styled.div`
 `;
 
 const BannerWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
   ${media.custom(768)} {
     height: 6.5rem;
   }
