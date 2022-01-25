@@ -10,7 +10,7 @@ import View from '../components/View';
 
 export type SocialProps = {};
 
-function Social({ }: SocialProps) {
+function Social({}: SocialProps) {
   return (
     <>
       <View.Container>
