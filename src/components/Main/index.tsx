@@ -37,7 +37,7 @@ function Main(props: MainProps) {
 
   return (
     <MainBlock className="flex flex-col justify-around max-w-9xl h-72 mt-20 mx-auto sm:px-6 m2xl:px-10  mmd:px-4">
-      {WindowWidth.width > 768 ? (
+      {/* {WindowWidth.width > 768 ? (
         <MainTitle className="font-mat text-5xl font-semibold leading-tight text-main-text mmd:text-3xl">
           The best dev
           <br /> articles every day.
@@ -46,7 +46,11 @@ function Main(props: MainProps) {
         <MinMainTitle className="font-mat w-full text-5xl font-semibold leading-tight text-center text-main-text mmd:text-3xl">
           The best dev articles every day.
         </MinMainTitle>
-      )}
+      )} */}
+      <MainTitle className="font-mat text-5xl font-semibold leading-tight text-main-text mmd:text-center mmd:text-3xl">
+        The best dev
+        <br /> articles every day.
+      </MainTitle>
 
       <MainSubTitle className="text-lg font-mat font-light leading-7 text-small-text mmd:text-center">
         Find the latest of my writing here.

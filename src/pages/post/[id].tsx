@@ -364,7 +364,7 @@ const PostHeader = styled.div`
   ${media.custom(768)} {
     width: 100%;
   }
-  height: 10rem;
+  height: 14rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -372,7 +372,7 @@ const PostHeader = styled.div`
 
 const PostWrapper = styled.div`
   margin: 5rem 0;
-  height: 10rem;
+  height: 14rem;
 `;
 
 const EditorWrapper = styled.div`
