@@ -14,7 +14,7 @@ module.exports = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://api.woongblog.xyz/:path*gu',
+        destination: 'https://api.woongblog.xyz/:path*',
       },
     ];
   },
