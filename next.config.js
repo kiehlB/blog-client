@@ -10,14 +10,14 @@ module.exports = {
   },
 
   // https://api.woongblog.xyz/api/v2/auth/register
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/api/v2/auth/register',
-  //       destination: 'https://api.woongblog.xyz/api/v2/auth/register',
-  //     },
-  //   ];
-  // },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://api.woongblog.xyz/:path*gu',
+      },
+    ];
+  },
 
   webpack(config) {
     config.module.rules.push({
