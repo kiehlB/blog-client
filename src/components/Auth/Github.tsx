@@ -4,6 +4,8 @@ import Link from 'next/link';
 export type GithubButtonProps = {};
 
 // https://api.woongblog.xyz/api/v2/auth/redirect/github
+
+// http://localhost:4000/
 function GithubButton({}: GithubButtonProps) {
   return (
     <Link href="https://api.woongblog.xyz/api/v2/auth/redirect/github" passHref={true}>

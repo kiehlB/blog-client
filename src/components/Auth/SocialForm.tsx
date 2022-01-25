@@ -26,7 +26,6 @@ function SocialForm({}: SocialFormProps) {
     const auths = JSON.stringify(inputs);
 
     const config = {
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },

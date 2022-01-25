@@ -8,12 +8,13 @@ module.exports = {
       },
     ],
   },
-
+  // /api/v2/auth/register/
+  // https://api.woongblog.xyz/
   async rewrites() {
     return [
       {
-        source: '/api/v2/auth/register/:path*',
-        destination: 'https://api.woongblog.xyz/:path*',
+        source: '/api/v2/auth/register',
+        destination: 'https://api.woongblog.xyz/api/v2/auth/register',
       },
     ];
   },
