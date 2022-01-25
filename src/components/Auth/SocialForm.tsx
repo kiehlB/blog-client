@@ -26,14 +26,14 @@ function SocialForm({}: SocialFormProps) {
     const auths = JSON.stringify(inputs);
 
     const config = {
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://api.woongblog.xyz',
       },
     };
 
     await axios
-      .post('https://api.woongblog.xyz/api/v2/auth/register', auths, config)
+      .post('https://wwww.woongblog.xyz/api/v2/auth/register', auths, config)
       .then(res => {
         router.push('/');
         console.log(res.data);

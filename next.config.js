@@ -9,6 +9,7 @@ module.exports = {
     ],
   },
 
+  // https://api.woongblog.xyz/api/v2/auth/register
   async rewrites() {
     return [
       {
