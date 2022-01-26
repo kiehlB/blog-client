@@ -198,6 +198,7 @@ export default function Post({ frontmatter, nextPost, previousPost, forLoading }
         <EditorWrapper>
           {!singlePostLoding && (
             <Editor
+              /* @ts-ignore */
               editorState={EditorState.createWithContent(
                 convertFromRaw(JSON.parse(singlePostData?.post?.body)),
                 decorator,
