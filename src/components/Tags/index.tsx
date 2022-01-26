@@ -5,9 +5,9 @@ const TagsTap = styled.div`
   background: none repeat scroll 0 0 #1fb6ff;
   border-radius: 2px;
   color: #fff;
-  padding: 0.3em;
+  padding: 0.3rem 0.6rem;
   float: left;
-
+  margin-bottom: 0.4rem;
   margin-right: 1rem;
 
   .tag-delete-button {

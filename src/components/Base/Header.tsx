@@ -23,7 +23,7 @@ const solutions = [
   {
     name: 'Kairos',
     description: 'chrome extension for recording and & visualizing chrome activity',
-    href: '/',
+    href: 'https://github.com/kiehlB/Kairos_chrome-extension',
     icon: ChartBarIcon,
   },
 
@@ -35,31 +35,41 @@ const solutions = [
   },
 ];
 const callsToAction = [
-  { name: 'Watch Demo', href: '/', icon: PlayIcon },
+  {
+    name: 'Watch Demo',
+    href: 'https://github.com/kiehlB/Kairos_chrome-extension',
+    icon: PlayIcon,
+  },
   { name: 'Contact Me', href: '/', icon: PhoneIcon },
 ];
 const resources = [
   {
-    name: 'Watch Demo',
+    name: '내가 쓴 글',
     description: 'Get all of your questions answered in our forums or contact support.',
     href: '/',
     icon: SupportIcon,
   },
   {
-    name: 'Contact Me',
+    name: '좋아요 글',
     description: 'Learn how to maximize our platform to get the most out of it.',
     href: '/',
     icon: BookmarkAltIcon,
   },
+  {
+    name: '설정',
+    description: 'See what meet-ups and other events we might be planning near you.',
+    href: '/',
+    icon: CalendarIcon,
+  },
 ];
 const recentPosts = [
-  { id: 1, name: 'Boost your conversion rate', href: '#' },
+  { id: 1, name: 'Boost your conversion rate', href: '/' },
   {
     id: 2,
     name: 'How to use search engine optimization to drive traffic to your site',
-    href: '#',
+    href: '/',
   },
-  { id: 3, name: 'Improve your customer experience', href: '#' },
+  { id: 3, name: 'Improve your customer experience', href: '/' },
 ];
 
 const withLoginresources = [
@@ -186,37 +196,38 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                       <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                           {solutions.map(item => (
-                            <a
-                              key={item.name}
-                              href={item.href}
-                              className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50">
-                              <item.icon
-                                className="flex-shrink-0 h-6 w-6 text-indigo-600"
-                                aria-hidden="true"
-                              />
-                              <div className="ml-4">
-                                <p className="text-base font-bold text-gray-900">
-                                  {item.name}
-                                </p>
-                                <p className="mt-1 text-sm text-gray-500">
-                                  {item.description}
-                                </p>
-                              </div>
-                            </a>
+                            <Link href={item.href}>
+                              <a
+                                key={item.name}
+                                className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50">
+                                <item.icon
+                                  className="flex-shrink-0 h-6 w-6 text-indigo-600"
+                                  aria-hidden="true"
+                                />
+                                <div className="ml-4">
+                                  <p className="text-base font-bold text-gray-900">
+                                    {item.name}
+                                  </p>
+                                  <p className="mt-1 text-sm text-gray-500">
+                                    {item.description}
+                                  </p>
+                                </div>
+                              </a>
+                            </Link>
                           ))}
                         </div>
                         <div className="px-5 py-5 bg-gray-50 space-y-6 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8">
                           {callsToAction.map(item => (
                             <div key={item.name} className="flow-root">
-                              <a
-                                href={item.href}
-                                className="-m-3 p-3 flex items-center rounded-md text-base font-bold text-gray-900 hover:bg-gray-100">
-                                <item.icon
-                                  className="flex-shrink-0 h-6 w-6 text-gray-400"
-                                  aria-hidden="true"
-                                />
-                                <div className="ml-3">{item.name}</div>
-                              </a>
+                              <Link href={item.href}>
+                                <a className="-m-3 p-3 flex items-center rounded-md text-base font-bold text-gray-900 hover:bg-gray-100">
+                                  <item.icon
+                                    className="flex-shrink-0 h-6 w-6 text-gray-400"
+                                    aria-hidden="true"
+                                  />
+                                  <div className="ml-3">{item.name}</div>
+                                </a>
+                              </Link>
                             </div>
                           ))}
                         </div>
@@ -263,23 +274,24 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                       <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                           {resources.map(item => (
-                            <a
-                              key={item.name}
-                              href={item.href}
-                              className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50">
-                              <item.icon
-                                className="flex-shrink-0 h-6 w-6 text-indigo-600"
-                                aria-hidden="true"
-                              />
-                              <div className="ml-4">
-                                <p className="text-base font-bold text-gray-900">
-                                  {item.name}
-                                </p>
-                                <p className="mt-1 text-sm text-gray-500">
-                                  {item.description}
-                                </p>
-                              </div>
-                            </a>
+                            <Link href={item.href}>
+                              <a
+                                key={item.name}
+                                className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50">
+                                <item.icon
+                                  className="flex-shrink-0 h-6 w-6 text-indigo-600"
+                                  aria-hidden="true"
+                                />
+                                <div className="ml-4">
+                                  <p className="text-base font-bold text-gray-900">
+                                    {item.name}
+                                  </p>
+                                  <p className="mt-1 text-sm text-gray-500">
+                                    {item.description}
+                                  </p>
+                                </div>
+                              </a>
+                            </Link>
                           ))}
                         </div>
                         <div className="px-5 py-5 bg-gray-50 sm:px-8 sm:py-8">
@@ -290,11 +302,11 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                             <ul role="list" className="mt-4 space-y-4">
                               {recentPosts.map(post => (
                                 <li key={post.id} className="text-base truncate">
-                                  <a
-                                    href={post.href}
-                                    className="font-bold text-gray-900 hover:text-gray-700">
-                                    {post.name}
-                                  </a>
+                                  <Link href={post.href}>
+                                    <a className="font-bold text-gray-900 hover:text-gray-700">
+                                      {post.name}
+                                    </a>
+                                  </Link>
                                 </li>
                               ))}
                             </ul>
@@ -411,20 +423,22 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                 </Link>
                 {getUser?.me?.id
                   ? withLoginresources.map(item => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="text-base font-bold text-gray-900 hover:text-gray-700">
-                        {item.name}
-                      </a>
+                      <Link href={item.href}>
+                        <a
+                          key={item.name}
+                          className="text-base font-bold text-gray-900 hover:text-gray-700">
+                          {item.name}
+                        </a>
+                      </Link>
                     ))
                   : resources.map(item => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="text-base font-bold text-gray-900 hover:text-gray-700">
-                        {item.name}
-                      </a>
+                      <Link href={item.href} key={item.name}>
+                        <a
+                          key={item.name}
+                          className="text-base font-bold text-gray-900 hover:text-gray-700">
+                          {item.name}
+                        </a>
+                      </Link>
                     ))}
               </div>
               <div>

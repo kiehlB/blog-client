@@ -32,6 +32,7 @@ import Button from '../Common/TailButton';
 import Tags from '../Tags';
 import TagsForm from '../Tags/TagsForm';
 import { Pane, Badge, Text } from 'evergreen-ui';
+import Link from 'next/link';
 
 const ButtonStyles = styled.div`
   font-size: 1rem;
@@ -253,12 +254,13 @@ const myBlockStyleFn = contentBlock => {
     return `${BlockStyling.superFancyBlockquote}`;
   } else if (type === 'CODE') {
     return 'h2BlcokTag';
+  } else if (type == 'unstyled') {
+    if (type.text === ' ' || type.text === '') return '';
+    return <div />;
   } else if (type === 'header-two') {
     return 'h2BlcokTag';
   } else if (type === 'header-three') {
     return 'h3BlcokTag';
-  } else if (type === 'unstyled') {
-    return <p />;
   }
 };
 
@@ -362,7 +364,6 @@ function EditorMain(props: EditorMainProps) {
 
   const handleKeyCommand = command => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
-
     if (newState) {
       setEditorState(newState);
       return 'handled';
@@ -372,12 +373,12 @@ function EditorMain(props: EditorMainProps) {
   };
 
   const handleReturn = e => {
-    if (e.shiftKey) {
+    if (e.keyCode === 13) {
       setEditorState(RichUtils.insertSoftNewline(editorState));
 
       return 'handled';
     }
-    return 'not-handled';
+    return getDefaultKeyBinding(e);
   };
 
   const addTag = text => {
@@ -474,7 +475,7 @@ function EditorMain(props: EditorMainProps) {
             />
             <div style={{ marginLeft: '.5rem' }}>{WaitingFotImg(readyForFile)}</div>
           </B>
-          <EW className="overflow-y-scroll mt-6" style={{ lineHeight: '100%' }}>
+          <EW className="overflow-y-scroll mt-6">
             <Editor
               customStyleMap={styleMap}
               editorState={editorState}
@@ -488,6 +489,11 @@ function EditorMain(props: EditorMainProps) {
           </EW>
 
           <ButtonWrapper>
+            <div style={{ marginRight: '1rem' }}>
+              <Link href="/">
+                <Button className="text-zinc-600 ">뒤로가기</Button>
+              </Link>
+            </div>
             <Button className="text-zinc-600 " onClick={e => handleSubmit(e)}>
               완료
             </Button>
@@ -503,16 +509,16 @@ export default EditorMain;
 const styleMap = {
   CODE: {
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
-
     fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
     fontSize: 16,
-    padding: 20,
+    padding: 15,
+    margin: 10,
     display: 'flex',
     whiteSpace: 'pre-line',
     lineBreak: 'strict',
   },
   BOLD: {
-    color: '#395296',
+    color: '#1fb6ff',
     fontWeight: 'bold',
   },
   ANYCUSTOMSTYLE: {
@@ -547,6 +553,8 @@ const EW = styled.div`
   padding: 2rem;
   white-space: pre-line;
   line-break: strict;
+
+  line-height: 75%;
 `;
 
 const ButtonWrapper = styled.div`

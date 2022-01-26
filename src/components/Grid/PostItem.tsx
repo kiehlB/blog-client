@@ -298,7 +298,7 @@ const PostBody = styled.section`
 const PostButtonWrapper = styled.section`
   margin-bottom: 2rem;
   padding: 0rem 1.5rem;
-
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -306,7 +306,7 @@ const PostButtonWrapper = styled.section`
 `;
 const WithoutPostButtonWrapper = styled.section`
   padding: 0 1.5rem;
-
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -428,7 +428,6 @@ const PostCardBlock = styled.div`
   }
 
   & + & {
-    border-top: 1px solid #e9ecef;
   }
 `;
 

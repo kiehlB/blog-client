@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import AuthHeader from '../components/Auth/AuthHeader';
 
 import AuthSocialButtonGroup from '../components/Auth/AuthSocialButtonGroup';
+import GithubButton from '../components/Auth/Github';
 import IsAuth from '../components/Auth/IsAuth';
 
 import SignInForm from '../components/Auth/SignInForm';
@@ -33,7 +34,7 @@ function SignIn({}: SignInProps) {
                 <AuthHeader HeaderName="Login to your account" />
                 <SignInForm />
                 <div className="my-6 border-gray-300 w-full" />
-                <AuthSocialButtonGroup />
+                <GithubButton />
                 <IsAuth />
               </div>
             </div>

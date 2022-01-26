@@ -90,6 +90,7 @@ module.exports = {
         '5vw': '5vw', // pull featured sections and navbar in the margin
         '8vw': '8vw', // positions hero img inside the margin
         '10vw': '10vw', // page margin
+        '768': '768px',
       },
       height: {
         hero: 'min(60rem, calc(100vh - 10rem))', // screen - navbar height (lg: only)

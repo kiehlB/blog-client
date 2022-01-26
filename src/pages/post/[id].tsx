@@ -40,8 +40,9 @@ import PostLike from '../../components/PostLike';
 import useGetPost from '../../components/Post/hooks/useGerPost';
 import Moment from 'react-moment';
 import RelatedPost from '../../components/RelatedPost.tsx';
+import { Skeleton, SkeletonTexts } from '../../components/Common/Skeleton';
 
-export default function Post({ frontmatter, nextPost, previousPost }) {
+export default function Post({ frontmatter, nextPost, previousPost, forLoading }) {
   const dispatch = useDispatch();
   const div = useCallback(node => {
     if (node !== null) {
@@ -86,10 +87,9 @@ export default function Post({ frontmatter, nextPost, previousPost }) {
   const [editText, setEditText] = useState('');
   const [subEditText, subSetEditText] = useState('');
 
-  if (commentsLoading) return <p>Loading...</p>;
   if (commentsError) return <p>Error !!!!!!!!!!:(</p>;
-  if (singlePostLoding) return <p>Loading...</p>;
-  const getComments = commentstData.comment.filter(el => el.post_id == router.query.id);
+
+  const getComments = commentstData?.comment.filter(el => el.post_id == router.query.id);
 
   // const username = findData.user.username;
   const findData = singlePostData?.post;
@@ -127,10 +127,10 @@ export default function Post({ frontmatter, nextPost, previousPost }) {
   };
   const decorator = createLinkDecorator();
 
-  const defaultEditorState = EditorState.createWithContent(
-    convertFromRaw(JSON.parse(singlePostData?.post?.body)),
-    decorator,
-  );
+  // const defaultEditorState = EditorState.createWithContent(
+  //   convertFromRaw(JSON.parse(singlePostData?.post?.body)),
+  //   decorator,
+  // );
 
   const FindUser = singlePostData?.post?.user?.username;
   const slicePost = data?.posts?.slice(0, 3);
@@ -174,24 +174,46 @@ export default function Post({ frontmatter, nextPost, previousPost }) {
         {/* <div dangerouslySetInnerHTML={{ __html: post.body }} />
       <textarea disabled value={draftToHtml(JSON.parse(post.body))} /> */}
 
+        <div className="w-768 mx-auto mt-32 mmd:w-full">
+          {singlePostLoding && (
+            <>
+              <h2>
+                <SkeletonTexts wordLengths={[3]} />
+              </h2>
+              <PostCardListSkeleton />
+            </>
+          )}
+        </div>
         <PostWrapper>
           <PostHeader>
             <BlogHeader>Blog</BlogHeader>
-            <BlogTitle>{singlePostData?.post?.title}</BlogTitle>
+            <BlogTitle>{!singlePostLoding && singlePostData?.post?.title}</BlogTitle>
             <BlogDate>
-              <Moment format="YYYY/MM/DD">{singlePostData?.post?.created_at}</Moment>
+              <Moment format="YYYY/MM/DD">
+                {!singlePostLoding && singlePostData?.post?.created_at}
+              </Moment>
             </BlogDate>
           </PostHeader>
         </PostWrapper>
         <EditorWrapper>
-          {/* @ts-ignore */}
-          <Editor editorState={defaultEditorState} readonly customStyleMap={styleMap} />
+          {!singlePostLoding && (
+            <Editor
+              editorState={EditorState.createWithContent(
+                convertFromRaw(JSON.parse(singlePostData?.post?.body)),
+                decorator,
+              )}
+              readonly
+              customStyleMap={styleMap}
+            />
+          )}
         </EditorWrapper>
 
         <div className="comments-wrapper">
           <div className="comments-text-wrapper">
             <div className="comments-mini">
-              <div className="comments-count">{getComments.length} 개의 댓글</div>
+              <div className="comments-count">
+                {!commentsLoading && getComments.length} 개의 댓글
+              </div>
             </div>
           </div>
           <CommentForm
@@ -204,58 +226,59 @@ export default function Post({ frontmatter, nextPost, previousPost }) {
             onClickNotifyCheckString={onClickNotifyCheckString}
           />
 
-          {getComments.map((el, id) => (
-            <>
-              <div key={id}>
-                <Comments
-                  el={el}
-                  editComment={editComment}
-                  editText={editText}
-                  editCommentInput={editCommentInput}
-                  toggle={toggle}
-                  on={on}
-                  EditCommentSubmit={EditCommentSubmit}
-                  fixComment={fixComment}
-                  DeleteCommentSubmit={DeleteCommentSubmit}
-                  setIsopen={setIsopen}
-                  userData={userData}
-                  onClickNotifyCheckString={onClickNotifyCheckString}
-                />
-              </div>
-
-              {el.id == isOpen && on ? (
-                <>
-                  <SubCommentsForm
-                    userData={userData}
-                    subHandleSubmit={subHandleSubmit}
-                    findData={findData}
-                    onClickNotify={onClickNotify}
-                    isOpen={isOpen}
-                    on={on}
-                    toggle={toggle}
-                    onClickNotifyCheckString={onClickNotifyCheckString}
-                  />
-                </>
-              ) : (
-                ''
-              )}
-              {getComments.map((ele, id) => (
-                <>
-                  <SubComments
-                    ele={ele}
+          {!commentsLoading &&
+            getComments.map((el, id) => (
+              <>
+                <div key={id}>
+                  <Comments
                     el={el}
-                    subEditText={subEditText}
-                    editSubCommentInput={editSubCommentInput}
+                    editComment={editComment}
+                    editText={editText}
+                    editCommentInput={editCommentInput}
+                    toggle={toggle}
+                    on={on}
                     EditCommentSubmit={EditCommentSubmit}
+                    fixComment={fixComment}
                     DeleteCommentSubmit={DeleteCommentSubmit}
+                    setIsopen={setIsopen}
                     userData={userData}
-                    findData={findData}
                     onClickNotifyCheckString={onClickNotifyCheckString}
                   />
-                </>
-              ))}
-            </>
-          ))}
+                </div>
+
+                {el.id == isOpen && on ? (
+                  <>
+                    <SubCommentsForm
+                      userData={userData}
+                      subHandleSubmit={subHandleSubmit}
+                      findData={findData}
+                      onClickNotify={onClickNotify}
+                      isOpen={isOpen}
+                      on={on}
+                      toggle={toggle}
+                      onClickNotifyCheckString={onClickNotifyCheckString}
+                    />
+                  </>
+                ) : (
+                  ''
+                )}
+                {getComments.map((ele, id) => (
+                  <>
+                    <SubComments
+                      ele={ele}
+                      el={el}
+                      subEditText={subEditText}
+                      editSubCommentInput={editSubCommentInput}
+                      EditCommentSubmit={EditCommentSubmit}
+                      DeleteCommentSubmit={DeleteCommentSubmit}
+                      userData={userData}
+                      findData={findData}
+                      onClickNotifyCheckString={onClickNotifyCheckString}
+                    />
+                  </>
+                ))}
+              </>
+            ))}
         </div>
       </div>
 
@@ -304,15 +327,67 @@ const CodeBlock = ({ language, value }) => {
 //     return { props: { post: postData?.data?.post || null, posts: postsData.data.posts } };
 //   }
 // }
+function PostCardListSkeleton({ hideUser, forLoading }: PostCardListSkeletonProps) {
+  return (
+    <div>
+      {Array.from({ length: forLoading ? 1 : 6 }).map((_, i) => (
+        <PostCardSkeleton hideUser={true} key={i} />
+      ))}
+    </div>
+  );
+}
+
+export type PostCardListSkeletonProps = {
+  hideUser?: boolean;
+  forLoading?: boolean;
+};
+
+const Separator = styled.div``;
+
+export type PostCardSkeletonProps = {
+  hideUser?: boolean;
+};
+
+export function PostCardSkeleton({ hideUser }: PostCardSkeletonProps) {
+  return (
+    <SkeletonBlock>
+      {!hideUser && (
+        <div className="user-info">
+          <Skeleton className="user-thumbnail-skeleton" circle marginRight="1rem" />
+          <div className="username">
+            <Skeleton width="5rem" />
+          </div>
+        </div>
+      )}
+
+      <div className="short-description">
+        <div className="line">
+          <SkeletonTexts wordLengths={[2, 4, 3, 6, 2, 7]} useFlex />
+        </div>
+        <div className="line">
+          <SkeletonTexts wordLengths={[3, 2, 3, 4, 7, 3]} useFlex />
+        </div>
+        <div className="line">
+          <SkeletonTexts wordLengths={[4, 3, 3]} />
+        </div>
+      </div>
+    </SkeletonBlock>
+  );
+}
 
 const styleMap = {
   CODE: {
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
     fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
     fontSize: 16,
+    padding: 15,
+    margin: 10,
+    display: 'flex',
+    whiteSpace: 'pre-line',
+    lineBreak: 'strict',
   },
   BOLD: {
-    color: '#395296',
+    color: '#1fb6ff',
     fontWeight: 'bold',
   },
   ANYCUSTOMSTYLE: {
@@ -325,7 +400,6 @@ const styleMap = {
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
-    width: '100%',
   },
   H1: {
     fontSize: '2rem',
@@ -564,5 +638,151 @@ const LikeVisible = styled.div`
   display: none;
   ${media.custom(1900)} {
     display: unset;
+  }
+`;
+
+const PostCardBlock = styled.div`
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  ${media.custom(768)} {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  & > a {
+    color: inherit;
+    text-decoration: none;
+  }
+  &:first-child {
+    padding-top: 0;
+  }
+  .user-info {
+    display: flex;
+    align-items: center;
+    img {
+      width: 3rem;
+      height: 3rem;
+      display: block;
+      margin-right: 1rem;
+      background: '#F8F9FA';
+      object-fit: cover;
+      border-radius: 1.5rem;
+      box-shadow: 0px 0 8px rgba(0, 0, 0, 0.1);
+      ${media.custom(768)} {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 1rem;
+      }
+    }
+    .username {
+      font-size: 0.875rem;
+      color: #212529;
+      font-weight: bold;
+      a {
+        color: inherit;
+        text-decoration: none;
+        &:hover {
+          color: #343a40;
+        }
+      }
+    }
+    margin-bottom: 1.5rem;
+    ${media.custom(768)} {
+      margin-bottom: 0.75rem;
+    }
+  }
+  .post-thumbnail {
+    margin-bottom: 1rem;
+  }
+  line-height: 1.5;
+  h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #212529;
+    word-break: keep-all;
+    ${media.custom(768)} {
+      font-size: 1rem;
+    }
+  }
+  p {
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #495057;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    ${media.custom(768)} {
+      font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+  .subinfo {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    color: #868e96;
+    font-size: 0.875rem;
+    ${media.custom(768)} {
+      font-size: 0.75rem;
+    }
+    span {
+    }
+    .separator {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+  .tags-wrapper {
+    margin-bottom: -0.875rem;
+    ${media.custom(768)} {
+      margin-bottom: -0.5rem;
+    }
+  }
+
+  & + & {
+  }
+`;
+
+const SkeletonBlock = styled(PostCardBlock)`
+  h2 {
+    display: flex;
+    margin-top: 1.375rem;
+    margin-bottom: 0.375rem;
+  }
+  .user-thumbnail-skeleton {
+    width: 3rem;
+    height: 3rem;
+    ${media.custom(768)} {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+  .thumbnail-skeleton-wrapper {
+    width: 100%;
+    padding-top: 52.35%;
+    position: relative;
+    .skeleton {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .short-description {
+    font-size: 1rem;
+    .line {
+      display: flex;
+    }
+    .line + .line {
+      margin-top: 0.5rem;
+    }
+  }
+  .tags-skeleton {
+    line-height: 1;
+    font-size: 2rem;
+    ${media.custom(768)} {
+      font-size: 1.25rem;
+    }
   }
 `;
