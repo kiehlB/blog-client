@@ -9,25 +9,25 @@ export type CellLayoutProps = {
 };
 
 function MainNav({ children }: CellLayoutProps) {
-  return <div>{children}</div>;
+  return <>{children}</>;
 }
 export default function AppLayout({ first, second, third }: AppLayoutProps) {
   return (
-    <div>
+    <>
       {first}
       {second}
       {third}
-    </div>
+    </>
   );
 }
 function First({ children }: CellLayoutProps) {
-  return <div>{children}</div>;
+  return <>{children}</>;
 }
 function Second({ children }: CellLayoutProps) {
-  return <div>{children}</div>;
+  return <>{children}</>;
 }
 function Third({ children }: CellLayoutProps) {
-  return <div>{children}</div>;
+  return <>{children}</>;
 }
 
 AppLayout.MainNav = MainNav;

@@ -178,7 +178,7 @@ const Home: NextPage = (post: any) => {
                 data={data}
               /> */}
             </section>
-            <div className="h-fulll">
+            <div className="h-full">
               <Next isLoding={isLoding} setIsLoding={setIsLoding} />
             </div>
           </AppLayout.Second>

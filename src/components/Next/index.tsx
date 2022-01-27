@@ -18,9 +18,9 @@ function Next({ setIsLoding, isLoding }: NextProps) {
       ) : (
         <NextBlock onClick={onClick} className="w-full h-32 bg-regal-sky cursor-pointer">
           <Wrapper className="flex justify-center items-center h-full text-3xl font-semibold text-white">
-            <TextWrapper className="w-full flex justify-center items-center ">
+            <TextWrapper className="w-full flex justify-center items-center  ">
               <h1>Next</h1>
-              <Arrow>
+              <Arrow className="w-11/12 absolute flex justify-end ">
                 <svg
                   width="34"
                   height="24"
@@ -52,15 +52,7 @@ const NextBlock = styled.div``;
 
 const Wrapper = styled.div``;
 
-const TextWrapper = styled.div`
-  & > div {
-    position: absolute;
-
-    width: 96%;
-    display: flex;
-    justify-content: flex-end;
-  }
-`;
+const TextWrapper = styled.div``;
 
 const Arrow = styled.div``;
 
