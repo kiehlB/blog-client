@@ -36,7 +36,7 @@ function Main(props: MainProps) {
   };
 
   return (
-    <MainBlock className="flex flex-col justify-around max-w-9xl h-72   mx-auto sm:px-6 m2xl:px-10  mmd:px-4">
+    <MainBlock className="flex flex-col justify-around max-w-9xl h-72 mt-20 mx-auto sm:px-6 m2xl:px-10  mmd:px-4">
       <MainTitle className="font-semibold font-mat text-5xl   leading-tight text-main-text mmd:text-center mmd:text-3xl">
         The best dev
         <br /> articles every day.
