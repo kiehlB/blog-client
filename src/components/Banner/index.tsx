@@ -25,9 +25,5 @@ const BannerBlock = styled.div``;
 
 const BannerWrapper = styled.div``;
 
-const BannerText = styled.div`
-  font-size: 1rem;
-  letter-spacing: -0.2px;
-  text-decoration: none solid rgb(255, 255, 255);
-`;
+const BannerText = styled.div``;
 export default Banner;

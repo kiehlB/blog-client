@@ -37,6 +37,7 @@ module.exports = {
       primary: ['Inter', ...fontFamily.sans],
       sans: ['Roboto', ...fontFamily.sans],
       mat: ['Matter', ...fontFamily.sans],
+      fira: ['Fira Mono', ...fontFamily.sans],
     },
 
     keyframes: {

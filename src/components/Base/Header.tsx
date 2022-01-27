@@ -153,7 +153,7 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                       />
                     </svg>
                     <Link href="https://github.com/kiehlB/blog-client" passHref={true}>
-                      <HeadTag className="bg-regal-sky leading-5 text-xs font-medium text-white px-1.5 flex justify-center items-center rounded-sm mxl:hidden">
+                      <HeadTag className="bg-regal-sky font-fira leading-5 text-xs font-medium text-white px-1.5 flex justify-center items-center rounded-sm mxl:hidden">
                         Contribute to the blog
                       </HeadTag>
                     </Link>
@@ -472,7 +472,6 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
 }
 
 const HeaderTagWrapper = styled.nav`
-  font-family: Fira Mono, monospace;
   /* & > svg {
     display: flex;
     align-items: center;
