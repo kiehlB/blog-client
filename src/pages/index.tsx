@@ -167,7 +167,7 @@ const Home: NextPage = (post: any) => {
             <section className="my-24">
               {/* <Grid post={limitPosts} input={searchInput} change={onSearchChange} /> */}
 
-              <Grid
+              {/* <Grid
                 isLoding={isLoding}
                 setIsLoding={setIsLoding}
                 PostsLoading={PostsLoading}
@@ -176,7 +176,7 @@ const Home: NextPage = (post: any) => {
                 fetchMore={fetchMore}
                 networkStatus={networkStatus}
                 data={data}
-              />
+              /> */}
             </section>
             <div className="h-fulll">
               <Next isLoding={isLoding} setIsLoding={setIsLoding} />
