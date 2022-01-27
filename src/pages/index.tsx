@@ -164,10 +164,10 @@ const Home: NextPage = (post: any) => {
         }
         second={
           <AppLayout.Second>
-            {/* <section className="my-24"> */}
-            {/* <Grid post={limitPosts} input={searchInput} change={onSearchChange} /> */}
+            <section className="my-24">
+              {/* <Grid post={limitPosts} input={searchInput} change={onSearchChange} /> */}
 
-            {/* <Grid
+              <Grid
                 isLoding={isLoding}
                 setIsLoding={setIsLoding}
                 PostsLoading={PostsLoading}
@@ -176,14 +176,18 @@ const Home: NextPage = (post: any) => {
                 fetchMore={fetchMore}
                 networkStatus={networkStatus}
                 data={data}
-              /> */}
-            {/* </section> */}
-            {/* <div className="h-full">
+              />
+            </section>
+            <div className="h-fulll">
               <Next isLoding={isLoding} setIsLoding={setIsLoding} />
-            </div> */}
+            </div>
           </AppLayout.Second>
         }
-        third={<AppLayout.Third>{/* <Footer /> */}</AppLayout.Third>}
+        third={
+          <AppLayout.Third>
+            <Footer />
+          </AppLayout.Third>
+        }
       />
     </>
   );
