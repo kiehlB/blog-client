@@ -19,20 +19,26 @@ export type GridProps = {
   setIsLoding: any;
   isLoding: any;
   forLoading?: any;
+
+  PostsLoading;
+  PostsError;
+  getposts;
+  fetchMore;
+  networkStatus;
+  data;
 };
 
-function Grid({ setIsLoding, isLoding, forLoading }: GridProps) {
-  const observerRef = useRef(null);
-  const [buttonRef, setButtonRef] = useState(null);
-  const input = useSelector((state: RootState) => state.post.input);
-  const { loading, error, data } = useGetSearchPosts(input);
-  const {
-    loading: PostsLoading,
-    error: PostsError,
-    data: getposts,
-    fetchMore,
-    networkStatus,
-  } = useGetPosts();
+function Grid({
+  setIsLoding,
+  isLoding,
+  forLoading,
+  PostsLoading,
+  PostsError,
+  getposts,
+  fetchMore,
+  networkStatus,
+  data,
+}: GridProps) {
   const post = getposts?.posts;
 
   const cursor = post?.length > 0 ? post[post.length - 1].id : null;

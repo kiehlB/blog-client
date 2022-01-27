@@ -17,6 +17,8 @@ import useGetPosts from '../components/Post/hooks/useGetPosts';
 import useForms from '../hooks/useForm';
 import ContentLoader from 'react-content-loader';
 import AboutMain from '../components/About';
+import TimeLine from '../components/About/TimeLine';
+import AboutForm from '../components/About/AboutForm';
 
 export type AboutProps = {};
 
@@ -35,6 +37,7 @@ function About({}: AboutProps) {
         first={
           <AppLayout.First>
             <AboutMain />
+            <TimeLine />
           </AppLayout.First>
         }
         second={<AppLayout.Second></AppLayout.Second>}

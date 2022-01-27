@@ -55,14 +55,14 @@ const resources = [
     id: 1,
     name: '내가 쓴 글',
     description: 'Get all of your questions answered in our forums or contact support.',
-    href: '/',
+    href: '/writeByMe',
     icon: SupportIcon,
   },
   {
     id: 2,
     name: '좋아요 글',
     description: 'Learn how to maximize our platform to get the most out of it.',
-    href: '/',
+    href: '/likedPost',
     icon: BookmarkAltIcon,
   },
   {

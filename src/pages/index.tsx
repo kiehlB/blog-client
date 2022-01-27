@@ -16,11 +16,30 @@ import { GET_Posts } from '../lib/graphql/posts';
 import useGetPosts from '../components/Post/hooks/useGetPosts';
 import useForms from '../hooks/useForm';
 import ContentLoader from 'react-content-loader';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/rootReducer';
+import useGetSearchPosts from '../components/Main/hooks/useGetSearchPosts';
 
 const Home: NextPage = (post: any) => {
   const { getUser, loading, error, logoutButton } = useGetUser();
 
   const [isLoding, setIsLoding] = useState(false);
+
+  const observerRef = useRef(null);
+  const [buttonRef, setButtonRef] = useState(null);
+  const input = useSelector((state: RootState) => state.post.input);
+  const {
+    loading: searchPostsLoading,
+    error: searchPostsError,
+    data,
+  } = useGetSearchPosts(input);
+  const {
+    loading: PostsLoading,
+    error: PostsError,
+    data: getposts,
+    fetchMore,
+    networkStatus,
+  } = useGetPosts();
 
   // if (process.browser) {
   //   const canvas = document.querySelector('canvas');
@@ -148,7 +167,16 @@ const Home: NextPage = (post: any) => {
             <section className="my-24">
               {/* <Grid post={limitPosts} input={searchInput} change={onSearchChange} /> */}
 
-              <Grid isLoding={isLoding} setIsLoding={setIsLoding} />
+              <Grid
+                isLoding={isLoding}
+                setIsLoding={setIsLoding}
+                PostsLoading={PostsLoading}
+                PostsError={PostsError}
+                getposts={getposts}
+                fetchMore={fetchMore}
+                networkStatus={networkStatus}
+                data={data}
+              />
             </section>
             <div className="h-fulll">
               <Next isLoding={isLoding} setIsLoding={setIsLoding} />
