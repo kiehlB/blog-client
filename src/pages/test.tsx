@@ -50,9 +50,6 @@ function LikedPost({}: LikedPostProps) {
 
   return (
     <>
-      <Banner />
-      <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
-      <FloatingHeader getUser={getUser} loading={loading} logoutButton={logoutButton} />
       <Main />
       {/* <Grid
         isLoding={isLoding}
@@ -64,11 +61,6 @@ function LikedPost({}: LikedPostProps) {
         networkStatus={networkStatus}
         data={data}
       /> */}
-
-      <div className="h-fulll">
-        <Next isLoding={isLoding} setIsLoding={setIsLoding} />
-      </div>
-      <Footer />
     </>
   );
 }
