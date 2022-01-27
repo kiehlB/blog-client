@@ -51,7 +51,7 @@ function LikedPost({}: LikedPostProps) {
   return (
     <>
       <Main />
-      {/* <Grid
+      <Grid
         isLoding={isLoding}
         setIsLoding={setIsLoding}
         PostsLoading={PostsLoading}
@@ -60,7 +60,7 @@ function LikedPost({}: LikedPostProps) {
         fetchMore={fetchMore}
         networkStatus={networkStatus}
         data={data}
-      /> */}
+      />
     </>
   );
 }

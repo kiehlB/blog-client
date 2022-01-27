@@ -64,6 +64,7 @@ function FloatingHeader({ getUser, loading, logoutButton }: FloatingHeaderProps)
 
   return (
     <Block
+      className="fixed top-0 bg-white w-full z-10 shadow "
       style={
         visible
           ? {
@@ -81,16 +82,6 @@ function FloatingHeader({ getUser, loading, logoutButton }: FloatingHeaderProps)
   );
 }
 
-const Block = styled.div`
-  position: fixed;
-  top: 0;
-  background: white;
-  width: 100%;
-  z-index: 10;
-  box-shadow: 0px 0 8px rgba(0, 0, 0, 0.08);
-  .tab-wrapper {
-    margin-top: -2rem;
-  }
-`;
+const Block = styled.div``;
 
 export default FloatingHeader;
