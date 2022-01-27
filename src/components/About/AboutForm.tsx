@@ -28,7 +28,7 @@ function AboutForm({}: AboutFormProps) {
               <h6 className="text-xl mt-5 font-semibold text-white">Excelent Services</h6>
               <p className="mt-2 mb-4 text-blueGray-400">
                 Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                the cards content.
               </p>
             </div>
             <div className="w-full lg:w-3/12 px-4 text-center">
@@ -38,7 +38,7 @@ function AboutForm({}: AboutFormProps) {
               <h5 className="text-xl mt-5 font-semibold text-white">Grow your market</h5>
               <p className="mt-2 mb-4 text-white">
                 Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                the card s content.
               </p>
             </div>
             <div className="w-full lg:w-3/12 px-4 text-center">
@@ -48,7 +48,7 @@ function AboutForm({}: AboutFormProps) {
               <h5 className="text-xl mt-5 font-semibold text-white">Launch time</h5>
               <p className="mt-2 mb-4 text-blueGray-400">
                 Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                the card s content.
               </p>
             </div>
           </div>
@@ -99,7 +99,6 @@ function AboutForm({}: AboutFormProps) {
                       cols={80}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                       placeholder="Type a message..."
-                      defaultValue={''}
                     />
                   </div>
                   <div className="text-center mt-6">
@@ -119,19 +118,16 @@ function AboutForm({}: AboutFormProps) {
             <div className="flex flex-wrap items-center md:justify-between justify-center">
               <div className="w-full md:w-6/12 px-4 mx-auto text-center">
                 <div className="text-sm text-white font-semibold py-1">
-                  Made with{' '}
+                  Made with
                   <a
                     href="https://www.creative-tim.com/product/notus-js"
-                    className="text-white hover:text-gray-600"
-                    target="_blank">
+                    className="text-white hover:text-gray-600">
                     Notus JS
-                  </a>{' '}
-                  by{' '}
+                  </a>
+                  by
                   <a
                     href="https://www.creative-tim.com"
-                    className="text-white hover:text-blueGray-600"
-                    target="_blank">
-                    {' '}
+                    className="text-white hover:text-blueGray-600">
                     Creative Tim
                   </a>
                   .
