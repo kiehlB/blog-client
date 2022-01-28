@@ -120,10 +120,12 @@ function classNames(...classes) {
 export default function Header({ getUser, loading, logoutButton }: HeaderProps) {
   const [user, setUser] = useState(null);
 
-  if (typeof window !== 'undefined') {
-    const isAuth = localStorage.getItem('user');
-    setUser(isAuth);
-  }
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isAuth = localStorage.getItem('user' || '');
+      setUser(isAuth);
+    }
+  }, []);
 
   return (
     <Popover className="relative bg-white">
