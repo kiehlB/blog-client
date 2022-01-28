@@ -25,8 +25,11 @@ const userSlice = createSlice({
     getuserSuccess(state) {
       state.isAuth = 'resolved';
     },
+    logoutSuccess(state) {
+      state.isAuth = 'idel';
+    },
     getuserFailure(state, { payload }: PayloadAction<userState>) {
-      state.error = payload.error;
+      state.isAuth = 'rejected';
     },
     fetchuserInit(state) {
       state.user = '';
@@ -38,8 +41,14 @@ const userSlice = createSlice({
   },
 });
 
-export const { getuserSuccess, getuserFailure, fetchuserInit, getSearch, getuserStart } =
-  userSlice.actions;
+export const {
+  getuserSuccess,
+  getuserFailure,
+  fetchuserInit,
+  getSearch,
+  getuserStart,
+  logoutSuccess,
+} = userSlice.actions;
 
 export const userGet = (): AppThunk => async (dispatch: AppDispatch) => {
   dispatch(getuserSuccess());
@@ -51,6 +60,10 @@ export const userStart = (): AppThunk => async (dispatch: AppDispatch) => {
 
 export const userInit = (): AppThunk => async (dispatch: AppDispatch) => {
   dispatch(fetchuserInit());
+};
+
+export const userLogout = (): AppThunk => async (dispatch: AppDispatch) => {
+  dispatch(logoutSuccess());
 };
 
 export const getSearchInput =

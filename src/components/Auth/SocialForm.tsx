@@ -4,6 +4,9 @@ import LabelInput from '../LabelInput/LabelInput';
 import useRegister from './hooks/useRegister';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { userGet, userStart } from '../../store/user';
+
 export type SocialFormProps = {};
 
 export const prod = process.env.NODE_ENV === 'production';
@@ -13,6 +16,7 @@ const isProd = prod
   : 'http://localhost:3000/api/v2/auth/register';
 
 function SocialForm({}: SocialFormProps) {
+  const dispatch = useDispatch();
   const [inputs, handleChange] = useForms({
     profileName: '',
     username: '',
@@ -35,6 +39,8 @@ function SocialForm({}: SocialFormProps) {
       .post('https://www.woongblog.xyz/api/v2/auth/register', auths, config)
       .then(res => {
         router.push('/');
+        dispatch(userStart());
+        dispatch(userGet());
 
         console.log(res.data);
       })
