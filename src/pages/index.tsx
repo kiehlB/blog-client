@@ -216,10 +216,9 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
   const { req, res } = context;
 
-  const { cookies } = req as any;
+  res.setHeader('Cache-Control', `s-maxage=60, stale-while-revalidate`);
 
   const a = context.req.cookies;
-  console.log('dd', a);
 
   return {
     props: { a },
