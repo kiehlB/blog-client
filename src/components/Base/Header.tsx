@@ -122,6 +122,7 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
 
   if (typeof window !== 'undefined') {
     const isAuth = localStorage.getItem('user');
+    setUser(isAuth);
   }
 
   return (
@@ -264,7 +265,7 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                       open ? 'text-gray-900' : 'text-gray-500',
                       'group bg-white rounded-md inline-flex items-center text-base font-bold hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
                     )}>
-                    {isAuth ? (
+                    {user ? (
                       <>
                         <div>Setting</div>
                         <ChevronDownIcon
@@ -344,7 +345,7 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
             </Popover>
           </Popover.Group>
 
-          {isAuth ? (
+          {user ? (
             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0 ">
               <Link href="/write">
                 <a className="whitespace-nowrap text-base font-bold text-gray-500 hover:text-gray-900">
