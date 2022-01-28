@@ -121,6 +121,7 @@ function classNames(...classes) {
 export default function Header({ getUser, loading, logoutButton }: HeaderProps) {
   const Cookie = Cookies.get('refresh_token'); // => 'value'
 
+  console.log(Cookie);
   return (
     <Popover className="relative bg-white">
       <div className="max-w-9xl mx-auto sm:px-6 m2xl:px-10 mmd:px-4">

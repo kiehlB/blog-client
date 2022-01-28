@@ -20,7 +20,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store/rootReducer';
 import useGetSearchPosts from '../components/Main/hooks/useGetSearchPosts';
 
-const Home: NextPage = (post: any) => {
+const Home: NextPage = (post: any, cooike) => {
   const { getUser, loading, error, logoutButton } = useGetUser();
 
   const [isLoding, setIsLoding] = useState(false);
@@ -41,6 +41,7 @@ const Home: NextPage = (post: any) => {
     networkStatus,
   } = useGetPosts();
 
+  console.log('쿠키', cooike);
   // if (process.browser) {
   //   const canvas = document.querySelector('canvas');
   //   const c = canvas.getContext('2d');
@@ -201,13 +202,13 @@ export default Home;
       </C> */
 }
 
-// export const getServerSideProps: GetServerSideProps = async context => {
-//   const apolloClient = initializeApollo();
-//   const { req, res } = context;
-//   const { cookies } = req;
-//   const postData = await apolloClient.query({
-//     query: GET_Posts,
-//   });
+export const getServerSideProps: GetServerSideProps = async context => {
+  const apolloClient = initializeApollo();
+  const { req, res } = context;
+  const { cookies } = req;
+  const postData = await apolloClient.query({
+    query: GET_Posts,
+  });
 
-//   return { props: { post: postData.data.posts, cooike: cookies } };
-// };
+  return { props: { post: postData.data.posts, cooike: cookies } };
+};
