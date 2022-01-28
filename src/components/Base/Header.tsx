@@ -18,8 +18,9 @@ import { ChevronDownIcon } from '@heroicons/react/solid';
 import styled from 'styled-components';
 import Link from 'next/link';
 import media from '../../lib/styles/media';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/rootReducer';
+import { userGet, userStart } from '../../store/user';
 
 const solutions = [
   {
@@ -120,9 +121,16 @@ function classNames(...classes) {
 }
 
 export default function Header({ getUser, loading, logoutButton }: HeaderProps) {
-  const [user, setUser] = useState(null);
-
+  const [user, setUser] = useState('');
+  const dispatch = useDispatch();
   const getIsAuth = useSelector((state: RootState) => state.user.isAuth);
+
+  useLayoutEffect(() => {
+    if (getUser?.me?.id) {
+      dispatch(userStart());
+      dispatch(userGet());
+    }
+  }, []);
 
   console.log(getIsAuth);
 

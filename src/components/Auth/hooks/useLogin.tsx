@@ -18,8 +18,8 @@ export default function useLogin() {
   const router = useRouter();
   const [login, { error: loginError }] = useMutation(loginMutation, {
     onCompleted({ login }) {
-      dispatch(userStart());
-      dispatch(userGet());
+      // dispatch(userStart());
+      // dispatch(userGet());
 
       router.push('/');
     },

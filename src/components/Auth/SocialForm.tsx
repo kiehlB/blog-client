@@ -44,9 +44,6 @@ function SocialForm({}: SocialFormProps) {
       .catch(err => {
         console.log(err);
       });
-
-    dispatch(userStart());
-    dispatch(userGet());
   };
 
   return (
