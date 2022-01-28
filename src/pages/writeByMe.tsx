@@ -22,7 +22,7 @@ import useGetSearchPosts from '../components/Main/hooks/useGetSearchPosts';
 
 export type WriteByMeProps = {};
 
-function WriteByMe({}: WriteByMeProps) {
+function WriteByMe(a: WriteByMeProps) {
   const { getUser, loading, error, logoutButton } = useGetUser();
   const [isLoding, setIsLoding] = useState(false);
 
@@ -54,7 +54,12 @@ function WriteByMe({}: WriteByMeProps) {
     <>
       <AppLayout.MainNav>
         <Banner />
-        <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
+        <Header
+          getUser={getUser}
+          loading={loading}
+          logoutButton={logoutButton}
+          token={a}
+        />
         <FloatingHeader getUser={getUser} loading={loading} logoutButton={logoutButton} />
       </AppLayout.MainNav>
 
@@ -100,3 +105,21 @@ const WriteByMeBlock = styled.div`
 `;
 
 export default WriteByMe;
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const apolloClient = initializeApollo();
+
+  const postData = await apolloClient.query({
+    query: GET_Posts,
+  });
+
+  const { req, res } = context;
+
+  const { cookies } = req as any;
+
+  const a = context.req.cookies;
+
+  return {
+    props: { a },
+  };
+};

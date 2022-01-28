@@ -22,7 +22,7 @@ import useGetSearchPosts from '../components/Main/hooks/useGetSearchPosts';
 
 export type LikedPostProps = {};
 
-function LikedPost({}: LikedPostProps) {
+const LikedPost: NextPage = a => {
   const { getUser, loading, error, logoutButton } = useGetUser();
   const [isLoding, setIsLoding] = useState(false);
 
@@ -44,7 +44,7 @@ function LikedPost({}: LikedPostProps) {
 
   const posts = getposts?.posts?.filter(ele => ele.liked === true);
 
-  const a = {
+  const ab = {
     posts,
   };
 
@@ -52,7 +52,12 @@ function LikedPost({}: LikedPostProps) {
     <>
       <AppLayout.MainNav>
         <Banner />
-        <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
+        <Header
+          getUser={getUser}
+          loading={loading}
+          logoutButton={logoutButton}
+          token={a}
+        />
         <FloatingHeader getUser={getUser} loading={loading} logoutButton={logoutButton} />
       </AppLayout.MainNav>
 
@@ -72,7 +77,7 @@ function LikedPost({}: LikedPostProps) {
                 setIsLoding={setIsLoding}
                 PostsLoading={PostsLoading}
                 PostsError={PostsError}
-                getposts={a}
+                getposts={ab}
                 fetchMore={fetchMore}
                 networkStatus={networkStatus}
                 data={data}
@@ -91,10 +96,28 @@ function LikedPost({}: LikedPostProps) {
       />
     </>
   );
-}
+};
 
 const LikedPostBlock = styled.div`
   height: 100%;
 `;
 
 export default LikedPost;
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const apolloClient = initializeApollo();
+
+  const postData = await apolloClient.query({
+    query: GET_Posts,
+  });
+
+  const { req, res } = context;
+
+  const { cookies } = req as any;
+
+  const a = context.req.cookies;
+
+  return {
+    props: { a },
+  };
+};

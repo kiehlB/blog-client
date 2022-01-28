@@ -41,8 +41,9 @@ import useGetPost from '../../components/Post/hooks/useGerPost';
 import Moment from 'react-moment';
 import RelatedPost from '../../components/RelatedPost.tsx';
 import { Skeleton, SkeletonTexts } from '../../components/Common/Skeleton';
+import { GetServerSideProps } from 'next';
 
-export default function Post({ frontmatter, nextPost, previousPost, forLoading }) {
+export default function Post({ a }) {
   const dispatch = useDispatch();
   const div = useCallback(node => {
     if (node !== null) {
@@ -138,7 +139,12 @@ export default function Post({ frontmatter, nextPost, previousPost, forLoading }
     <PostPageTap>
       <Banner />
       <div ref={div}>
-        <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
+        <Header
+          getUser={getUser}
+          loading={loading}
+          logoutButton={logoutButton}
+          token={a}
+        />
         <div className="sticky-wrapper">
           <div className="like-button-wrapper">
             <PostLike
@@ -375,6 +381,24 @@ export function PostCardSkeleton({ hideUser }: PostCardSkeletonProps) {
     </SkeletonBlock>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const apolloClient = initializeApollo();
+
+  const postData = await apolloClient.query({
+    query: GET_Posts,
+  });
+
+  const { req, res } = context;
+
+  const { cookies } = req as any;
+
+  const a = context.req.cookies;
+
+  return {
+    props: { a },
+  };
+};
 
 const styleMap = {
   CODE: {
