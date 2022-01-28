@@ -35,19 +35,24 @@ function SocialForm({}: SocialFormProps) {
       },
     };
 
-    await axios
-      .post('https://www.woongblog.xyz/api/v2/auth/register', auths, config)
-      .then(res => {
+    try {
+      const response = await axios.post(
+        'https://www.woongblog.xyz/api/v2/auth/register',
+        auths,
+        config,
+      );
+
+      if (response) {
         dispatch(userStart());
         dispatch(userGet());
 
         router.push('/');
-
-        console.log(res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      }
+    } catch (error) {
+      const { response } = error;
+      const { request, ...errorObject } = response; // take everything but 'request'
+      console.log(errorObject);
+    }
   };
 
   return (
