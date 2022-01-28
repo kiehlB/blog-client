@@ -38,9 +38,10 @@ function SocialForm({}: SocialFormProps) {
     await axios
       .post('https://www.woongblog.xyz/api/v2/auth/register', auths, config)
       .then(res => {
-        router.push('/');
         dispatch(userStart());
         dispatch(userGet());
+
+        router.push('/');
 
         console.log(res.data);
       })
