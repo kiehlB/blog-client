@@ -19,8 +19,9 @@ import ContentLoader from 'react-content-loader';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/rootReducer';
 import useGetSearchPosts from '../components/Main/hooks/useGetSearchPosts';
+import cookie from 'cookie';
 
-const Home: NextPage = (post: any, cooike) => {
+const Home: NextPage = a => {
   const { getUser, loading, error, logoutButton } = useGetUser();
 
   const [isLoding, setIsLoding] = useState(false);
@@ -41,7 +42,6 @@ const Home: NextPage = (post: any, cooike) => {
     networkStatus,
   } = useGetPosts();
 
-  console.log('쿠키', cooike);
   // if (process.browser) {
   //   const canvas = document.querySelector('canvas');
   //   const c = canvas.getContext('2d');
@@ -153,7 +153,12 @@ const Home: NextPage = (post: any, cooike) => {
     <>
       <AppLayout.MainNav>
         <Banner />
-        <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
+        <Header
+          getUser={getUser}
+          loading={loading}
+          logoutButton={logoutButton}
+          token={a}
+        />
         <FloatingHeader getUser={getUser} loading={loading} logoutButton={logoutButton} />
       </AppLayout.MainNav>
 
@@ -204,11 +209,19 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const apolloClient = initializeApollo();
-  const { req, res } = context;
-  const { cookies } = req;
+
   const postData = await apolloClient.query({
     query: GET_Posts,
   });
 
-  return { props: { post: postData.data.posts, cooike: cookies } };
+  const { req, res } = context;
+
+  const { cookies } = req as any;
+
+  const a = context.req.cookies;
+  console.log('dd', a);
+
+  return {
+    props: { a },
+  };
 };

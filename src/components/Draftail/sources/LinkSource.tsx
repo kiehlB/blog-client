@@ -1,18 +1,16 @@
 // @flow
-import React, { Component } from "react";
-import { RichUtils } from "draft-js";
-import Modal from "../components/Modal";
+import React, { Component } from 'react';
+import { RichUtils } from 'draft-js';
+import Modal from '../components/Modal';
 
 class LinkSource extends Component {
   constructor(props) {
     super(props);
 
-    console.log("LinkSource", props);
-
     /* @ts-ignore */
     const { entity } = this.props;
     const state = {
-      url: ""
+      url: '',
     };
 
     if (entity) {
@@ -35,20 +33,20 @@ class LinkSource extends Component {
     const contentState = editorState.getCurrentContent();
 
     const data = {
-      url: url.replace(/\s/g, "")
+      url: url.replace(/\s/g, ''),
     };
     const contentStateWithEntity = contentState.createEntity(
       // Fixed in https://github.com/facebook/draft-js/commit/6ba124cf663b78c41afd6c361a67bd29724fa617, to be released.
       // $FlowFixMe
       entityType.type,
-      "MUTABLE",
-      data
+      'MUTABLE',
+      data,
     );
     const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
     const nextState = RichUtils.toggleLink(
       editorState,
       editorState.getSelection(),
-      entityKey
+      entityKey,
     );
 
     onComplete(nextState);
@@ -90,8 +88,7 @@ class LinkSource extends Component {
         onRequestClose={this.onRequestClose}
         onAfterOpen={this.onAfterOpen}
         isOpen
-        contentLabel="Link chooser"
-      >
+        contentLabel="Link chooser">
         <form className="LinkSource" onSubmit={this.onConfirm}>
           <label className="form-field">
             <span className="form-field__label">Link URL</span>

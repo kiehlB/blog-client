@@ -249,7 +249,6 @@ const inlineStyleButtons = [
 const myBlockStyleFn = contentBlock => {
   const type = contentBlock.getType();
 
-  console.log(type);
   if (type === 'blockquote') {
     return `${BlockStyling.superFancyBlockquote}`;
   } else if (type === 'CODE') {

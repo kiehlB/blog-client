@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import {
   BookmarkAltIcon,
@@ -18,7 +18,6 @@ import { ChevronDownIcon } from '@heroicons/react/solid';
 import styled from 'styled-components';
 import Link from 'next/link';
 import media from '../../lib/styles/media';
-import Cookies from 'js-cookie';
 
 const solutions = [
   {
@@ -112,16 +111,16 @@ export type HeaderProps = {
   getUser?: any;
   loading?: any;
   logoutButton?: any;
+  token?;
 };
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Header({ getUser, loading, logoutButton }: HeaderProps) {
-  const Cookie = Cookies.get('refresh_token'); // => 'value'
+export default function Header({ getUser, loading, logoutButton, token }: HeaderProps) {
+  console.log(token?.a?.refresh_token);
 
-  console.log(Cookie);
   return (
     <Popover className="relative bg-white">
       <div className="max-w-9xl mx-auto sm:px-6 m2xl:px-10 mmd:px-4">
@@ -342,7 +341,7 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
             </Popover>
           </Popover.Group>
 
-          {Cookie ? (
+          {token?.a?.refresh_token ? (
             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0 ">
               <Link href="/write">
                 <a className="whitespace-nowrap text-base font-bold text-gray-500 hover:text-gray-900">

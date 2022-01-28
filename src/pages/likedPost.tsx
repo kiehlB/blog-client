@@ -47,7 +47,6 @@ function LikedPost({}: LikedPostProps) {
   const a = {
     posts,
   };
-  console.log(posts);
 
   return (
     <>
