@@ -203,10 +203,11 @@ export default Home;
 
 // export const getServerSideProps: GetServerSideProps = async context => {
 //   const apolloClient = initializeApollo();
-
+//   const { req, res } = context;
+//   const { cookies } = req;
 //   const postData = await apolloClient.query({
 //     query: GET_Posts,
 //   });
 
-//   return { props: { post: postData.data.posts } };
+//   return { props: { post: postData.data.posts, cooike: cookies } };
 // };

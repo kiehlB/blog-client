@@ -18,6 +18,7 @@ import { ChevronDownIcon } from '@heroicons/react/solid';
 import styled from 'styled-components';
 import Link from 'next/link';
 import media from '../../lib/styles/media';
+import Cookies from 'js-cookie';
 
 const solutions = [
   {
@@ -118,6 +119,8 @@ function classNames(...classes) {
 }
 
 export default function Header({ getUser, loading, logoutButton }: HeaderProps) {
+  const Cookie = Cookies.get('refresh_token'); // => 'value'
+
   return (
     <Popover className="relative bg-white">
       <div className="max-w-9xl mx-auto sm:px-6 m2xl:px-10 mmd:px-4">
@@ -338,7 +341,7 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
             </Popover>
           </Popover.Group>
 
-          {!loading && getUser?.me ? (
+          {Cookie ? (
             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0 ">
               <Link href="/write">
                 <a className="whitespace-nowrap text-base font-bold text-gray-500 hover:text-gray-900">
