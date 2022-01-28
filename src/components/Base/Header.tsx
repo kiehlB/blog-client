@@ -120,12 +120,6 @@ function classNames(...classes) {
 export default function Header({ getUser, loading, logoutButton }: HeaderProps) {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setUser(localStorage.getItem('user'));
-    }
-  });
-
   console.log(user);
 
   return (
