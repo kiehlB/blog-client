@@ -2,28 +2,33 @@ import { createSlice, PayloadAction, createSelector } from '@reduxjs/toolkit';
 import { AppThunk, AppDispatch } from './store';
 
 export interface userState {
-  post?: object;
+  user?: object;
   error?: string;
   input?: string;
+  isAuth: string;
 }
 
 export const initialState = {
   user: {},
   error: '',
   input: '',
+  isAuth: 'idel',
 };
 
 const userSlice = createSlice({
-  name: 'post',
+  name: 'user',
   initialState,
   reducers: {
-    getuserSuccess(state, { payload }) {
-      state.user = payload;
+    getuserStart(state) {
+      state.isAuth = 'pending';
+    },
+    getuserSuccess(state) {
+      state.isAuth = 'resolved';
     },
     getuserFailure(state, { payload }: PayloadAction<userState>) {
       state.error = payload.error;
     },
-    fetchPostInit(state) {
+    fetchuserInit(state) {
       state.user = '';
     },
 
@@ -33,17 +38,19 @@ const userSlice = createSlice({
   },
 });
 
-export const { getuserSuccess, getuserFailure, fetchPostInit, getSearch } =
+export const { getuserSuccess, getuserFailure, fetchuserInit, getSearch, getuserStart } =
   userSlice.actions;
 
-export const PostGet =
-  (payload): AppThunk =>
-  async (dispatch: AppDispatch) => {
-    dispatch(getuserSuccess(payload));
-  };
+export const userGet = (): AppThunk => async (dispatch: AppDispatch) => {
+  dispatch(getuserSuccess());
+};
 
-export const PostInit = (): AppThunk => async (dispatch: AppDispatch) => {
-  dispatch(fetchPostInit());
+export const userStart = (): AppThunk => async (dispatch: AppDispatch) => {
+  dispatch(getuserStart());
+};
+
+export const userInit = (): AppThunk => async (dispatch: AppDispatch) => {
+  dispatch(fetchuserInit());
 };
 
 export const getSearchInput =

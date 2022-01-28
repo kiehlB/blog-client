@@ -13,14 +13,20 @@ import '@draft-js-plugins/emoji/lib/plugin.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 import 'draft-js/dist/Draft.css';
 import 'draftail/dist/draftail.css';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
+
+let persistor = persistStore(store);
 
 function MyApp({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);
   return (
     <Provider store={store}>
-      <ApolloProvider client={apolloClient}>
-        <Component {...pageProps} />
-      </ApolloProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <ApolloProvider client={apolloClient}>
+          <Component {...pageProps} />
+        </ApolloProvider>
+      </PersistGate>
     </Provider>
   );
 }

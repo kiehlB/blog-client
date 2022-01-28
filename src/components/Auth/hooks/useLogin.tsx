@@ -1,11 +1,15 @@
 import { useMutation } from '@apollo/client';
 
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 
 import useForms from '../../../hooks/useForm';
 import { loginMutation } from '../../../lib/graphql/users';
+import { userGet, userStart } from '../../../store/user';
 
 export default function useLogin() {
+  const dispatch = useDispatch();
+
   const [inputs, handleChange] = useForms({
     email: '',
     password: '',
@@ -14,9 +18,8 @@ export default function useLogin() {
   const router = useRouter();
   const [login, { error: loginError }] = useMutation(loginMutation, {
     onCompleted({ login }) {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('user', 'In');
-      }
+      dispatch(userStart());
+      dispatch(userGet());
 
       router.push('/');
     },
