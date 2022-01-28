@@ -120,7 +120,9 @@ function classNames(...classes) {
 export default function Header({ getUser, loading, logoutButton }: HeaderProps) {
   const [user, setUser] = useState(null);
 
-  const isAuth = localStorage.getItem('user');
+  if (typeof window !== 'undefined') {
+    const isAuth = localStorage.getItem('user');
+  }
 
   return (
     <Popover className="relative bg-white">
