@@ -132,7 +132,7 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
     }
   }, []);
 
-  console.log(getIsAuth);
+  console.log(getUser);
 
   return (
     <Popover className="relative bg-white">
