@@ -17,6 +17,7 @@ export default function useLogin() {
       if (typeof window !== 'undefined') {
         localStorage.setItem('user', 'In');
       }
+
       router.push('/');
     },
   });

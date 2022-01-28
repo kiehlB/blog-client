@@ -35,9 +35,7 @@ function SocialForm({}: SocialFormProps) {
       .post('https://www.woongblog.xyz/api/v2/auth/register', auths, config)
       .then(res => {
         router.push('/');
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('user', 'In');
-        }
+
         console.log(res.data);
       })
       .catch(err => {

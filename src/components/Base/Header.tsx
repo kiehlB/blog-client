@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useLayoutEffect, useState } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import {
   BookmarkAltIcon,
@@ -120,7 +120,7 @@ function classNames(...classes) {
 export default function Header({ getUser, loading, logoutButton }: HeaderProps) {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (typeof window !== 'undefined') {
       const isAuth = localStorage.getItem('user' || '');
       setUser(isAuth);
