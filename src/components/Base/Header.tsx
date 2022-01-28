@@ -125,12 +125,12 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
   const dispatch = useDispatch();
   const getIsAuth = useSelector((state: RootState) => state.user.isAuth);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (getUser?.me?.id) {
       dispatch(userStart());
       dispatch(userGet());
     }
-  }, []);
+  }, [getUser]);
 
   console.log(getUser);
 
