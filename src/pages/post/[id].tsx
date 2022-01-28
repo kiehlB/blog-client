@@ -382,7 +382,7 @@ export function PostCardSkeleton({ hideUser }: PostCardSkeletonProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getInitialProps = async context => {
   const apolloClient = initializeApollo();
 
   const postData = await apolloClient.query({

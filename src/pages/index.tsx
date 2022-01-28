@@ -207,7 +207,7 @@ export default Home;
       </C> */
 }
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getInitialProps = async context => {
   const apolloClient = initializeApollo();
 
   const postData = await apolloClient.query({

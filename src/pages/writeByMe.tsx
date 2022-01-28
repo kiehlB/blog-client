@@ -106,7 +106,7 @@ const WriteByMeBlock = styled.div`
 
 export default WriteByMe;
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getInitialProps = async context => {
   const apolloClient = initializeApollo();
 
   const postData = await apolloClient.query({

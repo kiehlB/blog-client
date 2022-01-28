@@ -104,7 +104,7 @@ const LikedPostBlock = styled.div`
 
 export default LikedPost;
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getInitialProps = async context => {
   const apolloClient = initializeApollo();
 
   const postData = await apolloClient.query({
