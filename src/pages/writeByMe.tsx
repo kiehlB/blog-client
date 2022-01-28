@@ -22,7 +22,7 @@ import useGetSearchPosts from '../components/Main/hooks/useGetSearchPosts';
 
 export type WriteByMeProps = {};
 
-function WriteByMe(a: WriteByMeProps) {
+function WriteByMe({}: WriteByMeProps) {
   const { getUser, loading, error, logoutButton } = useGetUser();
   const [isLoding, setIsLoding] = useState(false);
 
@@ -54,12 +54,7 @@ function WriteByMe(a: WriteByMeProps) {
     <>
       <AppLayout.MainNav>
         <Banner />
-        <Header
-          getUser={getUser}
-          loading={loading}
-          logoutButton={logoutButton}
-          token={a}
-        />
+        <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
         <FloatingHeader getUser={getUser} loading={loading} logoutButton={logoutButton} />
       </AppLayout.MainNav>
 
@@ -106,20 +101,20 @@ const WriteByMeBlock = styled.div`
 
 export default WriteByMe;
 
-export const getInitialProps = async context => {
-  const apolloClient = initializeApollo();
+// export const getServerSideProps: GetServerSideProps = async context => {
+//   const apolloClient = initializeApollo();
 
-  const postData = await apolloClient.query({
-    query: GET_Posts,
-  });
+//   const postData = await apolloClient.query({
+//     query: GET_Posts,
+//   });
 
-  const { req, res } = context;
+//   const { req, res } = context;
 
-  res.setHeader('Cache-Control', `s-maxage=60, stale-while-revalidate`);
+//   res.setHeader('Cache-Control', `s-maxage=60, stale-while-revalidate`);
 
-  const a = context.req.cookies;
+//   const a = context.req.cookies;
 
-  return {
-    props: { a },
-  };
-};
+//   return {
+//     props: { a },
+//   };
+// };

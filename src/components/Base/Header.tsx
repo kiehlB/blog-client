@@ -111,19 +111,22 @@ export type HeaderProps = {
   getUser?: any;
   loading?: any;
   logoutButton?: any;
-  token?;
 };
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Header({ getUser, loading, logoutButton, token }: HeaderProps) {
-  const [cookie, setCookie] = useState(token?.a?.refresh_token);
+export default function Header({ getUser, loading, logoutButton }: HeaderProps) {
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    setCookie(token?.a?.refresh_token);
-  }, [token?.a?.refresh_token]);
+    if (typeof window !== 'undefined') {
+      setUser(localStorage.getItem('user'));
+    }
+  });
+
+  console.log(user);
 
   return (
     <Popover className="relative bg-white">
@@ -265,7 +268,7 @@ export default function Header({ getUser, loading, logoutButton, token }: Header
                       open ? 'text-gray-900' : 'text-gray-500',
                       'group bg-white rounded-md inline-flex items-center text-base font-bold hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
                     )}>
-                    {token?.a?.refresh_token ? (
+                    {user ? (
                       <>
                         <div>Setting</div>
                         <ChevronDownIcon
@@ -345,7 +348,7 @@ export default function Header({ getUser, loading, logoutButton, token }: Header
             </Popover>
           </Popover.Group>
 
-          {cookie ? (
+          {user ? (
             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0 ">
               <Link href="/write">
                 <a className="whitespace-nowrap text-base font-bold text-gray-500 hover:text-gray-900">

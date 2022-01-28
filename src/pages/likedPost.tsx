@@ -22,7 +22,7 @@ import useGetSearchPosts from '../components/Main/hooks/useGetSearchPosts';
 
 export type LikedPostProps = {};
 
-const LikedPost: NextPage = a => {
+const LikedPost: NextPage = () => {
   const { getUser, loading, error, logoutButton } = useGetUser();
   const [isLoding, setIsLoding] = useState(false);
 
@@ -52,12 +52,7 @@ const LikedPost: NextPage = a => {
     <>
       <AppLayout.MainNav>
         <Banner />
-        <Header
-          getUser={getUser}
-          loading={loading}
-          logoutButton={logoutButton}
-          token={a}
-        />
+        <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
         <FloatingHeader getUser={getUser} loading={loading} logoutButton={logoutButton} />
       </AppLayout.MainNav>
 
@@ -104,20 +99,20 @@ const LikedPostBlock = styled.div`
 
 export default LikedPost;
 
-export const getInitialProps = async context => {
-  const apolloClient = initializeApollo();
+// export const getServerSideProps: GetServerSideProps = async context => {
+//   const apolloClient = initializeApollo();
 
-  const postData = await apolloClient.query({
-    query: GET_Posts,
-  });
+//   const postData = await apolloClient.query({
+//     query: GET_Posts,
+//   });
 
-  const { req, res } = context;
+//   const { req, res } = context;
 
-  res.setHeader('Cache-Control', `s-maxage=60, stale-while-revalidate`);
+//   res.setHeader('Cache-Control', `s-maxage=60, stale-while-revalidate`);
 
-  const a = context.req.cookies;
+//   const a = context.req.cookies;
 
-  return {
-    props: { a },
-  };
-};
+//   return {
+//     props: { a },
+//   };
+// };

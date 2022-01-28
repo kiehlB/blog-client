@@ -43,7 +43,7 @@ import RelatedPost from '../../components/RelatedPost.tsx';
 import { Skeleton, SkeletonTexts } from '../../components/Common/Skeleton';
 import { GetServerSideProps } from 'next';
 
-export default function Post({ a }) {
+export default function Post({}) {
   const dispatch = useDispatch();
   const div = useCallback(node => {
     if (node !== null) {
@@ -139,12 +139,7 @@ export default function Post({ a }) {
     <PostPageTap>
       <Banner />
       <div ref={div}>
-        <Header
-          getUser={getUser}
-          loading={loading}
-          logoutButton={logoutButton}
-          token={a}
-        />
+        <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
         <div className="sticky-wrapper">
           <div className="like-button-wrapper">
             <PostLike
@@ -382,23 +377,23 @@ export function PostCardSkeleton({ hideUser }: PostCardSkeletonProps) {
   );
 }
 
-export const getInitialProps = async context => {
-  const apolloClient = initializeApollo();
+// export const getServerSideProps: GetServerSideProps = async context => {
+//   const apolloClient = initializeApollo();
 
-  const postData = await apolloClient.query({
-    query: GET_Posts,
-  });
+//   const postData = await apolloClient.query({
+//     query: GET_Posts,
+//   });
 
-  const { req, res } = context;
+//   const { req, res } = context;
 
-  res.setHeader('Cache-Control', `s-maxage=60, stale-while-revalidate`);
+//   res.setHeader('Cache-Control', `s-maxage=60, stale-while-revalidate`);
 
-  const a = context.req.cookies;
+//   const a = context.req.cookies;
 
-  return {
-    props: { a },
-  };
-};
+//   return {
+//     props: { a },
+//   };
+// };
 
 const styleMap = {
   CODE: {

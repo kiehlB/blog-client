@@ -19,9 +19,9 @@ import ContentLoader from 'react-content-loader';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/rootReducer';
 import useGetSearchPosts from '../components/Main/hooks/useGetSearchPosts';
-import cookie from 'cookie';
+import cookieCutter from 'cookie-cutter';
 
-const Home: NextPage = a => {
+const Home: NextPage = () => {
   const { getUser, loading, error, logoutButton } = useGetUser();
 
   const [isLoding, setIsLoding] = useState(false);
@@ -153,12 +153,7 @@ const Home: NextPage = a => {
     <>
       <AppLayout.MainNav>
         <Banner />
-        <Header
-          getUser={getUser}
-          loading={loading}
-          logoutButton={logoutButton}
-          token={a}
-        />
+        <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
         <FloatingHeader getUser={getUser} loading={loading} logoutButton={logoutButton} />
       </AppLayout.MainNav>
 
@@ -206,21 +201,3 @@ export default Home;
         <canvas></canvas>
       </C> */
 }
-
-export const getInitialProps = async context => {
-  const apolloClient = initializeApollo();
-
-  const postData = await apolloClient.query({
-    query: GET_Posts,
-  });
-
-  const { req, res } = context;
-
-  res.setHeader('Cache-Control', `s-maxage=60, stale-while-revalidate`);
-
-  const a = context.req.cookies;
-
-  return {
-    props: { a },
-  };
-};

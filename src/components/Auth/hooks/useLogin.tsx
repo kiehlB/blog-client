@@ -14,6 +14,9 @@ export default function useLogin() {
   const router = useRouter();
   const [login, { error: loginError }] = useMutation(loginMutation, {
     onCompleted({ login }) {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('user', 'In');
+      }
       router.push('/');
     },
   });

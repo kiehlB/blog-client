@@ -13,6 +13,7 @@ export default function useGetUser() {
 
       await client.clearStore().then(() => {
         client.resetStore();
+        window.localStorage.clear();
         router.push('/');
       });
     }
