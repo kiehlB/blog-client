@@ -137,6 +137,9 @@ export default function Post({}) {
   const slicePost = data?.posts?.slice(0, 3);
 
   const tags = singlePostData?.post?.tags?.name?.split('%');
+
+  console.log(userData?.me?.id);
+  console.log(findData);
   return (
     <PostPageTap>
       <Banner />
@@ -192,20 +195,24 @@ export default function Post({}) {
           <PostHeader>
             <BlogWrapper className="flex   justify-between">
               <BlogHeader>Blog</BlogHeader>
-              <section className="flex   z-10">
-                <Link href={`/write/${findId}`} passHref>
-                  <a>
-                    <div onClick={getPostData} className="mr-2">
-                      수정
-                    </div>
-                  </a>
-                </Link>
-                <div
-                  className="cursor-pointer"
-                  onClick={e => DeletePostSubmit(e, findId)}>
-                  삭제
-                </div>
-              </section>
+              {userData?.me?.id === findData?.user?.id ? (
+                <section className="flex   z-10">
+                  <Link href={`/write/${findId}`} passHref>
+                    <a>
+                      <div onClick={getPostData} className="mr-2">
+                        수정
+                      </div>
+                    </a>
+                  </Link>
+                  <div
+                    className="cursor-pointer"
+                    onClick={e => DeletePostSubmit(e, findId)}>
+                    삭제
+                  </div>
+                </section>
+              ) : (
+                ''
+              )}
             </BlogWrapper>
             <BlogTitle>{!singlePostLoding && singlePostData?.post?.title}</BlogTitle>
             <div className="flex flex-wrap">
