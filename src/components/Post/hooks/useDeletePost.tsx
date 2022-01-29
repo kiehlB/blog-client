@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { GET_Post, Remove_Post } from '../../../lib/graphql/posts';
+import { GET_Post, GET_Posts, Remove_Post } from '../../../lib/graphql/posts';
 
 export default function useDeletePost() {
   const router = useRouter();
@@ -14,20 +14,21 @@ export default function useDeletePost() {
       },
       update: proxy => {
         const data = proxy.readQuery({
-          query: GET_Post,
-          variables: { id: router.query.id },
+          query: GET_Posts,
         });
 
-        proxy.writeQuery({
-          query: GET_Post,
-          data: {
-            ...(data as any),
-            post: [...(data as any).post.filter(i => i.id !== findId)],
-          },
-        });
+        // console.log(data);
+        // proxy.writeQuery({
+        //   query: GET_Posts,
+        //   data: {
+        //     ...(data as any),
+        //     posts: [...(data as any).posts?.filter(i => i.id !== findId)],
+        //   },
+        // });
       },
     });
-    router.push('/');
+    // router.push('/');
+    window.location.replace('/');
   };
 
   return { DeletePostSubmit };

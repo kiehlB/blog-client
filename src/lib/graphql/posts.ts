@@ -11,6 +11,9 @@ export const GET_Post = gql`
       body
       likes
       liked
+      tags {
+        name
+      }
       user {
         id
         username
@@ -77,6 +80,9 @@ export const GET_Search_Posts = gql`
       views
       body
       likes
+      tags {
+        name
+      }
       liked
       user {
         id

@@ -42,18 +42,18 @@ import Moment from 'react-moment';
 import RelatedPost from '../../components/RelatedPost.tsx';
 import { Skeleton, SkeletonTexts } from '../../components/Common/Skeleton';
 import { GetServerSideProps } from 'next';
+import { TiHeartOutline } from 'react-icons/ti';
+import { TiHeart } from 'react-icons/ti';
+import { AiOutlineUserAdd } from 'react-icons/ai';
+import { AiOutlineUserDelete } from 'react-icons/ai';
 
 export default function Post({}) {
   const dispatch = useDispatch();
-  const div = useCallback(node => {
-    if (node !== null) {
-      setHeight(node.getBoundingClientRect().height);
-    }
-  }, []);
 
   const [isInput, setisInput] = useState(false);
   const [height, setHeight] = useState(null);
   const getPost = useSelector((state: RootState) => state.post);
+  const getIsAuth = useSelector((state: RootState) => state.user.isAuth);
   const { getUser: userData, loading: userLoding } = useGetUser();
   const { singlePostLoding, singlePostError, singlePostData } = useGetPost();
   const { loading: PostsLoading, error: PostsError, data } = useGetPosts();
@@ -135,11 +135,14 @@ export default function Post({}) {
 
   const FindUser = singlePostData?.post?.user?.username;
   const slicePost = data?.posts?.slice(0, 3);
+
+  const tags = singlePostData?.post?.tags?.name?.split('%');
   return (
     <PostPageTap>
       <Banner />
-      <div ref={div}>
+      <div>
         <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
+
         <div className="sticky-wrapper">
           <div className="like-button-wrapper">
             <PostLike
@@ -175,7 +178,7 @@ export default function Post({}) {
         {/* <div dangerouslySetInnerHTML={{ __html: post.body }} />
       <textarea disabled value={draftToHtml(JSON.parse(post.body))} /> */}
 
-        <div className="w-768 mx-auto mt-32 mmd:w-full">
+        <div className="w-768 mx-auto mt-32 mmd:w-full ">
           {singlePostLoding && (
             <>
               <h2>
@@ -187,8 +190,29 @@ export default function Post({}) {
         </div>
         <PostWrapper>
           <PostHeader>
-            <BlogHeader>Blog</BlogHeader>
+            <BlogWrapper className="flex   justify-between">
+              <BlogHeader>Blog</BlogHeader>
+              <section className="flex   z-10">
+                <Link href={`/write/${findId}`} passHref>
+                  <a>
+                    <div onClick={getPostData} className="mr-2">
+                      수정
+                    </div>
+                  </a>
+                </Link>
+                <div
+                  className="cursor-pointer"
+                  onClick={e => DeletePostSubmit(e, findId)}>
+                  삭제
+                </div>
+              </section>
+            </BlogWrapper>
             <BlogTitle>{!singlePostLoding && singlePostData?.post?.title}</BlogTitle>
+            <div className="flex flex-wrap">
+              {tags?.map(ele => (
+                <TagBlock key={ele}>{ele}</TagBlock>
+              ))}
+            </div>
             <BlogDate>
               <Moment format="YYYY/MM/DD">
                 {!singlePostLoding && singlePostData?.post?.created_at}
@@ -210,11 +234,33 @@ export default function Post({}) {
           )}
         </EditorWrapper>
 
-        <div className="comments-wrapper">
-          <div className="comments-text-wrapper">
-            <div className="comments-mini">
-              <div className="comments-count">
-                {!commentsLoading && getComments.length} 개의 댓글
+        <div className="comments-wrapper  ">
+          <div className="comments-text-wrapper ">
+            <div
+              className="comments-count   flex items-center   w-full
+             ">
+              {!commentsLoading && getComments.length} 개의 댓글
+              <div className="flex  items-center  justify-end  ml-6">
+                {getIsAuth == 'resolved' ? (
+                  <>
+                    <LikeVisible>
+                      {isLikeBoolean ? (
+                        <TiHeart onClick={UnlikehandleSubmit} size="20" />
+                      ) : (
+                        <TiHeartOutline onClick={LikehandleSubmit} size="20" />
+                      )}
+                    </LikeVisible>
+                    <div className="follow-visible ml-2">
+                      {BooleanIsFollowing ? (
+                        <AiOutlineUserDelete onClick={unFollowHandleSubmit} size="20" />
+                      ) : (
+                        <AiOutlineUserAdd onClick={followHandleSubmit} size="20" />
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  ''
+                )}
               </div>
             </div>
           </div>
@@ -395,6 +441,13 @@ export function PostCardSkeleton({ hideUser }: PostCardSkeletonProps) {
 //   };
 // };
 
+const LikeVisible = styled.div`
+  display: none;
+  ${media.custom(1900)} {
+    display: unset;
+  }
+`;
+
 const styleMap = {
   CODE: {
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
@@ -448,6 +501,34 @@ const BlogDate = styled.div`
   font-weight: 600;
 `;
 
+const TagBlock = styled.div`
+  background-color: #1fb6ff;
+  margin-bottom: 0.875rem;
+  color: #fff;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  height: 2rem;
+  border-radius: 1rem;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.875rem;
+
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  ${media.custom(768)} {
+    height: 1.5rem;
+    font-size: 0.75rem;
+    border-radius: 0.75rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+`;
+
 const PostHeader = styled.div`
   width: 768px;
   margin: 0 auto;
@@ -481,13 +562,17 @@ const EditorWrapper = styled.div`
   }
 `;
 
-const EditorFlex = styled.div``;
+const BlogWrapper = styled.div`
+  & > section {
+    justify-content: flex-end;
+  }
+`;
 
 const PostPageTap = styled.div`
   .card-wrapper {
     width: 50%;
     right: 0;
-    margin: 0 auto;
+    z-index: -999;
     position: absolute;
   }
   .like-button-wrapper {
@@ -651,13 +736,6 @@ const Title = styled.div`
   margin-block-end: 0.83em;
   ${media.custom(1000)} {
     font-size: 36px;
-  }
-`;
-
-const LikeVisible = styled.div`
-  display: none;
-  ${media.custom(1900)} {
-    display: unset;
   }
 `;
 

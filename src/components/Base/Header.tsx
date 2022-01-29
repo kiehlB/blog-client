@@ -446,7 +446,7 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                     About
                   </a>
                 </Link>
-                {getUser?.me?.id
+                {getIsAuth == 'resolved'
                   ? withLoginresources.map(item => (
                       <Link href={item.href} key={item.id}>
                         <a className="text-base font-bold text-gray-900 hover:text-gray-700">
@@ -454,29 +454,32 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                         </a>
                       </Link>
                     ))
-                  : resources.map(item => (
-                      <Link href={item.href} key={item.id}>
-                        <a className="text-base font-bold text-gray-900 hover:text-gray-700">
-                          {item.name}
-                        </a>
-                      </Link>
-                    ))}
+                  : ''}
               </div>
               <div>
-                {getUser?.me?.id ? (
-                  <a
-                    href="#"
-                    className="w-full flex items-center justify-center   bg-regal-sky hover:bg-sky-600 text-white font-semibold rounded-lg
+                {getIsAuth == 'resolved' ? (
+                  <Link href="/">
+                    <a
+                      onClick={logoutButton}
+                      className="w-full flex items-center justify-center    bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg
         px-4 py-3 mt-6">
-                    로그아웃
-                  </a>
-                ) : (
-                  <p className="mt-6 text-center text-base font-bold text-gray-500">
-                    Existing customer?{' '}
-                    <a href="#" className="text-indigo-600 hover:text-indigo-500">
-                      Sign in
+                      로그아웃
                     </a>
-                  </p>
+                  </Link>
+                ) : (
+                  <>
+                    <Link href="/signup">
+                      <a className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                        Sign up
+                      </a>
+                    </Link>
+                    <Link href="/signin">
+                      <p className="mt-6 text-center text-base font-bold text-gray-500">
+                        Existing customer?{' '}
+                        <a className="text-indigo-600 hover:text-indigo-500">Sign in</a>
+                      </p>
+                    </Link>
+                  </>
                 )}
               </div>
             </div>

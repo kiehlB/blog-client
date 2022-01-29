@@ -33,6 +33,7 @@ import Tags from '../Tags';
 import TagsForm from '../Tags/TagsForm';
 import { Pane, Badge, Text } from 'evergreen-ui';
 import Link from 'next/link';
+import { toast, ToastContainer } from 'react-nextjs-toast';
 
 const ButtonStyles = styled.div`
   font-size: 1rem;
@@ -361,6 +362,14 @@ function EditorMain(props: EditorMainProps) {
     setEditorState(RichUtils.toggleBlockType(editorState, block));
   };
 
+  const onClickNotifyCheckString = e => {
+    e.preventDefault();
+    toast.notify(`제목을 입력해주세요`, {
+      duration: 2,
+      type: 'error',
+    });
+  };
+
   const handleKeyCommand = command => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
@@ -493,7 +502,15 @@ function EditorMain(props: EditorMainProps) {
                 <Button className="text-zinc-600 ">뒤로가기</Button>
               </Link>
             </div>
-            <Button className="text-zinc-600 " onClick={e => handleSubmit(e)}>
+            <Button
+              className="text-zinc-600 "
+              onClick={e =>
+                checkEmpty(inputs)
+                  ? onClickNotifyCheckString(e)
+                  : router.query.id === undefined
+                  ? handleSubmit(e)
+                  : EditSubmit(e)
+              }>
               완료
             </Button>
           </ButtonWrapper>

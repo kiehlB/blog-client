@@ -97,7 +97,7 @@ export default function useEditor() {
     e.preventDefault();
     editPost({
       variables: {
-        post_id: router.query.slug.toString(),
+        post_id: router.query.id.toString(),
         title: inputs,
         body: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
       },
@@ -107,7 +107,7 @@ export default function useEditor() {
         });
 
         const findData = (data as any).posts.find(
-          el => el.id == router.query.slug.toString(),
+          el => el.id == router.query.id.toString(),
         );
         proxy.writeQuery({
           query: GET_Posts,
@@ -118,7 +118,7 @@ export default function useEditor() {
         });
       },
     });
-    router.push(`/blog/${router.query.slug.toString()}`);
+    router.push(`/post/${router.query.id.toString()}`);
   };
 
   const handleSubmit = async e => {

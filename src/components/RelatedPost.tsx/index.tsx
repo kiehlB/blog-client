@@ -64,6 +64,6 @@ const RelatedPostBlock = styled.div`
   background-color: #000;
   height: 100%;
   padding: 5rem 0;
-  margin-top: 5rem;
+  margin-top: 12rem;
   margin-bottom: 5rem;
 `;
