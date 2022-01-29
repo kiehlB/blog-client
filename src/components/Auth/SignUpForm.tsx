@@ -4,14 +4,18 @@ import useRegister from './hooks/useRegister';
 
 export type SignUpFormProps = {};
 
-function SignUpForm({ }: SignUpFormProps) {
-  const { inputs, handleChange, signUp, handleSubmit } = useRegister();
-
-
+function SignUpForm({}: SignUpFormProps) {
+  const { inputs, handleChange, signUp, handleSubmit, registerError } = useRegister();
 
   return (
     <form className="mt-8" onSubmit={handleSubmit}>
       <div>
+        <div className="text-sm py-2">
+          {registerError &&
+            registerError.graphQLErrors.map(({ message }, i) => (
+              <span key={i}>{message}</span>
+            ))}
+        </div>
         <label className="block text-gray-700">UserName</label>
         <LabelInput
           label="Username"

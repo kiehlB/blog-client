@@ -6,8 +6,8 @@ import useLogin from './hooks/useLogin';
 
 export type SignInFormProps = {};
 
-function SignInForm({ }: SignInFormProps) {
-  const { inputs, handleChange, login } = useLogin();
+function SignInForm({}: SignInFormProps) {
+  const { inputs, handleChange, login, loginError } = useLogin();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -35,6 +35,12 @@ function SignInForm({ }: SignInFormProps) {
   return (
     <form className="mt-8" onSubmit={handleSubmit}>
       <div className="mt-6">
+        <div className="text-sm py-2">
+          {loginError &&
+            loginError.graphQLErrors.map(({ message }, i) => (
+              <span key={i}>{message}</span>
+            ))}
+        </div>
         <label className="block text-gray-700">Email Address</label>
         <LabelInput
           label="Email"

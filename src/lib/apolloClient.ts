@@ -16,7 +16,10 @@ const link = new HttpLink({
   credentials: 'include',
 });
 
-const errorLink = onError(({ graphQLErrors }) => {
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (networkError) {
+    console.log(`[Network error]: ${networkError}`);
+  }
   if (graphQLErrors) graphQLErrors.map(({ message }) => console.log());
 });
 

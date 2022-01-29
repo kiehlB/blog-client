@@ -16,15 +16,14 @@ export default function useRegister() {
       router.push('/signin');
     },
   });
-
+  console.log(registerError && registerError.graphQLErrors);
 
   const handleSubmit = async e => {
-
     e.preventDefault();
     signUp({
       variables: inputs,
     });
   };
 
-  return { inputs, handleChange, signUp, handleSubmit };
+  return { inputs, handleChange, signUp, handleSubmit, registerError };
 }
