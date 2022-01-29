@@ -136,10 +136,11 @@ export default function Post({}) {
   const FindUser = singlePostData?.post?.user?.username;
   const slicePost = data?.posts?.slice(0, 3);
 
-  const tags = singlePostData?.post?.tags?.name?.split('%');
+  const tag = singlePostData?.post?.tags?.name?.split('%20');
 
-  console.log(userData?.me?.id);
-  console.log(findData);
+  const tags = tag?.splice(0, tag?.length - 1);
+
+  console.log(singlePostData);
   return (
     <PostPageTap>
       <Banner />
