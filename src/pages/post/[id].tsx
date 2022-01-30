@@ -643,6 +643,7 @@ const PostPageTap = styled.div`
   }
   .comments-layout {
     color: rgb(33, 37, 41);
+    z-index: 10;
 
     border: 1px solid rgb(33, 37, 41);
     border-color: rgb(233, 236, 239);
@@ -665,6 +666,7 @@ const PostPageTap = styled.div`
     margin-bottom: 1.5rem;
     width: 100%;
     font-size: 1rem;
+    z-index: 10;
 
     color: rgb(33, 37, 41);
     line-height: 1.75;
@@ -690,9 +692,9 @@ const PostPageTap = styled.div`
   .comments-edit-wrapper {
     display: flex;
     justify-content: flex-end;
-
+    margin-right: 0.5rem;
     & div {
-      margin-right: 0.4rem;
+      margin-right: 1rem;
     }
   }
   .edit-button {

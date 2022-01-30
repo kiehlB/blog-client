@@ -66,7 +66,7 @@ function Comments(props: CommentsProps) {
                 <Moment fromNow>{props.el.created_at}</Moment>
               </CommentMoment>
             </div>
-            <div className="comments-text">
+            <div className="comments-text z-10">
               {editComment ? (
                 <form
                   onSubmit={e => {
@@ -76,7 +76,7 @@ function Comments(props: CommentsProps) {
                     checkEmpty(editText) ? e.preventDefault() : fixComment();
                   }}>
                   <TextareaAutosize
-                    className="w-full"
+                    className="w-full z-10"
                     rows={4}
                     name="text"
                     value={editText}
@@ -111,6 +111,7 @@ function Comments(props: CommentsProps) {
                   {editComment ? (
                     <>
                       <div
+                        className="z-10"
                         onClick={e => {
                           checkEmpty(editText)
                             ? props.onClickNotifyCheckString(e)
@@ -119,12 +120,18 @@ function Comments(props: CommentsProps) {
                         }}>
                         수정
                       </div>
-                      <div onClick={fixComment}>취소</div>
+                      <div onClick={fixComment} className="z-10">
+                        취소
+                      </div>
                     </>
                   ) : (
                     <div className="edit-button">
-                      <div onClick={fixComment}>수정</div>
-                      <div onClick={e => props.DeleteCommentSubmit(e, props.el.id)}>
+                      <div onClick={fixComment} className="z-10">
+                        수정
+                      </div>
+                      <div
+                        className="z-10"
+                        onClick={e => props.DeleteCommentSubmit(e, props.el.id)}>
                         삭제
                       </div>
                     </div>

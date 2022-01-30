@@ -64,7 +64,7 @@ $color-3: #554d73;
     $x-angle: 90 / $x-half;
     $y-angle: 45 / $y-half;
     $nth: 1;
-    z-index: 1;
+   
     @for $y from $y-count - 1 to -1 {
       @for $x from 0 to $x-count {
         $x-cnt: $x - $x-half;

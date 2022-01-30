@@ -149,7 +149,7 @@ export default function useEditor() {
 
     setTimeout(() => {
       window.location.replace('/');
-    }, 1000);
+    }, 500);
     // router.push('/');
   };
 

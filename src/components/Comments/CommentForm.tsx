@@ -43,8 +43,9 @@ function CommentForm(props: CommentFormProps) {
   };
 
   return (
-    <CommentFormTap>
+    <CommentFormTap className="z-10">
       <form
+        className="z-10"
         onSubmit={e => {
           props.userData.me ? e.preventDefault() : props.onClickNotify(e);
           checkEmpty(Text)
@@ -52,7 +53,7 @@ function CommentForm(props: CommentFormProps) {
             : props.handleSubmit(e, props.findId, Text);
           props.userData.me ? setText('') : '';
         }}>
-        <div>
+        <div className="z-10">
           <TextareaAutosize
             rows={4}
             defaultValue="댓글을 입력하세요"
