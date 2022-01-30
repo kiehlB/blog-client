@@ -66,8 +66,8 @@ export default class ImageAdd extends Component {
     console.log('originalFile instanceof Blob', file instanceof Blob); // true
     console.log(`originalFile size ${file.size / 1024 / 1024} MB`);
     const options = {
-      maxSizeMB: 10,
-      maxWidthOrHeight: 1920,
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1024,
       useWebWorker: true,
     };
 
