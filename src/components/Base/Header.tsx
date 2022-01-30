@@ -75,6 +75,13 @@ const resources = [
     href: '/',
     icon: CalendarIcon,
   },
+  {
+    id: 4,
+    name: '글쓰기',
+    description: 'See what meet-ups and other events we might be planning near you.',
+    href: '/write',
+    icon: CalendarIcon,
+  },
 ];
 const recentPosts = [
   { id: 1, name: 'Boost your conversion rate', href: '/' },
@@ -447,7 +454,7 @@ export default function Header({ getUser, loading, logoutButton }: HeaderProps) 
                   </a>
                 </Link>
                 {getIsAuth == 'resolved'
-                  ? withLoginresources.map(item => (
+                  ? resources.map(item => (
                       <Link href={item.href} key={item.id}>
                         <a className="text-base font-bold text-gray-900 hover:text-gray-700">
                           {item.name}
