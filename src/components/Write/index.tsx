@@ -279,7 +279,7 @@ const alignmentPlugin = createAlignmentPlugin();
 const blockDndPlugin = createBlockDndPlugin();
 const { AlignmentTool } = alignmentPlugin;
 
-const decorator = composeDecorators(alignmentPlugin.decorator, focusPlugin.decorator);
+const decorator = composeDecorators(focusPlugin.decorator, blockDndPlugin.decorator);
 
 const imagePlugin = createImagePlugin({ decorator });
 

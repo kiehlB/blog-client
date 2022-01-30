@@ -175,16 +175,16 @@ const Home: NextPage = (props: any) => {
         );
       }
 
-      function updateAll() {
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        myCircle.update();
-        for (let i = 0; i < circleArray.length; i++) {
-          circleArray[i].update();
-        }
-        window.requestAnimationFrame(updateAll);
-      }
+      // function updateAll() {
+      //   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      //   myCircle.update();
+      //   for (let i = 0; i < circleArray.length; i++) {
+      //     circleArray[i].update();
+      //   }
+      //   window.requestAnimationFrame(updateAll);
+      // }
 
-      updateAll();
+      // updateAll();
     };
     render();
 

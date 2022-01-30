@@ -71,9 +71,9 @@ export default class ImageAdd extends Component {
     };
 
     try {
+      console.log(e.target.value);
       const compressedFile = await imageCompression(file, options);
       this.setState({ selectedFile: compressedFile });
-      console.log('done with the img1');
     } catch (error) {
       console.log(error);
     }
@@ -83,23 +83,13 @@ export default class ImageAdd extends Component {
     reader.readAsDataURL(this.state.selectedFile);
     reader.onloadend = () => {
       this.addImage(reader.result);
-
-      console.log('done with the img2');
     };
   };
 
   handleSubmitFile = e => {
     e.preventDefault();
   };
-
   render() {
-    const popoverClassName = this.state.open
-      ? styles.addImagePopover
-      : styles.addImageClosedPopover;
-    const buttonClassName = this.state.open
-      ? styles.addImagePressedButton
-      : styles.addImageButton;
-
     return (
       <>
         <ButtonStyles>
