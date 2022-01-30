@@ -21,7 +21,7 @@ import { RootState } from '../store/rootReducer';
 import useGetSearchPosts from '../components/Main/hooks/useGetSearchPosts';
 import cookieCutter from 'cookie-cutter';
 
-const Home: NextPage = () => {
+const Home: NextPage = (props: any) => {
   const { getUser, loading, error, logoutButton } = useGetUser();
 
   const [isLoding, setIsLoding] = useState(false);
@@ -42,115 +42,162 @@ const Home: NextPage = () => {
     networkStatus,
   } = useGetPosts();
 
-  // if (process.browser) {
-  //   const canvas = document.querySelector('canvas');
-  //   const c = canvas.getContext('2d');
+  //canvas
+  const canvasRef = useRef(null);
+  function Circle(xCoordinate, yCoordinate, radius, ctx, mouseX, mouseY) {
+    const colorArray = ['#272F32', '#9DBDC6', '#FF3D2E', '#DAEAEF'];
+    // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    // ctx.fillStyle = '#000000';
+    // ctx.beginPath();
+    // ctx.arc(50, 100, 20 * Math.sin(frameCount * 0.05) ** 2, 0, 2 * Math.PI);
+    // ctx.fill();
+    const maxRadius = 35;
 
-  //   canvas.width = innerWidth;
-  //   canvas.height = innerHeight / 2;
+    const randomNumber = Math.floor(Math.random() * 4);
+    const randomTrueOrFalse = Math.floor(Math.random() * 2);
 
-  //   const mouse = {
-  //     x: innerWidth / 2,
-  //     y: innerHeight / 2,
-  //   };
+    this.xCoordinate = xCoordinate;
+    this.yCoordinate = yCoordinate;
+    this.radius = radius;
+    this.color = colorArray[randomNumber];
 
-  //   const colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66'];
+    if (randomTrueOrFalse == 1) {
+      this.xVelocity = -Math.random() * 1;
+    } else {
+      this.xVelocity = Math.random() * 1;
+    }
 
-  //   let mouseDown = false;
-  //   addEventListener('mousedown', () => {
-  //     mouseDown = true;
-  //   });
+    if (randomTrueOrFalse == 1) {
+      this.yVelocity = -Math.random() * 1;
+    } else {
+      this.yVelocity = Math.random() * 1;
+    }
 
-  //   addEventListener('mouseup', () => {
-  //     mouseDown = false;
-  //   });
+    // As distance gets closer to 0, increase radius
 
-  //   addEventListener('resize', () => {
-  //     canvas.width = innerWidth;
-  //     canvas.height = innerHeight;
+    this.update = function () {
+      this.xCoordinate += this.xVelocity;
+      const xDistance = mouseX - this.xCoordinate;
+      const yDistance = mouseY - this.yCoordinate;
+      const originalRadius = radius;
+      this.yCoordinate += this.yVelocity;
 
-  //     init();
-  //   });
+      // Movement Functions
+      if (
+        this.xCoordinate + this.radius > ctx.canvas.width ||
+        this.xCoordinate - this.radius < 0
+      ) {
+        this.xVelocity = -this.xVelocity;
+      }
+      if (
+        this.yCoordinate + this.radius > ctx.canvas.height ||
+        this.yCoordinate - this.radius < 0
+      ) {
+        this.yVelocity = -this.yVelocity;
+      }
 
-  //   // Objects
-  //   class Particle {
-  //     x: any;
-  //     y: any;
-  //     radius: any;
-  //     color: any;
-  //     constructor(x, y, radius, color) {
-  //       this.x = x;
-  //       this.y = y;
-  //       this.radius = radius;
-  //       this.color = color;
-  //     }
+      // Radius Decrease Functions
+      // When distance between circle center and mouse on horizontal axis is less than 50, increase radius until it is equal to 35
+      if (
+        xDistance < 50 &&
+        xDistance > -50 &&
+        this.radius < maxRadius &&
+        yDistance < 50 &&
+        yDistance > -50
+      ) {
+        this.radius += 2;
+      } else if (
+        (xDistance >= 50 && originalRadius < this.radius) ||
+        (xDistance <= -50 && originalRadius < this.radius) ||
+        (yDistance >= 50 && originalRadius < this.radius) ||
+        (yDistance <= -50 && originalRadius < this.radius)
+      ) {
+        this.radius -= 2;
+      }
 
-  //     draw() {
-  //       c.beginPath();
-  //       c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-  //       c.shadowColor = this.color;
-  //       c.shadowBlur = 15;
-  //       c.fillStyle = this.color;
-  //       c.fill();
-  //       c.closePath();
-  //     }
+      this.draw();
+    };
 
-  //     update() {
-  //       this.draw();
-  //     }
-  //   }
+    this.draw = function () {
+      ctx.beginPath();
+      ctx.arc(this.xCoordinate, this.yCoordinate, Math.abs(this.radius), 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+    };
+  }
 
-  //   // Implementation
-  //   let particles;
-  //   /* @ts-ignore */
-  //   function init() {
-  //     particles = [];
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    let frameCount = 0;
+    let animationFrameId;
+    let radians = 0;
+    let alpha = 1;
+    let particles = [];
+    let mouseX;
+    let mouseY;
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
 
-  //     for (let i = 0; i < 1500; i++) {
-  //       const canvasWidth = canvas.width + 1000;
-  //       const canvasHeight = canvas.height + 2000;
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
 
-  //       const x = Math.random() * canvasWidth - canvasWidth / 2;
-  //       const y = Math.random() * canvasHeight - canvasHeight / 2;
-  //       const radius = 2 * Math.random();
+    const maxRadius = 35;
 
-  //       const color = colors[Math.floor(Math.random() * colors.length)];
-  //       particles.push(new Particle(x, y, radius, color));
-  //     }
-  //   }
+    canvas.onmousemove = function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    };
 
-  //   // Animation Loop
-  //   let radians = 0;
-  //   let alpha = 1;
-  //   /* @ts-ignore */
-  //   function animate() {
-  //     requestAnimationFrame(animate);
-  //     c.fillStyle = `rgba(255, 255, 255, ${alpha})`;
-  //     c.fillRect(0, 0, canvas.width, canvas.height);
+    window.addEventListener('resize', function () {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
 
-  //     c.save();
-  //     c.translate(canvas.width / 2, canvas.height / 2);
-  //     c.rotate(radians);
-  //     particles.forEach(particle => {
-  //       particle.update();
-  //     });
-  //     c.restore();
+    const render = () => {
+      frameCount++;
 
-  //     radians += 0.001;
+      animationFrameId = window.requestAnimationFrame(render);
+      const myCircle = new Circle(30, 80, 10, ctx, mouseX, mouseY);
+      let circleArray = [];
 
-  //     if (mouseDown && alpha >= 0.03) {
-  //       alpha -= 0.01;
-  //     } else if (!mouseDown && alpha < 1) {
-  //       alpha += 0.01;
-  //     }
-  //   }
+      for (let i = 0; i < 800; i++) {
+        const randomXCoordinate = Math.random() * ctx.canvas.width;
+        const randomYCoordinate = Math.random() * ctx.canvas.height;
+        const randomRadius = Math.random() * 5;
+        circleArray.push(
+          new Circle(
+            randomXCoordinate,
+            randomYCoordinate,
+            randomRadius,
+            ctx,
+            mouseX,
+            mouseY,
+          ),
+        );
+      }
 
-  //   init();
-  //   animate();
-  // }
+      function updateAll() {
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        myCircle.update();
+        for (let i = 0; i < circleArray.length; i++) {
+          circleArray[i].update();
+        }
+        window.requestAnimationFrame(updateAll);
+      }
+
+      updateAll();
+    };
+    render();
+
+    return () => {
+      window.cancelAnimationFrame(animationFrameId);
+    };
+  }, [Circle]);
 
   return (
     <>
+      <canvas ref={canvasRef} {...props} />
       <AppLayout.MainNav>
         <Banner />
         <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />

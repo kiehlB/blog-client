@@ -39,7 +39,7 @@ import Face from '../../components/FollowButton';
 import PostLike from '../../components/PostLike';
 import useGetPost from '../../components/Post/hooks/useGerPost';
 import Moment from 'react-moment';
-import RelatedPost from '../../components/RelatedPost.tsx';
+import RelatedPost from '../../components/RelatedPost';
 import { Skeleton, SkeletonTexts } from '../../components/Common/Skeleton';
 import { GetServerSideProps } from 'next';
 import { TiHeartOutline } from 'react-icons/ti';
