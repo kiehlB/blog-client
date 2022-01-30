@@ -1,13 +1,13 @@
+import { Spinner } from 'evergreen-ui';
+import createColorBlockPlugin from './colorBlockPlugin';
+import Button from '../Common/TailButton';
+import { Pane, Badge, Text } from 'evergreen-ui';
+import Link from 'next/link';
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import {
-  RichUtils,
-  convertToRaw,
-  getDefaultKeyBinding,
-  AtomicBlockUtils,
-} from 'draft-js';
+import { RichUtils, getDefaultKeyBinding } from 'draft-js';
 import { convertToHTML } from 'draft-convert';
-import Editor, { composeDecorators } from '@draft-js-plugins/editor';
+import Editor, { composeDecorators } from 'draft-js-plugins-editor';
 import createHashtagPlugin from 'draft-js-hashtag-plugin';
 import hashtagStyles from './hashtagStyles.module.css';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
@@ -15,30 +15,23 @@ import createLinkPlugin from 'draft-js-anchor-plugin';
 import { BoldButton } from 'draft-js-buttons';
 import linkStyles from './linkStyles.module.css';
 import BlockStyling from './BlockStyling.module.css';
-import createAlignmentPlugin from '@draft-js-plugins/alignment';
 import ImageAdd from './ImageAdd';
 import createStyles from 'draft-js-custom-styles';
 import buttonStyle from './button.module.scss';
 import classNames from 'classnames';
 import useEditor from './hooks/useEditor';
 import { useRouter } from 'next/router';
-import createImagePlugin from '@draft-js-plugins/image';
-import createFocusPlugin from '@draft-js-plugins/focus';
-import createResizeablePlugin from '@draft-js-plugins/resizeable';
-import createBlockDndPlugin from '@draft-js-plugins/drag-n-drop';
-import createDragNDropUploadPlugin from '@draft-js-plugins/drag-n-drop-upload';
-import { Spinner } from 'evergreen-ui';
+import createImagePlugin from 'draft-js-image-plugin';
+import createFocusPlugin from 'draft-js-focus-plugin';
+import createResizeablePlugin from 'draft-js-resizeable-plugin';
+import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
+import Tags from '../Tags';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast, ToastContainer } from 'react-nextjs-toast';
 import media from '../../lib/styles/media';
 import { PostInit } from '../../store/post';
-import { checkEmpty } from '../../utils/isNull';
-import createColorBlockPlugin from './colorBlockPlugin';
-import Button from '../Common/TailButton';
-import Tags from '../Tags';
 import TagsForm from '../Tags/TagsForm';
-import { Pane, Badge, Text } from 'evergreen-ui';
-import Link from 'next/link';
-import { toast, ToastContainer } from 'react-nextjs-toast';
+import { checkEmpty } from '../../utils/isNull';
 
 const ButtonStyles = styled.div`
   font-size: 1rem;
@@ -280,17 +273,27 @@ const { InlineToolbar } = inlineToolbarPlugin;
 
 const focusPlugin = createFocusPlugin();
 const resizeablePlugin = createResizeablePlugin();
-const alignmentPlugin = createAlignmentPlugin();
 const blockDndPlugin = createBlockDndPlugin();
-const { AlignmentTool } = alignmentPlugin;
 
-const decorator = composeDecorators(focusPlugin.decorator, blockDndPlugin.decorator);
+const decorator = composeDecorators(
+  resizeablePlugin.decorator,
+  focusPlugin.decorator,
+  blockDndPlugin.decorator,
+);
 
-const imagePlugin = createImagePlugin();
+const imagePlugin = createImagePlugin({ decorator });
 
 const colorBlockPlugin = createColorBlockPlugin({ decorator });
 
-const plugins = [imagePlugin, blockDndPlugin];
+const plugins = [
+  imagePlugin,
+  hashtagPlugin,
+  inlineToolbarPlugin,
+  linkPlugin,
+  blockDndPlugin,
+  focusPlugin,
+  resizeablePlugin,
+];
 
 function BlockWrapper({ children }) {
   return <div>{children}</div>;
@@ -479,6 +482,7 @@ function EditorMain(props: EditorMainProps) {
             </B>
             <EW className="overflow-y-scroll mt-6">
               <Editor
+                /* @ts-ignore */
                 customStyleMap={styleMap}
                 editorState={editorState}
                 onChange={onChange}
@@ -497,6 +501,7 @@ function EditorMain(props: EditorMainProps) {
                 </Link>
               </div>
               <Button
+                type="button"
                 className="text-zinc-600 "
                 onClick={e =>
                   checkEmpty(inputs)

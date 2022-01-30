@@ -1297,94 +1297,6 @@
   dependencies:
     lodash.snakecase "^4.1.1"
 
-"@draft-js-plugins/alignment@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/alignment/-/alignment-5.0.2.tgz#02633253d8fd5f973af04fd46d17514794d52d41"
-  integrity sha512-Xlpt2wFjuN50Dx6N46XxqGO87111qDXuW/2m3EcyN7p6LeMyqAHJQepOBIji427xe4Bw87sb6/EqhHRJtkQbMg==
-  dependencies:
-    "@draft-js-plugins/buttons" "^4.0.0"
-    "@draft-js-plugins/utils" "^4.0.0"
-
-"@draft-js-plugins/buttons@^4.0.0":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/buttons/-/buttons-4.1.1.tgz#35e1045339f1de5b0c86885933a73d60864e2160"
-  integrity sha512-Z6dHYMq9tgJbLV3Jm4ATT5yH5TtnynuDBOSODUESvi3S/bfzn9Gca73nQ7u1Rt1SEilkKtsbsp0XIGx4pPR50Q==
-  dependencies:
-    clsx "^1.0.4"
-
-"@draft-js-plugins/drag-n-drop-upload@^4.1.1":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/drag-n-drop-upload/-/drag-n-drop-upload-4.1.1.tgz#082d6466a5cc1a2ca32ca15dd3801c189ffed160"
-  integrity sha512-dGL5yX1eZnGVwMv4VzqOnU9aQgmhyXkBIQiOZxX13RTpked0JbiZ8QJwguTfwNp4WP41LeRVWBnGTyAq7MuKpQ==
-
-"@draft-js-plugins/drag-n-drop@^4.2.1":
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/drag-n-drop/-/drag-n-drop-4.2.1.tgz#df107cc3d107d8fc11edc13890a70472db6ae720"
-  integrity sha512-vcuY5PabzPPperFV8M+dajhvY6mlP1V7h6Vt0by9BttQTWHOgNnJlD9if3v+Ug39mh80J/cAuGwuV50pg3whZA==
-  dependencies:
-    immutable "~3.7.4"
-
-"@draft-js-plugins/editor@^4.1.1":
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/editor/-/editor-4.1.1.tgz#886cd9605da37f45f0272f39df18464f166198e5"
-  integrity sha512-zqxBUyX7cPEMT5Z7/DdhC4kga+uPSg/SvsRbndKbYXoT6sIXWXo+DI/TuAwaybOPjVFLLwxBco6CBkQr3d1ejg==
-  dependencies:
-    immutable "~3.7.4"
-    prop-types "^15.8.1"
-
-"@draft-js-plugins/emoji@^4.5.5":
-  version "4.5.5"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/emoji/-/emoji-4.5.5.tgz#958acc243f9d9d6a81fa09f0b7b332c4b29b52df"
-  integrity sha512-+KesYqRHsVN8PhftEXkHGYKjVFXZTemq6wB9UsTyXcxNTnuJnQsiePJl0H3wHb7IwtX1EzQzzoqWv8N6KCC4uQ==
-  dependencies:
-    "@draft-js-plugins/buttons" "^4.0.0"
-    "@draft-js-plugins/utils" "^4.2.0"
-    "@types/lodash" "^4.14.170"
-    clsx "^1.0.4"
-    emoji-toolkit "^6.5.1"
-    emojibase "^5.2.0"
-    emojibase-data "^6.2.0"
-    immutable "~3.7.4"
-    lodash "^4.17.21"
-    lodash-es "^4.17.21"
-    prop-types "^15.5.8"
-    react-custom-scrollbars-2 "^4.4.0"
-    react-icons "^4.2.0"
-    to-style "^1.3.3"
-
-"@draft-js-plugins/focus@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/focus/-/focus-4.1.2.tgz#4ea65cd54988c5605f657b08d04f3479dffa7ee8"
-  integrity sha512-1jiQiJEeYZbaAkHPEw+IDl5ye19NGASfc4dz8Tedrb6zYJbr0sQpSp3IACdJ424TciMhecyPsAKIflTE7yScOQ==
-  dependencies:
-    clsx "^1.0.4"
-    immutable "~3.7.4"
-
-"@draft-js-plugins/image@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/image/-/image-4.1.2.tgz#ad84b35f83c862da2e96ddfc15de34da7d4c1910"
-  integrity sha512-Nuh+fgGMdDOwamH2oDU45zmbykX0owgr8XlfLFfjqBol9a0xblDK5sXS6juWofSrCKAP9vxh1OUbpRVf6kb/Gg==
-  dependencies:
-    clsx "^1.0.4"
-
-"@draft-js-plugins/inline-toolbar@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/inline-toolbar/-/inline-toolbar-4.1.2.tgz#057e23f3eb72d994043d286e50065caaa3f9efe3"
-  integrity sha512-zpxDosD7kypRT0F/ohXIkhBy0r+s1/HO2qJIWNHo8+s9H/HfHhJtKaSLZsMwowYSg1zo/BmKg/D6DryIxyJxjQ==
-  dependencies:
-    "@draft-js-plugins/buttons" "^4.0.0"
-    "@draft-js-plugins/utils" "^4.0.0"
-
-"@draft-js-plugins/resizeable@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/resizeable/-/resizeable-5.0.2.tgz#69ce6f403f9bbc024eb2ef985ba27d3b7a410524"
-  integrity sha512-16+NdyKj+znt7xvjKNJ4sKfX7HCkNWRpTeprzltH/dg3hgUL/lpApjbF/ehZheFsOM7eJqbhX1vRRTRwuek3eg==
-
-"@draft-js-plugins/utils@^4.0.0", "@draft-js-plugins/utils@^4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@draft-js-plugins/utils/-/utils-4.2.0.tgz#ee3c643c94d548fd9460541881a7554c5b077988"
-  integrity sha512-tQhf7a0S9ZDtOb0Mje5a+xTOT6LVDRv2LueEqqVdX4aI+oh0jjkAuP0oTiZBv6h7K9XSPgsQ08q9+kwHc3EyUg==
-
 "@emotion/hash@^0.7.1":
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.7.4.tgz#f14932887422c9056b15a8d222a9074a7dfa2831"
@@ -2008,11 +1920,6 @@
   version "0.0.29"
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
-
-"@types/lodash@^4.14.170":
-  version "4.14.178"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.178.tgz#341f6d2247db528d4a13ddbb374bcdc80406f4f8"
-  integrity sha512-0d5Wd09ItQWH1qFbEyQ7oTQ3GZrMfth5JkbN3EvTKLXcHLRDSXeLnlvlOn0wvxVIwK5o2M8JzP/OWz7T3NRsbw==
 
 "@types/mdast@^3.0.0", "@types/mdast@^3.0.3":
   version "3.0.10"
@@ -2937,7 +2844,7 @@ brorand@^1.0.1, brorand@^1.1.0:
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
   integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
-browser-image-compression@^1.0.17:
+browser-image-compression@^1.0.12:
   version "1.0.17"
   resolved "https://registry.yarnpkg.com/browser-image-compression/-/browser-image-compression-1.0.17.tgz#5b97bb65297dadfee123be6c40ecb355c4758cf2"
   integrity sha512-TMDh3gyNlVA5Vvn0D0AdWr33s2ftIeokHK406z8cYlLJ4ANAq1x6eMaSzqedDoZwUGyTVB+0rhNVaSFgM3YAZg==
@@ -4632,21 +4539,6 @@ emoji-regex@^9.2.2:
   version "9.2.2"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-9.2.2.tgz#840c8803b0d8047f4ff0cf963176b32d4ef3ed72"
   integrity sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==
-
-emoji-toolkit@^6.5.1:
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/emoji-toolkit/-/emoji-toolkit-6.6.0.tgz#e7287c43a96f940ec4c5428cd7100a40e57518f1"
-  integrity sha512-pEu0kow2p1N8zCKnn/L6H0F3rWUBB3P3hVjr/O5yl1fK7N9jU4vO4G7EFapC5Y3XwZLUCY0FZbOPyTkH+4V2eQ==
-
-emojibase-data@^6.2.0:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/emojibase-data/-/emojibase-data-6.2.0.tgz#db6c75c36905284fa623f4aa5f468d2be6ed364a"
-  integrity sha512-SWKaXD2QeQs06IE7qfJftsI5924Dqzp+V9xaa5RzZIEWhmlrG6Jt2iKwfgOPHu+5S8MEtOI7GdpKsXj46chXOw==
-
-emojibase@^5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/emojibase/-/emojibase-5.2.0.tgz#3b53899f9a9f8aae1280db446c83ce28f1d286d5"
-  integrity sha512-5T02oTJaWpScAtYbukKVc8vQ1367MyfVtFHUMoOVZ9/r1kFcbYqjSktD56TICBAeyW9uc1t+7qQuXEtntM6p5A==
 
 emojione@^2.2.7:
   version "2.2.7"
@@ -8816,7 +8708,7 @@ prop-types@15.7.2, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
-prop-types@^15.0.0, prop-types@^15.6.0, prop-types@^15.8.1:
+prop-types@^15.0.0, prop-types@^15.6.0:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -9049,15 +8941,6 @@ react-copy-to-clipboard@^5.0.4:
     copy-to-clipboard "^3"
     prop-types "^15.5.8"
 
-react-custom-scrollbars-2@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/react-custom-scrollbars-2/-/react-custom-scrollbars-2-4.4.0.tgz#6cc237abc18f5ab32b5392b336e6f072c2b4cfc1"
-  integrity sha512-I+oxZ9rfHfvYm85jdH2lQqpzwNr/ZAdYB8htm6R/hwRGoIEK31jq+YE6MmFwBzuO7C5zcAtH5HN9vwZxnW61NQ==
-  dependencies:
-    dom-css "^2.0.0"
-    prop-types "^15.5.10"
-    raf "^3.1.0"
-
 react-custom-scrollbars@^4.2.0:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/react-custom-scrollbars/-/react-custom-scrollbars-4.2.1.tgz#830fd9502927e97e8a78c2086813899b2a8b66db"
@@ -9142,11 +9025,6 @@ react-icons@^3.11.0:
   integrity sha512-JRgiI/vdF6uyBgyZhVyYJUZAop95Sy4XDe/jmT3R/bKliFWpO/uZBwvSjWEdxwzec7SYbEPNPck0Kff2tUGM2Q==
   dependencies:
     camelcase "^5.0.0"
-
-react-icons@^4.2.0:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.3.1.tgz#2fa92aebbbc71f43d2db2ed1aed07361124e91ca"
-  integrity sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==
 
 react-image-lightbox@^5.1.4:
   version "5.1.4"
