@@ -191,7 +191,7 @@ const Home: NextPage = (props: any) => {
     return () => {
       window.cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [Circle]);
 
   return (
     <>
@@ -205,7 +205,7 @@ const Home: NextPage = (props: any) => {
       <AppLayout
         first={
           <AppLayout.First>
-            <div className="absolute">
+            <div className="absolute -z-10">
               <canvas ref={canvasRef} {...props} />
             </div>
             <Main />
