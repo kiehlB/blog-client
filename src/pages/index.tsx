@@ -155,13 +155,11 @@ const Home: NextPage = (props: any) => {
     });
 
     const render = () => {
-      frameCount++;
-
       animationFrameId = window.requestAnimationFrame(render);
       const myCircle = new Circle(30, 80, 10, ctx, mouseX, mouseY);
       let circleArray = [];
 
-      for (let i = 0; i < 800; i++) {
+      for (let i = 0; i < 20; i++) {
         const randomXCoordinate = Math.random() * ctx.canvas.width;
         const randomYCoordinate = Math.random() * ctx.canvas.height;
         const randomRadius = Math.random() * 5;
