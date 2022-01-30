@@ -279,12 +279,7 @@ const alignmentPlugin = createAlignmentPlugin();
 const blockDndPlugin = createBlockDndPlugin();
 const { AlignmentTool } = alignmentPlugin;
 
-const decorator = composeDecorators(
-  resizeablePlugin.decorator,
-  alignmentPlugin.decorator,
-  focusPlugin.decorator,
-  blockDndPlugin.decorator,
-);
+const decorator = composeDecorators(alignmentPlugin.decorator, focusPlugin.decorator);
 
 const imagePlugin = createImagePlugin({ decorator });
 
@@ -293,13 +288,8 @@ const colorBlockPlugin = createColorBlockPlugin({ decorator });
 const plugins = [
   imagePlugin,
   hashtagPlugin,
-  inlineToolbarPlugin,
   linkPlugin,
-  focusPlugin,
-  resizeablePlugin,
   blockDndPlugin,
-
-  alignmentPlugin,
   colorBlockPlugin,
 ];
 
