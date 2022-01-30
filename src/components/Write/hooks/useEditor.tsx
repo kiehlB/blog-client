@@ -147,7 +147,9 @@ export default function useEditor() {
       },
     });
 
-    window.location.replace('/');
+    setTimeout(() => {
+      window.location.replace('/');
+    }, 1000);
     // router.push('/');
   };
 
