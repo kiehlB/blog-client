@@ -285,13 +285,7 @@ const imagePlugin = createImagePlugin({ decorator });
 
 const colorBlockPlugin = createColorBlockPlugin({ decorator });
 
-const plugins = [
-  imagePlugin,
-  hashtagPlugin,
-  linkPlugin,
-  blockDndPlugin,
-  colorBlockPlugin,
-];
+const plugins = [imagePlugin, blockDndPlugin];
 
 function BlockWrapper({ children }) {
   return <div>{children}</div>;
