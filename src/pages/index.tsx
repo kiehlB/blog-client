@@ -136,7 +136,7 @@ const Home: NextPage = (props: any) => {
     let particles = [];
     let mouseX;
     let mouseY;
-    canvas.height = window.innerHeight;
+    canvas.height = window.innerHeight / 2;
     canvas.width = window.innerWidth;
 
     const canvasWidth = canvas.width;
@@ -191,13 +191,13 @@ const Home: NextPage = (props: any) => {
     return () => {
       window.cancelAnimationFrame(animationFrameId);
     };
-  }, [Circle]);
+  }, []);
 
   return (
     <>
-      <canvas ref={canvasRef} {...props} />
       <AppLayout.MainNav>
         <Banner />
+
         <Header getUser={getUser} loading={loading} logoutButton={logoutButton} />
         <FloatingHeader getUser={getUser} loading={loading} logoutButton={logoutButton} />
       </AppLayout.MainNav>
@@ -205,6 +205,9 @@ const Home: NextPage = (props: any) => {
       <AppLayout
         first={
           <AppLayout.First>
+            <div className="absolute">
+              <canvas ref={canvasRef} {...props} />
+            </div>
             <Main />
           </AppLayout.First>
         }
