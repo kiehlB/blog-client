@@ -140,7 +140,6 @@ export default function Post({}) {
 
   const tags = tag?.splice(0, tag?.length - 1);
 
-  console.log(singlePostData);
   return (
     <PostPageTap>
       <Banner />

@@ -1,39 +1,42 @@
 import React, { useState } from 'react';
-import allContentState from "./allContentState";
-import { INLINE_CONTROL, BLOCK_CONTROL, ENTITY_CONTROL } from "./ui";
+import allContentState from './allContentState';
+import { INLINE_CONTROL, BLOCK_CONTROL, ENTITY_CONTROL } from './ui';
 
-import { DraftailEditor, BLOCK_TYPE, INLINE_STYLE, createEditorStateFromRaw } from "draftail"
+import {
+  DraftailEditor,
+  BLOCK_TYPE,
+  INLINE_STYLE,
+  createEditorStateFromRaw,
+} from 'draftail';
 
-import linkifyPlugin from "./plugins/linkifyPlugin";
-import autoEmbedPlugin from "./plugins/autoEmbedPlugin";
+import linkifyPlugin from './plugins/linkifyPlugin';
+import autoEmbedPlugin from './plugins/autoEmbedPlugin';
 
-import createHashtagPlugin from "draft-js-hashtag-plugin";
-import createMentionPlugin, {
-  defaultSuggestionsFilter
-} from "draft-js-mention-plugin";
+import createHashtagPlugin from 'draft-js-hashtag-plugin';
+import createMentionPlugin, { defaultSuggestionsFilter } from 'draft-js-mention-plugin';
 
-import "draft-js/dist/Draft.css";
-import "draftail/dist/draftail.css";
+import 'draft-js/dist/Draft.css';
+import 'draftail/dist/draftail.css';
 
-import createEmojiPlugin from "draft-js-emoji-plugin";
+import createEmojiPlugin from 'draft-js-emoji-plugin';
 // import createResizeablePlugin from 'draft-js-resizeable-plugin';
 // import createFocusPlugin from 'draft-js-focus-plugin';
-import createStickerPlugin from "draft-js-sticker-plugin";
+import createStickerPlugin from 'draft-js-sticker-plugin';
 
-import ReadingTime from "./components/ReadingTime";
+import ReadingTime from './components/ReadingTime';
 
-import { mentions } from "./plugins/mentions";
+import { mentions } from './plugins/mentions';
 
 // const focusPlugin = createFocusPlugin();
 // const resizeablePlugin = createResizeablePlugin();
 
-import { stickers } from "./plugins/stickers";
+import { stickers } from './plugins/stickers';
 
-import { getDefaultKeyBinding, serialiseEditorStateToRaw } from "draft-js";
+import { getDefaultKeyBinding, serialiseEditorStateToRaw } from 'draft-js';
 
 const stickerPlugin = createStickerPlugin({
   stickers: stickers,
-  selectButtonContent: <button>Stickers</button>
+  selectButtonContent: <button>Stickers</button>,
 });
 const emojiPlugin = createEmojiPlugin();
 const linkify = linkifyPlugin();
@@ -41,37 +44,32 @@ const autoEmbed = autoEmbedPlugin();
 const hashtagPlugin = createHashtagPlugin();
 const mentionPlugin = createMentionPlugin({
   mentions,
-  entityMutability: "IMMUTABLE",
+  entityMutability: 'IMMUTABLE',
   mentionComponent: mentionProps => (
     <span
       className={mentionProps.className}
       // eslint-disable-next-line no-alert
-      onClick={() => alert("Clicked on the Mention!")}
-    >
+      onClick={() => alert('Clicked on the Mention!')}>
       {mentionProps.children}
     </span>
   ),
   // theme: mentionsStyles,
   // positionSuggestions,
-  mentionPrefix: "@",
-  supportWhitespace: false
+  mentionPrefix: '@',
+  supportWhitespace: false,
 });
 
-
 // const initial = JSON.parse(sessionStorage.getItem("draftail:content"))
-const initial = null
+const initial = null;
 
-const onSave = (content) => {
-  console.log("saving", content)
+const onSave = content => {
   // sessionStorage.setItem("draftail:content", JSON.stringify(content))
-}
-
-
+};
 
 export const Editor = () => {
   const initEditorState = createEditorStateFromRaw(allContentState);
-  const [number, setNumber] = useState(0)
-  const [user, setUser] = useState()
+  const [number, setNumber] = useState(0);
+  const [user, setUser] = useState();
   const [editorState, setEditorState] = useState(initEditorState);
   const [suggestionsState, setSuggestionsState] = useState(mentions);
 
@@ -80,7 +78,6 @@ export const Editor = () => {
   };
 
   const myKeyBindingFn = e => {
-    console.log("myKeyBindingFn", e.keyCode);
     // if (e.keyCode === 83 /* `S` key */ && hasCommandModifier(e)) {
     //   return 'myeditor-save';
     // }
@@ -91,7 +88,6 @@ export const Editor = () => {
     setSuggestionsState(defaultSuggestionsFilter(value, mentions));
   };
 
-
   const { EmojiSuggestions, EmojiSelect } = emojiPlugin;
   const { MentionSuggestions } = mentionPlugin;
   const { StickerSelect } = stickerPlugin;
@@ -100,10 +96,9 @@ export const Editor = () => {
   //   focusPlugin.decorator,
   // );
 
-
   return (
-    <div style={{ display: "flex", flexWrap: "nowrap" }}>
-      <div style={{ flex: "1 0 50%" }}>
+    <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
+      <div style={{ flex: '1 0 50%' }}>
         <DraftailEditor
           rawContentState={allContentState}
           // onSave={onSave}
@@ -111,16 +106,16 @@ export const Editor = () => {
           onChange={onChange}
           stripPastedStyles={false}
           enableHorizontalRule={{
-            description: "Horizontal rule"
+            description: 'Horizontal rule',
           }}
           enableLineBreak={{
-            description: "Soft line break"
+            description: 'Soft line break',
           }}
           showUndoControl={{
-            description: "Undo last change"
+            description: 'Undo last change',
           }}
           showRedoControl={{
-            description: "Redo last change"
+            description: 'Redo last change',
           }}
           maxListNesting={6}
           blockTypes={Object.values(BLOCK_CONTROL)}
@@ -129,7 +124,7 @@ export const Editor = () => {
             ENTITY_CONTROL.IMAGE,
             ENTITY_CONTROL.LINK,
             ENTITY_CONTROL.EMBED,
-            ENTITY_CONTROL.DOCUMENT
+            ENTITY_CONTROL.DOCUMENT,
           ]}
           plugins={[
             autoEmbed,
@@ -137,7 +132,7 @@ export const Editor = () => {
             hashtagPlugin,
             mentionPlugin,
             emojiPlugin,
-            stickerPlugin
+            stickerPlugin,
             // focusPlugin,
             // resizeablePlugin
           ]}
@@ -150,21 +145,17 @@ export const Editor = () => {
         />
         <EmojiSuggestions />
       </div>
-      <div style={{ marginBottom: "2em" }}>
+      <div style={{ marginBottom: '2em' }}>
         <EmojiSelect />
       </div>
 
       <div
         style={{
-          flex: "0 0 50%",
-          width: "50%",
-          textAlign: "left",
-          wordBreak: "break-all"
-        }}
-      >
-
-      </div>
+          flex: '0 0 50%',
+          width: '50%',
+          textAlign: 'left',
+          wordBreak: 'break-all',
+        }}></div>
     </div>
-  )
-}
-
+  );
+};

@@ -71,7 +71,6 @@ export default class ImageAdd extends Component {
     };
 
     try {
-      console.log(e.target.value);
       const compressedFile = await imageCompression(file, options);
       this.setState({ selectedFile: compressedFile });
     } catch (error) {

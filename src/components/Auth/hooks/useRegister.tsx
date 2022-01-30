@@ -16,7 +16,6 @@ export default function useRegister() {
       router.push('/signin');
     },
   });
-  console.log(registerError && registerError.graphQLErrors);
 
   const handleSubmit = async e => {
     e.preventDefault();
