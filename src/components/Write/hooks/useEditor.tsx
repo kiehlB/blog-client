@@ -147,7 +147,7 @@ export default function useEditor() {
       },
     });
 
-    // window.location.replace('/');
+    window.location.replace('/');
     // router.push('/');
   };
 
