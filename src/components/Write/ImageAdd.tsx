@@ -73,6 +73,7 @@ export default class ImageAdd extends Component {
     try {
       const compressedFile = await imageCompression(file, options);
       this.setState({ selectedFile: compressedFile });
+      console.log('done with the img1');
     } catch (error) {
       console.log(error);
     }
@@ -82,6 +83,8 @@ export default class ImageAdd extends Component {
     reader.readAsDataURL(this.state.selectedFile);
     reader.onloadend = () => {
       this.addImage(reader.result);
+
+      console.log('done with the img2');
     };
   };
 
