@@ -72,7 +72,7 @@ export default class ImageAdd extends Component {
     this.setState({ waitForImg: 1 });
 
     const options = {
-      maxSizeMB: 0.01,
+      maxSizeMB: 0.1,
       maxWidthOrHeight: 1024,
       useWebWorker: true,
     };
