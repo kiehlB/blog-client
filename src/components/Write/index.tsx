@@ -281,7 +281,7 @@ const { AlignmentTool } = alignmentPlugin;
 
 const decorator = composeDecorators(focusPlugin.decorator, blockDndPlugin.decorator);
 
-const imagePlugin = createImagePlugin({ decorator });
+const imagePlugin = createImagePlugin();
 
 const colorBlockPlugin = createColorBlockPlugin({ decorator });
 
