@@ -63,16 +63,19 @@ export default class ImageAdd extends Component {
   handleFileInputChange = async e => {
     e.preventDefault();
     const file = e.target.files[0];
-
+    console.log('originalFile instanceof Blob', file instanceof Blob); // true
+    console.log(`originalFile size ${file.size / 1024 / 1024} MB`);
     const options = {
-      maxSizeMB: 0.1,
+      maxSizeMB: 10,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
     };
 
     try {
-      console.log(e.target.value);
       const compressedFile = await imageCompression(file, options);
+      console.log('compressedFile instanceof Blob', compressedFile instanceof Blob); // true
+      console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+
       this.setState({ selectedFile: compressedFile });
     } catch (error) {
       console.log(error);
@@ -80,7 +83,7 @@ export default class ImageAdd extends Component {
     if (!this.state.selectedFile) return;
     const reader = new FileReader();
     // @ts-ignore
-    reader.readAsDataURL(this.state.selectedFile);
+    await reader.readAsDataURL(this.state.selectedFile);
     reader.onloadend = () => {
       this.addImage(reader.result);
     };

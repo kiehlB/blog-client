@@ -32,7 +32,7 @@
     "autoprefixer": "^10.4.0",
     "axios": "^0.24.0",
     "babel-plugin-module-resolver": "^4.0.0",
-    "browser-image-compression": "^1.0.12",
+    "browser-image-compression": "^1.0.17",
     "cloudinary-build-url": "^0.2.1",
     "clsx": "^1.1.1",
     "cookie": "^0.4.1",
