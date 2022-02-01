@@ -33,7 +33,7 @@ function AboutMain({}: AboutMainProps) {
             <div className="xxl:flex items-center mb-4">
               <div className="flex items-center xxl:mr-8 mb-4 xxl:mb-0  ">
                 <FontAwesomeIcon icon={faEnvelope} size="2x" className="mr-2" />
-                <p>spacedawn96@gmail.com</p>
+                <p>kiehlb@gmail.com</p>
               </div>
               <div className="flex items-center">
                 <FontAwesomeIcon icon={faGithub} size="2x" className="mr-2" />

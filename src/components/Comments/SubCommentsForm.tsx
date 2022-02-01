@@ -49,6 +49,7 @@ function SubCommentsForm(props: SubCommentsFormProps) {
         }}>
         <TextareaAutosize
           rows={4}
+          
           className="commentsInput"
           placeholder="댓글을 입력하세요"
           name="text"

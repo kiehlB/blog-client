@@ -2,7 +2,7 @@
     "siteMetadata": {
       "title": "Blog-v3",
       "author": {
-        "name": "Spacedawn96",
+        "name": "kiehlb",
         "summary": "who works building clean user interfaces with React."
       },
       "description": "A blog created with Next.js and Tailwind.css",

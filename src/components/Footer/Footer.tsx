@@ -56,7 +56,7 @@ function SocialLinks() {
             </div>
           }>
           <CopyToClipboard
-            text="/"
+            text="thekiehlb@gmail.com"
             onCopy={() => {
               setCopyStatus('Copied to clipboard 🥳');
               setTimeout(() => setCopyStatus('Click the mail logo to copy'), 1500);
@@ -114,7 +114,7 @@ const footerLinks = [
 
 const socials = [
   {
-    href: 'https://github.com/spacedawn96',
+    href: 'https://github.com/kiehlb',
     icon: SiGithub,
     text: 'Github',
   },
