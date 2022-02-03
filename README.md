@@ -1,34 +1,58 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Architecture
 
-First, run the development server:
+![Component 6](https://user-images.githubusercontent.com/96700628/152285615-0432faf2-ca95-443b-91d8-79d874eaa90e.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+ 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Front-end
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- React
+- TypeScript
+- Next.js
+- GraphQL
+- Apollo Client
+- tailwind css
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Back-end
 
-## Learn More
+- Node js
+- TypeScript
+- Graphql
+- Apollo Server
+- Typeorm ( postgres )
 
-To learn more about Next.js, take a look at the following resources:
+### Deploy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- clinet -> vercel
+- server -> aws ec2
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+##### Index Page
 
-## Deploy on Vercel
+ ![메인](https://user-images.githubusercontent.com/96700628/152285717-04dc8a1e-4bb7-473f-9a9a-175e5e57683a.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+##### Write Page
+
+ ![라이트](https://user-images.githubusercontent.com/96700628/152285729-92050f15-9b79-4a70-9be2-a1a3acf70b83.png)
+
+
+#####  MainPage
+ 
+![포스트](https://user-images.githubusercontent.com/96700628/152285746-0b00caba-d039-4a4b-87ab-c9f9ed7d3e9d.png)
+
+#### login 
+
+![로그인](https://user-images.githubusercontent.com/96700628/152285765-232d8583-a6a0-413f-8456-9a9da3b4bc46.png)
+
+#### about
+
+![어바웃](https://user-images.githubusercontent.com/96700628/152285774-0bffca94-a132-4cef-a150-2ae7990cee0a.png)
+
+
+Link: [serverRepo][https://github.com/kiehlB/blog-server]
+
+
+
