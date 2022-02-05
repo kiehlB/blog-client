@@ -567,6 +567,17 @@ const EditorWrapper = styled.div`
   ${media.custom(768)} {
     width: 100%;
   }
+  span {
+    line-height: 2.125rem;
+    letter-spacing: -0.004em;
+    word-break: keep-all;
+    font-size: 1.25rem;
+    -webkit-font-smoothing: antialiased;
+    overflow-wrap: break-word;
+    font-weight: 300;
+    font-family: Graphik, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+      sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif !important;
+  }
 `;
 
 const BlogWrapper = styled.div`

@@ -32,6 +32,8 @@ import media from '../../lib/styles/media';
 import { PostInit } from '../../store/post';
 import TagsForm from '../Tags/TagsForm';
 import { checkEmpty } from '../../utils/isNull';
+import Map from 'immutable';
+import Immutable from 'immutable';
 
 const ButtonStyles = styled.div`
   font-size: 1rem;
@@ -248,10 +250,10 @@ const inlineStyleButtons = [
 const myBlockStyleFn = contentBlock => {
   const type = contentBlock.getType();
 
+  console.log(type);
+
   if (type === 'blockquote') {
     return `${BlockStyling.superFancyBlockquote}`;
-  } else if (type === 'CODE') {
-    return 'h2BlcokTag';
   } else if (type == 'unstyled') {
     if (type.text === ' ' || type.text === '') return '';
     return <div />;
@@ -259,8 +261,18 @@ const myBlockStyleFn = contentBlock => {
     return 'h2BlcokTag';
   } else if (type === 'header-three') {
     return 'h3BlcokTag';
+  } else if (type === ' code-block') {
+    return `${BlockStyling.codeBlock}`;
   }
 };
+const blockRenderMap = Immutable.Map({
+  'header-two': {
+    element: 'h2',
+  },
+  unstyled: {
+    element: 'h2',
+  },
+});
 
 const { customStyleFn } = createStyles(['font-size']);
 const hashtagPlugin = createHashtagPlugin({ theme: hashtagStyles });
@@ -350,12 +362,9 @@ function EditorMain(props: EditorMainProps) {
     );
   };
 
-  const toggleBlockType = event => {
-    event.preventDefault();
-
-    let block = event.currentTarget.getAttribute('data-block');
-
-    setEditorState(RichUtils.toggleBlockType(editorState, block));
+  const toggleBlockType = blockType => {
+    console.log(blockType);
+    setEditorState(RichUtils.toggleBlockType(editorState, blockType));
   };
 
   const onClickNotifyCheckString = e => {
@@ -426,6 +435,8 @@ function EditorMain(props: EditorMainProps) {
   return (
     <>
       <form className="w-2/4  border-r-2 h-full mlg:w-full">
+        <BlockStyleControls editorState={editorState} onToggle={toggleBlockType} />
+
         <div className="h-4/6  p-9">
           <input
             className="text-4xl  font-bold focus:outline-none w-full "
@@ -489,6 +500,7 @@ function EditorMain(props: EditorMainProps) {
               handleKeyCommand={handleKeyCommand}
               ref={inputEl}
               plugins={plugins}
+              blockRenderMap={blockRenderMap}
               customStyleFn={customStyleFn}
             />
           </EW>
@@ -520,19 +532,49 @@ function EditorMain(props: EditorMainProps) {
 
 export default EditorMain;
 
+const StyleButton = props => {
+  const onToggle = e => {
+    e.preventDefault();
+    props.onToggle(props.style);
+  };
+
+  let className = 'RichEditor-styleButton';
+  if (props.active) {
+    className += ' RichEditor-activeButton';
+  }
+
+  return (
+    <span className={className} onMouseDown={onToggle}>
+      {props.label}
+    </span>
+  );
+};
+
+const BlockStyleControls = props => {
+  const { editorState } = props;
+  const selection = editorState.getSelection();
+  const blockType = editorState
+    .getCurrentContent()
+    .getBlockForKey(selection.getStartKey())
+    .getType();
+  return (
+    <div className="RichEditor-controls">
+      {BLOCK_TYPES.map(type => (
+        <StyleButton
+          key={type.label}
+          active={type.style === blockType}
+          label={type.label}
+          onToggle={props.onToggle}
+          style={type.style}
+        />
+      ))}
+    </div>
+  );
+};
+
 const styleMap = {
-  CODE: {
-    backgroundColor: 'rgba(0, 0, 0, 0.05)',
-    fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
-    fontSize: 16,
-    padding: 15,
-    margin: 10,
-    display: 'flex',
-    whiteSpace: 'pre-line',
-    lineBreak: 'strict',
-  },
   BOLD: {
-    color: '#1fb6ff',
+    color: '#1fb6ff ',
     fontWeight: 'bold',
   },
   ANYCUSTOMSTYLE: {
@@ -548,6 +590,7 @@ const styleMap = {
   },
   H1: {
     fontSize: '2rem',
+    backgroundColor: '#fff',
   },
   H2: {
     fontSize: '1.5rem',
@@ -556,6 +599,19 @@ const styleMap = {
     fontSize: '1.7rem',
   },
 };
+
+const BLOCK_TYPES = [
+  { label: 'H1', style: 'header-one' },
+  { label: 'H2', style: 'header-two' },
+  { label: 'H3', style: 'header-three' },
+  { label: 'H4', style: 'header-four' },
+  { label: 'H5', style: 'header-five' },
+  { label: 'H6', style: 'header-six' },
+  { label: 'Blockquote', style: 'blockquote' },
+  { label: 'UL', style: 'unordered-list-item' },
+  { label: 'OL', style: 'ordered-list-item' },
+  { label: 'Code Block', style: 'code-block' },
+];
 
 const EW = styled.div`
   height: calc(100% - 85px) !important;
