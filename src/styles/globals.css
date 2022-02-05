@@ -76,6 +76,24 @@ div > span{
    
 }
  
+div .public-DraftStyleDefault-pre{
+  
+    background-color: rgba(0, 0, 0, 0.05);
+  font-family: "Inconsolata", "Menlo", "Consolas", monospace;
+  font-size: 16px;
+  padding: 20px;
+}
+div .BlockStyling_superFancyBlockquote__2mYy5{
+    color: #999;
+    font-family: 'Hoefler Text', Georgia, serif;
+    font-style: italic;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+ 
+
  
  
 
@@ -108,26 +126,12 @@ div > span{
   display: none;
 }
 
- 
 
-.RichEditor-editor .public-DraftStyleDefault-pre {
-  background-color: rgba(0, 0, 0, 0.05);
-  font-family: "Inconsolata", "Menlo", "Consolas", monospace;
-  font-size: 16px;
-  padding: 20px;
-}
-
-.RichEditor-editor.BlockStyling_b__y2Q7O {
-   color:#1fb6ff;
-    font-weight : bold;
-     font-size:1.25rem;
-}
-
- .RichEditor-editor .BlockStyling_h1__1Qs0g {
+ div .BlockStyling_h1__1Qs0g {
   font-size: 2rem;
 }
 
-.RichEditor-editor .BlockStyling_note__Tf5dL {
+ div .BlockStyling_note__Tf5dL {
   border-left:3px solid #67c5ff;
     margin-right:20px;
     height:20px;

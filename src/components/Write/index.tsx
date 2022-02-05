@@ -36,11 +36,7 @@ import { checkEmpty } from '../../utils/isNull';
 import Immutable from 'immutable';
 
 const CodeBlock = props => {
-  return (
-    <pre>
-      <code className="language-javascript">{props.children}</code>
-    </pre>
-  );
+  return <div className="text-7xl">{props.children}</div>;
 };
 
 const ButtonStyles = styled.div`
@@ -257,26 +253,15 @@ const inlineStyleButtons = [
 
 const myBlockStyleFn = contentBlock => {
   const type = contentBlock.getType();
-
-  if (type === 'BLOCKQUOTE') {
-    return `${BlockStyling.superFancyBlockquote}`;
-  } else if (type == 'unstyled') {
-    return <section />;
-  } else if (type === 'header-one') {
-    return `${BlockStyling.h1}`;
-  } else if (type === 'header-two') {
-    return `${BlockStyling.h2}`;
-  } else if (type === 'header-three') {
-    return `${BlockStyling.h3}`;
-  } else if (type === 'bold') {
-    return `${BlockStyling.b}`;
-  } else if (type === 'b2') {
-    return `${BlockStyling.b2}`;
-  } else if (type === 'note') {
-    return `${BlockStyling.note}`;
-  }
 };
-const blockRenderMap = Immutable.Map({});
+const blockRenderMap = Immutable.Map({
+  'header-one': {
+    // element is used during paste or html conversion to auto match your component;
+    // it is also retained as part of this.props.children and not stripped out
+    element: 'h2',
+    wrapper: <CodeBlock />,
+  },
+});
 
 const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(blockRenderMap);
 
