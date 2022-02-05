@@ -532,9 +532,6 @@ function EditorMain(props: EditorMainProps) {
               완료
             </Button>
           </ButtonWrapper>
-          <pre>
-            <code className="language-javascript">console.log('dd')</code>
-          </pre>
         </div>
       </form>
     </>
