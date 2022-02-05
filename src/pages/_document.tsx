@@ -1,5 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import Script from 'next/script';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -49,7 +50,7 @@ export default class MyDocument extends Document {
             }}
           />
           <link href="./images/prism.css" rel="stylesheet" />
-          <script src="./images/prism.js"></script>
+          <Script src="./images/prism.js"></Script>
         </Head>
         <body>
           <Main />
