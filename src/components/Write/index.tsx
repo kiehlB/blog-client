@@ -32,7 +32,7 @@ import media from '../../lib/styles/media';
 import { PostInit } from '../../store/post';
 import TagsForm from '../Tags/TagsForm';
 import { checkEmpty } from '../../utils/isNull';
-import Map from 'immutable';
+
 import Immutable from 'immutable';
 
 const CodeBlock = props => {
@@ -548,7 +548,7 @@ const StyleButton = props => {
 
   let className = 'RichEditor-styleButton';
   if (props.active) {
-    className += ' RichEditor-activeButton';
+    className += 'RichEditor-activeButton';
   }
 
   return (
