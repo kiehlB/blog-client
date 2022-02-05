@@ -482,6 +482,15 @@ const styleMap = {
     backgroundColor: '#F8F9FA',
     lineHeight: '2rem',
   },
+  H1: {
+    fontSize: '3rem',
+  },
+  H2: {
+    fontSize: '2rem',
+  },
+  H3: {
+    fontSize: '1rem',
+  },
 };
 const BlogHeader = styled.div`
   font-size: 1rem;

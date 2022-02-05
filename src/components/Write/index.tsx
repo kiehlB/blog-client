@@ -602,6 +602,9 @@ const styleMap = {
   H2: {
     fontSize: '2rem',
   },
+  H3: {
+    fontSize: '1rem',
+  },
 };
 
 const BLOCK_TYPES = [
