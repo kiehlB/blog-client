@@ -34,11 +34,6 @@ import TagsForm from '../Tags/TagsForm';
 import { checkEmpty } from '../../utils/isNull';
 import Map from 'immutable';
 import Immutable from 'immutable';
-import Prism from 'Prismjs';
-import 'prismjs/components/prism-jsx.min';
-import 'prismjs/plugins/unescaped-markup/prism-unescaped-markup.min.js';
-import style from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
 const CodeBlock = props => {
   return (
@@ -281,7 +276,6 @@ const myBlockStyleFn = contentBlock => {
 };
 const blockRenderMap = Immutable.Map({
   'code-block': {
-    element: 'div',
     wrapper: <CodeBlock />,
   },
 });
@@ -333,7 +327,6 @@ function EditorMain(props: EditorMainProps) {
   useEffect(() => {
     return () => {
       dispatch(PostInit());
-      Prism.highlightAll();
     };
   }, []);
   const inputEl = useRef(null);

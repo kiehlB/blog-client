@@ -18,7 +18,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { useEffect } from 'react';
 import * as gtag from '../lib/gtag';
 import { useRouter } from 'next/router';
-import 'prismjs/themes/prism-tomorrow.css';
 
 let persistor = persistStore(store);
 
