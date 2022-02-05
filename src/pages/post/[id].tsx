@@ -457,7 +457,7 @@ const LikeVisible = styled.div`
 
 const styleMap = {
   BOLD: {
-    color: '#1fb6ff',
+    color: '#1fb6ff ',
     fontWeight: 'bold',
   },
   ANYCUSTOMSTYLE: {
@@ -471,14 +471,16 @@ const styleMap = {
     justifyContent: 'center',
     flexWrap: 'wrap',
   },
-  H1: {
-    fontSize: '2rem',
-  },
-  H2: {
-    fontSize: '1.5rem',
-  },
-  H3: {
-    fontSize: '1.7rem',
+
+  NOTE: {
+    borderLeft: '3px solid #67c5ff',
+    marginRight: '20px',
+    height: '20px',
+    display: 'flex',
+    padding: '1rem',
+    alignItems: 'center',
+    backgroundColor: '#F8F9FA',
+    lineHeight: '2rem',
   },
 };
 const BlogHeader = styled.div`

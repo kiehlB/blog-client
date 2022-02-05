@@ -222,16 +222,24 @@ const inlineStyleButtons = [
     value: 'I',
     style: 'ITALIC',
   },
+  {
+    value: 'H1',
+    style: 'H1',
+  },
+  {
+    value: 'H2',
+    style: 'H2',
+  },
+  {
+    value: 'H3',
+    style: 'H3',
+  },
 
   {
     value: 'Underline',
     style: 'UNDERLINE',
   },
 
-  {
-    value: 'Code',
-    style: 'CODE',
-  },
   {
     value: 'FANCYBLOCKQUOTE',
     style: 'FANCYBLOCKQUOTE',
@@ -249,13 +257,7 @@ const myBlockStyleFn = contentBlock => {
     return `${BlockStyling.superFancyBlockquote}`;
   }
 };
-const blockRenderMap = Immutable.Map({
-  'header-one': {
-    // element is used during paste or html conversion to auto match your component;
-    // it is also retained as part of this.props.children and not stripped out
-    element: 'h1',
-  },
-});
+const blockRenderMap = Immutable.Map({});
 
 const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(blockRenderMap);
 
@@ -566,9 +568,7 @@ const styleMap = {
     color: '#1fb6ff ',
     fontWeight: 'bold',
   },
-  ANYCUSTOMSTYLE: {
-    color: '#00e400',
-  },
+
   FANCYBLOCKQUOTE: {
     color: '#999',
     fontStyle: 'italic',
@@ -588,16 +588,21 @@ const styleMap = {
     backgroundColor: '#F8F9FA',
     lineHeight: '2rem',
   },
+  H1: {
+    fontSize: '3rem',
+  },
+  H2: {
+    fontSize: '2rem',
+  },
+  H3: {
+    fontSize: '1rem',
+  },
 };
 
 const BLOCK_TYPES = [
   { label: 'UL', style: 'unordered-list-item' },
   { label: 'OL', style: 'ordered-list-item' },
   { label: 'Code', style: 'code-block' },
-  { label: 'H1', style: 'header-one' },
-  { label: 'H2', style: 'header-two' },
-  { label: 'H3', style: 'header-three' },
-  { label: 'blockquote', style: 'blockquote' },
 ];
 
 const EW = styled.div`
