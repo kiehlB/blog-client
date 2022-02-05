@@ -36,7 +36,11 @@ import { checkEmpty } from '../../utils/isNull';
 import Immutable from 'immutable';
 
 const CodeBlock = props => {
-  return <div className="text-7xl">{props.children}</div>;
+  return (
+    <pre>
+      <code className="language-javascript">{props.children}</code>
+    </pre>
+  );
 };
 
 const ButtonStyles = styled.div`
@@ -253,13 +257,21 @@ const inlineStyleButtons = [
 
 const myBlockStyleFn = contentBlock => {
   const type = contentBlock.getType();
+  if (type === 'blockquote') {
+    return `${BlockStyling.superFancyBlockquote}`;
+  } else if (type === 'atomic') {
+    return `${BlockStyling.b2}`;
+  } else if (type === 'header-two') {
+    return 'h2BlcokTag';
+  } else if (type === 'header-three') {
+    return 'h3BlcokTag';
+  }
 };
 const blockRenderMap = Immutable.Map({
   'header-one': {
     // element is used during paste or html conversion to auto match your component;
     // it is also retained as part of this.props.children and not stripped out
-    element: 'h2',
-    wrapper: <CodeBlock />,
+    element: 'h1',
   },
 });
 
@@ -447,6 +459,11 @@ function EditorMain(props: EditorMainProps) {
             </>
           </TagBlock>
           <div className="mt-3.5 flex items-center flex-wrap">
+            <div className="inline-style-options">
+              {inlineStyleButtons.map(button => {
+                return renderInlineStyleButton(button.value, button.style);
+              })}
+            </div>
             <BlockStyleControls editorState={editorState} onToggle={toggleBlockType} />
             <ImageAdd
               /* @ts-ignore */
@@ -591,15 +608,10 @@ const styleMap = {
 };
 
 const BLOCK_TYPES = [
-  { label: 'B', style: 'bold' },
-  { label: 'BLOCKQUOTE', style: 'BLOCKQUOTE' },
-  { label: 'H1', style: 'header-one' },
-  { label: 'H2', style: 'header-two' },
-  { label: 'H3', style: 'header-three' },
   { label: 'UL', style: 'unordered-list-item' },
   { label: 'OL', style: 'ordered-list-item' },
   { label: 'Code', style: 'code-block' },
-  { label: 'B2', style: 'b2' },
+  { label: 'B2', style: 'atomic' },
   { label: 'Note', style: 'note' },
 ];
 
