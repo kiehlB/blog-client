@@ -1297,6 +1297,35 @@
   dependencies:
     lodash.snakecase "^4.1.1"
 
+"@draft-js-plugins/buttons@^4.0.0":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@draft-js-plugins/buttons/-/buttons-4.1.1.tgz#35e1045339f1de5b0c86885933a73d60864e2160"
+  integrity sha512-Z6dHYMq9tgJbLV3Jm4ATT5yH5TtnynuDBOSODUESvi3S/bfzn9Gca73nQ7u1Rt1SEilkKtsbsp0XIGx4pPR50Q==
+  dependencies:
+    clsx "^1.0.4"
+
+"@draft-js-plugins/editor@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@draft-js-plugins/editor/-/editor-4.1.1.tgz#886cd9605da37f45f0272f39df18464f166198e5"
+  integrity sha512-zqxBUyX7cPEMT5Z7/DdhC4kga+uPSg/SvsRbndKbYXoT6sIXWXo+DI/TuAwaybOPjVFLLwxBco6CBkQr3d1ejg==
+  dependencies:
+    immutable "~3.7.4"
+    prop-types "^15.8.1"
+
+"@draft-js-plugins/static-toolbar@^4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@draft-js-plugins/static-toolbar/-/static-toolbar-4.1.2.tgz#c029d42f640cf79051ef2237070aba1fdd6d9937"
+  integrity sha512-fMicbvfw9Gwb5ni698yETOOHFXy+fEG00x6wd6lnDG9jUm8mQqg5JXYqob1t2R9CdSJPySCAHnaiv+PfHz/tPQ==
+  dependencies:
+    "@draft-js-plugins/buttons" "^4.0.0"
+    "@draft-js-plugins/utils" "^4.0.0"
+    prop-types "^15.5.8"
+
+"@draft-js-plugins/utils@^4.0.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@draft-js-plugins/utils/-/utils-4.2.0.tgz#ee3c643c94d548fd9460541881a7554c5b077988"
+  integrity sha512-tQhf7a0S9ZDtOb0Mje5a+xTOT6LVDRv2LueEqqVdX4aI+oh0jjkAuP0oTiZBv6h7K9XSPgsQ08q9+kwHc3EyUg==
+
 "@emotion/hash@^0.7.1":
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.7.4.tgz#f14932887422c9056b15a8d222a9074a7dfa2831"
@@ -8728,7 +8757,7 @@ prop-types@15.7.2, prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
-prop-types@^15.0.0, prop-types@^15.6.0:
+prop-types@^15.0.0, prop-types@^15.6.0, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==

@@ -255,6 +255,12 @@ const myBlockStyleFn = contentBlock => {
   const type = contentBlock.getType();
   if (type === 'blockquote') {
     return `${BlockStyling.superFancyBlockquote}`;
+  } else if (type === 'header-one') {
+    return 'h1BlcokTag';
+  } else if (type === 'header-two') {
+    return 'h2BlcokTag';
+  } else if (type === 'header-three') {
+    return 'h3BlcokTag';
   }
 };
 const blockRenderMap = Immutable.Map({});
@@ -551,7 +557,6 @@ const BlockStyleControls = props => {
       <div className="flex p-1.5 cursor-pointer  ">
         {BLOCK_TYPES.map(type => (
           <StyleButton
-            key={type.label}
             active={type.style === blockType}
             label={type.label}
             onToggle={props.onToggle}
@@ -576,17 +581,19 @@ const styleMap = {
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
+    lineHeight: '2rem',
   },
 
   NOTE: {
     borderLeft: '3px solid #67c5ff',
-    marginRight: '20px',
-    height: '20px',
+    paddingLeft: '2rem',
     display: 'flex',
-    padding: '1rem',
+    marginTop: '.5rem',
+    marginBottom: '.5rem',
+
     alignItems: 'center',
     backgroundColor: '#F8F9FA',
-    lineHeight: '2rem',
+    lineHeight: '1.5rem',
   },
   H1: {
     fontSize: '3rem',
@@ -594,15 +601,13 @@ const styleMap = {
   H2: {
     fontSize: '2rem',
   },
-  H3: {
-    fontSize: '1rem',
-  },
 };
 
 const BLOCK_TYPES = [
   { label: 'UL', style: 'unordered-list-item' },
   { label: 'OL', style: 'ordered-list-item' },
   { label: 'Code', style: 'code-block' },
+  { label: 'H1', style: 'headerOne' },
 ];
 
 const EW = styled.div`

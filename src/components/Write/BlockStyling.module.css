@@ -7,15 +7,15 @@
     justify-content: center;
  
   }
-  .h1{
+    .h1BlcokTag{
+    font-size: 3rem;
+
+  }
+  .h2BlcokTag{
     font-size: 2rem;
 
   }
-  .h2{
-    font-size: 1.5rem;
-
-  }
-  .h3{
+  .h3BlcokTag{
     font-size: 1rem;
 
   }
