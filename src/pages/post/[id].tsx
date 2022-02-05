@@ -474,13 +474,14 @@ const styleMap = {
 
   NOTE: {
     borderLeft: '3px solid #67c5ff',
-    marginRight: '20px',
-    height: '20px',
+    paddingLeft: '2rem',
     display: 'flex',
-    padding: '1rem',
+    marginTop: '.5rem',
+    marginBottom: '.5rem',
+
     alignItems: 'center',
     backgroundColor: '#F8F9FA',
-    lineHeight: '2rem',
+    lineHeight: '1.5rem',
   },
   H1: {
     fontSize: '3rem',

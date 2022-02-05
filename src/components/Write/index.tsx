@@ -256,11 +256,11 @@ const myBlockStyleFn = contentBlock => {
   if (type === 'blockquote') {
     return `${BlockStyling.superFancyBlockquote}`;
   } else if (type === 'header-one') {
-    return 'h1BlcokTag';
+    return `${BlockStyling.h1BlcokTag}`;
   } else if (type === 'header-two') {
-    return 'h2BlcokTag';
+    return `${BlockStyling.h2BlcokTag}`;
   } else if (type === 'header-three') {
-    return 'h3BlcokTag';
+    return `${BlockStyling.h3BlcokTag}`;
   }
 };
 const blockRenderMap = Immutable.Map({});
