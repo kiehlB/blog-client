@@ -32,6 +32,8 @@ import media from '../../lib/styles/media';
 import { PostInit } from '../../store/post';
 import TagsForm from '../Tags/TagsForm';
 import { checkEmpty } from '../../utils/isNull';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-jsx.min';
 
 import Immutable from 'immutable';
 
@@ -326,6 +328,7 @@ function EditorMain(props: EditorMainProps) {
 
   useEffect(() => {
     return () => {
+      Prism.highlightAll();
       dispatch(PostInit());
     };
   }, []);
@@ -529,6 +532,9 @@ function EditorMain(props: EditorMainProps) {
               완료
             </Button>
           </ButtonWrapper>
+          <pre>
+            <code className="language-javascript">console.log('dd')</code>
+          </pre>
         </div>
       </form>
     </>
@@ -549,7 +555,7 @@ const StyleButton = props => {
   }
 
   return (
-    <span className={className} onMouseDown={onToggle}>
+    <span className={className} onMouseDown={onToggle} style={{ marginRight: '1rem' }}>
       {props.label}
     </span>
   );
