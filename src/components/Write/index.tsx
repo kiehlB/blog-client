@@ -435,8 +435,6 @@ function EditorMain(props: EditorMainProps) {
   return (
     <>
       <form className="w-2/4  border-r-2 h-full mlg:w-full">
-        <BlockStyleControls editorState={editorState} onToggle={toggleBlockType} />
-
         <div className="h-4/6  p-9">
           <input
             className="text-4xl  font-bold focus:outline-none w-full "
@@ -460,6 +458,7 @@ function EditorMain(props: EditorMainProps) {
             {inlineStyleButtons.map(button => {
               return renderInlineStyleButton(button.value, button.style);
             })}
+            <BlockStyleControls editorState={editorState} onToggle={toggleBlockType} />
             <ImageAdd
               /* @ts-ignore */
               editorState={editorState}
@@ -559,15 +558,17 @@ const BlockStyleControls = props => {
     .getType();
   return (
     <div className="RichEditor-controls">
-      {BLOCK_TYPES.map(type => (
-        <StyleButton
-          key={type.label}
-          active={type.style === blockType}
-          label={type.label}
-          onToggle={props.onToggle}
-          style={type.style}
-        />
-      ))}
+      <div className="flex p-1.5 cursor-pointer  ">
+        {BLOCK_TYPES.map(type => (
+          <StyleButton
+            key={type.label}
+            active={type.style === blockType}
+            label={type.label}
+            onToggle={props.onToggle}
+            style={type.style}
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -601,16 +602,9 @@ const styleMap = {
 };
 
 const BLOCK_TYPES = [
-  { label: 'H1', style: 'header-one' },
-  { label: 'H2', style: 'header-two' },
-  { label: 'H3', style: 'header-three' },
-  { label: 'H4', style: 'header-four' },
-  { label: 'H5', style: 'header-five' },
-  { label: 'H6', style: 'header-six' },
-  { label: 'Blockquote', style: 'blockquote' },
   { label: 'UL', style: 'unordered-list-item' },
   { label: 'OL', style: 'ordered-list-item' },
-  { label: 'Code Block', style: 'code-block' },
+  { label: 'Code', style: 'code-block' },
 ];
 
 const EW = styled.div`

@@ -456,16 +456,6 @@ const LikeVisible = styled.div`
 `;
 
 const styleMap = {
-  CODE: {
-    backgroundColor: 'rgba(0, 0, 0, 0.05)',
-    fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
-    fontSize: 16,
-    padding: 15,
-    margin: 10,
-    display: 'flex',
-    whiteSpace: 'pre-line',
-    lineBreak: 'strict',
-  },
   BOLD: {
     color: '#1fb6ff',
     fontWeight: 'bold',
