@@ -76,15 +76,7 @@ div > span{
    
 }
  
-div .public-DraftStyleDefault-pre{
-  
-    background-color: rgba(0, 0, 0, 0.05);
-  font-family: "Inconsolata", "Menlo", "Consolas", monospace;
-  font-size: 16px;
-  padding: 20px;
-}
  
-
  
 
 .RichEditor-root {
@@ -125,17 +117,17 @@ div .public-DraftStyleDefault-pre{
   padding: 20px;
 }
 
-div .BlockStyling_b__y2Q7O {
+.RichEditor-editor.BlockStyling_b__y2Q7O {
    color:#1fb6ff;
     font-weight : bold;
      font-size:1.25rem;
 }
 
- div .BlockStyling_h1__1Qs0g {
+ .RichEditor-editor .BlockStyling_h1__1Qs0g {
   font-size: 2rem;
 }
 
-div .BlockStyling_note__Tf5dL {
+.RichEditor-editor .BlockStyling_note__Tf5dL {
   border-left:3px solid #67c5ff;
     margin-right:20px;
     height:20px;
