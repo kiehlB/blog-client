@@ -18,6 +18,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { useEffect } from 'react';
 import * as gtag from '../lib/gtag';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 let persistor = persistStore(store);
 
@@ -37,13 +39,19 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router.events]);
 
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <ApolloProvider client={apolloClient}>
-          <Component {...pageProps} />
-        </ApolloProvider>
-      </PersistGate>
-    </Provider>
+    <>
+      <Head>
+        <Script src="./images/prism.js"></Script>
+      </Head>
+
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ApolloProvider client={apolloClient}>
+            <Component {...pageProps} />
+          </ApolloProvider>
+        </PersistGate>
+      </Provider>
+    </>
   );
 }
 export default MyApp;
