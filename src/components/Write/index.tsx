@@ -229,11 +229,6 @@ const inlineStyleButtons = [
   },
 
   {
-    value: 'Strikethrough',
-    style: 'STRIKETHROUGH',
-  },
-
-  {
     value: 'Code',
     style: 'CODE',
   },
@@ -241,17 +236,10 @@ const inlineStyleButtons = [
     value: 'FANCYBLOCKQUOTE',
     style: 'FANCYBLOCKQUOTE',
   },
+
   {
-    value: 'H1',
-    style: 'H1',
-  },
-  {
-    value: 'H2',
-    style: 'H2',
-  },
-  {
-    value: 'H3',
-    style: 'H3',
+    value: 'Note',
+    style: 'NOTE',
   },
 ];
 
@@ -259,12 +247,6 @@ const myBlockStyleFn = contentBlock => {
   const type = contentBlock.getType();
   if (type === 'blockquote') {
     return `${BlockStyling.superFancyBlockquote}`;
-  } else if (type === 'atomic') {
-    return `${BlockStyling.b2}`;
-  } else if (type === 'header-two') {
-    return 'h2BlcokTag';
-  } else if (type === 'header-three') {
-    return 'h3BlcokTag';
   }
 };
 const blockRenderMap = Immutable.Map({
@@ -595,15 +577,16 @@ const styleMap = {
     justifyContent: 'center',
     flexWrap: 'wrap',
   },
-  H1: {
-    fontSize: '2rem',
-    backgroundColor: '#fff',
-  },
-  H2: {
-    fontSize: '1.5rem',
-  },
-  H3: {
-    fontSize: '1.7rem',
+
+  NOTE: {
+    borderLeft: '3px solid #67c5ff',
+    marginRight: '20px',
+    height: '20px',
+    display: 'flex',
+    padding: '1rem',
+    alignItems: 'center',
+    backgroundColor: '#F8F9FA',
+    lineHeight: '2rem',
   },
 };
 
@@ -611,8 +594,10 @@ const BLOCK_TYPES = [
   { label: 'UL', style: 'unordered-list-item' },
   { label: 'OL', style: 'ordered-list-item' },
   { label: 'Code', style: 'code-block' },
-  { label: 'B2', style: 'atomic' },
-  { label: 'Note', style: 'note' },
+  { label: 'H1', style: 'header-one' },
+  { label: 'H2', style: 'header-two' },
+  { label: 'H3', style: 'header-three' },
+  { label: 'blockquote', style: 'blockquote' },
 ];
 
 const EW = styled.div`
