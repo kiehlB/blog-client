@@ -50,7 +50,6 @@ export default class MyDocument extends Document {
             }}
           />
           <link href="./images/prism.css" rel="stylesheet" />
-          <Script src="./images/prism.js"></Script>
         </Head>
         <body>
           <Main />
