@@ -131,6 +131,34 @@ span{
   padding: 20px;
 }
 
+.RichEditor-editor .public-DraftStyleDefault-block {
+   color:#1fb6ff;
+    font-weight : bold;
+     font-size:1.25rem;
+}
+
+.RichEditor-editor .BlockStyling_h1__1Qs0g {
+  font-size: 2rem;
+}
+
+.RichEditor-editor .BlockStyling_note__Tf5dL {
+  border-left:3px solid #67c5ff;
+    margin-right:20px;
+    height:20px;
+    display: flex;
+    padding:1rem;
+    align-items: center;
+    background-color: #F8F9FA;
+    line-height: 2rem;
+}
+
+
+
+
+ 
+
+
+
 .RichEditor-controls {
   
   
