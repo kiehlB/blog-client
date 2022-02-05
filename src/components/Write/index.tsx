@@ -557,6 +557,7 @@ const BlockStyleControls = props => {
       <div className="flex p-1.5 cursor-pointer  ">
         {BLOCK_TYPES.map(type => (
           <StyleButton
+            key={type.label}
             active={type.style === blockType}
             label={type.label}
             onToggle={props.onToggle}
