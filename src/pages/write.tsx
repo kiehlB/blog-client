@@ -5,7 +5,7 @@ import EditorMain from '../components/Write';
 
 export type WriteProps = {};
 
-function Write({ }: WriteProps) {
+function Write({}: WriteProps) {
   return (
     <WriteBlock>
       <style global jsx>{`
@@ -18,7 +18,6 @@ function Write({ }: WriteProps) {
         }
       `}</style>
       <EditorMain />
-
     </WriteBlock>
   );
 }

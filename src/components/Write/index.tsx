@@ -32,8 +32,6 @@ import media from '../../lib/styles/media';
 import { PostInit } from '../../store/post';
 import TagsForm from '../Tags/TagsForm';
 import { checkEmpty } from '../../utils/isNull';
-import Prism from 'prismjs';
-import 'prismjs/components/prism-jsx.min';
 
 import Immutable from 'immutable';
 
@@ -276,11 +274,7 @@ const myBlockStyleFn = contentBlock => {
     return `${BlockStyling.b2}`;
   }
 };
-const blockRenderMap = Immutable.Map({
-  'code-block': {
-    wrapper: <CodeBlock />,
-  },
-});
+const blockRenderMap = Immutable.Map({});
 
 const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(blockRenderMap);
 
@@ -328,7 +322,6 @@ function EditorMain(props: EditorMainProps) {
 
   useEffect(() => {
     return () => {
-      Prism.highlightAll();
       dispatch(PostInit());
     };
   }, []);
