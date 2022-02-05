@@ -3,21 +3,46 @@
     font-family: 'Hoefler Text', Georgia, serif;
     font-style: italic;
     text-align: center;
+    display: flex;
+    justify-content: center;
  
   }
-  .h1BlcokTag{
+  .h1{
     font-size: 2rem;
 
   }
-  .h2BlcokTag{
+  .h2{
     font-size: 1.5rem;
 
   }
-  .h3BlcokTag{
+  .h3{
     font-size: 1rem;
 
   }
 
   .codeBlock{
     background-color: #999;
+    font-family: monospace;
+    background: #ffeff0;
+  word-wrap: break-word;
+  box-decoration-break: clone;
+  padding: .1rem .3rem .2rem;
+  border-radius: .2rem;
+  
+  }
+  
+
+  .b{
+    color:#1fb6ff;
+    font-weight : bold;
+     font-size:1.25rem;
+  }
+
+   .b2{
+  color: #1f2d3d;
+  font-size:1.25rem;
+    font-weight : bold;
+ 
+
+    
   }

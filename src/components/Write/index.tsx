@@ -5,7 +5,7 @@ import { Pane, Badge, Text } from 'evergreen-ui';
 import Link from 'next/link';
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { RichUtils, getDefaultKeyBinding } from 'draft-js';
+import { RichUtils, getDefaultKeyBinding, DefaultDraftBlockRenderMap } from 'draft-js';
 import { convertToHTML } from 'draft-convert';
 import Editor, { composeDecorators } from 'draft-js-plugins-editor';
 import createHashtagPlugin from 'draft-js-hashtag-plugin';
@@ -34,6 +34,19 @@ import TagsForm from '../Tags/TagsForm';
 import { checkEmpty } from '../../utils/isNull';
 import Map from 'immutable';
 import Immutable from 'immutable';
+import Prism from 'Prismjs';
+import 'prismjs/components/prism-jsx.min';
+import 'prismjs/plugins/unescaped-markup/prism-unescaped-markup.min.js';
+import style from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+const CodeBlock = props => {
+  return (
+    <pre>
+      <code className="language-javascript">{props.children}</code>
+    </pre>
+  );
+};
 
 const ButtonStyles = styled.div`
   font-size: 1rem;
@@ -250,29 +263,30 @@ const inlineStyleButtons = [
 const myBlockStyleFn = contentBlock => {
   const type = contentBlock.getType();
 
-  console.log(type);
-
-  if (type === 'blockquote') {
+  if (type === 'BLOCKQUOTE') {
     return `${BlockStyling.superFancyBlockquote}`;
   } else if (type == 'unstyled') {
-    if (type.text === ' ' || type.text === '') return '';
-    return <div />;
+    return <section />;
+  } else if (type === 'header-one') {
+    return `${BlockStyling.h1}`;
   } else if (type === 'header-two') {
-    return 'h2BlcokTag';
+    return `${BlockStyling.h2}`;
   } else if (type === 'header-three') {
-    return 'h3BlcokTag';
-  } else if (type === ' code-block') {
-    return `${BlockStyling.codeBlock}`;
+    return `${BlockStyling.h3}`;
+  } else if (type === 'bold') {
+    return `${BlockStyling.b}`;
+  } else if (type === 'b2') {
+    return `${BlockStyling.b2}`;
   }
 };
 const blockRenderMap = Immutable.Map({
-  'header-two': {
-    element: 'h2',
-  },
-  unstyled: {
-    element: 'h2',
+  'code-block': {
+    element: 'div',
+    wrapper: <CodeBlock />,
   },
 });
+
+const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(blockRenderMap);
 
 const { customStyleFn } = createStyles(['font-size']);
 const hashtagPlugin = createHashtagPlugin({ theme: hashtagStyles });
@@ -315,9 +329,11 @@ export type EditorMainProps = {};
 
 function EditorMain(props: EditorMainProps) {
   const dispatch = useDispatch();
+
   useEffect(() => {
     return () => {
       dispatch(PostInit());
+      Prism.highlightAll();
     };
   }, []);
   const inputEl = useRef(null);
@@ -455,9 +471,6 @@ function EditorMain(props: EditorMainProps) {
             </>
           </TagBlock>
           <div className="mt-3.5 flex items-center flex-wrap">
-            {inlineStyleButtons.map(button => {
-              return renderInlineStyleButton(button.value, button.style);
-            })}
             <BlockStyleControls editorState={editorState} onToggle={toggleBlockType} />
             <ImageAdd
               /* @ts-ignore */
@@ -499,7 +512,7 @@ function EditorMain(props: EditorMainProps) {
               handleKeyCommand={handleKeyCommand}
               ref={inputEl}
               plugins={plugins}
-              blockRenderMap={blockRenderMap}
+              blockRenderMap={extendedBlockRenderMap}
               customStyleFn={customStyleFn}
             />
           </EW>
@@ -523,6 +536,9 @@ function EditorMain(props: EditorMainProps) {
               완료
             </Button>
           </ButtonWrapper>
+          <pre>
+            <code className="language-javascript">console.log('dd');</code>
+          </pre>
         </div>
       </form>
     </>
@@ -602,9 +618,15 @@ const styleMap = {
 };
 
 const BLOCK_TYPES = [
+  { label: 'B', style: 'bold' },
+  { label: 'BLOCKQUOTE', style: 'BLOCKQUOTE' },
+  { label: 'H1', style: 'header-one' },
+  { label: 'H2', style: 'header-two' },
+  { label: 'H3', style: 'header-three' },
   { label: 'UL', style: 'unordered-list-item' },
   { label: 'OL', style: 'ordered-list-item' },
   { label: 'Code', style: 'code-block' },
+  { label: 'B2', style: 'b2' },
 ];
 
 const EW = styled.div`

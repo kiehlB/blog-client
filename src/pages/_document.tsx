@@ -48,6 +48,8 @@ export default class MyDocument extends Document {
           `,
             }}
           />
+          <link href="/styles/Prism.css" rel="stylesheet" />
+          <script src="/js/Prism.js"></script>
         </Head>
         <body>
           <Main />
