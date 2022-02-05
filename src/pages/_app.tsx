@@ -19,7 +19,6 @@ import { useEffect } from 'react';
 import * as gtag from '../lib/gtag';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 let persistor = persistStore(store);
 
@@ -40,9 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        <Script src="./images/prism.js"></Script>
-      </Head>
+      <Script src="./images/prism.js"></Script>
 
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
