@@ -272,6 +272,8 @@ const myBlockStyleFn = contentBlock => {
     return `${BlockStyling.b}`;
   } else if (type === 'b2') {
     return `${BlockStyling.b2}`;
+  } else if (type === 'note') {
+    return `${BlockStyling.note}`;
   }
 };
 const blockRenderMap = Immutable.Map({});
@@ -613,6 +615,7 @@ const BLOCK_TYPES = [
   { label: 'OL', style: 'ordered-list-item' },
   { label: 'Code', style: 'code-block' },
   { label: 'B2', style: 'b2' },
+  { label: 'Note', style: 'note' },
 ];
 
 const EW = styled.div`

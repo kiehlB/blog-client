@@ -46,3 +46,14 @@
 
     
   }
+
+  .note{
+    border-left:3px solid #67c5ff;
+    margin-right:20px;
+    height:20px;
+    display: flex;
+    padding:1rem;
+    align-items: center;
+    background-color: #F8F9FA;
+    line-height: 2rem;
+  }
