@@ -59,10 +59,15 @@ a {
 }
 
  
-div.DraftEditor-root {
- 
+ span{
+   
   
-}
+  line-height: 140%;
+    letter-spacing: -0.004em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    
+ }
  
 
 div > span{

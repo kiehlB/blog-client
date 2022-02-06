@@ -217,6 +217,10 @@ const inlineStyleButtons = [
     value: 'B',
     style: 'BOLD',
   },
+  {
+    value: 'B2',
+    style: 'BOLD2',
+  },
 
   {
     value: 'I',
@@ -375,14 +379,14 @@ function EditorMain(props: EditorMainProps) {
 
   const renderInlineStyleButton = (value, style) => {
     return (
-      <input
+      <button
         type="button"
         key={style}
-        value={value}
         data-style={style}
         onMouseDown={toggleInlineStyle}
-        className="p-1.5 cursor-pointer hover:bg-neutral-100 transition-all"
-      />
+        className="p-1.5 cursor-pointer hover:bg-neutral-100 transition-all">
+        <ButtonStyles> {value}</ButtonStyles>
+      </button>
     );
   };
 
@@ -606,6 +610,10 @@ const styleMap = {
     color: '#1fb6ff ',
     fontWeight: 'bold',
   },
+  BOLD2: {
+    color: '#212529 ',
+    fontWeight: 'bold',
+  },
 
   FANCYBLOCKQUOTE: {
     color: '#999',
@@ -635,7 +643,7 @@ const styleMap = {
     fontSize: '1.5rem',
   },
   H3: {
-    fontSize: '1.7rem',
+    fontSize: '1.125rem',
   },
 };
 
@@ -654,9 +662,8 @@ const EW = styled.div`
   word-break: break-word;
   padding: 2rem;
   white-space: pre-line;
+  line-height: 140%;
   line-break: strict;
-
-  line-height: 75%;
 `;
 
 const ButtonWrapper = styled.div`

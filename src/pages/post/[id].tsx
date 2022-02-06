@@ -52,6 +52,11 @@ const styleMap = {
     color: '#1fb6ff ',
     fontWeight: 'bold',
   },
+
+  BOLD2: {
+    color: '#212529 ',
+    fontWeight: 'bold',
+  },
   ANYCUSTOMSTYLE: {
     color: '#00e400',
   },
@@ -82,7 +87,7 @@ const styleMap = {
     fontSize: '1.5rem',
   },
   H3: {
-    fontSize: '1.7rem',
+    fontSize: '1.125rem',
   },
 };
 
