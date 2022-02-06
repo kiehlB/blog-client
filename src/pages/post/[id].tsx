@@ -7,7 +7,7 @@ import { initializeApollo } from '../../lib/apolloClient';
 import { GET_Post, GET_Posts } from '../../lib/graphql/posts';
 import draftToHtml from 'draftjs-to-html';
 import styled from 'styled-components';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import createLinkDecorator from '../../components/Write/Decorators';
@@ -46,6 +46,13 @@ import { TiHeartOutline } from 'react-icons/ti';
 import { TiHeart } from 'react-icons/ti';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { AiOutlineUserDelete } from 'react-icons/ai';
+
+import Prism from 'prismjs';
+import createPrismPlugin from 'draft-js-prism-plugin';
+import 'prismjs/themes/prism.css'; // add prism.css to add highlights
+import 'prismjs/themes/prism-tomorrow.css';
+import 'prismjs/components/prism-jsx.min';
+import 'prismjs/components/prism-tsx.min';
 
 const styleMap = {
   BOLD: {
@@ -93,6 +100,9 @@ const styleMap = {
 
 export default function Post({}) {
   const dispatch = useDispatch();
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
 
   const [isInput, setisInput] = useState(false);
   const [height, setHeight] = useState(null);

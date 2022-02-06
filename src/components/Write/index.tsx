@@ -40,6 +40,9 @@ import { checkEmpty } from '../../utils/isNull';
 import Prism from 'prismjs';
 import createPrismPlugin from 'draft-js-prism-plugin';
 import 'prismjs/themes/prism.css'; // add prism.css to add highlights
+import 'prismjs/themes/prism-tomorrow.css';
+import 'prismjs/components/prism-jsx.min';
+import 'prismjs/components/prism-tsx.min';
 
 import Immutable from 'immutable';
 
@@ -312,6 +315,8 @@ function EditorMain(props: EditorMainProps) {
 
   useEffect(() => {
     return () => {
+      Prism.highlightAll();
+
       dispatch(PostInit());
     };
   }, []);
