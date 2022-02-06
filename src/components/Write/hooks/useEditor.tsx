@@ -53,7 +53,7 @@ export default function useEditor() {
   const [editorState, setEditorState] = useState(
     EditorState.createWithContent(
       convertFromRaw(
-        (getPosts as any).body ? JSON.parse((getPosts as any).body) : initialData,
+        (getPosts as any)?.body ? JSON.parse((getPosts as any).body) : initialData,
       ),
     ),
   );

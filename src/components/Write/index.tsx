@@ -3,9 +3,14 @@ import createColorBlockPlugin from './colorBlockPlugin';
 import Button from '../Common/TailButton';
 import { Pane, Badge, Text } from 'evergreen-ui';
 import Link from 'next/link';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { RichUtils, getDefaultKeyBinding, DefaultDraftBlockRenderMap } from 'draft-js';
+import {
+  RichUtils,
+  getDefaultKeyBinding,
+  DefaultDraftBlockRenderMap,
+  EditorState,
+} from 'draft-js';
 import { convertToHTML } from 'draft-convert';
 import Editor, { composeDecorators } from 'draft-js-plugins-editor';
 import createHashtagPlugin from 'draft-js-hashtag-plugin';
@@ -32,6 +37,9 @@ import media from '../../lib/styles/media';
 import { PostInit } from '../../store/post';
 import TagsForm from '../Tags/TagsForm';
 import { checkEmpty } from '../../utils/isNull';
+import Prism from 'prismjs';
+import createPrismPlugin from 'draft-js-prism-plugin';
+import 'prismjs/themes/prism.css'; // add prism.css to add highlights
 
 import Immutable from 'immutable';
 
@@ -280,8 +288,6 @@ const decorator = composeDecorators(
 
 const imagePlugin = createImagePlugin({ decorator });
 
-const colorBlockPlugin = createColorBlockPlugin({ decorator });
-
 const plugins = [
   imagePlugin,
   hashtagPlugin,
@@ -290,6 +296,9 @@ const plugins = [
   blockDndPlugin,
   focusPlugin,
   resizeablePlugin,
+  createPrismPlugin({
+    prism: Prism,
+  }),
 ];
 
 function BlockWrapper({ children }) {
@@ -325,10 +334,12 @@ function EditorMain(props: EditorMainProps) {
 
   const myBlockStyleFn = contentBlock => {
     const type = contentBlock.getType();
+
+    console.log(type);
     if (type === 'blockquote') {
       return `${BlockStyling.superFancyBlockquote}`;
-    } else if (type === 'header-one') {
-      return 'h1BlcokTag';
+    } else if (type === 'code-block') {
+      return 'javascript';
     } else if (type === 'header-two') {
       return 'h2BlcokTag';
     } else if (type === 'header-three') {
@@ -336,39 +347,7 @@ function EditorMain(props: EditorMainProps) {
     }
   };
 
-  const html = convertToHTML({
-    styleToHTML: style => {
-      if (style === 'BOLD') {
-        return <span style={{ fontWeight: 'bold' }} />;
-      } else if (style === 'ITALIC') {
-        return <span style={{ fontStyle: 'italic' }} />;
-      } else if (style === 'UNDERLINE') {
-        return <span style={{ textDecoration: ' underline' }} />;
-      } else if (style === 'STRIKETHROUGH') {
-        return <span style={{ textDecoration: ' line-through' }} />;
-      } else if (style === 'CODE') {
-        return <span style={{ fontFamily: 'Times New Roman' }} />;
-      }
-    },
-
-    blockToHTML: block => {
-      if (block.type === 'header-one') {
-        return <h1 />;
-      }
-    },
-    entityToHTML: (entity, originalText) => {
-      if (entity.type === 'LINK') {
-        return <a href={entity.data.url}>{originalText}</a>;
-      }
-      return originalText;
-    },
-  })(editorState.getCurrentContent());
-
   const buttonClass = classNames(`${buttonStyle.button} ${buttonStyle.shinydarken}`);
-
-  const onChange = editorState => {
-    setEditorState(editorState);
-  };
 
   const toggleInlineStyle = event => {
     event.preventDefault();
@@ -460,6 +439,44 @@ function EditorMain(props: EditorMainProps) {
     if (e.code === 'Enter') e.preventDefault();
   };
 
+  const getCodeHighlitedEditorState = ({ block, newEditorState, selection }) => {
+    const data = block.getData().merge({ language: 'javascript' });
+    const newBlock = block.merge({ data });
+    const newContentState = newEditorState.getCurrentContent().merge({
+      blockMap: newEditorState
+        .getCurrentContent()
+        .getBlockMap()
+        .set(selection.getStartKey(), newBlock),
+      selectionAfter: selection,
+    });
+    const codeHighlitedEditorState = EditorState.push(
+      newEditorState,
+      newContentState,
+      'change-block-data',
+    );
+    return codeHighlitedEditorState;
+  };
+
+  const setEditorState2 = useCallback(({ newEditorState, from }) => {
+    let finalEditorState = newEditorState;
+    const selection = newEditorState.getSelection();
+    const block = newEditorState
+      .getCurrentContent()
+      .getBlockForKey(selection.getStartKey());
+    if (block.getType() === 'code-block') {
+      finalEditorState = getCodeHighlitedEditorState({
+        block,
+        newEditorState,
+        selection,
+      });
+    }
+    setEditorState(finalEditorState);
+  }, []);
+
+  const onChange = () => {
+    console.log('hello');
+  };
+
   return (
     <>
       <div className="w-2/4  border-r-2 h-full mlg:w-full">
@@ -526,7 +543,9 @@ function EditorMain(props: EditorMainProps) {
               /* @ts-ignore */
               customStyleMap={styleMap}
               editorState={editorState}
-              onChange={onChange}
+              onChange={newEditorState =>
+                setEditorState2({ newEditorState, from: 'EditorOnChange' })
+              }
               blockStyleFn={myBlockStyleFn}
               handleKeyCommand={handleKeyCommand}
               ref={inputEl}
