@@ -387,7 +387,6 @@ function EditorMain(props: EditorMainProps) {
   };
 
   const toggleBlockType = blockType => {
-    console.log(blockType);
     setEditorState(RichUtils.toggleBlockType(editorState, blockType));
   };
 

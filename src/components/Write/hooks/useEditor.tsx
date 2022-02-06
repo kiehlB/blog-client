@@ -13,6 +13,8 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { RootState } from '../../../store/rootReducer';
 
+const PrismDraftDecorator = require('../PrismDecorator');
+
 export default function useEditor() {
   const [editPost, { error }] = useMutation(Edit_Post);
   const {
@@ -38,6 +40,8 @@ export default function useEditor() {
     entityMap: {},
   };
 
+  var decorator = new PrismDraftDecorator();
+
   const [createPost] = useMutation(Create_Post);
   const [uploadThumbnail] = useMutation(UPLOAD_IMAGE_TO_CLOUDINARY);
   const [inputs, setInputs] = useState(
@@ -50,12 +54,16 @@ export default function useEditor() {
   const [tag, setTag] = useState([]);
   const [url, setUrl] = useState('');
 
+  // const [editorState, setEditorState] = useState(
+  //   EditorState.createWithContent(
+  //     convertFromRaw(
+  //       (getPosts as any)?.body ? JSON.parse((getPosts as any).body) : initialData,
+  //     ),
+  //   ),
+  // );
+
   const [editorState, setEditorState] = useState(
-    EditorState.createWithContent(
-      convertFromRaw(
-        (getPosts as any)?.body ? JSON.parse((getPosts as any).body) : initialData,
-      ),
-    ),
+    EditorState.createWithContent(convertFromRaw(initialData, decorator)),
   );
 
   const handleFileInputChange = e => {
