@@ -574,7 +574,7 @@ const EditorWrapper = styled.div`
     line-height: 2.125rem;
     letter-spacing: -0.004em;
     word-break: keep-all;
-    font-size: 1.25rem;
+
     -webkit-font-smoothing: antialiased;
     overflow-wrap: break-word;
     font-weight: 300;
