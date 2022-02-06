@@ -375,14 +375,14 @@ function EditorMain(props: EditorMainProps) {
 
   const renderInlineStyleButton = (value, style) => {
     return (
-      <button
+      <input
         type="button"
         key={style}
+        value={value}
         data-style={style}
         onMouseDown={toggleInlineStyle}
-        className="p-1.5 cursor-pointer hover:bg-neutral-100 transition-all">
-        <ButtonStyles> {value}</ButtonStyles>
-      </button>
+        className="p-1.5 cursor-pointer hover:bg-neutral-100 transition-all"
+      />
     );
   };
 
@@ -629,13 +629,13 @@ const styleMap = {
     lineHeight: '1.5rem',
   },
   H1: {
-    fontSize: '3rem',
-  },
-  H2: {
     fontSize: '2rem',
   },
+  H2: {
+    fontSize: '1.5rem',
+  },
   H3: {
-    fontSize: '1rem',
+    fontSize: '1.7rem',
   },
 };
 

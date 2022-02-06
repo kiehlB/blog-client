@@ -47,6 +47,45 @@ import { TiHeart } from 'react-icons/ti';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { AiOutlineUserDelete } from 'react-icons/ai';
 
+const styleMap = {
+  BOLD: {
+    color: '#1fb6ff ',
+    fontWeight: 'bold',
+  },
+  ANYCUSTOMSTYLE: {
+    color: '#00e400',
+  },
+  FANCYBLOCKQUOTE: {
+    color: '#999',
+    fontStyle: 'italic',
+    fontFamily: `'Hoefler Text', Georgia, serif`,
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+  },
+
+  NOTE: {
+    borderLeft: '3px solid #67c5ff',
+    paddingLeft: '2rem',
+    display: 'flex',
+    marginTop: '.5rem',
+    marginBottom: '.5rem',
+
+    alignItems: 'center',
+    backgroundColor: '#F8F9FA',
+    lineHeight: '1.5rem',
+  },
+  H1: {
+    fontSize: '2rem',
+  },
+  H2: {
+    fontSize: '1.5rem',
+  },
+  H3: {
+    fontSize: '1.7rem',
+  },
+};
+
 export default function Post({}) {
   const dispatch = useDispatch();
 
@@ -455,44 +494,6 @@ const LikeVisible = styled.div`
   }
 `;
 
-const styleMap = {
-  BOLD: {
-    color: '#1fb6ff ',
-    fontWeight: 'bold',
-  },
-  ANYCUSTOMSTYLE: {
-    color: '#00e400',
-  },
-  FANCYBLOCKQUOTE: {
-    color: '#999',
-    fontStyle: 'italic',
-    fontFamily: `'Hoefler Text', Georgia, serif`,
-    display: 'flex',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-  },
-
-  NOTE: {
-    borderLeft: '3px solid #67c5ff',
-    paddingLeft: '2rem',
-    display: 'flex',
-    marginTop: '.5rem',
-    marginBottom: '.5rem',
-
-    alignItems: 'center',
-    backgroundColor: '#F8F9FA',
-    lineHeight: '1.5rem',
-  },
-  H1: {
-    fontSize: '3rem',
-  },
-  H2: {
-    fontSize: '2rem',
-  },
-  H3: {
-    fontSize: '1rem',
-  },
-};
 const BlogHeader = styled.div`
   font-size: 1rem;
   color: #8492a6;
