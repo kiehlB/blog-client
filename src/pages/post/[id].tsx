@@ -53,7 +53,7 @@ const styleMap = {
     fontWeight: 'bold',
   },
 
-  BOLD2: {
+  BC: {
     color: '#212529 ',
     fontWeight: 'bold',
   },
@@ -576,7 +576,6 @@ const EditorWrapper = styled.div`
     width: 100%;
   }
   span {
-    line-height: 2.125rem;
     letter-spacing: -0.004em;
     word-break: keep-all;
 

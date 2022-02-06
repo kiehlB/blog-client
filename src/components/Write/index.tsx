@@ -218,8 +218,8 @@ const inlineStyleButtons = [
     style: 'BOLD',
   },
   {
-    value: 'B2',
-    style: 'BOLD2',
+    value: 'BC',
+    style: 'BC',
   },
 
   {
@@ -462,7 +462,7 @@ function EditorMain(props: EditorMainProps) {
 
   return (
     <>
-      <form className="w-2/4  border-r-2 h-full mlg:w-full">
+      <div className="w-2/4  border-r-2 h-full mlg:w-full">
         <div className="h-4/6  p-9">
           <input
             className="text-4xl  font-bold focus:outline-none w-full "
@@ -556,7 +556,7 @@ function EditorMain(props: EditorMainProps) {
             </Button>
           </ButtonWrapper>
         </div>
-      </form>
+      </div>
     </>
   );
 }
@@ -610,7 +610,7 @@ const styleMap = {
     color: '#1fb6ff ',
     fontWeight: 'bold',
   },
-  BOLD2: {
+  BC: {
     color: '#212529 ',
     fontWeight: 'bold',
   },
