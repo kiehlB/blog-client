@@ -54,16 +54,12 @@ export default function useEditor() {
   const [tag, setTag] = useState([]);
   const [url, setUrl] = useState('');
 
-  // const [editorState, setEditorState] = useState(
-  //   EditorState.createWithContent(
-  //     convertFromRaw(
-  //       (getPosts as any)?.body ? JSON.parse((getPosts as any).body) : initialData,
-  //     ),
-  //   ),
-  // );
-
   const [editorState, setEditorState] = useState(
-    EditorState.createWithContent(convertFromRaw(initialData, decorator)),
+    EditorState.createWithContent(
+      convertFromRaw(
+        (getPosts as any)?.body ? JSON.parse((getPosts as any).body) : initialData,
+      ),
+    ),
   );
 
   const handleFileInputChange = e => {

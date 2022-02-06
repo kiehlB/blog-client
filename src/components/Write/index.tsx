@@ -332,22 +332,7 @@ function EditorMain(props: EditorMainProps) {
     Prism.highlightAll();
 
     dispatch(PostInit());
-
-    const selection = editorState.getSelection();
-    const block = editorState.getCurrentContent().getBlockForKey(selection.getStartKey());
-    if (block.getType() === 'code-block') {
-      const data = block.getData().merge({ language: 'javascript' });
-      const newBlock = block.merge({ data });
-      const newContentState = editorState.getCurrentContent().merge({
-        blockMap: editorState
-          .getCurrentContent()
-          .getBlockMap()
-          .set(selection.getStartKey(), newBlock),
-        selectionAfter: selection,
-      });
-      setEditorState(EditorState.push(editorState, newContentState, 'change-block-data'));
-    }
-  }, [editorState]);
+  }, []);
 
   const myBlockStyleFn = contentBlock => {
     const type = contentBlock.getType();
@@ -497,29 +482,27 @@ function EditorMain(props: EditorMainProps) {
   //   setEditorState(codeHighlitedEditorState);
   // }, []);
 
-  // const setEditorState2 = newEditorState => {
-  //   const selection = newEditorState.getSelection();
-  //   const block = newEditorState
-  //     .getCurrentContent()
-  //     .getBlockForKey(selection.getStartKey());
+  const setEditorState2 = newEditorState => {
+    const selection = newEditorState.getSelection();
+    const block = newEditorState
+      .getCurrentContent()
+      .getBlockForKey(selection.getStartKey());
+    if (block.getType() === 'code-block') {
+      const data = block.getData().merge({ language: 'javascript' });
+      const newBlock = block.merge({ data });
+      const newContentState = newEditorState.getCurrentContent().merge({
+        blockMap: newEditorState
+          .getCurrentContent()
+          .getBlockMap()
+          .set(selection.getStartKey(), newBlock),
+        selectionAfter: selection,
+      });
 
-  //   const data = block.getData().merge({ language: 'javascript' });
-  //   const newBlock = block.merge({ data });
-  //   const newContentState = newEditorState.getCurrentContent().merge({
-  //     blockMap: newEditorState
-  //       .getCurrentContent()
-  //       .getBlockMap()
-  //       .set(selection.getStartKey(), newBlock),
-  //     selectionAfter: selection,
-  //   });
-  //   const codeHighlitedEditorState = EditorState.push(
-  //     newEditorState,
-  //     newContentState,
-  //     'change-block-data',
-  //   );
-
-  //   setEditorState(codeHighlitedEditorState);
-  // };
+      setEditorState(
+        EditorState.push(newEditorState, newContentState, 'change-block-data'),
+      );
+    }
+  };
 
   const onChange = editorState => {
     setEditorState(editorState);
