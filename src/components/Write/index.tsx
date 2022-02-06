@@ -10,6 +10,7 @@ import {
   getDefaultKeyBinding,
   DefaultDraftBlockRenderMap,
   EditorState,
+  convertToRaw,
 } from 'draft-js';
 import { convertToHTML } from 'draft-convert';
 import Editor, { composeDecorators } from 'draft-js-plugins-editor';
@@ -39,10 +40,8 @@ import TagsForm from '../Tags/TagsForm';
 import { checkEmpty } from '../../utils/isNull';
 import Prism from 'prismjs';
 import createPrismPlugin from 'draft-js-prism-plugin';
-import 'prismjs/themes/prism.css'; // add prism.css to add highlights
+
 import 'prismjs/themes/prism-tomorrow.css';
-import 'prismjs/components/prism-jsx.min';
-import 'prismjs/components/prism-tsx.min';
 
 import Immutable from 'immutable';
 
@@ -463,7 +462,6 @@ function EditorMain(props: EditorMainProps) {
   };
 
   const setEditorState2 = useCallback(({ newEditorState, from }) => {
-    let finalEditorState = newEditorState;
     const selection = newEditorState.getSelection();
     const block = newEditorState
       .getCurrentContent()
@@ -481,7 +479,7 @@ function EditorMain(props: EditorMainProps) {
     const codeHighlitedEditorState = EditorState.push(
       newEditorState,
       newContentState,
-      'change-block-data',
+      'change-block-type',
     );
 
     setEditorState(codeHighlitedEditorState);
