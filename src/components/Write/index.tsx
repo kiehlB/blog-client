@@ -251,18 +251,6 @@ const inlineStyleButtons = [
   },
 ];
 
-const myBlockStyleFn = contentBlock => {
-  const type = contentBlock.getType();
-  if (type === 'blockquote') {
-    return `${BlockStyling.superFancyBlockquote}`;
-  } else if (type === 'header-one') {
-    return `${BlockStyling.h1BlcokTag}`;
-  } else if (type === 'header-two') {
-    return `${BlockStyling.h2BlcokTag}`;
-  } else if (type === 'header-three') {
-    return `${BlockStyling.h3BlcokTag}`;
-  }
-};
 const blockRenderMap = Immutable.Map({});
 
 const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(blockRenderMap);
@@ -330,6 +318,48 @@ function EditorMain(props: EditorMainProps) {
     tag,
     setTag,
   } = useEditor();
+
+  const myBlockStyleFn = contentBlock => {
+    const type = contentBlock.getType();
+    if (type === 'blockquote') {
+      return `${BlockStyling.superFancyBlockquote}`;
+    } else if (type === 'header-one') {
+      return 'h1BlcokTag';
+    } else if (type === 'header-two') {
+      return 'h2BlcokTag';
+    } else if (type === 'header-three') {
+      return 'h3BlcokTag';
+    }
+  };
+
+  const html = convertToHTML({
+    styleToHTML: style => {
+      if (style === 'BOLD') {
+        return <span style={{ fontWeight: 'bold' }} />;
+      } else if (style === 'ITALIC') {
+        return <span style={{ fontStyle: 'italic' }} />;
+      } else if (style === 'UNDERLINE') {
+        return <span style={{ textDecoration: ' underline' }} />;
+      } else if (style === 'STRIKETHROUGH') {
+        return <span style={{ textDecoration: ' line-through' }} />;
+      } else if (style === 'CODE') {
+        return <span style={{ fontFamily: 'Times New Roman' }} />;
+      }
+    },
+
+    blockToHTML: block => {
+      if (block.type === 'header-one') {
+        return <h1 />;
+      }
+    },
+    entityToHTML: (entity, originalText) => {
+      if (entity.type === 'LINK') {
+        return <a href={entity.data.url}>{originalText}</a>;
+      }
+      return originalText;
+    },
+  })(editorState.getCurrentContent());
+
   const buttonClass = classNames(`${buttonStyle.button} ${buttonStyle.shinydarken}`);
 
   const onChange = editorState => {
@@ -485,7 +515,9 @@ function EditorMain(props: EditorMainProps) {
             />
             <div style={{ marginLeft: '.5rem' }}>{WaitingFotImg(readyForFile)}</div>
           </B>
-          <EW className="overflow-y-scroll mt-6">
+          <EW
+            className="overflow-y-scroll mt-6"
+            onMouseOver={() => inputEl.current.focus()}>
             <Editor
               /* @ts-ignore */
               customStyleMap={styleMap}
@@ -611,7 +643,6 @@ const BLOCK_TYPES = [
   { label: 'UL', style: 'unordered-list-item' },
   { label: 'OL', style: 'ordered-list-item' },
   { label: 'Code', style: 'code-block' },
-  { label: 'H1', style: 'headerOne' },
 ];
 
 const EW = styled.div`
