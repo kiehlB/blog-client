@@ -468,14 +468,23 @@ function EditorMain(props: EditorMainProps) {
     const block = newEditorState
       .getCurrentContent()
       .getBlockForKey(selection.getStartKey());
-    if (block.getType() === 'code-block') {
-      finalEditorState = getCodeHighlitedEditorState({
-        block,
-        newEditorState,
-        selection,
-      });
-    }
-    setEditorState(finalEditorState);
+
+    const data = block.getData().merge({ language: 'javascript' });
+    const newBlock = block.merge({ data });
+    const newContentState = newEditorState.getCurrentContent().merge({
+      blockMap: newEditorState
+        .getCurrentContent()
+        .getBlockMap()
+        .set(selection.getStartKey(), newBlock),
+      selectionAfter: selection,
+    });
+    const codeHighlitedEditorState = EditorState.push(
+      newEditorState,
+      newContentState,
+      'change-block-data',
+    );
+
+    setEditorState(codeHighlitedEditorState);
   }, []);
 
   const onChange = () => {
