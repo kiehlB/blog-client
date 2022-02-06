@@ -581,7 +581,7 @@ const EditorWrapper = styled.div`
 
     -webkit-font-smoothing: antialiased;
     overflow-wrap: break-word;
-    font-weight: 300;
+
     font-family: Graphik, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
       sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif !important;
   }
