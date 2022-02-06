@@ -311,14 +311,6 @@ export type EditorMainProps = {};
 
 function EditorMain(props: EditorMainProps) {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    return () => {
-      Prism.highlightAll();
-
-      dispatch(PostInit());
-    };
-  }, []);
   const inputEl = useRef(null);
   const router = useRouter();
   const {
@@ -335,6 +327,27 @@ function EditorMain(props: EditorMainProps) {
     tag,
     setTag,
   } = useEditor();
+
+  useEffect(() => {
+    Prism.highlightAll();
+
+    dispatch(PostInit());
+
+    const selection = editorState.getSelection();
+    const block = editorState.getCurrentContent().getBlockForKey(selection.getStartKey());
+    if (block.getType() === 'code-block') {
+      const data = block.getData().merge({ language: 'javascript' });
+      const newBlock = block.merge({ data });
+      const newContentState = editorState.getCurrentContent().merge({
+        blockMap: editorState
+          .getCurrentContent()
+          .getBlockMap()
+          .set(selection.getStartKey(), newBlock),
+        selectionAfter: selection,
+      });
+      setEditorState(EditorState.push(editorState, newContentState, 'change-block-data'));
+    }
+  }, [editorState]);
 
   const myBlockStyleFn = contentBlock => {
     const type = contentBlock.getType();
@@ -461,32 +474,56 @@ function EditorMain(props: EditorMainProps) {
     return codeHighlitedEditorState;
   };
 
-  const setEditorState2 = useCallback(({ newEditorState, from }) => {
-    const selection = newEditorState.getSelection();
-    const block = newEditorState
-      .getCurrentContent()
-      .getBlockForKey(selection.getStartKey());
+  // const setEditorState2 = useCallback(({ newEditorState, from }) => {
+  //   const selection = newEditorState.getSelection();
+  //   const block = newEditorState
+  //     .getCurrentContent()
+  //     .getBlockForKey(selection.getStartKey());
 
-    const data = block.getData().merge({ language: 'javascript' });
-    const newBlock = block.merge({ data });
-    const newContentState = newEditorState.getCurrentContent().merge({
-      blockMap: newEditorState
-        .getCurrentContent()
-        .getBlockMap()
-        .set(selection.getStartKey(), newBlock),
-      selectionAfter: selection,
-    });
-    const codeHighlitedEditorState = EditorState.push(
-      newEditorState,
-      newContentState,
-      'change-block-type',
-    );
+  //   const data = block.getData().merge({ language: 'javascript' });
+  //   const newBlock = block.merge({ data });
+  //   const newContentState = newEditorState.getCurrentContent().merge({
+  //     blockMap: newEditorState
+  //       .getCurrentContent()
+  //       .getBlockMap()
+  //       .set(selection.getStartKey(), newBlock),
+  //     selectionAfter: selection,
+  //   });
+  //   const codeHighlitedEditorState = EditorState.push(
+  //     newEditorState,
+  //     newContentState,
+  //     'change-block-data',
+  //   );
 
-    setEditorState(codeHighlitedEditorState);
-  }, []);
+  //   setEditorState(codeHighlitedEditorState);
+  // }, []);
 
-  const onChange = () => {
-    console.log('hello');
+  // const setEditorState2 = newEditorState => {
+  //   const selection = newEditorState.getSelection();
+  //   const block = newEditorState
+  //     .getCurrentContent()
+  //     .getBlockForKey(selection.getStartKey());
+
+  //   const data = block.getData().merge({ language: 'javascript' });
+  //   const newBlock = block.merge({ data });
+  //   const newContentState = newEditorState.getCurrentContent().merge({
+  //     blockMap: newEditorState
+  //       .getCurrentContent()
+  //       .getBlockMap()
+  //       .set(selection.getStartKey(), newBlock),
+  //     selectionAfter: selection,
+  //   });
+  //   const codeHighlitedEditorState = EditorState.push(
+  //     newEditorState,
+  //     newContentState,
+  //     'change-block-data',
+  //   );
+
+  //   setEditorState(codeHighlitedEditorState);
+  // };
+
+  const onChange = editorState => {
+    setEditorState(editorState);
   };
 
   return (
@@ -555,9 +592,7 @@ function EditorMain(props: EditorMainProps) {
               /* @ts-ignore */
               customStyleMap={styleMap}
               editorState={editorState}
-              onChange={newEditorState =>
-                setEditorState2({ newEditorState, from: 'EditorOnChange' })
-              }
+              onChange={onChange}
               blockStyleFn={myBlockStyleFn}
               handleKeyCommand={handleKeyCommand}
               ref={inputEl}
