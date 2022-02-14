@@ -10,6 +10,12 @@ const PostLikeTap = styled.div<{ isLikeBoolean: boolean }>`
   ${media.custom(1900)} {
     display: none;
   }
+  
+
+   ${media.minCustom(2000)} {
+    display: none;
+  }
+
   .heart {
     width: 0.5em;
     height: 0.5em;

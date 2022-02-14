@@ -9,6 +9,10 @@ const FaceTap = styled.div`
   ${media.custom(1900)} {
     display: none;
   }
+    ${media.minCustom(2000)} {
+    display: none;
+  }
+
 `;
 
 export type FaceProps = {

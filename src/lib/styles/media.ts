@@ -1,4 +1,5 @@
 export const customMediaQuery = (maxWidth: number) => `@media (max-width: ${maxWidth}px)`;
+export const minCustomMediaQuery = (minWidth: number) => `@media (min-width: ${minWidth}px)`;
 export const customHeigtMediaQuery = (maxHeigt: number) =>
   `@media (max-height: ${maxHeigt}px)`;
 
@@ -11,6 +12,7 @@ export const breakpoints = {
 
 const media = {
   custom: customMediaQuery,
+  minCustom: minCustomMediaQuery,
   desktop: customMediaQuery(922),
   tablet: customMediaQuery(768),
   phone: customMediaQuery(576),
